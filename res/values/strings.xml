@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Ecstore-robotium-test-symbioTest</string>
+	<string name="favorite_store">要收藏最愛商店？</string>
+</resources>
