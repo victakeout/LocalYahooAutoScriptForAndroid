@@ -1,7 +1,9 @@
 package com.yahoo.mobile.client.android.ecstore.test.Checkout;
 
+import android.annotation.SuppressLint;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.widget.TextView;
 
@@ -13,6 +15,7 @@ import com.yahoo.mobile.client.android.ecstore.Assert.Assert;
 import com.yahoo.mobile.client.android.ecstore.test.TestHelper;
 import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 
+@SuppressLint("NewApi")
 @SuppressWarnings("rawtypes")
 public class Checkout extends ActivityInstrumentationTestCase2 {
 	private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
@@ -38,7 +41,7 @@ public class Checkout extends ActivityInstrumentationTestCase2 {
 	protected void setUp() throws Exception {
 
 		solo = new Solo(getInstrumentation(), getActivity());
-		Assert.testFirstLaunch(solo);
+		// Assert.testFirstLaunch(solo);
 	}
 
 	@Override
@@ -48,28 +51,39 @@ public class Checkout extends ActivityInstrumentationTestCase2 {
 		super.tearDown();
 	}
 
+	@SuppressWarnings("deprecation")
+	public static void swipeUp(Solo solo, int stepCount) {
+		Display display = solo.getCurrentActivity().getWindowManager()
+				.getDefaultDisplay();
+		int width = display.getWidth();
+		int height = display.getHeight();
+		float yStart = height - 100;
+		float yEnd = 100;
+		solo.drag(width / 2, width / 2, yStart, yEnd, stepCount);
+	}
+
 	// 1959918:Verify user can change other delivery places
+	// Cannot swipe screen now.ME
 	public void testChangeOtherDeliveryPlaces() throws Exception {
 
 		/*
-		 * Account.JudgementAccountLogin(solo); 
-		 * Action.enterToItemPage(solo);
+		 * Account.JudgementAccountLogin(solo); Action.enterToItemPage(solo);
 		 * Action.addToShoppingCart(solo);
 		 */
+
 		solo.clickOnView(solo.getView("tab_image", 3));
 		solo.clickOnView(solo.getView("ecshopping_cart_store_name", 0));
 		solo.sleep(15000);
-		TestHelper.swipeUp(solo, 1);
-		Action.clickElementsInWebview(solo, "shipping updateItemChange");
+		// solo.scrollToBottom();
+		// TestHelper.swipeUp(solo, 1);
+		// Scroll the screen to load more data.
+		Action.searchTextOnWebview(solo, "以上商品所適用的優惠");
+		// Log.i("number", web.getText().toString());
 
-		/*
-		 * // Search "Confirm"button on alert window. for (WebElement web :
-		 * solo.getCurrentWebElements()) { Log.i("number",
-		 * web.getText().toString()); if
-		 * (web.getText().toString().equals("我要結帳")) {
-		 * solo.clickOnWebElement(web); solo.sleep(5000); } }
-		 */
+		Action.clickElementsInWebviewByClassname(solo,
+				"shipping updateItemChange");
+
+		Action.clickElementsInWebviewByText(solo, "我要結帳");
 
 	}
-
 }

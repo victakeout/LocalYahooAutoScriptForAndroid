@@ -2,6 +2,7 @@ package com.yahoo.mobile.client.android.ecstore.test.ShoppingCart;
 
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.yahoo.mobile.client.android.ecstore.Assert.Assert;
 import com.yahoo.mobile.client.android.ecstore.test.TestHelper;
 import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 
+@SuppressLint("NewApi")
 @SuppressWarnings("rawtypes")
 public class ShoppingCart extends ActivityInstrumentationTestCase2 {
 	private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
@@ -98,10 +100,10 @@ public class ShoppingCart extends ActivityInstrumentationTestCase2 {
 		solo.clickOnView(solo.getView("tab_image", 3));
 		solo.clickOnView(solo.getView("ecshopping_cart_store_name", 0));
 		solo.sleep(10000);
-		Action.clickElementsInWebview(solo, "goNextBuy updateItemClick");
+		Action.clickElementsInWebviewByText(solo, "goNextBuy updateItemClick");
 
 		// Search "Confirm"button on alert window.
-		Action.clickElementsInWebview(solo, "confirm");
+		Action.clickElementsInWebviewByText(solo, "confirm");
 		solo.sleep(5000);
 			 
 	 

@@ -113,6 +113,19 @@ public class Action {
 
 	}
 
+	// Navigate to favorite store screen
+	public static void navigateToFavoriteStoreScreen(Solo solo)
+			throws Exception {
+
+		solo.clickOnView(solo.getView("tab_text", 1));
+		solo.clickOnText(ValidationText.Favorite_Stores);
+		TextView favorite = (TextView) solo.getView("tab_text", 1);
+		junit.framework.Assert.assertTrue(
+				"Not highligh to favorite store tab bar.",
+				favorite.isSelected());
+
+	}
+
 	public static int getListviewOnCurrentScreen(Solo solo) throws Exception {
 
 		ArrayList<ListView> listview = solo.getCurrentViews(ListView.class);
@@ -403,13 +416,40 @@ public class Action {
 
 	}
 
-	// click elements from web view
-	public static void clickElementsInWebview(Solo solo, String text)
+	// click elements from web view by ClassName.
+	public static void clickElementsInWebviewByClassname(Solo solo, String text)
 			throws Exception {
 		for (WebElement web : solo.getCurrentWebElements()) {
-		 	if (web.getClassName().toString().equals(text)) {
+			// Log.i("number", web.getClassName().toString());
+			if (web.getClassName().toString().equals(text)) {
 				solo.clickOnWebElement(web);
-				solo.sleep(3000);
+				solo.sleep(5000);
+			}
+		}
+
+	}
+
+	// click elements from web view by text.
+	public static void clickElementsInWebviewByText(Solo solo, String text)
+			throws Exception {
+		for (WebElement web : solo.getCurrentWebElements()) {
+			Log.i("number", "ClassName:" + web.getClassName().toString());
+			Log.i("number", "Text:" + web.getText().toString());
+			if (web.getText().toString().equals(text)) {
+				solo.clickOnWebElement(web);
+				solo.sleep(5000);
+
+			}
+
+		}
+	}
+
+	// Search text on webview.
+	public static void searchTextOnWebview(Solo solo, String text)
+			throws Exception {
+		for (WebElement web : solo.getCurrentWebElements()) {
+			if (web.getText().toString().equals(text)) {
+				junit.framework.Assert.assertTrue("Text not found", true);
 
 			}
 

@@ -19,9 +19,9 @@ public class Assert {
 		boolean flag = prefs.getBoolean("Time", false);
 
 		if (!flag) {
-
+			View versionAlert ;
 			try {
-				View versionAlert = (View) solo.getView("alertTitle");
+				versionAlert = (View) solo.getView("alertTitle");
 				if (versionAlert.isShown())
 					solo.goBack();
 			} catch (final AssertionError e) {
