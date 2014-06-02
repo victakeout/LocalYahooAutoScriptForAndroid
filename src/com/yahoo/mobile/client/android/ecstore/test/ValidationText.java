@@ -13,6 +13,8 @@ public class ValidationText {
 	public static final String News = "最新動態";
 
 	public static final String Dong = "東";
+	
+	public static final String Dong_Jing = "東京著衣";
 
 	public static final String Apparel = "服飾";
 
@@ -43,6 +45,8 @@ public class ValidationText {
 	public static final String Clear_Search_History = "清除搜尋記錄";
 
 	public static final String Results_value = "筆結果";
+	
+	public static final String Shop = "商店";
 
 	public static final String Please_login_account = "請先登入帳號";
 
@@ -113,6 +117,8 @@ public class ValidationText {
 	public static final String Log_Out = "登出";
 
 	public static final String apple = "iphone";
+	
+	 
 
 	public static final String Add_Shopping_Cart = "加入購物車";
 
@@ -120,11 +126,15 @@ public class ValidationText {
 
 	public static final String Own_Shopping_Cart = "本店購物車";
 	
+	public static final String See_All_Store_Product = "看本店家全部商品";
+	
 	public static final String one = "一一二";
 	
 	public static final String two = "一一一二";
 	
 	public static final String Next_buy = "下次購買";
+	
+	public static final String Shopping_tips = "購物須知";
 
 	public static final String[] store_title = { "分類", "商品" };
 

@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckedTextView;
 import android.widget.TextView;
 
 import com.robotium.solo.Solo;
@@ -42,7 +43,7 @@ public class ShoppingCart extends ActivityInstrumentationTestCase2 {
 	protected void setUp() throws Exception {
 		super.setUp();
 		solo = new Solo(getInstrumentation(), getActivity());
-		Assert.testFirstLaunch(solo);
+		// Assert.testFirstLaunch(solo);
 
 	}
 
@@ -105,17 +106,8 @@ public class ShoppingCart extends ActivityInstrumentationTestCase2 {
 		// Search "Confirm"button on alert window.
 		Action.clickElementsInWebviewByText(solo, "confirm");
 		solo.sleep(5000);
-			 
-	 
-		
 		// Tap "Next Buy" button on web view.
-		for (WebElement web : solo.getCurrentWebElements()) {
-			if (web.getText().toString().equals(ValidationText.Next_buy)) {
-				solo.clickOnWebElement(web);
-				solo.sleep(10000);
-
-			}
-		}
+		Action.clickElementsInWebviewByText(solo, ValidationText.Next_buy);
 		boolean expected = false;
 		for (WebElement webs : solo.getCurrentWebElements()) {
 			Log.i("number", webs.getClassName().toString());
@@ -124,7 +116,7 @@ public class ShoppingCart extends ActivityInstrumentationTestCase2 {
 			}
 
 		}
-		assertTrue("", expected);
+		assertTrue("NextBuy page display incorrect.", expected);
 	}
 
 	// 1959908:Verify numbers under shopping$next buy
@@ -143,4 +135,75 @@ public class ShoppingCart extends ActivityInstrumentationTestCase2 {
 		solo.clickOnView(solo.getView("ecshopping_cart_store_name", 0));
 		solo.sleep(10000);
 	}
+
+	// 1977500:Verify the page whether refresh OK.
+	public void testRefreshWhenBack() throws Exception {
+		Account.JudgementAccountLogin(solo);
+		Action.clickText(solo, ValidationText.All_Categories);
+		Action.clickText(solo, ValidationText.Apparel);
+		Action.clickText(solo, ValidationText.Commodity);
+		solo.sleep(2000);
+		Action.clickStarIconNote(solo);
+
+		solo.clickOnView(solo.getView("tab_image", 3));
+		solo.clickOnView(solo.getView("ecshopping_cart_store_name", 0));
+		solo.sleep(15000);
+		Action.clickElementsInWebviewByClassname(solo, "pimg");
+		solo.goBack();
+		solo.sleep(15000);
+		View webpage = (View) solo.getView("webpage", 0);
+		assertTrue("This page incorrect.", webpage.isShown());
+
+	}
+	
+	//1977496:Verify check out.
+	public void testCheckout() throws Exception {
+		
+		Account.JudgementAccountLogin(solo);
+		Action.enterToItemPage(solo);
+		Action.addToShoppingCart(solo);
+		solo.clickOnView(solo.getView("tab_image", 3));
+		solo.clickOnView(solo.getView("ecshopping_cart_store_name", 0));
+		solo.sleep(15000);
+		TestHelper.swipeUp(solo, 1);
+		Action.clickElementsInWebviewByText(solo, "我要結帳");
+		Action.searchTextOnWebview(solo, "購買者資料");
+	}
+	
+	//1959885：Verify shoppingcart details info.
+	public void testShoppingcartDetail()throws Exception{
+		
+		Account.JudgementAccountLogin(solo);
+		//Action.removeShoppingCart(solo);
+		Action.enterToItemPage(solo);
+		Action.addToShoppingCart(solo);
+		solo.clickOnView(solo.getView("tab_image", 3));
+		solo.clickOnView(solo.getView("ecshopping_cart_store_name", 0));
+		solo.sleep(15000);
+		Action.clickElementsInWebviewByClassname(solo, "updateItemChange");
+		//Action.searchTextOnWebview(solo, "1");
+		CheckedTextView number = (CheckedTextView)solo.getView("text1",0);
+		assertTrue("",number.isChecked());
+		
+	}
+	
+	//1959903：Verify user can view next buy items then view shopping cart items.
+	public void testViewNextbuyAndShoppingCartItem()throws Exception{
+		
+		Account.JudgementAccountLogin(solo);
+		for (int i = 0; i < 3; i++) {
+			solo.scrollToTop();
+			Action.enterToItemPage(solo);
+			Action.addToShoppingCart(solo);
+		}
+		solo.clickOnView(solo.getView("tab_image", 3));
+		solo.clickOnView(solo.getView("ecshopping_cart_store_name", 0));
+		solo.sleep(10000);
+		Action.clickElementsInWebviewByText(solo, "goNextBuy updateItemClick");
+
+		// Search "Confirm"button on alert window.
+		Action.clickElementsInWebviewByText(solo, "confirm");
+		solo.sleep(5000);
+	}
+	
 }

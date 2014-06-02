@@ -1,5 +1,6 @@
 package com.yahoo.mobile.client.android.ecstore.test.FavoriteStore;
 
+import android.annotation.SuppressLint;
 import android.test.ActivityInstrumentationTestCase2;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +12,7 @@ import com.yahoo.mobile.client.android.ecstore.Action.Action;
 import com.yahoo.mobile.client.android.ecstore.Assert.Assert;
 import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 
+@SuppressLint("NewApi")
 @SuppressWarnings("rawtypes")
 public class FavoriteStore extends ActivityInstrumentationTestCase2 {
 	private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
@@ -120,7 +122,6 @@ public class FavoriteStore extends ActivityInstrumentationTestCase2 {
 	}
 
 	// 1954571:Verify 18禁items displayed in favorite stores
-
 	public void testRestricted() throws Exception {
 
 		Account.JudgementAccountLogin(solo);

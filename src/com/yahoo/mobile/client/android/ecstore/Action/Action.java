@@ -430,14 +430,14 @@ public class Action {
 	}
 
 	// click elements from web view by text.
+
 	public static void clickElementsInWebviewByText(Solo solo, String text)
 			throws Exception {
 		for (WebElement web : solo.getCurrentWebElements()) {
-			Log.i("number", "ClassName:" + web.getClassName().toString());
-			Log.i("number", "Text:" + web.getText().toString());
+
 			if (web.getText().toString().equals(text)) {
 				solo.clickOnWebElement(web);
-				solo.sleep(5000);
+				solo.sleep(15000);
 
 			}
 
@@ -445,14 +445,17 @@ public class Action {
 	}
 
 	// Search text on webview.
+	static boolean actual = false;
+
 	public static void searchTextOnWebview(Solo solo, String text)
 			throws Exception {
 		for (WebElement web : solo.getCurrentWebElements()) {
 			if (web.getText().toString().equals(text)) {
-				junit.framework.Assert.assertTrue("Text not found", true);
+				actual = true;
 
 			}
 
 		}
+		junit.framework.Assert.assertTrue("Text not found", actual);
 	}
 }
