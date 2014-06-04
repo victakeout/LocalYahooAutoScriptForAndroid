@@ -154,6 +154,10 @@ public class ValidationText {
 	
 	public static final String Sales_Promotion = "促銷活動";
 	
+	public static final String Full = "購物滿";
+	
+	public static final String Share_Product = "分享商品";
+	
 	public static final String Default_Item = "待生效+已生效";
 
 	public static final String[] store_title = { "分類", "商品" };
