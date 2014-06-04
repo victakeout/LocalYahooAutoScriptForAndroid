@@ -1,5 +1,6 @@
 package com.yahoo.mobile.client.android.ecstore.test.MyAccount;
 
+import android.annotation.SuppressLint;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 import android.widget.TextView;
@@ -10,6 +11,7 @@ import com.yahoo.mobile.client.android.ecstore.Action.Action;
 import com.yahoo.mobile.client.android.ecstore.Assert.Assert;
 import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 
+@SuppressLint("NewApi")
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class MyAccount extends ActivityInstrumentationTestCase2 {
 	private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
@@ -87,5 +89,18 @@ public class MyAccount extends ActivityInstrumentationTestCase2 {
 			assertTrue("favorite items number is null.", true);
 		}
 	}
-
+	
+	//1959920:Verify the number of e-coupon can count correctly
+	public void testECouponCorrectly() throws Exception {
+		
+		Account.JudgementAccountLogin(solo);
+		solo.clickOnView(solo.getView("tab_image", 4));
+		solo.clickOnText(ValidationText.ECoupon);
+		solo.sleep(15000);
+		Action.clickElementsInWebviewByClassname(solo, "filter");
+		solo.sleep(5000);
+		TextView defaultText = (TextView)solo.getView("text1",4);
+		assertTrue("Default item is incorrect.",defaultText.isActivated());
+		
+	}
 }

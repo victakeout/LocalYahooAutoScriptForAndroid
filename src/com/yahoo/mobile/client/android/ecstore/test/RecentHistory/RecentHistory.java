@@ -1,14 +1,18 @@
 package com.yahoo.mobile.client.android.ecstore.test.RecentHistory;
 
+import android.annotation.SuppressLint;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.robotium.solo.Solo;
+import com.yahoo.mobile.client.android.ecstore.Account.Account;
 import com.yahoo.mobile.client.android.ecstore.Action.Action;
 import com.yahoo.mobile.client.android.ecstore.Assert.Assert;
 import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 
+@SuppressLint("NewApi")
 @SuppressWarnings("rawtypes")
 public class RecentHistory extends ActivityInstrumentationTestCase2 {
 	private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
@@ -53,24 +57,35 @@ public class RecentHistory extends ActivityInstrumentationTestCase2 {
 		solo.waitForText(ValidationText.News, 1, 3000);
 		junit.framework.Assert.assertTrue("Navigate to main screen failed.",
 				solo.searchText(ValidationText.News));
-		// click on up icon
+
+		// click "up" icon
 		solo.sleep(3000);
 		solo.clickOnView(solo.getView("home"));
-
 		solo.waitForText(ValidationText.Setting, 1, 3000);
 		solo.clickOnText(ValidationText.Setting);
 
-		TextView search = (TextView) solo.getView("title");
-		TextView search_record = (TextView) solo.getView("title", 1);
-		TextView search_clean = (TextView) solo.getView("title", 2);
-
+		TextView recent_browse = (TextView) solo.getView("title", 3);
+		TextView browse_record = (TextView) solo.getView("title", 4);
+		TextView clean_browse_record = (TextView) solo.getView("title", 5);
+		Switch toggle = (Switch) solo.getView("switchWidget", 1);
 		assertTrue(
 				"Some search text not found.",
-				search.getText().toString().equals(ValidationText.Search)
-						&& search_record.getText().toString()
-								.equals(ValidationText.Search_recorder)
-						&& search_clean.getText().toString()
-								.equals(ValidationText.Search_clean));
+				recent_browse.getText().toString()
+						.equals(ValidationText.Recent_Browse)
+						&& browse_record.getText().toString()
+								.equals(ValidationText.Browse_Record)
+						&& clean_browse_record.getText().toString()
+								.equals(ValidationText.Clean_Browse_Record)
+						&& toggle.isChecked());
 
+	}
+
+	// 1900004:verify can browse recent items in「商品」tab
+	public void testVerifyBrowseRecentItems() throws Exception {
+
+		// Account.JudgementAccountLogin(solo);
+		Action.makeBrowseRecord(solo, 20);
+		solo.clickOnView(solo.getView("tab_image", 4));
+		solo.clickOnText(ValidationText.Recent_Browse);
 	}
 }

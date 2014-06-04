@@ -2,6 +2,7 @@ package com.yahoo.mobile.client.android.ecstore.test.SRP;
 
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.yahoo.mobile.client.android.ecstore.Assert.Assert;
 import com.yahoo.mobile.client.android.ecstore.test.TestHelper;
 import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 
+@SuppressLint("NewApi")
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class SRP extends ActivityInstrumentationTestCase2 {
 	private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
@@ -51,7 +53,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		super.tearDown();
 	}
 
-	// 1937914:back to category tab
+	/*// 1937914:back to category tab    //delete
 	public void testBackToCategoryTab() throws Exception {
 
 		// navigate to category screen
@@ -68,7 +70,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		solo.scrollToTop();
 		Assert.CategoryListShow(solo);
 
-	}
+	}*/
 
 	// 1937918:check 'Tab' display.
 	public void testTabDisplay() throws Exception {
@@ -1499,7 +1501,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		}
 	}
 
-	// 1937913:check header display.
+	/*// 1937913:check header display. // delete
 	public void testHeaderResult() throws Exception {
 
 		// navigate to category screen
@@ -1513,7 +1515,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 		assertTrue("some icon not exists.", solo.getView("").isShown());
 	}
-
+*/
 	// 1977511:verify shouldn't duplicate keyword in search box
 	public void testInputKeywords() throws Exception {
 

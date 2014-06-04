@@ -1,6 +1,7 @@
 package com.yahoo.mobile.client.android.ecstore.test.Category;
 
  
+import android.annotation.SuppressLint;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.yahoo.mobile.client.android.ecstore.Assert.Assert;
 import com.yahoo.mobile.client.android.ecstore.test.TestHelper;
 import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 
+@SuppressLint("NewApi")
 @SuppressWarnings("rawtypes")
 public class Category extends ActivityInstrumentationTestCase2 {
 	private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
@@ -753,7 +755,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938159:Check '運動/戶外/休閒' is displayed on the top of the screen.
+	/*// 1938159:Check '運動/戶外/休閒' is displayed on the top of the screen.
 	public void testSportDisplayedOnTheScreen() throws Exception {
 
 		solo.clickOnView(solo.getView("tab_image", 2));
@@ -765,9 +767,9 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 		assertTrue("sport text does not exist.", text);
 
-	}
+	}*/
 
-	// 1938160:Check '圖書/文具/影音' is displayed on the top of the screen.
+	/*// 1938160:Check '圖書/文具/影音' is displayed on the top of the screen.
 	public void testBookDisplayedOnTheScreen() throws Exception {
 
 		solo.clickOnView(solo.getView("tab_image", 2));
@@ -779,7 +781,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 		assertTrue("book text does not exist.", text);
 
-	}
+	}*/
 
 	// 2014-04-30
 	// 1938103:Check to click the start icon without login.
@@ -1143,6 +1145,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 	}
 
 	//
+	@SuppressLint("NewApi")
 	public void testTwoLineDisplayInLargeView() throws Exception {
 
 		

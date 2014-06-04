@@ -133,7 +133,24 @@ public class ShoppingCart extends ActivityInstrumentationTestCase2 {
 
 		solo.clickOnView(solo.getView("tab_image", 3));
 		solo.clickOnView(solo.getView("ecshopping_cart_store_name", 0));
-		solo.sleep(10000);
+		solo.sleep(15000);
+		Action.clickElementsInWebviewByClassname(solo,
+				"goNextBuy updateItemClick");
+
+		solo.sleep(5000);
+		// Search "Confirm"button on alert window.
+		Action.clickElementsInWebviewByText(solo, ValidationText.OK);
+		solo.sleep(5000);
+		solo.clickOnView(solo.getView("tab_image", 3));
+		TextView shoppingCart = (TextView) solo.getView(
+				"ecshopping_cart_store_count", 0);
+		TextView nextBuy = (TextView) solo.getView(
+				"ecshopping_cart_store_count", 1);
+
+		assertTrue(
+				"Total number displayed incorrect",
+				Integer.valueOf(shoppingCart.getText().toString())
+						+ Integer.valueOf(nextBuy.getText().toString()) == 3);
 	}
 
 	// 1977500:Verify the page whether refresh OK.
@@ -155,10 +172,10 @@ public class ShoppingCart extends ActivityInstrumentationTestCase2 {
 		assertTrue("This page incorrect.", webpage.isShown());
 
 	}
-	
-	//1977496:Verify check out.
+
+	// 1977496:Verify check out.
 	public void testCheckout() throws Exception {
-		
+
 		Account.JudgementAccountLogin(solo);
 		Action.enterToItemPage(solo);
 		Action.addToShoppingCart(solo);
@@ -169,27 +186,28 @@ public class ShoppingCart extends ActivityInstrumentationTestCase2 {
 		Action.clickElementsInWebviewByText(solo, "我要結帳");
 		Action.searchTextOnWebview(solo, "購買者資料");
 	}
-	
-	//1959885：Verify shoppingcart details info.
-	public void testShoppingcartDetail()throws Exception{
-		
+
+	// 1959885：Verify shoppingcart details info.
+	public void testShoppingcartDetail() throws Exception {
+
 		Account.JudgementAccountLogin(solo);
-		//Action.removeShoppingCart(solo);
+		// Action.removeShoppingCart(solo);
 		Action.enterToItemPage(solo);
 		Action.addToShoppingCart(solo);
 		solo.clickOnView(solo.getView("tab_image", 3));
 		solo.clickOnView(solo.getView("ecshopping_cart_store_name", 0));
 		solo.sleep(15000);
 		Action.clickElementsInWebviewByClassname(solo, "updateItemChange");
-		//Action.searchTextOnWebview(solo, "1");
-		CheckedTextView number = (CheckedTextView)solo.getView("text1",0);
-		assertTrue("",number.isChecked());
-		
+		// Action.searchTextOnWebview(solo, "1");
+		CheckedTextView number = (CheckedTextView) solo.getView("text1", 0);
+		assertTrue("", number.isChecked());
+
 	}
-	
-	//1959903：Verify user can view next buy items then view shopping cart items.
-	public void testViewNextbuyAndShoppingCartItem()throws Exception{
-		
+
+	// 1959903：Verify user can view next buy items then view shopping cart
+	// items.
+	public void testViewNextbuyAndShoppingCartItem() throws Exception {
+
 		Account.JudgementAccountLogin(solo);
 		for (int i = 0; i < 3; i++) {
 			solo.scrollToTop();
@@ -205,5 +223,5 @@ public class ShoppingCart extends ActivityInstrumentationTestCase2 {
 		Action.clickElementsInWebviewByText(solo, "confirm");
 		solo.sleep(5000);
 	}
-	
+
 }

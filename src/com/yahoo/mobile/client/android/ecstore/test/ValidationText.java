@@ -22,6 +22,10 @@ public class ValidationText {
 
 	public static final String Jacket = "上衣";
 
+	public static final String T_shirt = "T恤";
+	
+	public static final String No_Sleeve_Shirt = "無袖T恤";
+	
 	public static final String Commodity = "商品";
 
 	public static final String Search_Top = "搜尋上衣";
@@ -29,6 +33,12 @@ public class ValidationText {
 	public static final String Search_Apparel = "搜尋服飾";
 	
 	public static final String Search = "搜尋";
+	
+	public static final String Recent_Browse = "最近瀏覽";
+	
+	public static final String Browse_Record = "瀏覽記錄";
+	
+	public static final String Clean_Browse_Record = "清除瀏覽記錄";
 	
 	public static final String Search_recorder = "搜尋記錄";
 	
@@ -49,6 +59,8 @@ public class ValidationText {
 	public static final String Shop = "商店";
 
 	public static final String Please_login_account = "請先登入帳號";
+	
+	public static final String Product_Collection = "商品收藏";
 
 	public static final String Has_added_collection = "已加入商品收藏";
 
@@ -118,9 +130,9 @@ public class ValidationText {
 
 	public static final String apple = "iphone";
 	
-	 
-
 	public static final String Add_Shopping_Cart = "加入購物車";
+
+	public static final String Maybe_Like = "你可能會喜歡";
 
 	public static final String Already_Add_Shopping_Cart = "已加入購物車";
 
@@ -135,6 +147,14 @@ public class ValidationText {
 	public static final String Next_buy = "下次購買";
 	
 	public static final String Shopping_tips = "購物須知";
+	
+	public static final String ECoupon = "電子折價券";
+	
+	public static final String Discount = "折扣";
+	
+	public static final String Sales_Promotion = "促銷活動";
+	
+	public static final String Default_Item = "待生效+已生效";
 
 	public static final String[] store_title = { "分類", "商品" };
 

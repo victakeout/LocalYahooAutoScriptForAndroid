@@ -416,6 +416,33 @@ public class Action {
 
 	}
 
+	// enter to product item detail page2.
+
+	public static void makeBrowseRecord(Solo solo, int counts) throws Exception {
+
+		Action.clickText(solo, ValidationText.All_Categories);
+		Action.clickText(solo, ValidationText.Apparel);
+		Action.clickText(solo, ValidationText.Commodity);
+		solo.sleep(2000);
+		for (int i = 1; i <= counts; i++) {
+			solo.clickInList(i);
+			solo.sleep(2000);
+			if (i % 4 == 0) {
+				solo.scrollUpList(i);
+		 
+				//TestHelper.swipeUp2(solo, 2);
+				solo.sleep(1000);
+				solo.clickInList(i);
+				solo.sleep(2000);
+			}
+			solo.goBack();
+			// solo.scrollDownList(i + 1);
+
+		}
+		solo.sleep(2000);
+
+	}
+
 	// click elements from web view by ClassName.
 	public static void clickElementsInWebviewByClassname(Solo solo, String text)
 			throws Exception {
@@ -434,7 +461,7 @@ public class Action {
 	public static void clickElementsInWebviewByText(Solo solo, String text)
 			throws Exception {
 		for (WebElement web : solo.getCurrentWebElements()) {
-
+			Log.i("number", web.getText().toString());
 			if (web.getText().toString().equals(text)) {
 				solo.clickOnWebElement(web);
 				solo.sleep(15000);
@@ -450,8 +477,10 @@ public class Action {
 	public static void searchTextOnWebview(Solo solo, String text)
 			throws Exception {
 		for (WebElement web : solo.getCurrentWebElements()) {
+			Log.i("number", web.getClassName().toString());
 			if (web.getText().toString().equals(text)) {
 				actual = true;
+				solo.sleep(5000);
 
 			}
 

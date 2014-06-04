@@ -2,11 +2,13 @@ package com.yahoo.mobile.client.android.ecstore.test.FavoriteStore;
 
 import android.annotation.SuppressLint;
 import android.test.ActivityInstrumentationTestCase2;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.robotium.solo.Solo;
+import com.robotium.solo.WebElement;
 import com.yahoo.mobile.client.android.ecstore.Account.Account;
 import com.yahoo.mobile.client.android.ecstore.Action.Action;
 import com.yahoo.mobile.client.android.ecstore.Assert.Assert;
@@ -74,8 +76,14 @@ public class FavoriteStore extends ActivityInstrumentationTestCase2 {
 	// 1959886:Verify the page display when user is logged in and has no
 	// favorite stores.
 	public void testNoFavoriteStoreWhenLogin() throws Exception {
-
+		
 		Account.JudgementAccountLogin(solo);
+		solo.clickOnView(solo.getView("tab_image", 1));	 
+		solo.sleep(10000);
+		TextView noResult = (TextView)solo.getView("no_result_text",1);
+		Log.i("number",noResult.getText().toString());
+		assertTrue("Text not found.", noResult.isShown());
+		/*Account.JudgementAccountLogin(solo);
 		solo.clickOnView(solo.getView("tab_image", 4));
 		solo.sleep(5000);
 		try {
@@ -118,7 +126,7 @@ public class FavoriteStore extends ActivityInstrumentationTestCase2 {
 					"Favorite items not deleted.",
 					solo.searchText(ValidationText.Not_Collection_Any_Commodity));
 
-		}
+		}*/
 	}
 
 	// 1954571:Verify 18禁items displayed in favorite stores
@@ -159,8 +167,30 @@ public class FavoriteStore extends ActivityInstrumentationTestCase2 {
 		Account.JudgementAccountWithoutLogin(solo);
 		solo.clickOnView(solo.getView("tab_image", 1));
 		solo.sleep(2000);
-		Button loginButton = (Button)solo.getView("option_button",1);
-		assertTrue("No login button displayed!",
-				loginButton.isShown());
+		Button loginButton = (Button) solo.getView("option_button", 1);
+		assertTrue("No login button displayed!", loginButton.isShown());
+	}
+
+	// 1959922:Verify user can access correct store page from recommendation.
+	public void testAccessRecommendationStore() throws Exception {
+
+		Account.JudgementAccountLogin(solo);
+		solo.clickOnView(solo.getView("tab_image", 1));
+		solo.sleep(2000);
+		solo.clickOnText(ValidationText.Maybe_Like);
+		solo.sleep(5000);
+		View  img = (View)solo.getView("no_result_img");
+		solo.clickOnView(img);
+		/*Action.clickElementsInWebviewByText(solo, ValidationText.Dong_Jing);
+		for (WebElement web : solo.getCurrentWebElements()) {
+			Log.i("number", web.getText().toString());
+			if (web.getText().toString().equals(ValidationText.Maybe_Like)) {
+				solo.clickOnWebElement(web);
+				solo.sleep(15000);
+
+			}
+
+		}*/
+		solo.sleep(5000);
 	}
 }
