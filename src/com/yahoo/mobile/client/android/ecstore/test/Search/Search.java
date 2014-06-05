@@ -2,14 +2,22 @@ package com.yahoo.mobile.client.android.ecstore.test.Search;
 
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.test.ActivityInstrumentationTestCase2;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.robotium.solo.Solo;
+import com.yahoo.mobile.client.android.ecstore.Account.Account;
 import com.yahoo.mobile.client.android.ecstore.Action.Action;
 import com.yahoo.mobile.client.android.ecstore.Assert.Assert;
 import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 
+@SuppressLint("NewApi")
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class Search extends ActivityInstrumentationTestCase2 {
 	private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
@@ -905,5 +913,321 @@ public class Search extends ActivityInstrumentationTestCase2 {
 			Action.searchAfterPutData(solo, 0, ValidationText.apple);
 			assertTrue("Not 2 lines.", solo.searchText("phone"));
 		}
+	}
+
+	// 1937893:The L5 layer classification click returns Icon
+	public void testClickReturnIconInL5Layer() throws Exception {
+
+		Action.enterToJacket(solo);
+		Action.clickText(solo, ValidationText.T_shirt);
+		Action.clickSearchButtonOnScreen(solo);
+		solo.goBack();
+		TextView searchText = (TextView) solo.getView("action_bar_title", 0);
+		Log.i("number", searchText.getText().toString());
+		assertTrue("Not enter to T-shirt category!", searchText.getText()
+				.toString().equals(ValidationText.T_shirt));
+	}
+
+	// 1937894:The L6 layer classification click returns Icon
+	public void testClickReturnIconInL6Layer() throws Exception {
+
+		Action.enterToJacket(solo);
+		Action.clickText(solo, ValidationText.T_shirt);
+		Action.clickText(solo, ValidationText.Categories);
+		Action.clickText(solo, ValidationText.No_Sleeve_Shirt);
+		Action.clickSearchButtonOnScreen(solo);
+		solo.goBack();
+		TextView searchText = (TextView) solo.getView("action_bar_title", 0);
+		Log.i("number", searchText.getText().toString());
+		assertTrue("Not enter to Sleeve Shirt category!", searchText.getText()
+				.toString().trim().equals(ValidationText.No_Sleeve_Shirt));
+	}
+
+	// 1937909:Search in L4 classification
+	public void testSearchInL4Layer() throws Exception {
+		Action.enterToJacket(solo);
+		Action.clickText(solo, ValidationText.Commodity);
+		Action.clickSearchButtonOnScreen(solo);
+
+		// element and test_data
+		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+
+		solo.sleep(3000);
+		TextView searchText = (TextView) solo.getView("action_bar_title", 0);
+		Log.i("number", searchText.getText().toString());
+		assertTrue("Not enter to Jacket category!", searchText.getText()
+				.toString().trim().equals(ValidationText.Jacket));
+	}
+
+	// 1937898:click search icon
+	public void testClickSearchIcon() throws Exception {
+
+		solo.clickOnView(solo.getView("tab_text", 2));
+		Action.clickSearchButtonOnScreen(solo);
+		// element and test_data
+		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		assertTrue("Not enter to search page.",
+				solo.searchText(ValidationText.Results_value));
+	}
+
+	// 1937899:Click return icon in L2 item list.
+	public void testClickReturnIconInL2() throws Exception {
+		Action.clickText(solo, ValidationText.All_Categories);
+		Action.clickText(solo, ValidationText.Apparel);
+		Action.clickText(solo, ValidationText.Commodity);
+		solo.goBack();
+		Action.navigateToCategoryScreen(solo);
+	}
+
+	// 1937900:Click return icon in L3 item list.
+	public void testClickReturnIconInL3() throws Exception {
+		solo.clickOnView(solo.getView("tab_text", 2));
+		Action.clickText(solo, ValidationText.Apparel);
+		Action.clickText(solo, ValidationText.Popular_Women);
+		Action.clickText(solo, ValidationText.Categories);
+		solo.goBack();
+		int size = ValidationText.CostumeList.length;
+		for (int i = 0; i < size; i++) {
+			boolean textFound = solo.searchText(ValidationText.CostumeList[i]);
+			assertTrue(ValidationText.CostumeList[i] + " not found", textFound);
+		}
+
+	}
+
+	// 1937901:Click return icon in L4 item list.
+	public void testClickReturnIconInL4() throws Exception {
+		Action.enterToJacket(solo);
+		Action.clickText(solo, ValidationText.Commodity);
+		solo.goBack();
+		TextView searchText = (TextView) solo.getView("action_bar_title", 0);
+		Log.i("number", searchText.getText().toString());
+		assertTrue("Not back to fashion category!", searchText.getText()
+				.toString().trim().equals(ValidationText.Popular_Women));
+	}
+
+	// 1937902:Click return icon in L5 item list.
+	public void testClickReturnIconInL5() throws Exception {
+		Action.enterToJacket(solo);
+		Action.clickText(solo, ValidationText.T_shirt);
+		Action.clickText(solo, ValidationText.Commodity);
+		solo.goBack();
+		TextView searchText = (TextView) solo.getView("action_bar_title", 0);
+		Log.i("number", searchText.getText().toString());
+		assertTrue("Not back to jacket category!", searchText.getText()
+				.toString().trim().equals(ValidationText.Jacket));
+	}
+
+	// 1937903:Click return icon in L6 item list.
+	public void testClickReturnIconInL6() throws Exception {
+		Action.enterToJacket(solo);
+		Action.clickText(solo, ValidationText.T_shirt);
+		Action.clickText(solo, ValidationText.Categories);
+		Action.clickText(solo, ValidationText.No_Sleeve_Shirt);
+		solo.goBack();
+		TextView searchText = (TextView) solo.getView("action_bar_title", 0);
+		Log.i("number", searchText.getText().toString());
+		assertTrue("Not back to T_shirt category!", searchText.getText()
+				.toString().trim().equals(ValidationText.T_shirt));
+	}
+
+	// 1937904:Input keywords and search.
+	public void testInputkeywordsAndSearch() throws Exception {
+
+		Action.clickText(solo, ValidationText.All_Categories);
+		Action.clickText(solo, ValidationText.Apparel);
+		Action.clickText(solo, ValidationText.Commodity);
+		Action.clickSearchButtonOnScreen(solo);
+		// element and test_data
+		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+
+		// if find product and store tab,we can confirm already in search
+		// result.
+		TextView product = (TextView) solo.getView(
+				"category_tab_primary_title", 0);
+		TextView store = (TextView) solo.getView("category_tab_primary_title",
+				1);
+		assertTrue("Not enter to search result page.", product.isShown()
+				&& store.isShown());
+	}
+
+	// 1937906:Search in L1 category.
+	public void testSearchInL1Category() throws Exception {
+
+		Action.clickText(solo, ValidationText.All_Categories);
+		Action.clickSearchButtonOnScreen(solo);
+		// element and test_data
+		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+
+		// if find product and store tab,we can confirm already in search
+		// result.
+		TextView product = (TextView) solo.getView(
+				"category_tab_primary_title", 0);
+		TextView store = (TextView) solo.getView("category_tab_primary_title",
+				1);
+		assertTrue("Not enter to search result page.", product.isShown()
+				&& store.isShown());
+	}
+
+	// 1937907:Search in L2 category.
+	public void testSearchInL2Category() throws Exception {
+
+		Action.clickText(solo, ValidationText.All_Categories);
+		Action.clickText(solo, ValidationText.Apparel);
+		Action.clickText(solo, ValidationText.Commodity);
+		Action.clickSearchButtonOnScreen(solo);
+		// element and test_data
+		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+
+		// if find product and store tab,we can confirm already in search
+		// result.
+		TextView product = (TextView) solo.getView(
+				"category_tab_primary_title", 0);
+		TextView store = (TextView) solo.getView("category_tab_primary_title",
+				1);
+		assertTrue("Not enter to search result page.", product.isShown()
+				&& store.isShown());
+	}
+
+	// 1937908:Search in L3 category.
+	public void testSearchInL3Category() throws Exception {
+
+		Action.clickText(solo, ValidationText.All_Categories);
+		Action.clickText(solo, ValidationText.Apparel);
+		Action.clickText(solo, ValidationText.Popular_Women);
+		Action.clickSearchButtonOnScreen(solo);
+		// element and test_data
+		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+
+		TextView searchText = (TextView) solo.getView("action_bar_title", 0);
+
+		// if find product and store tab,we can confirm already in search
+		// result.
+		TextView product = (TextView) solo.getView(
+				"category_tab_primary_title", 0);
+		TextView store = (TextView) solo.getView("category_tab_primary_title",
+				1);
+		assertTrue(
+				"Not enter to search result page.",
+				product.isShown()
+						&& store.isShown()
+						&& searchText.getText().toString().trim()
+								.equals(ValidationText.Popular_Women));
+	}
+
+	// 1937910:Search in L5 category.
+	public void testSearchInL5Category() throws Exception {
+		Action.enterToJacket(solo);
+		Action.clickText(solo, ValidationText.T_shirt);
+		Action.clickSearchButtonOnScreen(solo);
+		// element and test_data
+		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+
+		TextView searchText = (TextView) solo.getView("action_bar_title", 0);
+
+		// if find product and store tab,we can confirm already in search
+		// result.
+		TextView product = (TextView) solo.getView(
+				"category_tab_primary_title", 0);
+		TextView store = (TextView) solo.getView("category_tab_primary_title",
+				1);
+
+		Log.i("number", searchText.getText().toString());
+		assertTrue(
+				"Not enter to search result page.",
+				product.isShown()
+						&& store.isShown()
+						&& searchText.getText().toString().trim()
+								.equals(ValidationText.T_shirt));
+
+	}
+
+	// // 1937911:Search in L6 category.
+	public void testSearchInL6Category() throws Exception {
+
+		Action.enterToJacket(solo);
+		Action.clickText(solo, ValidationText.T_shirt);
+		Action.clickText(solo, ValidationText.Categories);
+		Action.clickText(solo, ValidationText.No_Sleeve_Shirt);
+		Action.clickSearchButtonOnScreen(solo);
+		// element and test_data
+		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		// if find product and store tab,we can confirm already in search
+		// result.
+		TextView product = (TextView) solo.getView(
+				"category_tab_primary_title", 0);
+		TextView store = (TextView) solo.getView("category_tab_primary_title",
+				1);
+		TextView searchText = (TextView) solo.getView("action_bar_title", 0);
+		Log.i("number", searchText.getText().toString());
+		assertTrue(
+				"Not enter to search result page.",
+				product.isShown()
+						&& store.isShown()
+						&& searchText.getText().toString().trim()
+								.equals(ValidationText.No_Sleeve_Shirt));
+	}
+
+	// 1959905:Verify "搜索全部商店" function.
+	public void testSearchAllStore() throws Exception {
+
+		Action.clickSearchButtonOnScreen(solo);
+		// element and test_data
+		Action.searchAfterPutData(solo, 0, ValidationText.Dong_Jing);
+
+		Action.clickText(solo, ValidationText.Shop);
+		ImageView dongjing = (ImageView) solo.getView(
+				"listitem_storelist_image", 0);
+		solo.clickOnView(dongjing);
+		solo.sleep(1000);
+		// Action.clickSearchButtonOnScreen(solo);
+		View iv = solo.getView("menu_search");
+		solo.clickOnView(iv);
+
+		Action.searchAfterPutData(solo, 0, ValidationText.model);
+		/* Button optionButton = (Button)solo.getView("option_button",2); */
+		solo.clickOnText(ValidationText.Search_All_Store);
+		solo.sleep(1000);
+		assertFalse("Search all store button still exist.",
+				solo.getView("option_button").isShown());
+	}
+
+	// 1977507:verify search result when enter special characters in search box.
+	public void testEnterSpecialCharactersToSearch() throws Exception {
+
+		Account.JudgementAccountLogin(solo);
+		Action.clickSearchButtonOnScreen(solo);
+		// element and test_data
+		Action.searchAfterPutData(solo, 0, ValidationText.Special);
+		assertTrue("No result note pop up.",
+				solo.searchText(ValidationText.Results_value));
+	}
+
+	// 1959914:Verify user can access store page by tapping store logo
+	public void testEnterStorePageByTapLog() throws Exception {
+
+		// click on search button on home screen
+		Action.clickSearchButtonOnScreen(solo);
+
+		// fill in keyword then click search button
+		Action.searchAfterPutData(solo, 0, ValidationText.Dong_J);
+		solo.sleep(5000);
+		Action.clickText(solo, ValidationText.Shop);
+
+		// Get and tap store logo.
+		ImageView StoreLog = (ImageView) solo
+				.getView("listitem_storelist_image");
+		solo.clickOnView(StoreLog);
+		TextView category = (TextView) solo.getView(
+				"category_tab_primary_title", 0);
+		Log.i("number", category.getText().toString());
+		TextView product = (TextView) solo.getView(
+				"category_tab_primary_title", 2);
+		Log.i("number", product.getText().toString());
+		assertTrue(
+				"Not tap store logo.",
+				category.getText().toString().trim()
+						.equals(ValidationText.Categories)
+						&& product.getText().toString().trim()
+								.equals(ValidationText.Commodity));
 	}
 }

@@ -1126,7 +1126,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 		Action.setListViewStyleAfterSearch(solo);
 	}
 
-	// 1938098:
+	// 1938098:test productlist titlle display.
 	public void testTwoLineDisplay() throws Exception {
 
 		enterClassification();

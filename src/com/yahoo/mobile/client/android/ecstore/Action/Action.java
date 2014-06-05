@@ -429,8 +429,8 @@ public class Action {
 			solo.sleep(2000);
 			if (i % 4 == 0) {
 				solo.scrollUpList(i);
-		 
-				//TestHelper.swipeUp2(solo, 2);
+
+				// TestHelper.swipeUp2(solo, 2);
 				solo.sleep(1000);
 				solo.clickInList(i);
 				solo.sleep(2000);
@@ -486,5 +486,14 @@ public class Action {
 
 		}
 		junit.framework.Assert.assertTrue("Text not found", actual);
+	}
+
+	// enter to
+	public static void enterToJacket(Solo solo) throws Exception {
+		solo.clickOnView(solo.getView("tab_text", 2));
+		Action.clickText(solo, ValidationText.Apparel);
+		Action.clickText(solo, ValidationText.Popular_Women);
+		Action.clickText(solo, ValidationText.Jacket);
+		Action.clickText(solo, ValidationText.Categories);
 	}
 }

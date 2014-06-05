@@ -14,6 +14,8 @@ public class ValidationText {
 
 	public static final String Dong = "東";
 	
+	public static final String Dong_J = "東京";
+	
 	public static final String Dong_Jing = "東京著衣";
 
 	public static final String Apparel = "服飾";
@@ -49,6 +51,8 @@ public class ValidationText {
 	public static final String Categories = "分類";
 
 	public static final String OK = "確定";
+	
+	public static final String Special = "‘";
 
 	public static final String Setting = "設定";
 
@@ -155,6 +159,12 @@ public class ValidationText {
 	public static final String Sales_Promotion = "促銷活動";
 	
 	public static final String Full = "購物滿";
+	
+	public static final String model = "造造";
+	
+	public static final String Sorry = "很抱歉，目前無法顯示搜尋結果";
+	
+	public static final String Search_All_Store = "搜尋全部商店";
 	
 	public static final String Share_Product = "分享商品";
 	
