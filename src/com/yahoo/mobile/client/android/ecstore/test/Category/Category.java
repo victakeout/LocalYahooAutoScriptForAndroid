@@ -1,6 +1,5 @@
 package com.yahoo.mobile.client.android.ecstore.test.Category;
 
- 
 import android.annotation.SuppressLint;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
@@ -755,33 +754,37 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	/*// 1938159:Check '運動/戶外/休閒' is displayed on the top of the screen.
-	public void testSportDisplayedOnTheScreen() throws Exception {
+	/*
+	 * // 1938159:Check '運動/戶外/休閒' is displayed on the top of the screen. public
+	 * void testSportDisplayedOnTheScreen() throws Exception {
+	 * 
+	 * solo.clickOnView(solo.getView("tab_image", 2));
+	 * solo.clickOnText(ValidationText.Sports_Outdoor_Recreation);
+	 * solo.sleep(2000); TextView sport = (TextView)
+	 * solo.getView("action_bar_title", 0); boolean text =
+	 * sport.getText().toString().trim()
+	 * .equals(ValidationText.Sports_Outdoor_Recreation2);
+	 * 
+	 * assertTrue("sport text does not exist.", text);
+	 * 
+	 * }
+	 */
 
-		solo.clickOnView(solo.getView("tab_image", 2));
-		solo.clickOnText(ValidationText.Sports_Outdoor_Recreation);
-		solo.sleep(2000);
-		TextView sport = (TextView) solo.getView("action_bar_title", 0);
-		boolean text = sport.getText().toString().trim()
-				.equals(ValidationText.Sports_Outdoor_Recreation2);
-
-		assertTrue("sport text does not exist.", text);
-
-	}*/
-
-	/*// 1938160:Check '圖書/文具/影音' is displayed on the top of the screen.
-	public void testBookDisplayedOnTheScreen() throws Exception {
-
-		solo.clickOnView(solo.getView("tab_image", 2));
-		solo.clickOnText(ValidationText.Books_Stationery_Video);
-		solo.sleep(2000);
-		TextView book = (TextView) solo.getView("action_bar_title", 0);
-		boolean text = book.getText().toString().trim()
-				.equals(ValidationText.Books_Stationery_Video2);
-
-		assertTrue("book text does not exist.", text);
-
-	}*/
+	/*
+	 * // 1938160:Check '圖書/文具/影音' is displayed on the top of the screen. public
+	 * void testBookDisplayedOnTheScreen() throws Exception {
+	 * 
+	 * solo.clickOnView(solo.getView("tab_image", 2));
+	 * solo.clickOnText(ValidationText.Books_Stationery_Video);
+	 * solo.sleep(2000); TextView book = (TextView)
+	 * solo.getView("action_bar_title", 0); boolean text =
+	 * book.getText().toString().trim()
+	 * .equals(ValidationText.Books_Stationery_Video2);
+	 * 
+	 * assertTrue("book text does not exist.", text);
+	 * 
+	 * }
+	 */
 
 	// 2014-04-30
 	// 1938103:Check to click the start icon without login.
@@ -1148,7 +1151,6 @@ public class Category extends ActivityInstrumentationTestCase2 {
 	@SuppressLint("NewApi")
 	public void testTwoLineDisplayInLargeView() throws Exception {
 
-		
 		enterClassification();
 		solo.clickOnText(ValidationText.Commodity);
 		Action.setLargePhotoViewStyleAfterSearch(solo);
@@ -1163,6 +1165,95 @@ public class Category extends ActivityInstrumentationTestCase2 {
 			assertTrue("Not 2 lines.", tv.getMaxLines() == 2);
 			Action.setListViewStyleAfterSearch(solo);
 		}
-		
+
 	}
+
+	// 1938046:Check the default browse mode.
+	public void testDefaultBrowseMode() throws Exception {
+		solo.clickOnView(solo.getView("tab_image", 2));
+		Action.clickText(solo, ValidationText.Apparel);
+		Assert.CategoryListShow(solo);
+		int size = ValidationText.CostumeList.length;
+		// Make sure all the item displayed correctly.
+		for (int i = 0; i < size; i++) {
+			boolean textFound = solo.searchText(ValidationText.CostumeList[i]);
+			assertTrue(ValidationText.CostumeList[i] + " not found", textFound);
+		}
+		// Select two item to compare the position.
+		boolean flag = TestHelper.positionCompare(solo,
+				ValidationText.CostumeList[0], 1,
+				ValidationText.CostumeList[1], 2, 1);
+		assertTrue(
+				"Item position is not right,need confirm the default browse mode.",
+				flag);
+	}
+
+	// 1938050:Check the default advanced tab.
+	public void testDefaultAdvancedTabMode() throws Exception {
+		enterClassification();
+		solo.sleep(2000);
+		Action.enterAdvancedPage(solo);
+		solo.sleep(3000);
+		TextView btn_sort = (TextView) solo.getView("indicator_sort");
+
+		assertTrue("The default tab is incorrect.", btn_sort.isShown());
+	}
+
+	// 1953657:verify side bar edit category function.
+	public void testEditFavoriteCategoryBySidebar() throws Exception {
+		// click on up icon
+		solo.sleep(3000);
+		Action.clickHomeButtonOnScreen(solo);
+		solo.clickOnText(ValidationText.Edit_Favorite_Category);
+		// Get the grid view count.
+		GridView lv = (GridView) solo.getView("category_editor_grid");
+		Log.i("number", String.valueOf(lv.getCount()));
+
+		for (int i = 0; i < lv.getCount(); i++) {
+			View category = (View) solo.getView("category_editor_grid_button",
+					i);
+			solo.clickOnView(category);
+			assertTrue("Category item is not selected.", category.isPressed());
+		}
+	}
+
+	// 1959882:Verify 18 limit note
+	public void test18LimitNote() throws Exception {
+
+		solo.clickOnView(solo.getView("tab_image", 2));
+		solo.scrollToBottom();
+		Action.clickText(solo, ValidationText.Sports_Outdoor_Recreation);
+		Action.clickText(solo, ValidationText.Eighteen_Area);
+		TextView restrictNote = (TextView) solo
+				.getView("restrict_category_bottom_text");
+		assertTrue("Restrict note not exist.", restrictNote.isShown());
+	}
+
+	// 1938159:Verify Leisure / traffic tab correctly displayed on the page
+	public void testLeisureTrafficTabDisplayed() throws Exception {
+
+		solo.clickOnView(solo.getView("tab_image", 2));
+		assertTrue("Sports/Outdoor/Leisure is not displayed.",
+				solo.searchText(ValidationText.Sports_Outdoor_Recreation));
+	}
+
+	// 1954573:Verify 18 restrict page cancel button.
+	public void testLeaveRestrictPage() throws Exception {
+
+		solo.clickOnView(solo.getView("tab_image", 2));
+		solo.scrollToBottom();
+		Action.clickText(solo, ValidationText.Sports_Outdoor_Recreation);
+		Action.clickText(solo, ValidationText.Eighteen_Area);
+		TextView restrictNote = (TextView) solo
+				.getView("restrict_category_bottom_text");
+		assertTrue("Restrict note not exist.", restrictNote.isShown());
+		Button leave = (Button) solo.getView("btn_under18_leave");
+		solo.clickOnView(leave);
+		TextView sport = (TextView) solo.getView("action_bar_title", 0);
+		boolean text = sport.getText().toString().trim()
+				.equals(ValidationText.Sports_Outdoor_Recreation2);
+
+		assertTrue("sport text does not exist.", text);
+	}
+
 }

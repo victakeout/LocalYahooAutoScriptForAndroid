@@ -169,6 +169,14 @@ public class ValidationText {
 	public static final String Share_Product = "分享商品";
 	
 	public static final String Default_Item = "待生效+已生效";
+	
+	public static final String Eighteen_Area = "18禁專區";
+	
+	public static final String Payment = "付款及交貨方式";
+	
+	public static final String Post = "交貨方式";
+	
+	public static final String Edit_Favorite_Category = "編輯喜愛的分類";
 
 	public static final String[] store_title = { "分類", "商品" };
 

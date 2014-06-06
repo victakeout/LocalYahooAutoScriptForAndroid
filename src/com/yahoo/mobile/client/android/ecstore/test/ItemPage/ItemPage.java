@@ -108,7 +108,7 @@ public class ItemPage extends ActivityInstrumentationTestCase2 {
 	public void testVerifyFavoriteitems() throws Exception {
 
 		Account.JudgementAccountLogin(solo);
-		
+
 		Action.removeFavoriteItem(solo);
 		Action.enterToItemPage(solo);
 		solo.goBack();
@@ -124,5 +124,68 @@ public class ItemPage extends ActivityInstrumentationTestCase2 {
 				"Product not added to favorite list. ",
 				storeName.getText().toString()
 						.equals(collectStoreName.getText().toString()));
+	}
+
+	// 1953626:verify Payment.
+	public void testVerifyPayment() throws Exception {
+
+		Action.enterToItemPage(solo);
+		TestHelper.swipeUp(solo, 1);
+		Action.clickText(solo, ValidationText.Payment);
+		TextView payInfoATM = (TextView) solo.getView("pay_info", 1);
+		TextView payInfoVisa = (TextView) solo.getView("pay_info", 2);
+		assertTrue(
+				"Payment page not contain any item.",
+				payInfoATM.isShown() && payInfoVisa.isShown()
+						&& solo.searchText(ValidationText.Post));
+	}
+
+	// 1953627:Verify Shopping methods
+	public void testVerifyShoppingMethods() throws Exception {
+		Action.enterToItemPage(solo);
+		TestHelper.swipeUp(solo, 1);
+		Action.clickText(solo, ValidationText.Shopping_tips);
+		TextView ShoppingTips = (TextView) solo.getView("text_must_know", 3);
+		assertTrue("Shopping tips not show.", ShoppingTips.isShown());
+
+	}
+
+	// 1953629:Verify the classification in current store page.
+	public void testVerifyCurrentStorePage() throws Exception {
+		Action.enterToItemPage(solo);
+		TestHelper.swipeUp(solo, 1);
+		Action.clickText(solo, ValidationText.See_All_Store_Product);
+		Action.clickText(solo, ValidationText.Categories);
+		// TextView ShoppingTips = (TextView)solo.getView("text_must_know",3);
+		assertTrue(
+				"Shopping tips not show.",
+				solo.searchText(ValidationText.Categories)
+						&& solo.searchText(ValidationText.Commodity));
+
+	}
+
+	// 1953630:Verify the Commodity in current store page.
+	public void testVerifyCommodityPage() throws Exception {
+		Action.enterToItemPage(solo);
+		TestHelper.swipeUp(solo, 1);
+		Action.clickText(solo, ValidationText.See_All_Store_Product);
+		assertTrue(
+				"Shopping tips not show.",
+				solo.searchText(ValidationText.Categories)
+						&& solo.searchText(ValidationText.Commodity));
+
+	}
+
+	// 1953631:verify share product Layer.
+	public void testShareProductPage() throws Exception {
+		Action.enterToItemPage(solo);
+		TestHelper.swipeUp(solo, 1);
+		Action.clickText(solo, ValidationText.Share_Product);
+		
+		solo.getCurrentActivity().getClass();
+		
+		View share = (View) solo.getView("alertTitle", 1);
+		assertTrue("Share window not pop up.", share.isShown());
+
 	}
 }

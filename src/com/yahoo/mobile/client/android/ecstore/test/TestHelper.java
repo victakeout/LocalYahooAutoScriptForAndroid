@@ -1,6 +1,8 @@
 package com.yahoo.mobile.client.android.ecstore.test;
 
 import junit.framework.Assert;
+import android.annotation.SuppressLint;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 
@@ -67,11 +69,16 @@ public class TestHelper {
 	 * Compare the location of two views. Parameters: 1. solo 2. view_id_1 3.
 	 * view_id_2 4. KeyString. values: 1. up; 2.down; 3. left; 4. right
 	 */
+	@SuppressLint("NewApi")
 	public static boolean positionCompare(Solo solo, String view_F,
 			int view_F_id, String view_S, int View_S_id, int keyString) {
 
 		View view1 = solo.getView(view_F, view_F_id);
+		Log.i("number", "View1X:"+String.valueOf(view1.getX()));
+		Log.i("number", "View1Y:"+String.valueOf(view1.getY()));
 		View view2 = solo.getView(view_S, View_S_id);
+		Log.i("number", "View2X:"+String.valueOf(view2.getX()));
+		Log.i("number", "View2Y:"+String.valueOf(view2.getY()));
 		if (keyString > 4 || keyString < 1) {
 			Assert.assertTrue("Position parameter is error.", false);
 		}
