@@ -42,7 +42,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 	@Override
 	protected void setUp() throws Exception {
 		solo = new Solo(getInstrumentation(), getActivity());
-		Assert.testFirstLaunch(solo);
+		// Assert.testFirstLaunch(solo);
 	}
 
 	@Override
@@ -539,7 +539,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938135:Check the search icon on the screen top.
+	/*// 1938135:Check the search icon on the screen top.
 	public void testSearchIconOnTheTop() throws Exception {
 
 		solo.clickOnView(solo.getView("tab_image", 2));
@@ -547,7 +547,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 		assertTrue("Search icon does not exist.", searchIcon.isShown());
 
-	}
+	}*/
 
 	// 1938141:Check latest update side bar.
 	public void testLatestUpdateSidebar() throws Exception {
@@ -754,37 +754,18 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	/*
-	 * // 1938159:Check '運動/戶外/休閒' is displayed on the top of the screen. public
-	 * void testSportDisplayedOnTheScreen() throws Exception {
-	 * 
-	 * solo.clickOnView(solo.getView("tab_image", 2));
-	 * solo.clickOnText(ValidationText.Sports_Outdoor_Recreation);
-	 * solo.sleep(2000); TextView sport = (TextView)
-	 * solo.getView("action_bar_title", 0); boolean text =
-	 * sport.getText().toString().trim()
-	 * .equals(ValidationText.Sports_Outdoor_Recreation2);
-	 * 
-	 * assertTrue("sport text does not exist.", text);
-	 * 
-	 * }
-	 */
+	/*// 1938160:Check '圖書/文具/影音' is displayed on the top of the screen.
+	public void testBookDisplayedOnTheScreen() throws Exception {
 
-	/*
-	 * // 1938160:Check '圖書/文具/影音' is displayed on the top of the screen. public
-	 * void testBookDisplayedOnTheScreen() throws Exception {
-	 * 
-	 * solo.clickOnView(solo.getView("tab_image", 2));
-	 * solo.clickOnText(ValidationText.Books_Stationery_Video);
-	 * solo.sleep(2000); TextView book = (TextView)
-	 * solo.getView("action_bar_title", 0); boolean text =
-	 * book.getText().toString().trim()
-	 * .equals(ValidationText.Books_Stationery_Video2);
-	 * 
-	 * assertTrue("book text does not exist.", text);
-	 * 
-	 * }
-	 */
+		solo.clickOnView(solo.getView("tab_image", 2));
+		solo.clickOnText(ValidationText.Books_Stationery_Video);
+		solo.sleep(2000);
+		TextView book = (TextView) solo.getView("action_bar_title", 0);
+		boolean text = book.getText().toString().trim()
+				.equals(ValidationText.Books_Stationery_Video2);
+		assertTrue("book text does not exist.", text);
+
+	}*/
 
 	// 2014-04-30
 	// 1938103:Check to click the start icon without login.
@@ -1103,7 +1084,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938099:check advanced page tab display.
+	// 1938099:check enter to item page.
 	public void testTapProductName() throws Exception {
 
 		enterClassification();
@@ -1116,7 +1097,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938112:check advanced page tab display.
+	/*// 1938112:check advanced page tab display.
 	public void testTapProductNameInGridView() throws Exception {
 
 		enterClassification();
@@ -1127,9 +1108,9 @@ public class Category extends ActivityInstrumentationTestCase2 {
 		View imageView = (View) solo.getView("productitem_images");
 		assertTrue("Not in item page.", imageView.isShown());
 		Action.setListViewStyleAfterSearch(solo);
-	}
+	}*/
 
-	// 1938098:test productlist titlle display.
+	/*// 1938098:test productlist titlle display.
 	public void testTwoLineDisplay() throws Exception {
 
 		enterClassification();
@@ -1145,9 +1126,9 @@ public class Category extends ActivityInstrumentationTestCase2 {
 					1);
 			assertTrue("Not 2 lines.", tv.getMaxLines() == 2);
 		}
-	}
+	}*/
 
-	//
+	/*//
 	@SuppressLint("NewApi")
 	public void testTwoLineDisplayInLargeView() throws Exception {
 
@@ -1166,7 +1147,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 			Action.setListViewStyleAfterSearch(solo);
 		}
 
-	}
+	}*/
 
 	// 1938046:Check the default browse mode.
 	public void testDefaultBrowseMode() throws Exception {
@@ -1198,7 +1179,24 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 		assertTrue("The default tab is incorrect.", btn_sort.isShown());
 	}
+	// 1953648:verify My account edit category function.
+	public void testEditFavoriteCategoryInMyAccount() throws Exception {
+			Account.JudgementAccountLogin(solo);
+			solo.clickOnView(solo.getView("tab_image",4));
+			solo.scrollToBottom();
+			solo.clickOnView(solo.getView("profile_bt_ecoupon_account",4));
+		//	solo.clickOnText(ValidationText.Edit_Favorite_Category);
+			// Get the grid view count.
+			GridView lv = (GridView) solo.getView("category_editor_grid");
+			Log.i("number", String.valueOf(lv.getCount()));
 
+			for (int i = 0; i < lv.getCount(); i++) {
+				View category = (View) solo.getView("category_editor_grid_button",
+						i);
+				solo.clickOnView(category);
+				assertTrue("Category item is not selected.", category.isPressed());
+			}
+		}
 	// 1953657:verify side bar edit category function.
 	public void testEditFavoriteCategoryBySidebar() throws Exception {
 		// click on up icon
@@ -1256,4 +1254,142 @@ public class Category extends ActivityInstrumentationTestCase2 {
 		assertTrue("sport text does not exist.", text);
 	}
 
+	// 1938064:Verify “Confirm”button function.
+	public void testConfirmButtonFuction() throws Exception {
+
+		enterClassification();
+		solo.sleep(2000);
+		Action.enterAdvancedPage(solo);
+		solo.clickOnView(solo.getView("btn_filter"));
+		// Get "0 Interest" button.
+		ToggleButton tb = (ToggleButton) solo.getView("tb_cczeroint");
+		solo.clickOnView(tb);
+		Action.clickText(solo, ValidationText.OK);
+		assertFalse("Back to search result page failed.", tb.isShown());
+	}
+
+	// 1938096:click product image in listview.
+	public void testClickProductImageInListview() throws Exception {
+		enterClassification();
+		solo.waitForText(ValidationText.Commodity, 1, 3000);
+		solo.clickOnText(ValidationText.Commodity);
+		View ProductImage = (View) solo
+				.getView("listitem_productlist_image", 0);
+		solo.clickOnView(ProductImage);
+		solo.sleep(5000);
+		TextView classificationText = (TextView) solo
+				.getView("action_bar_title");
+		assertFalse("Not enter to production detail page.", classificationText
+				.getText().toString().equals(ValidationText.Commodity));
+	}
+
+	// 1938109:click product image in Gridview.
+	public void testClickProductImageInGridview() throws Exception {
+		enterClassification();
+		// Change the item view to photo grid view
+		Action.setSmallPhotoViewStyleAfterSearch(solo);
+
+		solo.waitForText(ValidationText.Commodity, 1, 3000);
+		solo.clickOnText(ValidationText.Commodity);
+		View ProductImage = (View) solo
+				.getView("listitem_productlist_image", 0);
+		solo.clickOnView(ProductImage);
+		solo.sleep(5000);
+		TextView classificationText = (TextView) solo
+				.getView("action_bar_title");
+		assertFalse("Not enter to production detail page.", classificationText
+				.getText().toString().equals(ValidationText.Commodity));
+		solo.goBack();
+		Action.setListViewStyleAfterSearch(solo);
+	}
+
+	// 1938121:click product image in listview.
+	public void testClickProductImageInLargePhotoview() throws Exception {
+		enterClassification();
+		// Change the item view to photo grid view
+		Action.setLargePhotoViewStyleAfterSearch(solo);
+		solo.waitForText(ValidationText.Commodity, 1, 3000);
+		solo.clickOnText(ValidationText.Commodity);
+		View ProductImage = (View) solo
+				.getView("listitem_productlist_image", 0);
+		solo.clickOnView(ProductImage);
+		solo.sleep(5000);
+		TextView classificationText = (TextView) solo
+				.getView("action_bar_title");
+		assertFalse("Not enter to production detail page.", classificationText
+				.getText().toString().equals(ValidationText.Commodity));
+		solo.goBack();
+		Action.setListViewStyleAfterSearch(solo);
+	}
+
+	// 1938039:Input keywords and search.
+	public void testInputKeywordsSearch() throws Exception {
+
+		enterClassification();
+
+		// click search button
+		Action.clickSearchButtonOnScreen(solo);
+
+		// input keyword and search
+		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+
+		solo.sleep(2000);
+		solo.goBack();
+		// click search button
+		Action.clickSearchButtonOnScreen(solo);
+
+		// input keyword and search
+		Action.searchAfterPutData(solo, 0, ValidationText.apple);
+
+		assertTrue("Keywords not changed to iphone.",
+				solo.searchText(ValidationText.apple));
+	}
+
+	// 1938044:Check“Advanced”button display
+	public void testAdvancedButtonDisplay() throws Exception {
+		enterClassification();
+		solo.sleep(2000);
+		solo.waitForText(ValidationText.Commodity, 1, 3000);
+		solo.clickOnText(ValidationText.Commodity);
+		// solo.clickOnView(solo.getView("btn_filter"));
+		View advancedView = (View) solo.getView("menu_filter");
+		assertTrue("Advanced button not found!", advancedView.isShown());
+	}
+
+	// 1938061:check unselected button function.
+	public void testUnselectedButtonFunction() throws Exception {
+
+		enterClassification();
+		
+		TextView storeName = (TextView)solo.getView("listitem_productlist_store_name");
+		String original = storeName.getText().toString().trim();
+		// Go to advanced sort page.
+		Action.enterAdvancedSortPage(solo);
+
+		// solo.clickOnToggleButton("可刷卡");
+		ToggleButton tb = (ToggleButton) solo.getView("tb_cc");
+
+		solo.clickOnView(tb);
+		solo.sleep(3000);
+		assertTrue(" '可刷卡'  button unselected.", tb.isChecked());
+		solo.clickOnView(tb);
+		solo.sleep(3000);
+		assertFalse("'可刷卡'  button  selected.", tb.isChecked());
+		Action.clickText(solo, ValidationText.OK);
+		TextView storeNames = (TextView)solo.getView("listitem_productlist_store_name");
+		assertTrue("Item list has changed.", original.equals(storeNames.getText().toString().trim()));
+
+	}
+	
+	// 1938124:check enter to item page in large photo view.
+	public void testEnterToItemPageInLargeView() throws Exception {
+
+			enterClassification();
+			Action.setLargePhotoViewStyleAfterSearch(solo);	 
+			solo.clickInList(1);
+			solo.sleep(5000);
+			View imageView = (View) solo.getView("productitem_images");
+			assertTrue("Not in item page.", imageView.isShown());
+
+		}
 }

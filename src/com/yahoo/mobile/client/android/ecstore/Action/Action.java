@@ -290,9 +290,10 @@ public class Action {
 	}
 
 	// click Star Icon .
+	static int counts = 0;
 	public static void clickStarIconNote(Solo solo) throws Exception {
 
-		View star = (View) solo.getView("star_button", 0);
+		View star = (View) solo.getView("star_button", counts);
 		solo.clickOnView(star);
 		boolean alreadyAdd;
 
@@ -307,6 +308,7 @@ public class Action {
 			junit.framework.Assert.assertTrue("Add failed.", alreadyAdd);
 
 		}
+		counts++;
 	}
 
 	// Add product to shopping cart in item page.
@@ -447,10 +449,12 @@ public class Action {
 	public static void clickElementsInWebviewByClassname(Solo solo, String text)
 			throws Exception {
 		for (WebElement web : solo.getCurrentWebElements()) {
-			// Log.i("number", web.getClassName().toString());
+			 Log.i("number","ClassNme:"+ web.getClassName().toString());
+			 Log.i("number","Text:"+ web.getText().toString());
+
 			if (web.getClassName().toString().equals(text)) {
 				solo.clickOnWebElement(web);
-				solo.sleep(5000);
+				solo.sleep(15000);
 			}
 		}
 
@@ -462,6 +466,7 @@ public class Action {
 			throws Exception {
 		for (WebElement web : solo.getCurrentWebElements()) {
 			Log.i("number", web.getText().toString());
+			Log.i("number", web.getClassName().toString());
 			if (web.getText().toString().equals(text)) {
 				solo.clickOnWebElement(web);
 				solo.sleep(15000);
@@ -495,5 +500,28 @@ public class Action {
 		Action.clickText(solo, ValidationText.Popular_Women);
 		Action.clickText(solo, ValidationText.Jacket);
 		Action.clickText(solo, ValidationText.Categories);
+	}
+
+	public static void deleteProductCollected(Solo solo) throws Exception {
+		solo.clickOnView(solo.getView("tab_image", 4));
+		TextView OutNumberTwo = null;
+		try {
+			OutNumberTwo = (TextView) solo.getView("profile_bt_favorite_count");
+			solo.clickOnView(OutNumberTwo);		
+			int number = Integer.parseInt(OutNumberTwo.getText().toString());
+		 
+				for (int i = 0; i < number; i++) {
+					View img = (View) solo.getView("listitem_productlist_image");
+					solo.clickLongOnView(img);
+					// Confirm remove it.
+					solo.clickOnView(solo.getView("button1"));
+					solo.sleep(2000);
+				}
+		 
+			
+		} catch (AssertionError e) {
+			junit.framework.Assert.assertTrue("No item need delete.", true);
+		}
+		solo.goBack();
 	}
 }

@@ -52,9 +52,13 @@ public class ValidationText {
 
 	public static final String OK = "確定";
 	
+	public static final String Content = "內容";
+	
 	public static final String Special = "‘";
 
 	public static final String Setting = "設定";
+	
+	public static final String Checkout = "結賬";
 
 	public static final String Clear_Search_History = "清除搜尋記錄";
 
@@ -176,8 +180,25 @@ public class ValidationText {
 	
 	public static final String Post = "交貨方式";
 	
-	public static final String Edit_Favorite_Category = "編輯喜愛的分類";
+	public static final String Sort = "排序";
+	
+	public static final String No_Data_Product = "你沒有最近瀏覽的商品";
+	
+	public static final String No_Data_Shop = "你沒有最近瀏覽的商店";
 
+	
+	public static final String Edit_Favorite_Category = "編輯喜愛的分類";
+	
+	public static final String Hanshen_Home_Life = "漢神百貨居家生活";
+
+	public static final String Hanshen_Ten_Days = "10DAYS科技睡眠館";
+	
+	public static final String Hanshen_Memory_Mattress = "記憶床墊";
+	
+	public static final String Zero_Result = "0筆結果";
+	
+	public static final String Store_Offers = "實體商店優惠";
+	
 	public static final String[] store_title = { "分類", "商品" };
 
 	public static final String[] CategoryList = { "服飾", "美妝", "鞋包配飾", "媽咪寶貝",

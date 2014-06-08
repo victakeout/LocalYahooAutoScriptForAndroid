@@ -66,24 +66,20 @@ public class Checkout extends ActivityInstrumentationTestCase2 {
 	// Cannot swipe screen now.ME
 	public void testChangeOtherDeliveryPlaces() throws Exception {
 
-		/*
-		 * Account.JudgementAccountLogin(solo); Action.enterToItemPage(solo);
-		 * Action.addToShoppingCart(solo);
-		 */
+		 
+		/* Account.JudgementAccountLogin(solo); 
+		 Action.enterToItemPage(solo);
+		 Action.addToShoppingCart(solo);*/
 
 		solo.clickOnView(solo.getView("tab_image", 3));
 		solo.clickOnView(solo.getView("ecshopping_cart_store_name", 0));
-		solo.sleep(15000);
-		// solo.scrollToBottom();
-		// TestHelper.swipeUp(solo, 1);
-		// Scroll the screen to load more data.
-		Action.searchTextOnWebview(solo, "以上商品所適用的優惠");
-		// Log.i("number", web.getText().toString());
-
+		solo.sleep(20000);
+		TestHelper.swipeUp(solo, 2);
+		solo.sleep(5000);
 		Action.clickElementsInWebviewByClassname(solo,
-				"shipping updateItemChange");
+				"container");
 
-		Action.clickElementsInWebviewByText(solo, "我要結帳");
+	//	Action.clickElementsInWebviewByText(solo, "我要結帳");
 
 	}
 }

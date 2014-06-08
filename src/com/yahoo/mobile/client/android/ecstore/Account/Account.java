@@ -152,6 +152,7 @@ public class Account {
 		// if createAccount or newAccount button can be found,we can make sure
 		// that account status is not log in.
 		if (createAccount || newAccount) {
+			junit.framework.Assert.assertTrue("Account has login",createAccount || newAccount);
 			solo.goBack();
 		} else {
 			accountLogOut(solo);
