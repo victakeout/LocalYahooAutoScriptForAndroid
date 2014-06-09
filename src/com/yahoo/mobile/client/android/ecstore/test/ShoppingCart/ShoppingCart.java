@@ -183,8 +183,8 @@ public class ShoppingCart extends ActivityInstrumentationTestCase2 {
 		solo.clickOnView(solo.getView("ecshopping_cart_store_name", 0));
 		solo.sleep(15000);
 		TestHelper.swipeUp(solo, 1);
-		Action.clickElementsInWebviewByText(solo, "我要結帳");
-		Action.searchTextOnWebview(solo, "購買者資料");
+		Action.clickElementsInWebviewByText(solo, ValidationText.Want_Checkout);
+		Action.searchTextOnWebview(solo,ValidationText.Buy_Info);
 	}
 
 	// 1959885：Verify shoppingcart details info.
@@ -224,4 +224,9 @@ public class ShoppingCart extends ActivityInstrumentationTestCase2 {
 		solo.sleep(5000);
 	}
 
+	//1977534:verify delete function
+	public void testVerifyDeleteFunction() throws Exception {
+		Account.JudgementAccountLogin(solo);
+		Action.removeShoppingCart(solo);
+	}
 }

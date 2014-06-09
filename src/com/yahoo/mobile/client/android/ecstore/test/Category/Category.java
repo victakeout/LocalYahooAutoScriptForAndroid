@@ -754,7 +754,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	/*// 1938160:Check '圖書/文具/影音' is displayed on the top of the screen.
+	// 1938160:Check '圖書/文具/影音' is displayed on the top of the screen.
 	public void testBookDisplayedOnTheScreen() throws Exception {
 
 		solo.clickOnView(solo.getView("tab_image", 2));
@@ -765,7 +765,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 				.equals(ValidationText.Books_Stationery_Video2);
 		assertTrue("book text does not exist.", text);
 
-	}*/
+	}
 
 	// 2014-04-30
 	// 1938103:Check to click the start icon without login.
@@ -963,7 +963,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 		// Restore to list view.
 		Action.setListViewStyleAfterSearch(solo);
 	}
-
+	
 	// 1938127:Check the Star icon display in large photo view.
 	public void testStarIconDisplayInLargePhotoView() throws Exception {
 

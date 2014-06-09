@@ -52,6 +52,8 @@ public class ValidationText {
 
 	public static final String OK = "確定";
 	
+	public static final String Cancel = "取消";
+	
 	public static final String Content = "內容";
 	
 	public static final String Special = "‘";
@@ -190,6 +192,8 @@ public class ValidationText {
 	public static final String Edit_Favorite_Category = "編輯喜愛的分類";
 	
 	public static final String Hanshen_Home_Life = "漢神百貨居家生活";
+	
+	public static final String Hanshen_brand = "漢神百貨品牌服飾";
 
 	public static final String Hanshen_Ten_Days = "10DAYS科技睡眠館";
 	
@@ -197,10 +201,20 @@ public class ValidationText {
 	
 	public static final String Zero_Result = "0筆結果";
 	
+	public static final String Want_Checkout = "我要結帳";
+	
+	public static final String Buy_Info = "購買者資料";
+	
+	public static final String Filter = "篩選";
+	
 	public static final String Store_Offers = "實體商店優惠";
 	
 	public static final String[] store_title = { "分類", "商品" };
 
+	public static final String Low_To_High = "價錢低到高" ;
+	
+	public static final String High_To_Low = "價錢高到低" ;
+ 
 	public static final String[] CategoryList = { "服飾", "美妝", "鞋包配飾", "媽咪寶貝",
 			"電腦/週邊", "家電/視聽", "相機/\n手機/玩具", "美食/\n保健/飲料", "醫療/\n日用品/寵物",
 			"居家/\n寢具/傢俱", "運動/\n戶外/休閒", "圖書/\n文具/影音" };
@@ -218,5 +232,7 @@ public class ValidationText {
 			"超商付款", "有現貨", "有影音", "有圖片", "優良商店" };
 
 	public static final String[] CategoryList_Tab3 = { "排序", "瀏覽模式", "篩選" };
+	
+	public static final String[] Advanced_Sort = { "購買人次最高", "最新上架", "價錢低到高" , "價錢高到低"};
 
 }

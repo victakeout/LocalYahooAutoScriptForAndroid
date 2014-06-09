@@ -7,9 +7,11 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.ToggleButton;
-import android.widget.RadioButton;
 
 import com.robotium.solo.Solo;
 import com.yahoo.mobile.client.android.ecstore.Account.Account;
@@ -57,12 +59,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 	 * // 1937914:back to category tab //delete public void
 	 * testBackToCategoryTab() throws Exception {
 	 * 
-	 * // navigate to category screen Action.navigateToCategoryScreen(solo);
+	 * Action.navigateToCategoryScreen(solo);
 	 * 
-	 * // click search button Action.clickSearchButtonOnScreen(solo);
-	 * 
-	 * // input keyword and search Action.searchAfterPutData(solo, 0,
-	 * ValidationText.Jacket);
+	 * Action.clickSearchButtonOnScreen(solo); Action.searchAfterPutData(solo,
+	 * 0, ValidationText.Jacket);
 	 * 
 	 * Action.clickHomeButtonOnScreen(solo);
 	 * 
@@ -90,22 +90,22 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937919:Default to choose “商品” Tab.
-	public void testDefaultTab() throws Exception {
-
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
-
-		assertTrue("Goods tab is not selected.",
-				Action.getIsViewShown(solo, "star_button"));
-
-	}
+	/*
+	 * // 1937919:Default to choose “商品” Tab. public void testDefaultTab()
+	 * throws Exception {
+	 * 
+	 * // navigate to category screen Action.navigateToCategoryScreen(solo);
+	 * 
+	 * // click search button Action.clickSearchButtonOnScreen(solo);
+	 * 
+	 * // input keyword and search Action.searchAfterPutData(solo, 0,
+	 * ValidationText.Jacket);
+	 * 
+	 * assertTrue("Goods tab is not selected.", Action.getIsViewShown(solo,
+	 * "star_button"));
+	 * 
+	 * }
+	 */
 
 	// 1937920:Navigate to store tab.
 	public void testStoreTab() throws Exception {
@@ -1243,31 +1243,28 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938023:Store Logo below store name
-	public void testStoreNameDisplay() throws Exception {
-
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
-
-		// click on store tab
-		Action.clickView(solo, "category_tab_primary_title", 1);
-
-		// compare the position of two views
-		boolean flag = TestHelper.positionCompare(solo,
-				"listitem_storelist_image", 0,
-				"listitem_storelist_store_namerow", 0, 1);
-
-		if (!flag) {
-			assertTrue("Store Logo is not below store name.", false);
-		}
-
-	}
+	/*
+	 * // 1938023:Store Logo below store name public void testStoreNameDisplay()
+	 * throws Exception {
+	 * 
+	 * // navigate to category screen Action.navigateToCategoryScreen(solo);
+	 * 
+	 * // click search button Action.clickSearchButtonOnScreen(solo);
+	 * 
+	 * // input keyword and search Action.searchAfterPutData(solo, 0,
+	 * ValidationText.Jacket);
+	 * 
+	 * // click on store tab Action.clickView(solo,
+	 * "category_tab_primary_title", 1);
+	 * 
+	 * // compare the position of two views boolean flag =
+	 * TestHelper.positionCompare(solo, "listitem_storelist_image", 0,
+	 * "listitem_storelist_store_namerow", 0, 1);
+	 * 
+	 * if (!flag) { assertTrue("Store Logo is not below store name.", false); }
+	 * 
+	 * }
+	 */
 
 	// 1938024:navigate to store page
 	public void testNavigateToStorePage() throws Exception {
@@ -1474,31 +1471,25 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		}
 	}
 
-	// 1937978:check products name display.
-	public void testProductsNameTwoLine() throws Exception {
-
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
-
-		try {
-			TextView tv = (TextView) solo.getView("listitem_productlist_title",
-					1);
-			Log.i("number", String.valueOf(tv.getMaxLines()));
-			assertTrue("Not 2 lines.", tv.getMaxLines() == 2);
-		} catch (AssertionError e) {
-			// input keyword and search
-			Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
-			TextView tv = (TextView) solo.getView("listitem_productlist_title",
-					1);
-			assertTrue("Not 2 lines.", tv.getMaxLines() == 2);
-		}
-	}
+	/*
+	 * // 1937978:check products name display. public void
+	 * testProductsNameTwoLine() throws Exception {
+	 * 
+	 * // navigate to category screen Action.navigateToCategoryScreen(solo);
+	 * 
+	 * // click search button Action.clickSearchButtonOnScreen(solo);
+	 * 
+	 * // input keyword and search Action.searchAfterPutData(solo, 0,
+	 * ValidationText.Jacket);
+	 * 
+	 * try { TextView tv = (TextView) solo.getView("listitem_productlist_title",
+	 * 1); Log.i("number", String.valueOf(tv.getMaxLines()));
+	 * assertTrue("Not 2 lines.", tv.getMaxLines() == 2); } catch
+	 * (AssertionError e) { // input keyword and search
+	 * Action.searchAfterPutData(solo, 0, ValidationText.Jacket); TextView tv =
+	 * (TextView) solo.getView("listitem_productlist_title", 1);
+	 * assertTrue("Not 2 lines.", tv.getMaxLines() == 2); } }
+	 */
 
 	/*
 	 * // 1937913:check header display. // delete public void testHeaderResult()
@@ -1561,12 +1552,12 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		View productImage = (View) solo
 				.getView("listitem_productlist_image", 0);
 		solo.clickOnView(productImage);
-		TextView introduct = (TextView) solo.getView(
-				"productitem_product_name");
+		TextView introduct = (TextView) solo
+				.getView("productitem_product_name");
 		assertTrue("Not enter to product page.", introduct.isShown());
 		Action.setListViewStyleAfterSearch(solo);
 	}
-	
+
 	// 1938004:Verify click product name in large photo view.
 	public void testClickProductNameInLargePhotoView() throws Exception {
 
@@ -1577,18 +1568,19 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 		// input keyword and search
 		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
-		
-		TextView productName = (TextView)solo.getView("listitem_productlist_title");
-		Log.i("number",productName.getText().toString());
+
+		TextView productName = (TextView) solo
+				.getView("listitem_productlist_title");
+		Log.i("number", productName.getText().toString());
 		solo.clickOnView(productName);
 		assertTrue("Not enter to product page.", productName.isShown());
- 
+
 		Action.setListViewStyleAfterSearch(solo);
 	}
-	
+
 	// 1938009:Click star icon to add the product to favorite list.
 	public void testClickStarIconAddToFavoriteList() throws Exception {
-		
+
 		Account.JudgementAccountWithoutLogin(solo);
 		Action.clickText(solo, ValidationText.All_Categories);
 		// click search button
@@ -1601,19 +1593,252 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		solo.sleep(3000);
 		Action.clickStarIconNote(solo);
 	}
-	
-	//1937926:check the default browse mode.
+
+	// 1937926:check the default browse mode.
 	public void testCheckTheDefaultBrowseMode() throws Exception {
-		
+
 		Action.clickText(solo, ValidationText.All_Categories);
 		// click search button
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
 		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
-		
+
 		GridView lv = (GridView) solo.getView("gridview", 0);
 		int defaultItems = lv.getCount();
 		assertEquals("The default browse mode is listview.", 21, defaultItems);
+	}
+
+	// 1937943:Check confirm button display.
+	public void testCheckConfirmButtonInAdvancedPage() throws Exception {
+
+		Action.clickText(solo, ValidationText.All_Categories);
+		// click search button
+		Action.clickSearchButtonOnScreen(solo);
+
+		// input keyword and search
+		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		// navigate to Advanced screen
+		solo.clickOnView(solo.getView("menu_filter"));
+		Action.clickText(solo, ValidationText.Filter);
+		assertTrue("Confirm button not displayed.",
+				solo.searchText(ValidationText.OK));
+	}
+
+	// 1937941:Check cancel button display.
+	public void testCheckCancelButtonInAdvancedPage() throws Exception {
+
+		Action.clickText(solo, ValidationText.All_Categories);
+		// click search button
+		Action.clickSearchButtonOnScreen(solo);
+
+		// input keyword and search
+		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		// navigate to Advanced screen
+		solo.clickOnView(solo.getView("menu_filter"));
+		Action.clickText(solo, ValidationText.Filter);
+		String view_id = "tb_cc";
+		Action.clickView(solo, view_id);
+		assertTrue("Confirm button not displayed.",
+				solo.searchText(ValidationText.Cancel));
+	}
+
+	// 1937929:click"All classification"button in search result.
+	public void testClickAllclassificaitonButton() throws Exception {
+
+		solo.clickOnView(solo.getView("tab_image", 2));
+		// click search button
+		Action.clickSearchButtonOnScreen(solo);
+		// input keyword and search
+		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		solo.clickOnView(solo.getView("tab_image", 2));
+		Action.navigateToCategoryScreen(solo);
+
+	}
+
+	// 1937974:Check product image display.
+	public void testProductImageDisplay() throws Exception {
+
+		solo.clickOnView(solo.getView("tab_image", 2));
+		// click search button
+		Action.clickSearchButtonOnScreen(solo);
+		// input keyword and search
+		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		ImageView product = (ImageView) solo.getView(
+				"listitem_productlist_image", 0);
+		assertTrue("Product image not displayed.", product.isShown());
+	}
+
+	// 1938010:Check tab status.
+	public void testVerifyTabDisplayStatus() throws Exception {
+		solo.clickOnView(solo.getView("tab_image", 2));
+		// click search button
+		Action.clickSearchButtonOnScreen(solo);
+		// input keyword and search
+		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.clickText(solo, ValidationText.Shop);
+		TextView shop = (TextView) solo
+				.getView("category_tab_primary_title", 1);
+		assertTrue("Shop tab not highlight.", shop.isShown());
+	}
+
+	// 1938011:Check shop tab list show.
+	public void testShopTabListDisplay() throws Exception {
+		solo.clickOnView(solo.getView("tab_image", 2));
+		// click search button
+		Action.clickSearchButtonOnScreen(solo);
+		// input keyword and search
+		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.clickText(solo, ValidationText.Shop);
+		ImageView storeListImage = (ImageView) solo.getView(
+				"listitem_storelist_image", 0);
+		assertTrue("Store list displayed incorrect.", storeListImage.isShown());
+	}
+
+	// 1938012:Product list tab display.
+	public void testProductTabDisplay() throws Exception {
+		solo.clickOnView(solo.getView("tab_image", 2));
+		Action.clickText(solo, ValidationText.Apparel);
+		Action.clickText(solo, ValidationText.Hanshen_brand);
+		// click search button
+		Action.clickSearchButtonOnScreen(solo);
+		// input keyword and search
+		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.clickText(solo, ValidationText.Shop);
+		ImageView storeListImage = (ImageView) solo.getView(
+				"listitem_storelist_image", 0);
+		assertTrue("Store list displayed incorrect.", storeListImage.isShown());
+	}
+
+	// 1938014:Check header in search result.
+	public void testHeaderInSearchResult() throws Exception {
+
+		solo.clickOnView(solo.getView("tab_image", 2));
+		// click search button
+		Action.clickSearchButtonOnScreen(solo);
+		// input keyword and search
+		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+
+		View back = (View) solo.getView("home", 1);
+
+		View keywords = (View) solo.getView("search_autocompletetext");
+
+		View advanced = (View) solo.getView("menu_filter");
+
+		assertTrue("Some component not displayed.",
+				back.isShown() && keywords.isShown() && advanced.isShown());
+	}
+
+	// 1938016:click search icon in search store page.
+	public void testClickSearchIconInSearchStorePage() throws Exception {
+		solo.clickOnView(solo.getView("tab_image", 2));
+		// click search button
+		Action.clickSearchButtonOnScreen(solo);
+		// input keyword and search
+		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.clickText(solo, ValidationText.Shop);
+		ImageView storeListImage = (ImageView) solo.getView(
+				"listitem_storelist_image", 0);
+		solo.clickOnView(storeListImage);
+		View iv = solo.getView("menu_search", 1);
+		solo.clickOnView(iv);
+		View keywords = (View) solo.getView("search_autocompletetext");
+		assertTrue("Search component not displayed.", keywords.isShown());
+	}
+
+	// 1938032:click “Advanced” button in store page.
+	public void testClickAdvancedButtonInStorePage() throws Exception {
+
+		solo.clickOnView(solo.getView("tab_image", 2));
+		// click search button
+		Action.clickSearchButtonOnScreen(solo);
+		// input keyword and search
+		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.clickText(solo, ValidationText.Shop);
+		ImageView storeListImage = (ImageView) solo.getView(
+				"listitem_storelist_image", 0);
+		solo.clickOnView(storeListImage);
+		solo.sleep(1000);
+		View iv = solo.getView("menu_filter");
+		solo.clickOnView(iv);
+		solo.sleep(1000);
+		ListView lv = (ListView) solo.getView("list_sort", 0);
+
+		int listviewCount = lv.getCount();
+		assertEquals("Not four items in list.", listviewCount, 4);
+		for (int i = 0; i < listviewCount; i++) {
+
+			boolean sortList = lv.getItemAtPosition(0).equals(
+					ValidationText.Advanced_Sort[0])
+					&& lv.getItemAtPosition(1).equals(
+							ValidationText.Advanced_Sort[1])
+					&& lv.getItemAtPosition(2).equals(
+							ValidationText.Advanced_Sort[2])
+					&& lv.getItemAtPosition(3).equals(
+							ValidationText.Advanced_Sort[3]);
+
+			assertTrue("Sort incorrect.", sortList);
+
+		}
+	}
+
+	// 1938033:Verify the price" low to high" Sort.
+	public void testThePriceLowToHigh() throws Exception {
+		solo.clickOnView(solo.getView("tab_image", 2));
+		// click search button
+		Action.clickSearchButtonOnScreen(solo);
+		// input keyword and search
+		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.clickText(solo, ValidationText.Shop);
+		ImageView storeListImage = (ImageView) solo.getView(
+				"listitem_storelist_image", 0);
+		solo.clickOnView(storeListImage);
+		solo.sleep(1000);
+		View iv = solo.getView("menu_filter");
+		solo.clickOnView(iv);
+		solo.sleep(1000);
+		Action.clickText(solo, ValidationText.Low_To_High);
+		solo.sleep(5000);
+		TextView priceOne = (TextView) solo.getView(
+				"listitem_productlist_price", 0);
+		String priceOneNumber = priceOne.getText().toString().trim();
+		Log.i("number", "priceOneNumber" + priceOneNumber);
+		TextView priceTwo = (TextView) solo.getView(
+				"listitem_productlist_price", 1);
+		String priceTwoNumber = priceTwo.getText().toString().trim();
+		Log.i("number", "priceTwoNumber" + priceTwoNumber);
+		assertTrue("Sort function incorrect.", Integer.valueOf(priceOneNumber
+				.substring(1)) < Integer.valueOf(priceTwoNumber.substring(1)));
+	}
+
+	// 1938034:Verify the price" high to low" Sort.
+	public void testThePriceHighToLow() throws Exception {
+		solo.clickOnView(solo.getView("tab_image", 2));
+		// click search button
+		Action.clickSearchButtonOnScreen(solo);
+		// input keyword and search
+		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.clickText(solo, ValidationText.Shop);
+		ImageView storeListImage = (ImageView) solo.getView(
+				"listitem_storelist_image", 0);
+		solo.clickOnView(storeListImage);
+		solo.sleep(1000);
+		View iv = solo.getView("menu_filter");
+		solo.clickOnView(iv);
+		solo.sleep(1000);
+		Action.clickText(solo, ValidationText.High_To_Low);
+		solo.sleep(5000);
+		TextView priceOne = (TextView) solo.getView(
+				"listitem_productlist_price", 0);
+		String priceOneNumber = priceOne.getText().toString()
+				.replaceAll(",", "").trim();
+		Log.i("number", "priceOneNumber" + priceOneNumber);
+		TextView priceTwo = (TextView) solo.getView(
+				"listitem_productlist_price", 1);
+		String priceTwoNumber = priceTwo.getText().toString()
+				.replaceAll(",", "").trim();
+		Log.i("number", "priceTwoNumber" + priceTwoNumber);
+		assertTrue("Sort function incorrect.", Integer.valueOf(priceOneNumber
+				.substring(1)) > Integer.valueOf(priceTwoNumber.substring(1)));
 	}
 }
