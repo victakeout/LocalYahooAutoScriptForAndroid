@@ -55,7 +55,7 @@ public class Sidebar extends ActivityInstrumentationTestCase2 {
 		Account.JudgementAccountLogin(solo);
 		// click on up icon
 		Action.clickHomeButtonOnScreen(solo);
-		solo.clickOnText(ValidationText.Edit_Favorite_Category);
+		solo.clickOnText(ValidationText.EDIT_FAVORITE_CATEGORY);
 
 		// Get the grid view count.
 		GridView lv = (GridView) solo.getView("category_editor_grid");
@@ -76,11 +76,11 @@ public class Sidebar extends ActivityInstrumentationTestCase2 {
 		Account.JudgementAccountLogin(solo);
 		// click on up icon		
 		Action.clickHomeButtonOnScreen(solo);
-		Action.clickText(solo, ValidationText.Setting);
+		Action.clickText(solo, ValidationText.SETTING);
 		
 		//Recent browse text.
 		TextView recent = (TextView)solo.getView("title",3);
-		assertTrue("Cannot fount recent browse text.",recent.getText().toString().trim().equals(ValidationText.Recent_Browse));
+		assertTrue("Cannot fount recent browse text.",recent.getText().toString().trim().equals(ValidationText.RECENT_BROWSE));
 		
 		//Get the toggle button status.
 		Switch browse_History = (Switch)solo.getView("switchWidget",1);
@@ -89,13 +89,13 @@ public class Sidebar extends ActivityInstrumentationTestCase2 {
 		//Disable the toggle button and go to browse product.
 		solo.clickOnView(browse_History);
 		solo.sleep(1000);
-		Action.clickText(solo, ValidationText.Clean_Browse_Record);
+		Action.clickText(solo, ValidationText.CLEAN_BROWSE_RECORD);
 		Action.clickText(solo, ValidationText.OK);
 		solo.goBack();
 		Action.enterToItemPage(solo);
 		solo.clickOnView(solo.getView("tab_image", 4));
 		solo.sleep(2000);
-		Action.clickText(solo, ValidationText.Recent_Browse);
+		Action.clickText(solo, ValidationText.RECENT_BROWSE);
 		solo.sleep(15000);
 		TextView no_Result = (TextView)solo.getView("no_result_text",1);	
 		assertTrue("Exist some browse record displayed",no_Result.isShown());
@@ -109,10 +109,10 @@ public class Sidebar extends ActivityInstrumentationTestCase2 {
 		solo.goBack();
 		solo.sleep(1000);
 		Action.clickHomeButtonOnScreen(solo);
-		Action.clickText(solo, ValidationText.Setting);
+		Action.clickText(solo, ValidationText.SETTING);
 		Switch browse_Historys = (Switch)solo.getView("switchWidget",1);
 		solo.clickOnView(browse_Historys);
-		Action.clickText(solo, ValidationText.Clear_Search_History);
+		Action.clickText(solo, ValidationText.CLEAR_SEARCH_HISTORY);
 		Action.clickText(solo, ValidationText.OK);
 		solo.goBack(); 
 		Action.clickSearchButtonOnScreen(solo);

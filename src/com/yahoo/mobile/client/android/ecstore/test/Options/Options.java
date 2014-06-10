@@ -51,20 +51,20 @@ public class Options extends ActivityInstrumentationTestCase2 {
 	public void testZeroResultDisplayed() throws Exception {
 		
 		solo.clickOnView(solo.getView("tab_image",2));
-		Action.clickText(solo, ValidationText.Home_Bedding_Furniture);
+		Action.clickText(solo, ValidationText.HOME_BEDDING_FURNITURE);
 		solo.sleep(15000);
-		Action.clickText(solo, ValidationText.Hanshen_Home_Life);
+		Action.clickText(solo, ValidationText.HANSHEN_HOME_LIFE);
 		solo.sleep(10000);
 		
 		// Scroll to 10DAYS科技睡眠館
 		android.widget.ListView listView1 = (android.widget.ListView) solo.getView(android.widget.ListView.class, 1);
 		solo.scrollListToLine(listView1, 13);
 		Action.clickText(solo, ValidationText.Hanshen_Ten_Days);
-		Action.clickText(solo, ValidationText.Categories);
+		Action.clickText(solo, ValidationText.CATEGORIES);
 		Action.clickText(solo, ValidationText.Hanshen_Memory_Mattress);
 		TextView zeroResult = (TextView)solo.getView("category_tab_secondary_title");	
-		assertTrue("There are some products displayed.",zeroResult.getText().toString().trim().equals(ValidationText.Zero_Result));
+		assertTrue("There are some products displayed.",zeroResult.getText().toString().trim().equals(ValidationText.ZERO_RESULT));
 		solo.clickOnView(solo.getView("menu_filter"));
-		assertTrue("Advanced page not pop up!",solo.searchText(ValidationText.Sort));
+		assertTrue("Advanced page not pop up!",solo.searchText(ValidationText.SORT));
 	}
 }

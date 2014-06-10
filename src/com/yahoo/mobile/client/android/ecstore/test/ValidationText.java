@@ -1,238 +1,251 @@
 package com.yahoo.mobile.client.android.ecstore.test;
 
 public class ValidationText {
-
-	public static final String skip = "略過";
-
-	public static final String To_use = "前往使用";
-
-	public static final String Personalized = "建立個人化的購物體驗";
-
-	public static final String Search_All_categories = "搜尋全部分類";
-
-	public static final String News = "最新動態";
-
-	public static final String Dong = "東";
 	
-	public static final String Dong_J = "東京";
+	public static final int WAIT_TIME_SHORT = 2000;
 	
-	public static final String Dong_Jing = "東京著衣";
+	public static final int WAIT_TIME_MIDDLE = 5000;
+	
+	public static final int WAIT_TIME_LONG = 10000;
+	
+	public static final int WAIT_TIME_LONGER = 20000;
+	
+	public static final String WAIT = "等等";
+	
+	public static final String SKIP = "略過";
 
-	public static final String Apparel = "服飾";
+	public static final String TO_USE = "前往使用";
 
-	public static final String Popular_Women = "流行女裝";
+	public static final String PERSONALIZED = "建立個人化的購物體驗";
+	 
+	public static final String SEARCH_ALL_CATEGORIES = "搜尋全部分類";
 
-	public static final String Jacket = "上衣";
+	public static final String NEWS = "最新動態";
 
-	public static final String T_shirt = "T恤";
+	public static final String DONG = "東";
 	
-	public static final String No_Sleeve_Shirt = "無袖T恤";
+	public static final String DONG_J = "東京";
 	
-	public static final String Commodity = "商品";
+	public static final String DONG_JING = "東京著衣";
 
-	public static final String Search_Top = "搜尋上衣";
+	public static final String APPAREL = "服飾";
 
-	public static final String Search_Apparel = "搜尋服飾";
-	
-	public static final String Search = "搜尋";
-	
-	public static final String Recent_Browse = "最近瀏覽";
-	
-	public static final String Browse_Record = "瀏覽記錄";
-	
-	public static final String Clean_Browse_Record = "清除瀏覽記錄";
-	
-	public static final String Search_recorder = "搜尋記錄";
-	
-	public static final String Search_clean = "清除搜尋記錄";
+	public static final String POPULAR_WOMEN = "流行女裝";
 
-	public static final String All_Categories = "全部分類";
+	public static final String JACKET = "上衣";
 
-	public static final String Categories = "分類";
+	public static final String T_SHIRT = "T恤";
+	
+	public static final String NO_SLEEVE_SHIRT = "無袖T恤";
+	
+	public static final String COMMODITY = "商品";
+
+	public static final String SEARCH_TOP = "搜尋上衣";
+
+	public static final String SEARCH_APPAREL = "搜尋服飾";
+	
+	public static final String SEARCH = "搜尋";
+	
+	public static final String RECENT_BROWSE = "最近瀏覽";
+	
+	public static final String BROWSE_RECORD = "瀏覽記錄";
+	
+	public static final String CLEAN_BROWSE_RECORD = "清除瀏覽記錄";
+	
+	public static final String SEARCH_RECORDER = "搜尋記錄";
+	
+	public static final String SEARCH_CLEAN = "清除搜尋記錄";
+
+	public static final String ALL_CATEGORIES = "全部分類";
+
+	public static final String CATEGORIES = "分類";
 
 	public static final String OK = "確定";
 	
-	public static final String Cancel = "取消";
+	public static final String CANCEL = "取消";
 	
-	public static final String Content = "內容";
+	public static final String CONTENT = "內容";
 	
-	public static final String Special = "‘";
+	public static final String SPECIAL = "‘";
 
-	public static final String Setting = "設定";
+	public static final String SETTING = "設定";
 	
-	public static final String Checkout = "結賬";
+	public static final String CHECKOUT = "結賬";
 
-	public static final String Clear_Search_History = "清除搜尋記錄";
+	public static final String CLEAR_SEARCH_HISTORY = "清除搜尋記錄";
 
-	public static final String Results_value = "筆結果";
+	public static final String RESULTS_VALUE = "筆結果";
 	
-	public static final String Shop = "商店";
+	public static final String SHOP = "商店";
 
-	public static final String Please_login_account = "請先登入帳號";
+	public static final String PLEASE_LOGIN_ACCOUNT = "請先登入帳號";
 	
-	public static final String Product_Collection = "商品收藏";
+	public static final String PRODUCT_COLLECTION = "商品收藏";
 
-	public static final String Has_added_collection = "已加入商品收藏";
+	public static final String HAS_ADDED_COLLECTION = "已加入商品收藏";
 
-	public static final String Has_removed_collection = "此商品收藏已移除";
+	public static final String HAS_REMOVED_COLLECTION = "此商品收藏已移除";
 
-	public static final String Has_added_Commodity = "已加入最愛商店";
+	public static final String HAS_ADDED_COMMODITY = "已加入最愛商店";
 
-	public static final String Has_removed_Commodity = "此最愛商店已移除";
+	public static final String HAS_REMOVED_COMMODITY = "此最愛商店已移除";
 
-	public static final String Version_Update = "版本更新";
+	public static final String VERSION_UPDATE = "版本更新";
 
-	public static final String Sorry_Text = "很抱歉";
+	public static final String SORRY_TEXT = "很抱歉";
 
-	public static final String Favorite_Stores = "最愛商店";
+	public static final String FAVORITE_STORES = "最愛商店";
 
-	public static final String Shopping_Cart = "購物車";
+	public static final String SHOPPING_CART = "購物車";
 
-	public static final String My_Account = "我的帳戶";
+	public static final String MY_ACCOUNT = "我的帳戶";
 
-	public static final String Beauty = "美妝";
+	public static final String BEAUTY = "美妝";
 
-	public static final String Shoes_Bags_Accessories = "鞋包配飾";
+	public static final String SHOES_BAGS_ACCESSORIES = "鞋包配飾";
 
-	public static final String Computers_Peripherals = "電腦/週邊";
+	public static final String COMPUTERS_PERIPHERALS = "電腦/週邊";
 
-	public static final String Mommy_Baby = "媽咪寶貝";
+	public static final String MUMMY_BABY = "媽咪寶貝";
 
-	public static final String HomeAppliances_AV = "家電/視聽";
+	public static final String HOMEAPPLIANCES_AV = "家電/視聽";
 
-	public static final String Gourmet_Health_Beverage = "美食/\n保健/飲料";
+	public static final String GOURMET_HEALTH_BEVERAGE = "美食/\n保健/飲料";
 
-	public static final String Gourmet_Health_Beverage2 = "美食/保健/飲料";
+	public static final String GOURMET_HEALTH_BEVERAGE2 = "美食/保健/飲料";
 
-	public static final String Camera_Mobile_Toys = "相機/\n手機/玩具";
+	public static final String CAMERA_MOBILE_TOYS = "相機/\n手機/玩具";
 
-	public static final String Camera_Mobile_Toys2 = "相機/手機/玩具";
+	public static final String CAMERA_MOBILE_TOYS2 = "相機/手機/玩具";
 
-	public static final String Medical_Commodity_pet = "醫療/\n日用品/寵物";
+	public static final String MEDICAL_COMMODITY_PET = "醫療/\n日用品/寵物";
 
-	public static final String Medical_Commodity_pet2 = "醫療/日用品/寵物";
+	public static final String MEDICAL_COMMODITY_PET2 = "醫療/日用品/寵物";
 
-	public static final String Home_Bedding_Furniture = "居家/\n寢具/傢俱";
+	public static final String HOME_BEDDING_FURNITURE = "居家/\n寢具/傢俱";
 
-	public static final String Home_Bedding_Furniture2 = "居家/寢具/傢俱";
+	public static final String HOME_BEDDING_FURNITURE2 = "居家/寢具/傢俱";
 
-	public static final String Sports_Outdoor_Recreation = "運動/\n戶外/休閒";
+	public static final String SPORTS_OUTDOOR_RECREATION = "運動/\n戶外/休閒";
 
-	public static final String Sports_Outdoor_Recreation2 = "運動/戶外/休閒";
+	public static final String SPORTS_OUTDOOR_RECREATION2 = "運動/戶外/休閒";
 
-	public static final String Books_Stationery_Video = "圖書/\n文具/影音";
+	public static final String BOOKS_STATIONERY_VIDEO = "圖書/\n文具/影音";
 
-	public static final String Books_Stationery_Video2 = "圖書/文具/影音";
+	public static final String BOOKS_STATIONERY_VIDEO2 = "圖書/文具/影音";
 
-	public static final String Wishlist_Favorite_Store = "要收藏最愛商店？";
+	public static final String WISHLIST_FAVORITE_STORE = "要收藏最愛商店？";
 
-	public static final String Not_Collection_Any_Commodity = "你還沒收藏任何商品喔";
+	public static final String NOT_COLLECTION_ANY_COMMODITY = "你還沒收藏任何商品喔";
 
-	public static final String Inflatable_Doll = "充气娃娃";
+	public static final String INFLATABLE_DOLL = "充气娃娃";
 
-	public static final String New_Add_Account = "新增帳號";
+	public static final String NEW_ADD_ACCOUNT = "新增帳號";
 
-	public static final String Create_Account = "建立帳號";
+	public static final String CREATE_ACCOUNT = "建立帳號";
 
-	public static final String Log_In = "登入";
+	public static final String LOG_IN = "登入";
 
-	public static final String Log_Out = "登出";
+	public static final String LOG_OUT = "登出";
 
-	public static final String apple = "iphone";
+	public static final String APPLE = "iphone";
 	
-	public static final String Add_Shopping_Cart = "加入購物車";
+	public static final String ADD_SHOPPING_CART = "加入購物車";
 
-	public static final String Maybe_Like = "你可能會喜歡";
+	public static final String MAYBE_LIKE = "你可能會喜歡";
 
-	public static final String Already_Add_Shopping_Cart = "已加入購物車";
+	public static final String ALREADY_ADD_SHOPPING_CART = "已加入購物車";
 
-	public static final String Own_Shopping_Cart = "本店購物車";
+	public static final String OWN_SHOPPING_CART = "本店購物車";
 	
-	public static final String See_All_Store_Product = "看本店家全部商品";
+	public static final String SEE_ALL_STORE_PRODUCT = "看本店家全部商品";
 	
-	public static final String one = "一一二";
+	public static final String ONE = "一一二";
 	
-	public static final String two = "一一一二";
+	public static final String TWO = "一一一二";
 	
-	public static final String Next_buy = "下次購買";
+	public static final String NEXT_BUY = "下次購買";
 	
-	public static final String Shopping_tips = "購物須知";
+	public static final String SHOPPING_TIPS = "購物須知";
 	
-	public static final String ECoupon = "電子折價券";
+	public static final String ECOUPON = "電子折價券";
 	
-	public static final String Discount = "折扣";
+	public static final String DISCOUNT = "折扣";
 	
-	public static final String Sales_Promotion = "促銷活動";
+	public static final String SALES_PROMOTION = "促銷活動";
 	
-	public static final String Full = "購物滿";
+	public static final String FULL = "購物滿";
 	
-	public static final String model = "造造";
+	public static final String MODEL = "造造";
 	
-	public static final String Sorry = "很抱歉，目前無法顯示搜尋結果";
+	public static final String SORRY = "很抱歉，目前無法顯示搜尋結果";
 	
-	public static final String Search_All_Store = "搜尋全部商店";
+	public static final String SEARCH_ALL_STORE = "搜尋全部商店";
 	
-	public static final String Share_Product = "分享商品";
+	public static final String SHARE_PRODUCT = "分享商品";
 	
-	public static final String Default_Item = "待生效+已生效";
+	public static final String DEFAULT_ITEM = "待生效+已生效";
 	
-	public static final String Eighteen_Area = "18禁專區";
+	public static final String EIGHTEEN_AREA = "18禁專區";
 	
-	public static final String Payment = "付款及交貨方式";
+	public static final String PAYMENT = "付款及交貨方式";
 	
-	public static final String Post = "交貨方式";
+	public static final String POST = "交貨方式";
 	
-	public static final String Sort = "排序";
+	public static final String SORT = "排序";
 	
-	public static final String No_Data_Product = "你沒有最近瀏覽的商品";
+	public static final String NO_DATA_PRODUCT = "你沒有最近瀏覽的商品";
 	
-	public static final String No_Data_Shop = "你沒有最近瀏覽的商店";
-
+	public static final String NO_DATA_SHOP = "你沒有最近瀏覽的商店";
 	
-	public static final String Edit_Favorite_Category = "編輯喜愛的分類";
+	public static final String EDIT_FAVORITE_CATEGORY = "編輯喜愛的分類";
 	
-	public static final String Hanshen_Home_Life = "漢神百貨居家生活";
+	public static final String HANSHEN_HOME_LIFE = "漢神百貨居家生活";
 	
-	public static final String Hanshen_brand = "漢神百貨品牌服飾";
+	public static final String HANSHEN_BRAND = "漢神百貨品牌服飾";
 
 	public static final String Hanshen_Ten_Days = "10DAYS科技睡眠館";
 	
 	public static final String Hanshen_Memory_Mattress = "記憶床墊";
 	
-	public static final String Zero_Result = "0筆結果";
+	public static final String ZERO_RESULT = "0筆結果";
 	
-	public static final String Want_Checkout = "我要結帳";
+	public static final String WANT_CHECKOUT = "我要結帳";
 	
-	public static final String Buy_Info = "購買者資料";
+	public static final String BUY_INFO = "購買者資料";
 	
-	public static final String Filter = "篩選";
+	public static final String FILTER = "篩選";
 	
-	public static final String Store_Offers = "實體商店優惠";
+	public static final String STORE_OFFERS = "實體商店優惠";
 	
-	public static final String[] store_title = { "分類", "商品" };
+	public static final String[] STORE_TITLE = { "分類", "商品" };
 
-	public static final String Low_To_High = "價錢低到高" ;
+	public static final String LOW_TO_HIGH = "價錢低到高" ;
 	
-	public static final String High_To_Low = "價錢高到低" ;
- 
-	public static final String[] CategoryList = { "服飾", "美妝", "鞋包配飾", "媽咪寶貝",
+	public static final String HIGH_TO_LOW = "價錢高到低" ;
+	
+	public static final String TAI_BEI = "台北市" ;
+	
+	public static final String RESELECT_OTHER_STORE = "重選其它門市" ;
+	
+	public static final String[] CATEGORYLIST = { "服飾", "美妝", "鞋包配飾", "媽咪寶貝",
 			"電腦/週邊", "家電/視聽", "相機/\n手機/玩具", "美食/\n保健/飲料", "醫療/\n日用品/寵物",
 			"居家/\n寢具/傢俱", "運動/\n戶外/休閒", "圖書/\n文具/影音" };
 
-	public static final String[] CostumeList = { "漢神百貨品牌服飾", "漢神百貨內睡衣", "流行女裝",
+	public static final String[] COSTUMELIST = { "漢神百貨品牌服飾", "漢神百貨內睡衣", "流行女裝",
 			"中大尺碼女裝", "女性內睡衣", "品牌/潮流男裝" };
 
-	public static final String[] WomenClothing = { "上衣", "外套/罩衫", "背心/小可愛",
+	public static final String[] WOMENCLOTHING = { "上衣", "外套/罩衫", "背心/小可愛",
 			"洋裝", "褲子", "裙子", "牛仔女裝", "內搭褲", "禮服" };
 
-	public static final String[] CategoryList_Tab1 = { "相關度", "最新上架", "價錢低到高",
+	public static final String[] CATEGORYLIST_TAB1 = { "相關度", "最新上架", "價錢低到高",
 			"價錢高到低" };
 
-	public static final String[] CategoryList_Tab2 = { "可刷卡", "0利率", "可分期",
+	public static final String[] CATEGORYLIST_TAB2 = { "可刷卡", "0利率", "可分期",
 			"超商付款", "有現貨", "有影音", "有圖片", "優良商店" };
 
-	public static final String[] CategoryList_Tab3 = { "排序", "瀏覽模式", "篩選" };
+	public static final String[] CATEGORYLIST_TAB3 = { "排序", "瀏覽模式", "篩選" };
 	
-	public static final String[] Advanced_Sort = { "購買人次最高", "最新上架", "價錢低到高" , "價錢高到低"};
+	public static final String[] ADVANCED_SORT = { "購買人次最高", "最新上架", "價錢低到高" , "價錢高到低"};
 
 }

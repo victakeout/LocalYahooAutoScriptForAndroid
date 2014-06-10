@@ -87,7 +87,7 @@ public class ShoppingCart extends ActivityInstrumentationTestCase2 {
 		TextView actionBar = (TextView) solo.getView("action_bar_title", 3);
 		Log.i("number", actionBar.getText().toString());
 		assertTrue("Not enter the shopping page", actionBar.getText()
-				.toString().equals(ValidationText.Own_Shopping_Cart));
+				.toString().equals(ValidationText.OWN_SHOPPING_CART));
 
 	}
 
@@ -107,7 +107,7 @@ public class ShoppingCart extends ActivityInstrumentationTestCase2 {
 		Action.clickElementsInWebviewByText(solo, "confirm");
 		solo.sleep(5000);
 		// Tap "Next Buy" button on web view.
-		Action.clickElementsInWebviewByText(solo, ValidationText.Next_buy);
+		Action.clickElementsInWebviewByText(solo, ValidationText.NEXT_BUY);
 		boolean expected = false;
 		for (WebElement webs : solo.getCurrentWebElements()) {
 			Log.i("number", webs.getClassName().toString());
@@ -156,9 +156,9 @@ public class ShoppingCart extends ActivityInstrumentationTestCase2 {
 	// 1977500:Verify the page whether refresh OK.
 	public void testRefreshWhenBack() throws Exception {
 		Account.JudgementAccountLogin(solo);
-		Action.clickText(solo, ValidationText.All_Categories);
-		Action.clickText(solo, ValidationText.Apparel);
-		Action.clickText(solo, ValidationText.Commodity);
+		Action.clickText(solo, ValidationText.ALL_CATEGORIES);
+		Action.clickText(solo, ValidationText.APPAREL);
+		Action.clickText(solo, ValidationText.COMMODITY);
 		solo.sleep(2000);
 		Action.clickStarIconNote(solo);
 
@@ -183,8 +183,8 @@ public class ShoppingCart extends ActivityInstrumentationTestCase2 {
 		solo.clickOnView(solo.getView("ecshopping_cart_store_name", 0));
 		solo.sleep(15000);
 		TestHelper.swipeUp(solo, 1);
-		Action.clickElementsInWebviewByText(solo, ValidationText.Want_Checkout);
-		Action.searchTextOnWebview(solo,ValidationText.Buy_Info);
+		Action.clickElementsInWebviewByText(solo, ValidationText.WANT_CHECKOUT);
+		Action.searchTextOnWebview(solo,ValidationText.BUY_INFO);
 	}
 
 	// 1959885：Verify shoppingcart details info.

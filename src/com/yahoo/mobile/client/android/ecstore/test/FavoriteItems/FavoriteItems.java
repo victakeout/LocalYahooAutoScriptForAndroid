@@ -1,6 +1,25 @@
+/*
+ * This is automated script about "FavoriteItems".
+ * 
+ * You can run these test cases either on the emulator or on device. 
+ * By Eclipse:
+ * Right click the test project and select Run As --> Run As Android JUnit Test
+ * By Ant:
+ * 1.Run "android update test-project -m [path to target application] -p [path to the test folder]"  in command line .
+ * 2."ant test"
+ * By using instrument command:
+ * Run all test project:adb shell am instrument -w com.yahoo.mobile.client.android.ecstore.test/android.test.InstrumentationTestRunner
+ * Just run category:adb shell am instrument -e class com.yahoo.mobile.client.android.ecstore.test.FavoriteItems.FavoriteItems -w com.yahoo.mobile.client.android.ecstore.test/android.test.InstrumentationTestRunner
+ * 
+ * @author SYMBIO.
+ * @version YAHOO APP:1.2.4
+ * 
+ */
+
 package com.yahoo.mobile.client.android.ecstore.test.FavoriteItems;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 import android.view.View;
@@ -13,9 +32,9 @@ import com.yahoo.mobile.client.android.ecstore.Assert.Assert;
 import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 
 @SuppressLint("NewApi")
-public class FavoriteItems extends ActivityInstrumentationTestCase2 {
+public class FavoriteItems extends ActivityInstrumentationTestCase2<Activity> {
 	private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
-	private static Class launcherActivityClass;
+	private static Class<?> launcherActivityClass;
 	private Solo solo;
 	static {
 
@@ -30,7 +49,7 @@ public class FavoriteItems extends ActivityInstrumentationTestCase2 {
 
 	@SuppressWarnings("unchecked")
 	public FavoriteItems() throws ClassNotFoundException {
-		super(launcherActivityClass);
+		super((Class<Activity>)launcherActivityClass);
 	}
 
 	@Override
@@ -48,36 +67,34 @@ public class FavoriteItems extends ActivityInstrumentationTestCase2 {
 		super.tearDown();
 	}
 
-	// 1959929: Verify user can add favorite item.
+	// 1959929: Verify that user can add favorite item.
 	public void testVerifyAddFavoriteItem() throws Exception {
 
 		Account.JudgementAccountLogin(solo);
-		Action.clickText(solo, ValidationText.All_Categories);
-		Action.clickText(solo, ValidationText.Apparel);
-		Action.clickText(solo, ValidationText.Commodity);
-		solo.sleep(2000);
+		Action.enterCategoryClothesPage(solo);
+		Action.clickText(solo, ValidationText.COMMODITY);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		Action.clickStarIconNote(solo);
 		solo.goBack();
 		solo.scrollToTop();
-		Action.clickText(solo, ValidationText.Apparel);
-		Action.clickText(solo, ValidationText.Commodity);
+		Action.clickText(solo, ValidationText.APPAREL);
+		Action.clickText(solo, ValidationText.COMMODITY);
 		View star = (View) solo.getView("star_button", 0);
 		assertTrue("Star icon not checked.", star.isShown());
 
 	}
 
-	// 1959923:Verify store rate from items collected
+	// 1959923:Verify store rate from items collected.
 	public void testVerifyStoreRate() throws Exception {
 
 		Account.JudgementAccountLogin(solo);
-		Action.clickText(solo, ValidationText.All_Categories);
-		Action.clickText(solo, ValidationText.Apparel);
-		Action.clickText(solo, ValidationText.Commodity);
-		solo.sleep(2000);
+		Action.enterCategoryClothesPage(solo);
+		Action.clickText(solo, ValidationText.COMMODITY);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		Action.clickStarIconNote(solo);
 
 		solo.clickOnView(solo.getView("tab_image", 4));
-		solo.clickOnText(ValidationText.Product_Collection);
+		solo.clickOnText(ValidationText.PRODUCT_COLLECTION);
 		solo.sleep(10000);
 		TextView price = (TextView) solo.getView(
 				"listitem_productlist_store_rating", 0);

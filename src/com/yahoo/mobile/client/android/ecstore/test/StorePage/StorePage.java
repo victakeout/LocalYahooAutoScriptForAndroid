@@ -60,7 +60,7 @@ public class StorePage extends ActivityInstrumentationTestCase2 {
 		Action.clickElementsInWebviewByClassname(solo, "pimg");
 		solo.sleep(10000);
 		TestHelper.swipeUp(solo, 1);
-		solo.clickOnText(ValidationText.Shopping_tips);
+		solo.clickOnText(ValidationText.SHOPPING_TIPS);
 		solo.sleep(2000);
 
 		// Get the shopping tips text view.
@@ -74,24 +74,24 @@ public class StorePage extends ActivityInstrumentationTestCase2 {
 		Account.JudgementAccountLogin(solo);
 		Action.enterToItemPage(solo);
 		TestHelper.swipeUp(solo, 1);
-		solo.clickOnText(ValidationText.See_All_Store_Product);
+		solo.clickOnText(ValidationText.SEE_ALL_STORE_PRODUCT);
 		solo.sleep(2000);
 		solo.clickOnView(solo.getView("imageButton", 2));
 
 		solo.clickOnView(solo.getView("storeinfo_addfav"));
 		solo.sleep(1000);
-		if (solo.waitForText(ValidationText.Has_removed_Commodity)) {
+		if (solo.waitForText(ValidationText.HAS_REMOVED_COMMODITY)) {
 			solo.clickOnView(solo.getView("storeinfo_addfav"));
 		}
 
 		solo.goBack();
 		Action.navigateToFavoriteStoreScreen(solo);
 		solo.clickOnView(solo.getView("option_button"));
-		solo.clickOnText(ValidationText.Categories);
+		solo.clickOnText(ValidationText.CATEGORIES);
 		solo.sleep(5000);
-		solo.clickOnText(ValidationText.Commodity);
+		solo.clickOnText(ValidationText.COMMODITY);
 		solo.sleep(5000);
-		solo.clickOnText(ValidationText.Categories);
+		solo.clickOnText(ValidationText.CATEGORIES);
 		View categoryThumb = (View) solo.getView("category_thumb_expand");
 		assertTrue("category thumb is not show.", categoryThumb.isShown());
 	}
@@ -101,8 +101,8 @@ public class StorePage extends ActivityInstrumentationTestCase2 {
 		// click search button
 		Action.clickSearchButtonOnScreen(solo);
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Dong_Jing);
-		solo.clickOnText(ValidationText.Shop);
+		Action.searchAfterPutData(solo, 0, ValidationText.DONG_JING);
+		solo.clickOnText(ValidationText.SHOP);
 		TextView dongjing = (TextView) solo.getView(
 				"listitem_storelist_store_name", 0);
 		solo.clickOnView(dongjing);

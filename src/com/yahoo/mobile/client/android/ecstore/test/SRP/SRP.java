@@ -81,12 +81,12 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		assertTrue(
 				"Goods or stores is not display.",
-				solo.searchText(ValidationText.Commodity)
-						&& solo.searchText(ValidationText.Commodity));
+				solo.searchText(ValidationText.COMMODITY)
+						&& solo.searchText(ValidationText.COMMODITY));
 
 	}
 
@@ -117,7 +117,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// click on store tab
 		Action.clickView(solo, "category_tab_primary_title", 1);
@@ -137,7 +137,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// click on store tab
 		Action.clickView(solo, "category_tab_primary_title", 1);
@@ -160,12 +160,12 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// get the text of search result
 		String str = Action.getValuesInTextview(solo,
 				"category_tab_secondary_title", 0).replace(
-				ValidationText.Results_value, "");
+				ValidationText.RESULTS_VALUE, "");
 
 		assertTrue("The search result number format is incorrect! ",
 				str.matches("[0-9]+"));
@@ -182,7 +182,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// click on store tab
 		Action.clickView(solo, "category_tab_primary_title", 1);
@@ -190,7 +190,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		// get the text of search result
 		String str = Action.getValuesInTextview(solo,
 				"category_tab_secondary_title", 1).replace(
-				ValidationText.Results_value, "");
+				ValidationText.RESULTS_VALUE, "");
 		assertTrue("The search result number format is incorrect! ",
 				str.matches("[0-9]+"));
 
@@ -206,7 +206,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		GridView gv = (GridView) solo.getView("gridview");
 
@@ -225,7 +225,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// Action.closeSoftKeyBoard(solo);
 
@@ -253,7 +253,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// navigate to Advanced screen
 		Action.enterAdvancedPage(solo);
@@ -272,7 +272,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 		// navigate to Advanced screen
 		Action.enterAdvancedPage(solo);
 
@@ -293,7 +293,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// navigate to Advanced screen
 		Action.enterAdvancedPage(solo);
@@ -313,7 +313,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// navigate to Filter screen
 		Action.enterAdvancedSortPage(solo);
@@ -333,7 +333,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// navigate to Advanced screen
 		Action.enterAdvancedPage(solo);
@@ -365,7 +365,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// navigate to Filter screen
 		Action.enterAdvancedSortPage(solo);
@@ -385,7 +385,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// navigate to Filter screen
 		Action.enterAdvancedSortPage(solo);
@@ -414,7 +414,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// navigate to Filter screen
 		Action.enterAdvancedSortPage(solo);
@@ -439,7 +439,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// navigate to Filter screen
 		Action.enterAdvancedSortPage(solo);
@@ -463,7 +463,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// navigate to Filter screen
 		Action.enterAdvancedSortPage(solo);
@@ -491,7 +491,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// navigate to Filter screen
 		Action.enterAdvancedSortPage(solo);
@@ -517,7 +517,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// navigate to Filter screen
 		Action.enterAdvancedSortPage(solo);
@@ -543,7 +543,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// navigate to Filter screen
 		Action.enterAdvancedSortPage(solo);
@@ -593,7 +593,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// navigate to Filter screen
 		Action.enterAdvancedSortPage(solo);
@@ -621,7 +621,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// navigate to Filter screen
 		Action.enterAdvancedSortPage(solo);
@@ -645,7 +645,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// navigate to Filter screen
 		Action.enterAdvancedSortPage(solo);
@@ -673,7 +673,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// navigate to Filter screen
 		Action.enterAdvancedSortPage(solo);
@@ -703,7 +703,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// navigate to Filter screen
 		Action.enterAdvancedSortPage(solo);
@@ -732,7 +732,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		Action.setListViewStyleAfterSearch(solo);
 
@@ -753,7 +753,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		Action.setListViewStyleAfterSearch(solo);
 
@@ -774,7 +774,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// list style
 		Action.setListViewStyleAfterSearch(solo);
@@ -801,7 +801,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// list style
 		Action.setListViewStyleAfterSearch(solo);
@@ -828,7 +828,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// list style
 		Action.setListViewStyleAfterSearch(solo);
@@ -855,14 +855,14 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		Action.setListViewStyleAfterSearch(solo);
 
 		View star = (View) solo.getView("star_button", 0);
 		solo.clickOnView(star);
 
-		if (!solo.waitForText(ValidationText.Please_login_account, 1, 12000))
+		if (!solo.waitForText(ValidationText.PLEASE_LOGIN_ACCOUNT, 1, 12000))
 			assertTrue("Error tips.", false);
 
 	}
@@ -880,7 +880,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		Action.setListViewStyleAfterSearch(solo);
 
@@ -892,8 +892,8 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 		Action.clickView(solo, "star_button", 0);
 
-		if (solo.waitForText(ValidationText.Has_added_collection, 1, 12000)
-				|| solo.waitForText(ValidationText.Has_removed_collection, 1,
+		if (solo.waitForText(ValidationText.HAS_ADDED_COLLECTION, 1, 12000)
+				|| solo.waitForText(ValidationText.HAS_REMOVED_COLLECTION, 1,
 						12000))
 			solo.sleep(1000);
 		else
@@ -910,7 +910,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		Action.setListViewStyleAfterSearch(solo);
 
@@ -931,7 +931,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// small picture style
 		Action.setSmallPhotoViewStyleAfterSearch(solo);
@@ -953,7 +953,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// small picture style
 		Action.setSmallPhotoViewStyleAfterSearch(solo);
@@ -980,7 +980,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		Action.setSmallPhotoViewStyleAfterSearch(solo);
 
@@ -1002,14 +1002,14 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		Action.setSmallPhotoViewStyleAfterSearch(solo);
 
 		View star = (View) solo.getView("star_button", 0);
 		solo.clickOnView(star);
 
-		if (!solo.waitForText(ValidationText.Please_login_account, 1, 12000))
+		if (!solo.waitForText(ValidationText.PLEASE_LOGIN_ACCOUNT, 1, 12000))
 			assertTrue("Error tips.", false);
 
 	}
@@ -1027,7 +1027,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		Action.setSmallPhotoViewStyleAfterSearch(solo);
 
@@ -1039,8 +1039,8 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 		Action.clickView(solo, "star_button", 0);
 
-		if (solo.waitForText(ValidationText.Has_added_collection, 1, 12000)
-				|| solo.waitForText(ValidationText.Has_removed_collection, 1,
+		if (solo.waitForText(ValidationText.HAS_ADDED_COLLECTION, 1, 12000)
+				|| solo.waitForText(ValidationText.HAS_REMOVED_COLLECTION, 1,
 						12000))
 			solo.sleep(1000);
 		else
@@ -1057,7 +1057,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		Action.setLargePhotoViewStyleAfterSearch(solo);
 
@@ -1078,7 +1078,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		Action.setLargePhotoViewStyleAfterSearch(solo);
 
@@ -1099,7 +1099,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// large picture style
 		Action.setLargePhotoViewStyleAfterSearch(solo);
@@ -1128,7 +1128,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// large picture style
 		Action.setLargePhotoViewStyleAfterSearch(solo);
@@ -1155,7 +1155,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// large picture style
 		Action.setLargePhotoViewStyleAfterSearch(solo);
@@ -1183,7 +1183,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// large picture style
 		Action.setLargePhotoViewStyleAfterSearch(solo);
@@ -1191,7 +1191,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		View star = (View) solo.getView("star_button", 0);
 		solo.clickOnView(star);
 
-		if (!solo.waitForText(ValidationText.Please_login_account, 1, 12000))
+		if (!solo.waitForText(ValidationText.PLEASE_LOGIN_ACCOUNT, 1, 12000))
 			assertTrue("Error tips.", false);
 
 	}
@@ -1206,7 +1206,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// click on store tab
 		Action.clickView(solo, "category_tab_primary_title", 1);
@@ -1214,7 +1214,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		// get the text of search result
 		String str = Action.getValuesInTextview(solo,
 				"category_tab_secondary_title", 1).replace(
-				ValidationText.Results_value, "");
+				ValidationText.RESULTS_VALUE, "");
 
 		assertTrue("The search result number format is incorrect! ",
 				str.matches("[0-9]+"));
@@ -1231,7 +1231,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// click on store tab
 		Action.clickView(solo, "category_tab_primary_title", 1);
@@ -1276,7 +1276,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// click on store tab
 		Action.clickView(solo, "category_tab_primary_title", 1);
@@ -1284,7 +1284,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		// click on store icon
 		Action.clickView(solo, "listitem_storelist_image", 0);
 
-		String[] store_title = ValidationText.store_title;
+		String[] store_title = ValidationText.STORE_TITLE;
 
 		for (int i = 0; i < 2; i++) {
 
@@ -1306,7 +1306,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// click on store tab
 		Action.clickView(solo, "category_tab_primary_title", 1);
@@ -1332,7 +1332,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// click on store tab
 		Action.clickView(solo, "category_tab_primary_title", 1);
@@ -1340,7 +1340,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		// click on store icon
 		Action.clickView(solo, "listitem_storelist_store_item_count");
 
-		String[] store_title = ValidationText.store_title;
+		String[] store_title = ValidationText.STORE_TITLE;
 
 		for (int i = 0; i < 2; i++) {
 
@@ -1362,7 +1362,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// click on store tab
 		Action.clickView(solo, "category_tab_primary_title", 1);
@@ -1388,7 +1388,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// click on store tab
 		Action.clickView(solo, "category_tab_primary_title", 1);
@@ -1417,7 +1417,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// click on store tab
 		Action.clickView(solo, "category_tab_primary_title", 1);
@@ -1425,7 +1425,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		View heart = (View) solo.getView("heart_button", 0);
 		solo.clickOnView(heart);
 
-		if (!solo.waitForText(ValidationText.Please_login_account, 1, 12000))
+		if (!solo.waitForText(ValidationText.PLEASE_LOGIN_ACCOUNT, 1, 12000))
 			assertTrue("Error tips.", false);
 
 	}
@@ -1443,7 +1443,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// click on store tab
 		Action.clickView(solo, "category_tab_primary_title", 1);
@@ -1459,13 +1459,13 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		boolean alreadyAdd;
 
 		// Get toast text.
-		if (solo.waitForText(ValidationText.Has_added_Commodity)) {
-			alreadyAdd = solo.waitForText(ValidationText.Has_added_Commodity);
+		if (solo.waitForText(ValidationText.HAS_ADDED_COMMODITY)) {
+			alreadyAdd = solo.waitForText(ValidationText.HAS_ADDED_COMMODITY);
 			junit.framework.Assert.assertTrue("Add failed.", alreadyAdd);
 		} else {
 			solo.sleep(1000);
 			solo.clickOnView(solo.getView("heart_button", 0));
-			alreadyAdd = solo.waitForText(ValidationText.Has_added_Commodity);
+			alreadyAdd = solo.waitForText(ValidationText.HAS_ADDED_COMMODITY);
 			junit.framework.Assert.assertTrue("Add failed.", alreadyAdd);
 
 		}
@@ -1511,28 +1511,28 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.one);
+		Action.searchAfterPutData(solo, 0, ValidationText.ONE);
 
 		solo.goBack();
 		Action.clickSearchButtonOnScreen(solo);
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.two);
+		Action.searchAfterPutData(solo, 0, ValidationText.TWO);
 		solo.goBack();
 		Action.clickSearchButtonOnScreen(solo);
-		assertTrue(ValidationText.two + " not found.",
-				solo.searchText(ValidationText.two));
+		assertTrue(ValidationText.TWO + " not found.",
+				solo.searchText(ValidationText.TWO));
 
 	}
 
 	// 1937914:Verify“back”icon function.
 	public void testClickBackFunction() throws Exception {
 
-		Action.clickText(solo, ValidationText.All_Categories);
+		Action.clickText(solo, ValidationText.ALL_CATEGORIES);
 		// click search button
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 		solo.goBack();
 		Action.navigateToCategoryScreen(solo);
 	}
@@ -1540,14 +1540,14 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 	// 1937989:Verify click product image in grid view.
 	public void testClickProductImageInGridView() throws Exception {
 
-		Action.clickText(solo, ValidationText.All_Categories);
-		Action.clickText(solo, ValidationText.Apparel);
+		Action.clickText(solo, ValidationText.ALL_CATEGORIES);
+		Action.clickText(solo, ValidationText.APPAREL);
 		Action.setSmallPhotoViewStyleAfterSearch(solo);
 		// click search button
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		View productImage = (View) solo
 				.getView("listitem_productlist_image", 0);
@@ -1561,13 +1561,13 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 	// 1938004:Verify click product name in large photo view.
 	public void testClickProductNameInLargePhotoView() throws Exception {
 
-		Action.clickText(solo, ValidationText.All_Categories);
-		Action.clickText(solo, ValidationText.Apparel);
+		Action.clickText(solo, ValidationText.ALL_CATEGORIES);
+		Action.clickText(solo, ValidationText.APPAREL);
 		Action.setLargePhotoViewStyleAfterSearch(solo);
 		// click search button
 		Action.clickSearchButtonOnScreen(solo);
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		TextView productName = (TextView) solo
 				.getView("listitem_productlist_title");
@@ -1582,12 +1582,12 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 	public void testClickStarIconAddToFavoriteList() throws Exception {
 
 		Account.JudgementAccountWithoutLogin(solo);
-		Action.clickText(solo, ValidationText.All_Categories);
+		Action.clickText(solo, ValidationText.ALL_CATEGORIES);
 		// click search button
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 		Account.JudgementAccountLogin(solo);
 		solo.clickOnView(solo.getView("tab_image", 2));
 		solo.sleep(3000);
@@ -1597,12 +1597,12 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 	// 1937926:check the default browse mode.
 	public void testCheckTheDefaultBrowseMode() throws Exception {
 
-		Action.clickText(solo, ValidationText.All_Categories);
+		Action.clickText(solo, ValidationText.ALL_CATEGORIES);
 		// click search button
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		GridView lv = (GridView) solo.getView("gridview", 0);
 		int defaultItems = lv.getCount();
@@ -1612,15 +1612,15 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 	// 1937943:Check confirm button display.
 	public void testCheckConfirmButtonInAdvancedPage() throws Exception {
 
-		Action.clickText(solo, ValidationText.All_Categories);
+		Action.clickText(solo, ValidationText.ALL_CATEGORIES);
 		// click search button
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 		// navigate to Advanced screen
 		solo.clickOnView(solo.getView("menu_filter"));
-		Action.clickText(solo, ValidationText.Filter);
+		Action.clickText(solo, ValidationText.FILTER);
 		assertTrue("Confirm button not displayed.",
 				solo.searchText(ValidationText.OK));
 	}
@@ -1628,19 +1628,19 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 	// 1937941:Check cancel button display.
 	public void testCheckCancelButtonInAdvancedPage() throws Exception {
 
-		Action.clickText(solo, ValidationText.All_Categories);
+		Action.clickText(solo, ValidationText.ALL_CATEGORIES);
 		// click search button
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 		// navigate to Advanced screen
 		solo.clickOnView(solo.getView("menu_filter"));
-		Action.clickText(solo, ValidationText.Filter);
+		Action.clickText(solo, ValidationText.FILTER);
 		String view_id = "tb_cc";
 		Action.clickView(solo, view_id);
 		assertTrue("Confirm button not displayed.",
-				solo.searchText(ValidationText.Cancel));
+				solo.searchText(ValidationText.CANCEL));
 	}
 
 	// 1937929:click"All classification"button in search result.
@@ -1650,7 +1650,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		// click search button
 		Action.clickSearchButtonOnScreen(solo);
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 		solo.clickOnView(solo.getView("tab_image", 2));
 		Action.navigateToCategoryScreen(solo);
 
@@ -1663,7 +1663,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		// click search button
 		Action.clickSearchButtonOnScreen(solo);
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 		ImageView product = (ImageView) solo.getView(
 				"listitem_productlist_image", 0);
 		assertTrue("Product image not displayed.", product.isShown());
@@ -1675,8 +1675,8 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		// click search button
 		Action.clickSearchButtonOnScreen(solo);
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
-		Action.clickText(solo, ValidationText.Shop);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.clickText(solo, ValidationText.SHOP);
 		TextView shop = (TextView) solo
 				.getView("category_tab_primary_title", 1);
 		assertTrue("Shop tab not highlight.", shop.isShown());
@@ -1688,8 +1688,8 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		// click search button
 		Action.clickSearchButtonOnScreen(solo);
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
-		Action.clickText(solo, ValidationText.Shop);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.clickText(solo, ValidationText.SHOP);
 		ImageView storeListImage = (ImageView) solo.getView(
 				"listitem_storelist_image", 0);
 		assertTrue("Store list displayed incorrect.", storeListImage.isShown());
@@ -1698,13 +1698,13 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 	// 1938012:Product list tab display.
 	public void testProductTabDisplay() throws Exception {
 		solo.clickOnView(solo.getView("tab_image", 2));
-		Action.clickText(solo, ValidationText.Apparel);
-		Action.clickText(solo, ValidationText.Hanshen_brand);
+		Action.clickText(solo, ValidationText.APPAREL);
+		Action.clickText(solo, ValidationText.HANSHEN_BRAND);
 		// click search button
 		Action.clickSearchButtonOnScreen(solo);
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
-		Action.clickText(solo, ValidationText.Shop);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.clickText(solo, ValidationText.SHOP);
 		ImageView storeListImage = (ImageView) solo.getView(
 				"listitem_storelist_image", 0);
 		assertTrue("Store list displayed incorrect.", storeListImage.isShown());
@@ -1717,7 +1717,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		// click search button
 		Action.clickSearchButtonOnScreen(solo);
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		View back = (View) solo.getView("home", 1);
 
@@ -1735,8 +1735,8 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		// click search button
 		Action.clickSearchButtonOnScreen(solo);
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
-		Action.clickText(solo, ValidationText.Shop);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.clickText(solo, ValidationText.SHOP);
 		ImageView storeListImage = (ImageView) solo.getView(
 				"listitem_storelist_image", 0);
 		solo.clickOnView(storeListImage);
@@ -1753,8 +1753,8 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		// click search button
 		Action.clickSearchButtonOnScreen(solo);
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
-		Action.clickText(solo, ValidationText.Shop);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.clickText(solo, ValidationText.SHOP);
 		ImageView storeListImage = (ImageView) solo.getView(
 				"listitem_storelist_image", 0);
 		solo.clickOnView(storeListImage);
@@ -1769,13 +1769,13 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		for (int i = 0; i < listviewCount; i++) {
 
 			boolean sortList = lv.getItemAtPosition(0).equals(
-					ValidationText.Advanced_Sort[0])
+					ValidationText.ADVANCED_SORT[0])
 					&& lv.getItemAtPosition(1).equals(
-							ValidationText.Advanced_Sort[1])
+							ValidationText.ADVANCED_SORT[1])
 					&& lv.getItemAtPosition(2).equals(
-							ValidationText.Advanced_Sort[2])
+							ValidationText.ADVANCED_SORT[2])
 					&& lv.getItemAtPosition(3).equals(
-							ValidationText.Advanced_Sort[3]);
+							ValidationText.ADVANCED_SORT[3]);
 
 			assertTrue("Sort incorrect.", sortList);
 
@@ -1788,8 +1788,8 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		// click search button
 		Action.clickSearchButtonOnScreen(solo);
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
-		Action.clickText(solo, ValidationText.Shop);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.clickText(solo, ValidationText.SHOP);
 		ImageView storeListImage = (ImageView) solo.getView(
 				"listitem_storelist_image", 0);
 		solo.clickOnView(storeListImage);
@@ -1797,7 +1797,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		View iv = solo.getView("menu_filter");
 		solo.clickOnView(iv);
 		solo.sleep(1000);
-		Action.clickText(solo, ValidationText.Low_To_High);
+		Action.clickText(solo, ValidationText.LOW_TO_HIGH);
 		solo.sleep(5000);
 		TextView priceOne = (TextView) solo.getView(
 				"listitem_productlist_price", 0);
@@ -1817,8 +1817,8 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		// click search button
 		Action.clickSearchButtonOnScreen(solo);
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
-		Action.clickText(solo, ValidationText.Shop);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.clickText(solo, ValidationText.SHOP);
 		ImageView storeListImage = (ImageView) solo.getView(
 				"listitem_storelist_image", 0);
 		solo.clickOnView(storeListImage);
@@ -1826,7 +1826,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		View iv = solo.getView("menu_filter");
 		solo.clickOnView(iv);
 		solo.sleep(1000);
-		Action.clickText(solo, ValidationText.High_To_Low);
+		Action.clickText(solo, ValidationText.HIGH_TO_LOW);
 		solo.sleep(5000);
 		TextView priceOne = (TextView) solo.getView(
 				"listitem_productlist_price", 0);

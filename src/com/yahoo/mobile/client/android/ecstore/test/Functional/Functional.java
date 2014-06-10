@@ -54,8 +54,8 @@ public class Functional extends ActivityInstrumentationTestCase2 {
 		View iv = solo.getView("home");
 		solo.clickOnView(iv);
 		// clear history information and back
-		solo.waitForText(ValidationText.Setting, 1, 3000);
-		solo.clickOnText(ValidationText.Setting);
+		solo.waitForText(ValidationText.SETTING, 1, 3000);
+		solo.clickOnText(ValidationText.SETTING);
 		solo.sleep(2000);
 		Switch notification = (Switch) solo.getView("switchWidget", 2);
 

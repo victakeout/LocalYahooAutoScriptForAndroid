@@ -17,7 +17,7 @@ public class Account {
 
 		solo.clickOnView(solo.getView("tab_image", 4));
 
-		boolean newAccount = solo.searchText(ValidationText.New_Add_Account);
+		boolean newAccount = solo.searchText(ValidationText.NEW_ADD_ACCOUNT);
 		if (newAccount) {
 
 			solo.goBack();
@@ -31,7 +31,7 @@ public class Account {
 		solo.typeText(1, "A1234qwer");
 
 		// Click sign button
-		solo.clickOnButton(ValidationText.Log_In);
+		solo.clickOnButton(ValidationText.LOG_IN);
 		solo.sleep(15000);
 		solo.waitForView(solo.getView("tab_image", 4));
 		solo.clickOnView(solo.getView("tab_image", 4));
@@ -48,7 +48,7 @@ public class Account {
 
 		solo.clickOnView(solo.getView("tab_image", 4));
 
-		boolean newAccount = solo.searchText(ValidationText.New_Add_Account);
+		boolean newAccount = solo.searchText(ValidationText.NEW_ADD_ACCOUNT);
 		if (newAccount) {
 
 			solo.goBack();
@@ -62,7 +62,7 @@ public class Account {
 		solo.typeText(1, "A1234qwer");
 
 		// Click sign button
-		solo.clickOnButton(ValidationText.Log_In);
+		solo.clickOnButton(ValidationText.LOG_IN);
 		solo.sleep(10000);
 		solo.clickOnView(solo.getView("tab_image", 4));
 
@@ -137,22 +137,23 @@ public class Account {
 
 	}
 
-	// Account
+	// Judgment account whether logout.
 	public static void JudgementAccountWithoutLogin(Solo solo) throws Exception {
 
 		solo.clickOnView(solo.getView("tab_image", 4));
 		solo.sleep(2000);
 
 		// Search "建立帳號" aims to verify that not any account log in.
-		boolean createAccount = solo.searchText(ValidationText.Create_Account);
+		boolean createAccount = solo.searchText(ValidationText.CREATE_ACCOUNT);
 
 		// Search "新增帳號" aims to verify that hava account exist but not log in.
-		boolean newAccount = solo.searchText(ValidationText.New_Add_Account);
+		boolean newAccount = solo.searchText(ValidationText.NEW_ADD_ACCOUNT);
 
 		// if createAccount or newAccount button can be found,we can make sure
 		// that account status is not log in.
 		if (createAccount || newAccount) {
-			junit.framework.Assert.assertTrue("Account has login",createAccount || newAccount);
+			junit.framework.Assert.assertTrue("Account has login",
+					createAccount || newAccount);
 			solo.goBack();
 		} else {
 			accountLogOut(solo);
@@ -167,10 +168,10 @@ public class Account {
 		solo.sleep(2000);
 
 		// Search "建立帳號" aims to verify that not any account log in.
-		boolean createAccount = solo.searchText(ValidationText.Create_Account);
+		boolean createAccount = solo.searchText(ValidationText.CREATE_ACCOUNT);
 
 		// Search "新增帳號" aims to verify that hava account exist but not log in.
-		boolean newAccount = solo.searchText(ValidationText.New_Add_Account);
+		boolean newAccount = solo.searchText(ValidationText.NEW_ADD_ACCOUNT);
 
 		// if createAccount or newAccount button can be found,we can make sure
 		// that account status is not log in.

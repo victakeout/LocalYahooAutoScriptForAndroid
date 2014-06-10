@@ -86,11 +86,11 @@ public class Assert {
 	// check if navigate to search result page
 	public static void navigateToResultPage(Solo solo) throws Exception {
 
-		solo.waitForText(ValidationText.Results_value, 1, 3000);
+		solo.waitForText(ValidationText.RESULTS_VALUE, 1, 3000);
 		junit.framework.Assert.assertTrue(
 				"Failed to navigate to search result Screen",
-				solo.searchText(ValidationText.Commodity)
-						&& solo.searchText(ValidationText.Commodity));
+				solo.searchText(ValidationText.COMMODITY)
+						&& solo.searchText(ValidationText.COMMODITY));
 	}
 
 	//
@@ -106,7 +106,7 @@ public class Assert {
 	// check all Category item are show.
 	public static void CategoryListShow(Solo solo) throws Exception {
 
-		String[] CategoryList = ValidationText.CategoryList;
+		String[] CategoryList = ValidationText.CATEGORYLIST;
 		int size = CategoryList.length;
 		for (int i = 0; i < size; i++) {
 			boolean textFound = solo.searchText(CategoryList[i]);
@@ -120,7 +120,7 @@ public class Assert {
 	// is 服飾L2層分類 list show
 	public static void costumeL2ListShow(Solo solo) throws Exception {
 
-		String[] CostumeList = ValidationText.CostumeList;
+		String[] CostumeList = ValidationText.COSTUMELIST;
 		int size = CostumeList.length;
 		for (int i = 0; i < size; i++) {
 			boolean textFound = solo.searchText(CostumeList[i]);
@@ -133,7 +133,7 @@ public class Assert {
 	public static void womenClothingCategoryListShow(Solo solo)
 			throws Exception {
 
-		String[] WomenClothing = ValidationText.WomenClothing;
+		String[] WomenClothing = ValidationText.WOMENCLOTHING;
 		int size = WomenClothing.length;
 		for (int i = 0; i < size; i++) {
 			boolean textFound = solo.searchText(WomenClothing[i]);
@@ -144,14 +144,14 @@ public class Assert {
 
 	public static void noResultDisplay(Solo solo) throws Exception {
 
-		solo.waitForText(ValidationText.Results_value, 1, 3000);
+		solo.waitForText(ValidationText.RESULTS_VALUE, 1, 3000);
 		junit.framework.Assert.assertTrue("There have searched esults.",
-				solo.searchText(ValidationText.Sorry_Text));
+				solo.searchText(ValidationText.SORRY_TEXT));
 	}
 
 	public static void navigateToSortTab(Solo solo) throws Exception {
 
-		String[] CategoryList = ValidationText.CategoryList_Tab1;
+		String[] CategoryList = ValidationText.CATEGORYLIST_TAB1;
 		int size = CategoryList.length;
 		for (int i = 0; i < size; i++) {
 			boolean textFound = solo.searchText(CategoryList[i]);
@@ -162,7 +162,7 @@ public class Assert {
 
 	public static void navigateToFilterTab(Solo solo) throws Exception {
 
-		String[] CategoryList = ValidationText.CategoryList_Tab2;
+		String[] CategoryList = ValidationText.CATEGORYLIST_TAB2;
 		int size = CategoryList.length;
 		for (int i = 0; i < size; i++) {
 			boolean textFound = solo.searchText(CategoryList[i]);
@@ -186,7 +186,7 @@ public class Assert {
 
 	public static void navigateToAdvancedTab(Solo solo) throws Exception {
 
-		String[] CategoryList = ValidationText.CategoryList_Tab3;
+		String[] CategoryList = ValidationText.CATEGORYLIST_TAB3;
 		int size = CategoryList.length;
 		for (int i = 0; i < size; i++) {
 			boolean textFound = solo.searchText(CategoryList[i]);

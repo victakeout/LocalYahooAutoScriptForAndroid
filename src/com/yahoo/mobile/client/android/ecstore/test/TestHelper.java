@@ -38,8 +38,8 @@ public class TestHelper {
 				.getDefaultDisplay();
 		int width = display.getWidth();
 		int height = display.getHeight();
-		float yStart = height-200;
-		float yEnd = height - 280;
+		float yStart = (height/2) - (height/3);
+		float yEnd = (height/2) + (height/3);
 		solo.drag(width / 2, width / 2, yStart, yEnd, stepCount);
 	}
 

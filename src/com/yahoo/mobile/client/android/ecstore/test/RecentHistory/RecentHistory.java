@@ -54,15 +54,15 @@ public class RecentHistory extends ActivityInstrumentationTestCase2 {
 
 		// Go to main screen
 		solo.waitForActivity("ECStoreActivity", 2000);
-		solo.waitForText(ValidationText.News, 1, 3000);
+		solo.waitForText(ValidationText.NEWS, 1, 3000);
 		junit.framework.Assert.assertTrue("Navigate to main screen failed.",
-				solo.searchText(ValidationText.News));
+				solo.searchText(ValidationText.NEWS));
 
 		// click "up" icon
 		solo.sleep(3000);
 		solo.clickOnView(solo.getView("home"));
-		solo.waitForText(ValidationText.Setting, 1, 3000);
-		solo.clickOnText(ValidationText.Setting);
+		solo.waitForText(ValidationText.SETTING, 1, 3000);
+		solo.clickOnText(ValidationText.SETTING);
 
 		TextView recent_browse = (TextView) solo.getView("title", 3);
 		TextView browse_record = (TextView) solo.getView("title", 4);
@@ -71,11 +71,11 @@ public class RecentHistory extends ActivityInstrumentationTestCase2 {
 		assertTrue(
 				"Some search text not found.",
 				recent_browse.getText().toString()
-						.equals(ValidationText.Recent_Browse)
+						.equals(ValidationText.RECENT_BROWSE)
 						&& browse_record.getText().toString()
-								.equals(ValidationText.Browse_Record)
+								.equals(ValidationText.BROWSE_RECORD)
 						&& clean_browse_record.getText().toString()
-								.equals(ValidationText.Clean_Browse_Record)
+								.equals(ValidationText.CLEAN_BROWSE_RECORD)
 						&& toggle.isChecked());
 
 	}
@@ -86,6 +86,6 @@ public class RecentHistory extends ActivityInstrumentationTestCase2 {
 		// Account.JudgementAccountLogin(solo);
 		Action.makeBrowseRecord(solo, 20);
 		solo.clickOnView(solo.getView("tab_image", 4));
-		solo.clickOnText(ValidationText.Recent_Browse);
+		solo.clickOnText(ValidationText.RECENT_BROWSE);
 	}
 }

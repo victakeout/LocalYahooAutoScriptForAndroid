@@ -51,10 +51,10 @@ public class MyAccount extends ActivityInstrumentationTestCase2 {
 	public void testFavoriteItemNumber() throws Exception {
 
 		Account.JudgementAccountLogin(solo);
-		solo.clickOnText(ValidationText.All_Categories);
+		solo.clickOnText(ValidationText.ALL_CATEGORIES);
 		solo.sleep(5000);
-		Action.clickText(solo, ValidationText.Apparel);
-		solo.clickOnText(ValidationText.Commodity);
+		Action.clickText(solo, ValidationText.APPAREL);
+		solo.clickOnText(ValidationText.COMMODITY);
 		Action.clickStarIconNote(solo);
 
 		// "Add to favorite" operation will take for a period of time.
@@ -96,7 +96,7 @@ public class MyAccount extends ActivityInstrumentationTestCase2 {
 
 		Account.JudgementAccountLogin(solo);
 		solo.clickOnView(solo.getView("tab_image", 4));
-		solo.clickOnText(ValidationText.ECoupon);
+		solo.clickOnText(ValidationText.ECOUPON);
 		solo.sleep(15000);
 		Action.clickElementsInWebviewByClassname(solo, "filter");
 		solo.sleep(5000);
@@ -132,14 +132,14 @@ public class MyAccount extends ActivityInstrumentationTestCase2 {
 		Account.JudgementAccountLogin(solo);
 		solo.clickOnView(solo.getView("tab_image", 4));
 		assertTrue("Cannot found ",
-				solo.searchText(ValidationText.Store_Offers));
+				solo.searchText(ValidationText.STORE_OFFERS));
 	}
 
 	// 1977522:verify recent history from My Account.
 	public void testRecentHistory() throws Exception {
 		Account.JudgementAccountLogin(solo);
 		solo.clickOnView(solo.getView("tab_image", 4));
-		Action.clickText(solo, ValidationText.Recent_Browse);
+		Action.clickText(solo, ValidationText.RECENT_BROWSE);
 		TextView ActionBar = (TextView) solo.getView("action_bar_title", 0);
 		assertTrue("Cannot enter to recent history page. ", ActionBar.isShown());
 	}
@@ -149,7 +149,7 @@ public class MyAccount extends ActivityInstrumentationTestCase2 {
 		Account.JudgementAccountLogin(solo);
 		Action.clearHistoryInfomation(solo);
 		solo.clickOnView(solo.getView("tab_image", 4));
-		Action.clickText(solo, ValidationText.Recent_Browse);
+		Action.clickText(solo, ValidationText.RECENT_BROWSE);
 		solo.sleep(10000);
 		TextView NoResult = (TextView)solo.getView("no_result_text",1);	 
 		assertTrue("There are some product info displayed. ",NoResult.isShown());
@@ -158,13 +158,14 @@ public class MyAccount extends ActivityInstrumentationTestCase2 {
 		solo.clickOnView(shop);
 		assertTrue("There are some shop info displayed. ",shop.isShown());
 	}
+	
 	//1977527:verify remove an item from recently browsed
 	public void testRemoveItemFromRecently() throws Exception {
 		
 		Account.JudgementAccountLogin(solo);
 		Action.enterToItemPage(solo);
 		solo.clickOnView(solo.getView("tab_image", 4));
-		Action.clickText(solo, ValidationText.Recent_Browse);
+		Action.clickText(solo, ValidationText.RECENT_BROWSE);
 		View img = (View)solo.getView("listitem_productlist_image");
 		solo.clickLongOnView(img);
 		// Confirm remove it.
@@ -187,7 +188,7 @@ public class MyAccount extends ActivityInstrumentationTestCase2 {
 	 	}
 		
 		solo.clickOnView(solo.getView("tab_image", 4));
-		Action.clickText(solo, ValidationText.Recent_Browse);
+		Action.clickText(solo, ValidationText.RECENT_BROWSE);
 		 
 		View shop = (View)solo.getView("category_tab_primary_title",1);
 		solo.clickOnView(shop);
@@ -222,7 +223,7 @@ public class MyAccount extends ActivityInstrumentationTestCase2 {
 			solo.goBack();
 	 	} 
 		solo.clickOnView(solo.getView("tab_image", 4));
-		Action.clickText(solo, ValidationText.Recent_Browse);
+		Action.clickText(solo, ValidationText.RECENT_BROWSE);
 		TextView ActionBar = (TextView) solo.getView("action_bar_title", 0);
 		assertTrue("Cannot enter to recent history page. ", ActionBar.isShown());
 		
@@ -255,7 +256,7 @@ public class MyAccount extends ActivityInstrumentationTestCase2 {
 		int OutNumberTwos = Integer.valueOf(OutNumberTwo.getText().toString());
 		Log.i("number", "OutNumberTwo:"+OutNumberTwo.getText().toString());
 		assertTrue("Collect product failed.",OutNumbers < OutNumberTwos);
-		Action.clickText(solo, ValidationText.Product_Collection);
+		Action.clickText(solo, ValidationText.PRODUCT_COLLECTION);
 		
 		
 	}

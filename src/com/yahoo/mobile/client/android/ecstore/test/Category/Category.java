@@ -1,3 +1,21 @@
+/*
+ * This is automated script about "Category".
+ * 
+ * You can run these test cases either on the emulator or on device. 
+ * By Eclipse:
+ * Right click the test project and select Run As --> Run As Android JUnit Test
+ * By Ant:
+ * 1.Run "android update test-project -m [path to target application] -p [path to the test folder]"  in command line .
+ * 2."ant test"
+ * By using instrument command:
+ * Run all test project:adb shell am instrument -w com.yahoo.mobile.client.android.ecstore.test/android.test.InstrumentationTestRunner
+ * Just run category:adb shell am instrument -e class com.yahoo.mobile.client.android.ecstore.test.Category.Category -w com.yahoo.mobile.client.android.ecstore.test/android.test.InstrumentationTestRunner
+ * 
+ * @author SYMBIO.
+ * @version YAHOO APP:1.2.4
+ * 
+ */
+
 package com.yahoo.mobile.client.android.ecstore.test.Category;
 
 import android.annotation.SuppressLint;
@@ -18,7 +36,6 @@ import com.yahoo.mobile.client.android.ecstore.Assert.Assert;
 import com.yahoo.mobile.client.android.ecstore.test.TestHelper;
 import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 
-@SuppressLint("NewApi")
 @SuppressWarnings("rawtypes")
 public class Category extends ActivityInstrumentationTestCase2 {
 	private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
@@ -35,6 +52,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 	}
 
 	@SuppressWarnings("unchecked")
+	@SuppressLint("NewApi")
 	public Category() throws ClassNotFoundException {
 		super(launcherActivityClass);
 	}
@@ -42,7 +60,8 @@ public class Category extends ActivityInstrumentationTestCase2 {
 	@Override
 	protected void setUp() throws Exception {
 		solo = new Solo(getInstrumentation(), getActivity());
-		// Assert.testFirstLaunch(solo);
+		Assert.testFirstLaunch(solo);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 	}
 
 	@Override
@@ -52,21 +71,12 @@ public class Category extends ActivityInstrumentationTestCase2 {
 		super.tearDown();
 	}
 
-	// Go to clothes page.
-	public void enterClassification() throws Exception {
-
-		solo.waitForActivity("ECSplashActivity", 3000);
-		Action.clickText(solo, ValidationText.All_Categories);
-		Action.clickText(solo, ValidationText.Apparel);
-
-	}
-
 	// 1938037:Check back function.
 	public void testBackFunction() throws Exception {
 
-		enterClassification();
-		solo.clickOnView(solo.getView("up", 0));
-		solo.sleep(3000);
+		Action.enterCategoryClothesPage(solo);
+		solo.clickOnView(solo.getView("home"));
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 		Assert.CategoryListShow(solo);
 
 	}
@@ -74,11 +84,12 @@ public class Category extends ActivityInstrumentationTestCase2 {
 	// 1938041:Check tab display.
 	public void testTab() throws Exception {
 
-		enterClassification();
-		int size = ValidationText.store_title.length;
+		Action.enterCategoryClothesPage(solo);
+		int size = ValidationText.STORE_TITLE.length;
+
 		for (int i = 0; i < size; i++) {
-			boolean textFound = solo.searchText(ValidationText.store_title[i]);
-			assertTrue(ValidationText.store_title[i] + " not found", textFound);
+			boolean textFound = solo.searchText(ValidationText.STORE_TITLE[i]);
+			assertTrue(ValidationText.STORE_TITLE[i] + " not found", textFound);
 		}
 
 	}
@@ -86,16 +97,17 @@ public class Category extends ActivityInstrumentationTestCase2 {
 	// 1938036:Check header items.
 	public void testHeader() throws Exception {
 
-		enterClassification();
-		Action.clickText(solo, ValidationText.Commodity);
-		solo.sleep(3000);
-		// Back button
+		Action.enterCategoryClothesPage(solo);
+		Action.clickText(solo, ValidationText.COMMODITY);
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+
+		// Get "back" button view.
 		ImageView back = (ImageView) solo.getView("home");
 
-		// Search button
+		// Get "Search" button view.
 		View search = solo.getView("menu_search");
 
-		// Filter button
+		// Get "Filter" button view.
 		View advance = solo.getView("menu_filter");
 
 		boolean views = back.isShown() && search.isShown() && advance.isShown();
@@ -106,112 +118,117 @@ public class Category extends ActivityInstrumentationTestCase2 {
 	// 1938042:Check sort tab items all display.
 	public void testSortTab() throws Exception {
 
-		enterClassification();
-		int size = ValidationText.CostumeList.length;
+		Action.enterCategoryClothesPage(solo);
+		int size = ValidationText.COSTUMELIST.length;
+
 		for (int i = 0; i < size; i++) {
-			boolean textFound = solo.searchText(ValidationText.CostumeList[i]);
-			assertTrue(ValidationText.CostumeList[i] + " not found", textFound);
+			boolean textFound = solo.searchText(ValidationText.COSTUMELIST[i]);
+			assertTrue(ValidationText.COSTUMELIST[i] + " not found", textFound);
 		}
 
 	}
 
-	// 1938043:check return to item list.
+	// 1938043:Check can return to item list.
 	public void testItemList() throws Exception {
 
-		enterClassification();
-		Action.clickText(solo, ValidationText.Commodity);
-		Action.clickText(solo, ValidationText.Categories);
+		Action.enterCategoryClothesPage(solo);
+		Action.clickText(solo, ValidationText.COMMODITY);
+		Action.clickText(solo, ValidationText.CATEGORIES);
 		solo.goBack();
-		solo.sleep(1000);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		Assert.CategoryListShow(solo);
 
 	}
 
-	// 1938052:check "搜寻服饰" show in search bar.
+	// 1938052:Check "Search Clothing" text is show in search bar.
 	public void testSearchbarDefault() throws Exception {
 
-		enterClassification();
-		solo.sleep(3000);
+		Action.enterCategoryClothesPage(solo);
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 		solo.clickOnView(solo.getView("menu_search"));
-		assertTrue("Cannot find text",
-				solo.searchText(ValidationText.Search_Apparel, 1));
+		assertTrue("Not find 'Search Clothing' in search bar.",
+				solo.searchText(ValidationText.SEARCH_APPAREL, 1));
 
 	}
 
-	// 1938053:check switch to sort tab.
+	// 1938053:Check can switch to sort tab.
 	public void testSort() throws Exception {
 
-		enterClassification();
+		Action.enterCategoryClothesPage(solo);
 		Action.enterAdvancedPage(solo);
-		int size = ValidationText.CategoryList_Tab1.length;
+		int size = ValidationText.CATEGORYLIST_TAB1.length;
 
 		for (int i = 0; i < size; i++) {
 			boolean textFound = solo
-					.searchText(ValidationText.CategoryList_Tab1[i]);
-			assertTrue(ValidationText.CategoryList_Tab1[i] + " not found",
+					.searchText(ValidationText.CATEGORYLIST_TAB1[i]);
+			assertTrue(ValidationText.CATEGORYLIST_TAB1[i] + " not found",
 					textFound);
 		}
 
 	}
 
-	// 1938054:check switch to filter sort tab.
+	// 1938054:Check switch to filter sort tab.
 	public void testFilterSort() throws Exception {
 
-		enterClassification();
-		solo.sleep(2000);
+		Action.enterCategoryClothesPage(solo);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		Action.enterAdvancedPage(solo);
-		solo.sleep(3000);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		solo.clickOnView(solo.getView("btn_filter"));
 
-		int size = ValidationText.CategoryList_Tab2.length;
+		int size = ValidationText.CATEGORYLIST_TAB2.length;
 		for (int i = 0; i < size; i++) {
 			boolean textFound = solo
-					.searchText(ValidationText.CategoryList_Tab2[i]);
-			assertTrue(ValidationText.CategoryList_Tab2[i] + " not found",
+					.searchText(ValidationText.CATEGORYLIST_TAB2[i]);
+			assertTrue(ValidationText.CATEGORYLIST_TAB2[i] + " not found.",
 					textFound);
 		}
 
 	}
 
-	// 1938060:check the sort layout
+	// 1938060:Check the sort layout.
 	public void testSortLayout() throws Exception {
 
-		enterClassification();
+		Action.enterCategoryClothesPage(solo);
 		Action.enterAdvancedPage(solo);
-		solo.sleep(3000);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		solo.clickOnView(solo.getView("btn_filter"));
+
+		// Get the current page elements.
 		View ScrollBar = solo.getView("seekbar", 0);
 		View TableRowOne = solo.getView("tableRow1", 0);
 		View TableRowTwo = solo.getView("tableRow2", 0);
 		View TableRowThree = solo.getView("tableRow3", 0);
-		solo.sleep(3000);
+
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+
 		boolean views = ScrollBar.isShown() && TableRowOne.isShown()
 				&& TableRowTwo.isShown() && TableRowThree.isShown();
-		assertTrue("views not found.", views);
+		assertTrue("Some views not found.", views);
 
 	}
 
-	// 2014-04-18
-	// 1938055: verify the order of 排序 items
+	// 1938055: verify the order of sort items.
 	public void testSortOptions() throws Exception {
 
-		enterClassification();
+		Action.enterCategoryClothesPage(solo);
 		Action.enterAdvancedPage(solo);
 
 		ListView lv = (ListView) solo.getView("list_sort", 0);
 		lv.getItemAtPosition(0);
 		int listviewCount = lv.getCount();
 		assertEquals("Not four items in list.", listviewCount, 4);
+
 		for (int i = 0; i < listviewCount; i++) {
 
 			boolean sortList = lv.getItemAtPosition(0).equals(
-					ValidationText.CategoryList_Tab1[0])
+					ValidationText.CATEGORYLIST_TAB1[0])
 					&& lv.getItemAtPosition(1).equals(
-							ValidationText.CategoryList_Tab1[1])
+							ValidationText.CATEGORYLIST_TAB1[1])
 					&& lv.getItemAtPosition(2).equals(
-							ValidationText.CategoryList_Tab1[2])
+							ValidationText.CATEGORYLIST_TAB1[2])
 					&& lv.getItemAtPosition(3).equals(
-							ValidationText.CategoryList_Tab1[3]);
+							ValidationText.CATEGORYLIST_TAB1[3]);
 
 			assertTrue("Sort incorrect.", sortList);
 
@@ -219,37 +236,37 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938063:Check the "确定" button to display
+	// 1938063:Check the "OK" button to display
 	public void testComfirmButtonDisplay() throws Exception {
 
-		enterClassification();
+		Action.enterCategoryClothesPage(solo);
 		Action.enterAdvancedPage(solo);
-		solo.sleep(3000);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		solo.clickOnView(solo.getView("btn_filter"));
 		Button lv = (Button) solo.getView("btn_ok");
-		assertEquals("Not find confirm button.", ValidationText.OK, lv
-				.getText().toString());
+		assertEquals("Not find 'OK' button.", ValidationText.OK, lv.getText()
+				.toString());
 
 	}
 
-	// 1938047:check default items display.
+	// 1938047:Check default items display.
 	public void testCheckTheDefaultItems() throws Exception {
 
-		enterClassification();
-		Action.clickText(solo, ValidationText.Commodity);
-		solo.sleep(3000);
+		Action.enterCategoryClothesPage(solo);
+		Action.clickText(solo, ValidationText.COMMODITY);
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 		GridView lv = (GridView) solo.getView("gridview", 0);
 		int defaultItems = lv.getCount();
 		assertEquals("The default items incorrect.", 21, defaultItems);
 
 	}
 
-	// 1938048:check auto load more data.
+	// 1938048:Check auto load more data.
 	public void testAutoLoadMore() throws Exception {
 
-		enterClassification();
-		Action.clickText(solo, ValidationText.Commodity);
-		solo.sleep(3000);
+		Action.enterCategoryClothesPage(solo);
+		Action.clickText(solo, ValidationText.COMMODITY);
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 		GridView lv = (GridView) solo.getView("gridview", 0);
 
 		// Scroll the screen to load more data.
@@ -262,10 +279,10 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938069:check “可刷卡” can changed to unselected.
+	// 1938069:Check "Credit cards accepted" can changed to unselected.
 	public void testCreditCardMode() throws Exception {
 
-		enterClassification();
+		Action.enterCategoryClothesPage(solo);
 
 		// Go to advanced sort page.
 		Action.enterAdvancedSortPage(solo);
@@ -274,19 +291,20 @@ public class Category extends ActivityInstrumentationTestCase2 {
 		ToggleButton tb = (ToggleButton) solo.getView("tb_cc");
 
 		solo.clickOnView(tb);
-		solo.sleep(3000);
-		assertTrue(" '可刷卡'  button unselected.", tb.isChecked());
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
+		assertTrue(" 'Credit cards accepted'  button unselected.",
+				tb.isChecked());
 		solo.clickOnView(tb);
-		solo.sleep(3000);
-		assertFalse("'可刷卡'  button  selected.", tb.isChecked());
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
+		assertFalse("'Credit cards accepted'  button  selected.",
+				tb.isChecked());
 
 	}
 
-	// 2014-04-22
-	// 1938072:check “有影音” can changed to unselected.
+	// 1938072:Check "A/V" can changed to unselected.
 	public void testHasVideoMode() throws Exception {
 
-		enterClassification();
+		Action.enterCategoryClothesPage(solo);
 
 		// Go to advanced sort page.
 		Action.enterAdvancedSortPage(solo);
@@ -295,18 +313,18 @@ public class Category extends ActivityInstrumentationTestCase2 {
 		ToggleButton tb = (ToggleButton) solo.getView("tb_hasvideo");
 
 		solo.clickOnView(tb);
-		solo.sleep(3000);
-		assertTrue(" '有影音'  button unselected.", tb.isChecked());
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
+		assertTrue(" 'A/V'  button unselected.", tb.isChecked());
 		solo.clickOnView(tb);
-		solo.sleep(3000);
-		assertFalse("'有影音'  button  selected.", tb.isChecked());
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
+		assertFalse("'A/V'  button  selected.", tb.isChecked());
 
 	}
 
-	// 1938075:check “0利率” can changed to unselected.
+	// 1938075:Check "Zero Interest Rate" can changed to unselected.
 	public void testZeroInterestMode() throws Exception {
 
-		enterClassification();
+		Action.enterCategoryClothesPage(solo);
 
 		// Go to advanced sort page.
 		Action.enterAdvancedSortPage(solo);
@@ -315,17 +333,17 @@ public class Category extends ActivityInstrumentationTestCase2 {
 		ToggleButton tb = (ToggleButton) solo.getView("tb_cczeroint");
 
 		solo.clickOnView(tb);
-		solo.sleep(3000);
-		assertTrue(" '0利率'  button unselected.", tb.isChecked());
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
+		assertTrue(" 'Zero Interest Rate'  button unselected.", tb.isChecked());
 		solo.clickOnView(tb);
-		solo.sleep(3000);
-		assertFalse("'0利率'  button  selected.", tb.isChecked());
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
+		assertFalse("'Zero Interest Rate'  button  selected.", tb.isChecked());
 	}
 
-	// 1938078:check “可分期” can changed to unselected.
+	// 1938078:Check "Installments" can changed to unselected.
 	public void testInstallmentsMode() throws Exception {
 
-		enterClassification();
+		Action.enterCategoryClothesPage(solo);
 
 		// Go to advanced sort page.
 		Action.enterAdvancedSortPage(solo);
@@ -334,18 +352,18 @@ public class Category extends ActivityInstrumentationTestCase2 {
 		ToggleButton tb = (ToggleButton) solo.getView("tb_ccinstall");
 
 		solo.clickOnView(tb);
-		solo.sleep(3000);
-		assertTrue(" '可分期'  button unselected.", tb.isChecked());
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
+		assertTrue(" 'Installments'  button unselected.", tb.isChecked());
 		solo.clickOnView(tb);
-		solo.sleep(3000);
-		assertFalse("'可分期'  button  selected.", tb.isChecked());
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
+		assertFalse("'Installments'  button  selected.", tb.isChecked());
 
 	}
 
-	// 1938081:check “超商付款” can changed to unselected.
+	// 1938081:Check "Payments" can changed to unselected.
 	public void testSupermarketPaymentMode() throws Exception {
 
-		enterClassification();
+		Action.enterCategoryClothesPage(solo);
 
 		// Go to advanced sort page.
 		Action.enterAdvancedSortPage(solo);
@@ -354,18 +372,18 @@ public class Category extends ActivityInstrumentationTestCase2 {
 		ToggleButton tb = (ToggleButton) solo.getView("tb_cvs_pay");
 
 		solo.clickOnView(tb);
-		solo.sleep(3000);
-		assertTrue(" '超商付款'  button unselected.", tb.isChecked());
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
+		assertTrue(" 'Payments'  button unselected.", tb.isChecked());
 		solo.clickOnView(tb);
-		solo.sleep(3000);
-		assertFalse("'超商付款'  button  selected.", tb.isChecked());
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
+		assertFalse("'Payments'  button  selected.", tb.isChecked());
 
 	}
 
-	// 1938084:check “超商取貨” can changed to unselected.
+	// 1938084:Check "Pickup" can changed to unselected.
 	public void testSupermarketPickupMode() throws Exception {
 
-		enterClassification();
+		Action.enterCategoryClothesPage(solo);
 
 		// Go to advanced sort page.
 		Action.enterAdvancedSortPage(solo);
@@ -374,17 +392,18 @@ public class Category extends ActivityInstrumentationTestCase2 {
 		ToggleButton tb = (ToggleButton) solo.getView("tb_cvs_pick");
 
 		solo.clickOnView(tb);
-		solo.sleep(3000);
-		assertTrue(" '超商取貨'  button unselected.", tb.isChecked());
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
+		assertTrue(" 'Pickup'  button unselected.", tb.isChecked());
 		solo.clickOnView(tb);
-		solo.sleep(3000);
-		assertFalse("'超商取貨'  button  selected.", tb.isChecked());
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
+		assertFalse("'Pickup'  button  selected.", tb.isChecked());
 
 	}
 
-	// 1938087:check “有現貨” can changed to unselected.
+	// 1938087:Check "Has Stock" can changed to unselected.
 	public void testHasStockMode() throws Exception {
-		enterClassification();
+
+		Action.enterCategoryClothesPage(solo);
 
 		// Go to advanced sort page.
 		Action.enterAdvancedSortPage(solo);
@@ -393,17 +412,18 @@ public class Category extends ActivityInstrumentationTestCase2 {
 		ToggleButton tb = (ToggleButton) solo.getView("tb_hasstock");
 
 		solo.clickOnView(tb);
-		solo.sleep(3000);
-		assertTrue(" '有現貨'  button unselected.", tb.isChecked());
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
+		assertTrue(" 'Has Stock'  button unselected.", tb.isChecked());
 		solo.clickOnView(tb);
-		solo.sleep(3000);
-		assertFalse("'有現貨'  button  selected.", tb.isChecked());
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
+		assertFalse("'Has Stock'  button  selected.", tb.isChecked());
 
 	}
 
-	// 1938090:check “有圖片” can changed to unselected.
+	// 1938090:Check "Has Image" can changed to unselected.
 	public void testHasImageMode() throws Exception {
-		enterClassification();
+
+		Action.enterCategoryClothesPage(solo);
 
 		// Go to advanced page.
 		Action.enterAdvancedSortPage(solo);
@@ -412,18 +432,18 @@ public class Category extends ActivityInstrumentationTestCase2 {
 		ToggleButton tb = (ToggleButton) solo.getView("tb_hasimage");
 
 		solo.clickOnView(tb);
-		solo.sleep(3000);
-		assertTrue(" '有圖片'  button unselected.", tb.isChecked());
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
+		assertTrue(" 'Has Image'  button unselected.", tb.isChecked());
 		solo.clickOnView(tb);
-		solo.sleep(3000);
-		assertFalse("'有圖片'  button  selected.", tb.isChecked());
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
+		assertFalse("'Has Image'  button  selected.", tb.isChecked());
 
 	}
 
-	// 1938093:check “優良商店” can changed to unselected.
+	// 1938093:Check "SuperiorStore" can changed to unselected.
 	public void testSuperiorStoreMode() throws Exception {
 
-		enterClassification();
+		Action.enterCategoryClothesPage(solo);
 
 		// Go to advanced page.
 		Action.enterAdvancedSortPage(solo);
@@ -432,28 +452,30 @@ public class Category extends ActivityInstrumentationTestCase2 {
 		ToggleButton tb = (ToggleButton) solo.getView("tb_issuperior");
 
 		solo.clickOnView(tb);
-		solo.sleep(3000);
-		assertTrue(" '優良商店'  button unselected.", tb.isChecked());
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
+		assertTrue(" 'Superior Store'  button unselected.", tb.isChecked());
 		solo.clickOnView(tb);
-		solo.sleep(3000);
-		assertFalse("'優良商店'  button  selected.", tb.isChecked());
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
+		assertFalse("'Superior Store'  button  selected.", tb.isChecked());
 
 	}
 
 	// 1938100:Check the commodity price display.
 	public void testCommodityPriceDisplay() throws Exception {
 
-		enterClassification();
-		Action.clickText(solo, ValidationText.Commodity);
-		solo.sleep(3000);
+		Action.enterCategoryClothesPage(solo);
+		Action.clickText(solo, ValidationText.COMMODITY);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		TextView price;
+
 		try {
 			price = (TextView) solo.getView("listitem_productlist_price", 0);
 		} catch (AssertionError e) {
-			enterClassification();
-			Action.clickText(solo, ValidationText.Commodity);
+			Action.enterCategoryClothesPage(solo);
+			Action.clickText(solo, ValidationText.COMMODITY);
 			price = (TextView) solo.getView("listitem_productlist_price", 0);
 		}
+
 		String sr = price.getText().toString();
 
 		// Judgment whether the price matches the format of '$xxx'.
@@ -468,18 +490,20 @@ public class Category extends ActivityInstrumentationTestCase2 {
 	// 1938101:Check the Shops score display.
 	public void testShopsScoreDisplay() throws Exception {
 
-		enterClassification();
-		Action.clickText(solo, ValidationText.Commodity);
-		solo.sleep(3000);
+		Action.enterCategoryClothesPage(solo);
+		Action.clickText(solo, ValidationText.COMMODITY);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		TextView price = null;
+
 		try {
 			price = (TextView) solo.getView(
 					"listitem_productlist_store_rating", 0);
 		} catch (AssertionError e) {
-			enterClassification();
-			Action.clickText(solo, ValidationText.Commodity);
-			solo.sleep(3000);
+			Action.enterCategoryClothesPage(solo);
+			Action.clickText(solo, ValidationText.COMMODITY);
+			solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		}
+
 		String sr = price.getText().toString();
 
 		// Judgment whether the price matches the format of 'x.x'.
@@ -491,27 +515,25 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 2014-04-24
 	// 1938102:Check the Star icon display
 	public void testStarIconDisplay() throws Exception {
 
-		enterClassification();
-		Action.clickText(solo, ValidationText.Commodity);
-		solo.sleep(3000);
+		Action.enterCategoryClothesPage(solo);
+		Action.clickText(solo, ValidationText.COMMODITY);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		View star = (View) solo.getView("star_button", 1);
 		assertTrue(" Cannot find the star icon ", star.isShown());
 
 	}
 
-	// 2014-04-25
-	// 1938130:Check "全部分類" at the bottom of the screen.
+	// 1938130:Check "All Categories" at the bottom of the screen.
 	public void testAllClassificationExist() throws Exception {
 
 		View classificationIcon = (View) solo.getView("tab_image", 2);
 
 		TextView classificationText = (TextView) solo.getView("tab_text", 2);
 		boolean text = classificationText.getText().toString()
-				.equals(ValidationText.All_Categories);
+				.equals(ValidationText.ALL_CATEGORIES);
 
 		assertTrue("All classification does not exist.",
 				classificationIcon.isShown() && text);
@@ -533,21 +555,11 @@ public class Category extends ActivityInstrumentationTestCase2 {
 		TextView classificationText = (TextView) solo
 				.getView("action_bar_title");
 		boolean text = classificationText.getText().toString().trim()
-				.equals(ValidationText.All_Categories);
+				.equals(ValidationText.ALL_CATEGORIES);
 
 		assertTrue("All classification text does not exist.", text);
 
 	}
-
-	/*// 1938135:Check the search icon on the screen top.
-	public void testSearchIconOnTheTop() throws Exception {
-
-		solo.clickOnView(solo.getView("tab_image", 2));
-		View searchIcon = (View) solo.getView("menu_search", 0);
-
-		assertTrue("Search icon does not exist.", searchIcon.isShown());
-
-	}*/
 
 	// 1938141:Check latest update side bar.
 	public void testLatestUpdateSidebar() throws Exception {
@@ -556,12 +568,13 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 		TextView mostFavoriteText = (TextView) solo.getView("tab_text", 0);
 		boolean text = mostFavoriteText.getText().toString()
-				.equals(ValidationText.News);
+				.equals(ValidationText.NEWS);
 
 		View latestUpdateIcon = (View) solo.getView("tab_image", 0);
 
 		assertTrue("Latest update sidebar does not exist.",
 				latestUpdateIcon.isShown() && text);
+
 	}
 
 	// 1938143:Check most favorite store side bar.
@@ -571,13 +584,14 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 		TextView mostFavoriteText = (TextView) solo.getView("tab_text", 1);
 		boolean text = mostFavoriteText.getText().toString()
-				.equals(ValidationText.Favorite_Stores);
+				.equals(ValidationText.FAVORITE_STORES);
 		String texts = mostFavoriteText.getText().toString();
 		Log.i("what", texts);
 		View mostFavoriteIcon = (View) solo.getView("tab_image", 1);
 
 		assertTrue("Most favorite sidebar does not exist.",
 				mostFavoriteIcon.isShown() && text);
+
 	}
 
 	// 1938145:Check shopping Cart side bar
@@ -587,12 +601,13 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 		TextView shoppingCart = (TextView) solo.getView("tab_text", 3);
 		boolean text = shoppingCart.getText().toString()
-				.equals(ValidationText.Shopping_Cart);
+				.equals(ValidationText.SHOPPING_CART);
 
 		View shoppingCartIcon = (View) solo.getView("tab_image", 3);
 
 		assertTrue("Shopping Cart sidebar does not exist.",
 				shoppingCartIcon.isShown() && text);
+
 	}
 
 	// 1938147:Check my account side bar.
@@ -602,7 +617,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 		TextView myAccount = (TextView) solo.getView("tab_text", 4);
 		boolean text = myAccount.getText().toString().trim()
-				.equals(ValidationText.My_Account);
+				.equals(ValidationText.MY_ACCOUNT);
 
 		String temp = myAccount.getText().toString();
 		Log.i("what", temp);
@@ -611,85 +626,88 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 		assertTrue("My account sidebar does not exist.",
 				myAccountIcon.isShown() && text);
+
 	}
 
-	// 1938149:Check '服飾' is displayed on the top of the screen.
+	// 1938149:Check 'Apparel' is displayed on the top of the screen.
 	public void testDressDisplayedOnTheScreen() throws Exception {
 
-		enterClassification();
+		Action.enterCategoryClothesPage(solo);
 		TextView dressText = (TextView) solo.getView("action_bar_title", 0);
 		boolean text = dressText.getText().toString().trim()
-				.equals(ValidationText.Apparel);
+				.equals(ValidationText.APPAREL);
 		Log.i("what", dressText.getText().toString());
-		assertTrue("dress does not exist.", text);
+		assertTrue("Dress text does not exist.", text);
 
 	}
 
-	// 1938150:Check '美妝' is displayed on the top of the screen.
+	// 1938150:Check 'Beauty' is displayed on the top of the screen.
 	public void testMakeupDisplayedOnTheScreen() throws Exception {
 
 		solo.clickOnView(solo.getView("tab_image", 2));
-		solo.clickOnText(ValidationText.Beauty);
-		solo.sleep(2000);
+		solo.clickOnText(ValidationText.BEAUTY);
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 		TextView makeupText = (TextView) solo.getView("action_bar_title", 0);
 		boolean text = makeupText.getText().toString().trim()
-				.equals(ValidationText.Beauty);
-		assertTrue("Makeup does not exist.", text);
+				.equals(ValidationText.BEAUTY);
+		assertTrue("Makeup text does not exist.", text);
 
 	}
 
-	// 1938151:Check '鞋包配飾' is displayed on the top of the screen.
+	// 1938151:Check 'Shoes/Bags/Accessories' is displayed on the top of the
+	// screen.
 	public void testAccessoriesDisplayedOnTheScreen() throws Exception {
 
 		solo.clickOnView(solo.getView("tab_image", 2));
-		solo.clickOnText(ValidationText.Shoes_Bags_Accessories);
-		solo.sleep(2000);
+		solo.clickOnText(ValidationText.SHOES_BAGS_ACCESSORIES);
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 		TextView accessories = (TextView) solo.getView("action_bar_title", 0);
 		boolean text = accessories.getText().toString().trim()
-				.equals(ValidationText.Shoes_Bags_Accessories);
-		assertTrue("Accessories does not exist.", text);
+				.equals(ValidationText.SHOES_BAGS_ACCESSORIES);
+		assertTrue("Accessories text does not exist.", text);
 
 	}
 
-	// 1938152:Check '媽咪寶貝' is displayed on the top of the screen.
+	// 1938152:Check 'Mummy/Baby' is displayed on the top of the screen.
 	public void testBabyDisplayedOnTheScreen() throws Exception {
 
 		solo.clickOnView(solo.getView("tab_image", 2));
-		solo.searchText(ValidationText.Computers_Peripherals);
-		solo.clickOnText(ValidationText.Mommy_Baby);
-		solo.sleep(2000);
+		solo.searchText(ValidationText.COMPUTERS_PERIPHERALS);
+		solo.clickOnText(ValidationText.MUMMY_BABY);
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 		TextView baby = (TextView) solo.getView("action_bar_title", 0);
 		boolean text = baby.getText().toString().trim()
-				.equals(ValidationText.Mommy_Baby);
+				.equals(ValidationText.MUMMY_BABY);
 
 		assertTrue("Mom's Baby text does not exist.", text);
 
 	}
 
-	// 1938153:Check '電腦/週邊' is displayed on the top of the screen.
+	// 1938153:Check 'Computers_Peripherals' is displayed on the top of the
+	// screen.
 	public void testComputerDisplayedOnTheScreen() throws Exception {
 
 		solo.clickOnView(solo.getView("tab_image", 2));
-		solo.clickOnText(ValidationText.Computers_Peripherals);
-		solo.sleep(2000);
+		solo.clickOnText(ValidationText.COMPUTERS_PERIPHERALS);
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 		TextView Computer = (TextView) solo.getView("action_bar_title", 0);
 		boolean text = Computer.getText().toString().trim()
-				.equals(ValidationText.Computers_Peripherals);
+				.equals(ValidationText.COMPUTERS_PERIPHERALS);
 
 		assertTrue("Computer text does not exist.", text);
 
 	}
 
-	// 1938154:Check '家電/視聽' is displayed on the top of the screen.
+	// 1938154:Check 'Homeappliances_AV' is displayed on the top of the screen.
 	public void testHouseholdAppliancesDisplayedOnTheScreen() throws Exception {
 
 		solo.clickOnView(solo.getView("tab_image", 2));
-		solo.clickOnText(ValidationText.HomeAppliances_AV);
-		solo.sleep(2000);
+		solo.clickOnText(ValidationText.HOMEAPPLIANCES_AV);
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 		TextView householdAppliances = (TextView) solo.getView(
 				"action_bar_title", 0);
 		boolean text = householdAppliances.getText().toString().trim()
-				.equals(ValidationText.HomeAppliances_AV);
+				.equals(ValidationText.HOMEAPPLIANCES_AV);
 
 		Log.i("what", householdAppliances.getText().toString());
 
@@ -697,121 +715,128 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938155:Check '相機/手機/玩具' is displayed on the top of the screen.
+	// 1938155:Check 'Camera_Mobile_Toys' is displayed on the top of the screen.
 	public void testFasionDigitalDisplayedOnTheScreen() throws Exception {
 
 		solo.clickOnView(solo.getView("tab_image", 2));
-		solo.searchText(ValidationText.Gourmet_Health_Beverage);
-		solo.clickOnText(ValidationText.Camera_Mobile_Toys);
-		solo.sleep(3000);
+		solo.searchText(ValidationText.GOURMET_HEALTH_BEVERAGE);
+		solo.clickOnText(ValidationText.CAMERA_MOBILE_TOYS);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		TextView digital = (TextView) solo.getView("action_bar_title", 0);
 		boolean text = digital.getText().toString().trim()
-				.equals(ValidationText.Camera_Mobile_Toys2);
+				.equals(ValidationText.CAMERA_MOBILE_TOYS2);
 		Log.i("what", digital.getText().toString());
 		assertTrue("Fasion digital text does not exist.", text);
 
 	}
 
-	// 1938156:Check '美食/保健/飲料' is displayed on the top of the screen.
+	// 1938156:Check 'Gourmet/Health/Beverage' is displayed on the top of the
+	// screen.
 	public void testFoodDisplayedOnTheScreen() throws Exception {
 
 		solo.clickOnView(solo.getView("tab_image", 2));
-		solo.clickOnText(ValidationText.Gourmet_Health_Beverage);
-		solo.sleep(2000);
+		solo.clickOnText(ValidationText.GOURMET_HEALTH_BEVERAGE);
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 		TextView food = (TextView) solo.getView("action_bar_title", 0);
 		boolean text = food.getText().toString().trim()
-				.equals(ValidationText.Gourmet_Health_Beverage2);
+				.equals(ValidationText.GOURMET_HEALTH_BEVERAGE2);
 		Log.i("what", food.getText().toString().trim());
 		assertTrue("Food text does not exist.", text);
 
 	}
 
-	// 1938157:Check '醫療/日用品/寵物' is displayed on the top of the screen.
+	// 1938157:Check 'Medical/Commodity/Pet' is displayed on the top of the
+	// screen.
 	public void testCleanDisplayedOnTheScreen() throws Exception {
 
 		solo.clickOnView(solo.getView("tab_image", 2));
-		solo.clickOnText(ValidationText.Medical_Commodity_pet);
-		solo.sleep(2000);
+		solo.clickOnText(ValidationText.MEDICAL_COMMODITY_PET);
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 		TextView clean = (TextView) solo.getView("action_bar_title", 0);
 		boolean text = clean.getText().toString().trim()
-				.equals(ValidationText.Medical_Commodity_pet2);
+				.equals(ValidationText.MEDICAL_COMMODITY_PET2);
 
 		assertTrue("Clean text does not exist.", text);
 
 	}
 
-	// 1938158:Check '居家/寢具/傢俱' is displayed on the top of the screen.
+	// 1938158:Check 'Home/Bedding/Furniture' is displayed on the top of the
+	// screen.
 	public void testHomeDisplayedOnTheScreen() throws Exception {
 
 		solo.clickOnView(solo.getView("tab_image", 2));
-		solo.clickOnText(ValidationText.Home_Bedding_Furniture);
-		solo.sleep(2000);
+		solo.scrollToBottom();
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
+		solo.scrollToBottom();
+		solo.searchText(ValidationText.HOME_BEDDING_FURNITURE);
+		solo.clickOnText(ValidationText.HOME_BEDDING_FURNITURE);
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 		TextView home = (TextView) solo.getView("action_bar_title", 0);
 		boolean text = home.getText().toString().trim()
-				.equals(ValidationText.Home_Bedding_Furniture2);
+				.equals(ValidationText.HOME_BEDDING_FURNITURE2);
 
 		assertTrue("home text does not exist.", text);
 
 	}
 
-	// 1938160:Check '圖書/文具/影音' is displayed on the top of the screen.
+	// 1938160:Check 'Books/Stationery/Video' is displayed on the top of the
+	// screen.
 	public void testBookDisplayedOnTheScreen() throws Exception {
 
 		solo.clickOnView(solo.getView("tab_image", 2));
-		solo.clickOnText(ValidationText.Books_Stationery_Video);
-		solo.sleep(2000);
+		solo.clickOnText(ValidationText.BOOKS_STATIONERY_VIDEO);
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+
 		TextView book = (TextView) solo.getView("action_bar_title", 0);
 		boolean text = book.getText().toString().trim()
-				.equals(ValidationText.Books_Stationery_Video2);
+				.equals(ValidationText.BOOKS_STATIONERY_VIDEO2);
 		assertTrue("book text does not exist.", text);
 
 	}
 
-	// 2014-04-30
 	// 1938103:Check to click the start icon without login.
 	public void testStarIconWithoutLogin() throws Exception {
 
-		// Account.accountLogIn(solo);
+
 		Account.JudgementAccountWithoutLogin(solo);
-		// Account.accountLogIn(solo);
-		enterClassification();
-		Action.clickText(solo, ValidationText.Commodity);
-		solo.sleep(3000);
+		Action.enterCategoryClothesPage(solo);
+		Action.clickText(solo, ValidationText.COMMODITY);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		View star = (View) solo.getView("star_button", 0);
 		solo.clickOnView(star);
-		solo.sleep(3000);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 
 		// Get toast text.
 		TextView toastTextView = (TextView) solo.getView("message", 0);
 		if (toastTextView != null) {
 			String toastText = toastTextView.getText().toString();
-			assertEquals(toastText, ValidationText.Please_login_account);
+			assertEquals(toastText, ValidationText.PLEASE_LOGIN_ACCOUNT);
 		}
+
 	}
 
 	// 1938104:Check to click the start icon when login.
 	public void testStartIconWhenLogin() throws Exception {
 
 		Account.JudgementAccountLogin(solo);
-		enterClassification();
-		Action.clickText(solo, ValidationText.Commodity);
-		solo.sleep(3000);
+		Action.enterCategoryClothesPage(solo);
+		Action.clickText(solo, ValidationText.COMMODITY);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		Action.clickStarIconNote(solo);
 	}
 
-	// 2014-05-13
 	// 1938116:Check to click the start icon without login in grid view.
 	public void testStarIconWithoutLoginInGridView() throws Exception {
 
 		// Account.accountLogIn(solo);
 		Account.JudgementAccountWithoutLogin(solo);
 
-		enterClassification();
+		Action.enterCategoryClothesPage(solo);
 
 		Action.setSmallPhotoViewStyleAfterSearch(solo);
 
-		Action.clickText(solo, ValidationText.Commodity);
-		solo.sleep(3000);
+		Action.clickText(solo, ValidationText.COMMODITY);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		View star = (View) solo.getView("star_button", 1);
 		solo.clickOnView(star);
 
@@ -819,58 +844,61 @@ public class Category extends ActivityInstrumentationTestCase2 {
 		TextView toastTextView = (TextView) solo.getView("message", 0);
 		if (toastTextView != null) {
 			String toastText = toastTextView.getText().toString();
-			assertEquals(toastText, ValidationText.Please_login_account);
+			assertEquals(toastText, ValidationText.PLEASE_LOGIN_ACCOUNT);
 		}
 
 		// Restore to list view.
 		Action.setListViewStyleAfterSearch(solo);
+
 	}
 
 	// 1938117:Check to click the start icon in grid view when login.
 	public void testStartIconInGridViewWhenLogin() throws Exception {
 
 		Account.JudgementAccountLogin(solo);
-		enterClassification();
+		Action.enterCategoryClothesPage(solo);
 
 		// Change the item view to photo grid view
 		Action.setSmallPhotoViewStyleAfterSearch(solo);
 
-		Action.clickText(solo, ValidationText.Commodity);
-		solo.sleep(3000);
+		Action.clickText(solo, ValidationText.COMMODITY);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 
 		Action.clickStarIconNote(solo);
 
 		// Restore to list view.
 		Action.setListViewStyleAfterSearch(solo);
+
 	}
 
 	// 1938115:Check the Star icon display in grid view.
 	public void testStarIconDisplayInGridView() throws Exception {
 
-		enterClassification();
+		Action.enterCategoryClothesPage(solo);
 
 		// Change the item view to photo grid view
 		Action.setSmallPhotoViewStyleAfterSearch(solo);
 
-		Action.clickText(solo, ValidationText.Commodity);
-		solo.sleep(3000);
+		Action.clickText(solo, ValidationText.COMMODITY);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		View star = (View) solo.getView("star_button", 1);
 		assertTrue(" Cannot find star icon ", star.isShown());
 
 		// Restore to list view.
 		Action.setListViewStyleAfterSearch(solo);
+
 	}
 
 	// 1938113:Check the commodity price displays in grid view.
 	public void testCommodityPriceDisplayInGridView() throws Exception {
 
-		enterClassification();
+		Action.enterCategoryClothesPage(solo);
 
 		// Change the item view to photo grid view
 		Action.setSmallPhotoViewStyleAfterSearch(solo);
 
-		Action.clickText(solo, ValidationText.Commodity);
-		solo.sleep(3000);
+		Action.clickText(solo, ValidationText.COMMODITY);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		TextView price = (TextView) solo.getView("listitem_productlist_price",
 				0);
 		String sr = price.getText().toString();
@@ -888,14 +916,14 @@ public class Category extends ActivityInstrumentationTestCase2 {
 	// 1938114:Check the Shops score displays in grid view.
 	public void testShopsScoreDisplayInGridView() throws Exception {
 
-		enterClassification();
+		Action.enterCategoryClothesPage(solo);
 
 		// Change the item view to photo grid view
 		Action.setSmallPhotoViewStyleAfterSearch(solo);
 
-		solo.waitForText(ValidationText.Commodity, 1, 3000);
-		solo.clickOnText(ValidationText.Commodity);
-		solo.sleep(3000);
+		solo.waitForText(ValidationText.COMMODITY, 1, 3000);
+		solo.clickOnText(ValidationText.COMMODITY);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		TextView price = (TextView) solo.getView(
 				"listitem_productlist_store_rating", 0);
 		String sr = price.getText().toString();
@@ -907,19 +935,21 @@ public class Category extends ActivityInstrumentationTestCase2 {
 				" Cannot find the shops score or score format is incorrect! ",
 				isNum);
 
-		// Restore to list view. Action.setListViewStyleAfterSearch(solo);
+		// Restore to list view.
+		Action.setListViewStyleAfterSearch(solo);
+
 	}
 
 	// 1938125:Check the commodity price displays in large photo view.
 	public void testCommodityPriceDisplayInLargePhotoView() throws Exception {
 
-		enterClassification();
+		Action.enterCategoryClothesPage(solo);
 
 		// Change the item view to photo large photo view
 		Action.setLargePhotoViewStyleAfterSearch(solo);
 
-		Action.clickText(solo, ValidationText.Commodity);
-		solo.sleep(3000);
+		Action.clickText(solo, ValidationText.COMMODITY);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		TextView price = (TextView) solo.getView("listitem_productlist_price",
 				0);
 		String sr = price.getText().toString();
@@ -930,26 +960,28 @@ public class Category extends ActivityInstrumentationTestCase2 {
 		assertTrue(
 				" Cannot find the commodity price or price format is incorrect! ",
 				isNum);
+
 		// Restore to list view.
 		Action.setListViewStyleAfterSearch(solo);
+
 	}
 
 	// 1938126:Check the Shops score displays in large photo view.
 	public void testShopsScoreDisplayInLargePhotoView() throws Exception {
 
-		enterClassification();
+		Action.enterCategoryClothesPage(solo);
 
 		// Change the item view to photo large photo view
 		Action.setLargePhotoViewStyleAfterSearch(solo);
 
-		Action.clickText(solo, ValidationText.Commodity);
-		solo.sleep(3000);
+		Action.clickText(solo, ValidationText.COMMODITY);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		TextView price = null;
 		try {
 			price = (TextView) solo.getView(
 					"listitem_productlist_store_rating", 0);
 		} catch (AssertionError e) {
-			solo.clickOnText(ValidationText.Commodity);
+			solo.clickOnText(ValidationText.COMMODITY);
 		}
 		String sr = price.getText().toString();
 
@@ -962,23 +994,25 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 		// Restore to list view.
 		Action.setListViewStyleAfterSearch(solo);
+
 	}
-	
+
 	// 1938127:Check the Star icon display in large photo view.
 	public void testStarIconDisplayInLargePhotoView() throws Exception {
 
-		enterClassification();
+		Action.enterCategoryClothesPage(solo);
 
 		// Change the item view to photo large photo view
 		Action.setLargePhotoViewStyleAfterSearch(solo);
 
-		Action.clickText(solo, ValidationText.Commodity);
-		solo.sleep(3000);
+		Action.clickText(solo, ValidationText.COMMODITY);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		View star = (View) solo.getView("star_button", 0);
 		assertTrue(" Cannot find star icon ", star.isShown());
 
 		// Restore to list view.
 		Action.setListViewStyleAfterSearch(solo);
+
 	}
 
 	// 1938128:Check to click the start icon without login in large photo view.
@@ -987,11 +1021,11 @@ public class Category extends ActivityInstrumentationTestCase2 {
 		// Change the item view to photo large photo view
 		Action.setLargePhotoViewStyleAfterSearch(solo);
 
-		enterClassification();
+		Action.enterCategoryClothesPage(solo);
 		Action.setSmallPhotoViewStyleAfterSearch(solo);
 
-		Action.clickText(solo, ValidationText.Commodity);
-		solo.sleep(3000);
+		Action.clickText(solo, ValidationText.COMMODITY);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		View star = (View) solo.getView("star_button", 1);
 		solo.clickOnView(star);
 
@@ -999,24 +1033,25 @@ public class Category extends ActivityInstrumentationTestCase2 {
 		TextView toastTextView = (TextView) solo.getView("message", 0);
 		if (toastTextView != null) {
 			String toastText = toastTextView.getText().toString();
-			assertEquals(toastText, ValidationText.Please_login_account);
+			assertEquals(toastText, ValidationText.PLEASE_LOGIN_ACCOUNT);
 		}
 
 		// Restore to list view.
 		Action.setListViewStyleAfterSearch(solo);
+
 	}
 
 	// 1938129:Check to click the start icon in large photo view when login.
 	public void testStartIconInLargePhotoViewWhenLogin() throws Exception {
 
 		Account.JudgementAccountLogin(solo);
-		enterClassification();
+		Action.enterCategoryClothesPage(solo);
 
 		// Change the item view to photo large photo view
 		Action.setLargePhotoViewStyleAfterSearch(solo);
 
-		Action.clickText(solo, ValidationText.Commodity);
-		solo.sleep(3000);
+		Action.clickText(solo, ValidationText.COMMODITY);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		try {
 		} catch (AssertionError e) {
 			TestHelper.swipeUp2(solo, 1);
@@ -1026,27 +1061,31 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 		// Restore to list view.
 		Action.setListViewStyleAfterSearch(solo);
+
 	}
 
 	// 1938045:Check search result.
 	public void testSearchResult() throws Exception {
-		enterClassification();
-		solo.clickOnText(ValidationText.Commodity);
+
+		Action.enterCategoryClothesPage(solo);
+		solo.clickOnText(ValidationText.COMMODITY);
 		solo.waitForView(solo.getView("category_tab_secondary_title", 1));
 		TextView result = null;
+
 		try {
 			result = (TextView) solo.getView("category_tab_secondary_title", 1);
 			assertTrue("Result is not displayed.", result.isShown());
 		} catch (AssertionError e) {
-			enterClassification();
-			solo.clickOnText(ValidationText.Commodity);
+			Action.enterCategoryClothesPage(solo);
+			solo.clickOnText(ValidationText.COMMODITY);
 			solo.waitForView(solo.getView("category_tab_secondary_title"));
 			result = (TextView) solo.getView("category_tab_secondary_title", 1);
 		}
+
 		assertTrue("Result is not displayed.", result.isShown());
 		String X = result.getText().toString();
 
-		boolean isNum = X.matches("[0-9]+" + ValidationText.Results_value);
+		boolean isNum = X.matches("[0-9]+" + ValidationText.RESULTS_VALUE);
 
 		if (isNum) {
 			assertTrue("Search result format incorrect.", true);
@@ -1056,27 +1095,27 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938049:check advanced page tab display.
+	// 1938049:Check advanced page tab display.
 	public void testAdvancedPage() throws Exception {
 
-		enterClassification();
-		Action.clickText(solo, ValidationText.Commodity);
-		solo.sleep(3000);
+		Action.enterCategoryClothesPage(solo);
+		Action.clickText(solo, ValidationText.COMMODITY);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
+
 		// Filter button
 		solo.clickOnView(solo.getView("menu_filter"));
+
 		// Button sort = (Button) solo.getView("btn_sort", 0);
 		TextView sort_tv = (TextView) solo.getView("indicator_sort");
 		assertTrue("The first tab text is incorrect.", sort_tv.isShown());
 
-		// Check the second button and check the highlight line whether if
-		// focused.
+		// Check the second button and Check the highlight line whether focused.
 		Button mode = (Button) solo.getView("btn_browse_mode", 0);
 		solo.clickOnView(mode);
 		TextView mode_tv = (TextView) solo.getView("indicator_browse_mode");
 		assertTrue("The second tab text is incorrect.", mode_tv.isShown());
 
-		// Check the third button and check the highlight line whether if
-		// focused.
+		// Check the third button and the highlight line whether focused.
 		Button filter = (Button) solo.getView("btn_filter", 0);
 		solo.clickOnView(filter);
 		TextView filter_tv = (TextView) solo.getView("indicator_filter");
@@ -1084,125 +1123,63 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938099:check enter to item page.
+	// 1938099:Check enter to item page.
 	public void testTapProductName() throws Exception {
 
-		enterClassification();
-		Action.clickText(solo, ValidationText.Commodity);
-		solo.sleep(3000);
+		Action.enterCategoryClothesPage(solo);
+		Action.clickText(solo, ValidationText.COMMODITY);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		solo.clickInList(1);
-		solo.sleep(5000);
+		solo.sleep(ValidationText.WAIT_TIME_LONG);
 		View imageView = (View) solo.getView("productitem_images");
 		assertTrue("Not in item page.", imageView.isShown());
 
 	}
 
-	/*// 1938112:check advanced page tab display.
-	public void testTapProductNameInGridView() throws Exception {
-
-		enterClassification();
-		Action.setSmallPhotoViewStyleAfterSearch(solo);
-		solo.sleep(3000);
-		solo.clickInList(1);
-		solo.sleep(5000);
-		View imageView = (View) solo.getView("productitem_images");
-		assertTrue("Not in item page.", imageView.isShown());
-		Action.setListViewStyleAfterSearch(solo);
-	}*/
-
-	/*// 1938098:test productlist titlle display.
-	public void testTwoLineDisplay() throws Exception {
-
-		enterClassification();
-		solo.clickOnText(ValidationText.Commodity);
-		try {
-			TextView tv = (TextView) solo.getView("listitem_productlist_title",
-					1);
-			Log.i("number", String.valueOf(tv.getMaxLines()));
-			assertTrue("Not 2 lines.", tv.getMaxLines() == 2);
-		} catch (AssertionError e) {
-			solo.clickOnText(ValidationText.Commodity);
-			TextView tv = (TextView) solo.getView("listitem_productlist_title",
-					1);
-			assertTrue("Not 2 lines.", tv.getMaxLines() == 2);
-		}
-	}*/
-
-	/*//
-	@SuppressLint("NewApi")
-	public void testTwoLineDisplayInLargeView() throws Exception {
-
-		enterClassification();
-		solo.clickOnText(ValidationText.Commodity);
-		Action.setLargePhotoViewStyleAfterSearch(solo);
-		try {
-			TextView tv = (TextView) solo.getView("listitem_productlist_title");
-			Log.i("number", String.valueOf(tv.getMaxLines()));
-			assertTrue("Not 2 lines.", tv.getMaxLines() == 2);
-			Action.setListViewStyleAfterSearch(solo);
-		} catch (AssertionError e) {
-			solo.clickOnText(ValidationText.Commodity);
-			TextView tv = (TextView) solo.getView("listitem_productlist_title");
-			assertTrue("Not 2 lines.", tv.getMaxLines() == 2);
-			Action.setListViewStyleAfterSearch(solo);
-		}
-
-	}*/
-
 	// 1938046:Check the default browse mode.
 	public void testDefaultBrowseMode() throws Exception {
+
 		solo.clickOnView(solo.getView("tab_image", 2));
-		Action.clickText(solo, ValidationText.Apparel);
+		Action.clickText(solo, ValidationText.APPAREL);
 		Assert.CategoryListShow(solo);
-		int size = ValidationText.CostumeList.length;
+		int size = ValidationText.COSTUMELIST.length;
+
 		// Make sure all the item displayed correctly.
 		for (int i = 0; i < size; i++) {
-			boolean textFound = solo.searchText(ValidationText.CostumeList[i]);
-			assertTrue(ValidationText.CostumeList[i] + " not found", textFound);
+			boolean textFound = solo.searchText(ValidationText.COSTUMELIST[i]);
+			assertTrue(ValidationText.COSTUMELIST[i] + " not found", textFound);
 		}
+
 		// Select two item to compare the position.
 		boolean flag = TestHelper.positionCompare(solo,
-				ValidationText.CostumeList[0], 1,
-				ValidationText.CostumeList[1], 2, 1);
+				ValidationText.COSTUMELIST[0], 1,
+				ValidationText.COSTUMELIST[1], 2, 1);
 		assertTrue(
 				"Item position is not right,need confirm the default browse mode.",
 				flag);
+
 	}
 
 	// 1938050:Check the default advanced tab.
 	public void testDefaultAdvancedTabMode() throws Exception {
-		enterClassification();
-		solo.sleep(2000);
+
+		Action.enterCategoryClothesPage(solo);
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 		Action.enterAdvancedPage(solo);
-		solo.sleep(3000);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		TextView btn_sort = (TextView) solo.getView("indicator_sort");
 
 		assertTrue("The default tab is incorrect.", btn_sort.isShown());
-	}
-	// 1953648:verify My account edit category function.
-	public void testEditFavoriteCategoryInMyAccount() throws Exception {
-			Account.JudgementAccountLogin(solo);
-			solo.clickOnView(solo.getView("tab_image",4));
-			solo.scrollToBottom();
-			solo.clickOnView(solo.getView("profile_bt_ecoupon_account",4));
-		//	solo.clickOnText(ValidationText.Edit_Favorite_Category);
-			// Get the grid view count.
-			GridView lv = (GridView) solo.getView("category_editor_grid");
-			Log.i("number", String.valueOf(lv.getCount()));
 
-			for (int i = 0; i < lv.getCount(); i++) {
-				View category = (View) solo.getView("category_editor_grid_button",
-						i);
-				solo.clickOnView(category);
-				assertTrue("Category item is not selected.", category.isPressed());
-			}
-		}
+	}
+
 	// 1953657:verify side bar edit category function.
 	public void testEditFavoriteCategoryBySidebar() throws Exception {
+
+		Account.JudgementAccountLogin(solo);
 		// click on up icon
-		solo.sleep(3000);
 		Action.clickHomeButtonOnScreen(solo);
-		solo.clickOnText(ValidationText.Edit_Favorite_Category);
+		solo.clickOnText(ValidationText.EDIT_FAVORITE_CATEGORY);
 		// Get the grid view count.
 		GridView lv = (GridView) solo.getView("category_editor_grid");
 		Log.i("number", String.valueOf(lv.getCount()));
@@ -1213,18 +1190,21 @@ public class Category extends ActivityInstrumentationTestCase2 {
 			solo.clickOnView(category);
 			assertTrue("Category item is not selected.", category.isPressed());
 		}
+
 	}
 
 	// 1959882:Verify 18 limit note
 	public void test18LimitNote() throws Exception {
 
+		Account.JudgementAccountLogin(solo);
 		solo.clickOnView(solo.getView("tab_image", 2));
 		solo.scrollToBottom();
-		Action.clickText(solo, ValidationText.Sports_Outdoor_Recreation);
-		Action.clickText(solo, ValidationText.Eighteen_Area);
+		Action.clickText(solo, ValidationText.SPORTS_OUTDOOR_RECREATION);
+		Action.clickText(solo, ValidationText.EIGHTEEN_AREA);
 		TextView restrictNote = (TextView) solo
 				.getView("restrict_category_bottom_text");
 		assertTrue("Restrict note not exist.", restrictNote.isShown());
+
 	}
 
 	// 1938159:Verify Leisure / traffic tab correctly displayed on the page
@@ -1232,164 +1212,195 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 		solo.clickOnView(solo.getView("tab_image", 2));
 		assertTrue("Sports/Outdoor/Leisure is not displayed.",
-				solo.searchText(ValidationText.Sports_Outdoor_Recreation));
+				solo.searchText(ValidationText.SPORTS_OUTDOOR_RECREATION));
+
 	}
 
 	// 1954573:Verify 18 restrict page cancel button.
 	public void testLeaveRestrictPage() throws Exception {
 
+		Account.JudgementAccountLogin(solo);
 		solo.clickOnView(solo.getView("tab_image", 2));
 		solo.scrollToBottom();
-		Action.clickText(solo, ValidationText.Sports_Outdoor_Recreation);
-		Action.clickText(solo, ValidationText.Eighteen_Area);
+		Action.clickText(solo, ValidationText.SPORTS_OUTDOOR_RECREATION);
+		Action.clickText(solo, ValidationText.EIGHTEEN_AREA);
+
 		TextView restrictNote = (TextView) solo
 				.getView("restrict_category_bottom_text");
 		assertTrue("Restrict note not exist.", restrictNote.isShown());
+
 		Button leave = (Button) solo.getView("btn_under18_leave");
 		solo.clickOnView(leave);
 		TextView sport = (TextView) solo.getView("action_bar_title", 0);
+
 		boolean text = sport.getText().toString().trim()
-				.equals(ValidationText.Sports_Outdoor_Recreation2);
+				.equals(ValidationText.SPORTS_OUTDOOR_RECREATION2);
 
 		assertTrue("sport text does not exist.", text);
+
 	}
 
-	// 1938064:Verify “Confirm”button function.
+	// 1938064:Verify "Confirm" button function.
 	public void testConfirmButtonFuction() throws Exception {
 
-		enterClassification();
-		solo.sleep(2000);
+		Action.enterCategoryClothesPage(solo);
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 		Action.enterAdvancedPage(solo);
 		solo.clickOnView(solo.getView("btn_filter"));
+
 		// Get "0 Interest" button.
 		ToggleButton tb = (ToggleButton) solo.getView("tb_cczeroint");
+
 		solo.clickOnView(tb);
 		Action.clickText(solo, ValidationText.OK);
 		assertFalse("Back to search result page failed.", tb.isShown());
+
 	}
 
-	// 1938096:click product image in listview.
+	// 1938096:Click product image in list view.
 	public void testClickProductImageInListview() throws Exception {
-		enterClassification();
-		solo.waitForText(ValidationText.Commodity, 1, 3000);
-		solo.clickOnText(ValidationText.Commodity);
+
+		Action.enterCategoryClothesPage(solo);
+		solo.waitForText(ValidationText.COMMODITY, 1, 3000);
+		solo.clickOnText(ValidationText.COMMODITY);
 		View ProductImage = (View) solo
 				.getView("listitem_productlist_image", 0);
 		solo.clickOnView(ProductImage);
-		solo.sleep(5000);
+		solo.sleep(ValidationText.WAIT_TIME_LONG);
 		TextView classificationText = (TextView) solo
 				.getView("action_bar_title");
 		assertFalse("Not enter to production detail page.", classificationText
-				.getText().toString().equals(ValidationText.Commodity));
+				.getText().toString().equals(ValidationText.COMMODITY));
+
 	}
 
-	// 1938109:click product image in Gridview.
+	// 1938109:Click product image in Grid view.
 	public void testClickProductImageInGridview() throws Exception {
-		enterClassification();
+
+		Action.enterCategoryClothesPage(solo);
+
 		// Change the item view to photo grid view
 		Action.setSmallPhotoViewStyleAfterSearch(solo);
 
-		solo.waitForText(ValidationText.Commodity, 1, 3000);
-		solo.clickOnText(ValidationText.Commodity);
+		solo.waitForText(ValidationText.COMMODITY, 1, 3000);
+		solo.clickOnText(ValidationText.COMMODITY);
 		View ProductImage = (View) solo
 				.getView("listitem_productlist_image", 0);
 		solo.clickOnView(ProductImage);
-		solo.sleep(5000);
+		solo.sleep(ValidationText.WAIT_TIME_LONG);
 		TextView classificationText = (TextView) solo
 				.getView("action_bar_title");
 		assertFalse("Not enter to production detail page.", classificationText
-				.getText().toString().equals(ValidationText.Commodity));
+				.getText().toString().equals(ValidationText.COMMODITY));
 		solo.goBack();
+
+		// Restore to list view.
 		Action.setListViewStyleAfterSearch(solo);
+
 	}
 
-	// 1938121:click product image in listview.
+	// 1938121:Click product image in list view.
 	public void testClickProductImageInLargePhotoview() throws Exception {
-		enterClassification();
+
+		Action.enterCategoryClothesPage(solo);
+
 		// Change the item view to photo grid view
 		Action.setLargePhotoViewStyleAfterSearch(solo);
-		solo.waitForText(ValidationText.Commodity, 1, 3000);
-		solo.clickOnText(ValidationText.Commodity);
+
+		solo.waitForText(ValidationText.COMMODITY, 1, 3000);
+		solo.clickOnText(ValidationText.COMMODITY);
 		View ProductImage = (View) solo
 				.getView("listitem_productlist_image", 0);
 		solo.clickOnView(ProductImage);
-		solo.sleep(5000);
+		solo.sleep(ValidationText.WAIT_TIME_LONG);
 		TextView classificationText = (TextView) solo
 				.getView("action_bar_title");
-		assertFalse("Not enter to production detail page.", classificationText
-				.getText().toString().equals(ValidationText.Commodity));
+		assertFalse("Not enter the production detail page.", classificationText
+				.getText().toString().equals(ValidationText.COMMODITY));
 		solo.goBack();
 		Action.setListViewStyleAfterSearch(solo);
+
 	}
 
 	// 1938039:Input keywords and search.
 	public void testInputKeywordsSearch() throws Exception {
 
-		enterClassification();
+		Action.enterCategoryClothesPage(solo);
 
 		// click search button
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.Jacket);
+		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
-		solo.sleep(2000);
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 		solo.goBack();
+
 		// click search button
 		Action.clickSearchButtonOnScreen(solo);
 
 		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.apple);
+		Action.searchAfterPutData(solo, 0, ValidationText.APPLE);
 
 		assertTrue("Keywords not changed to iphone.",
-				solo.searchText(ValidationText.apple));
+				solo.searchText(ValidationText.APPLE));
+
 	}
 
-	// 1938044:Check“Advanced”button display
+	// 1938044:Check "Advanced" button display.
 	public void testAdvancedButtonDisplay() throws Exception {
-		enterClassification();
-		solo.sleep(2000);
-		solo.waitForText(ValidationText.Commodity, 1, 3000);
-		solo.clickOnText(ValidationText.Commodity);
-		// solo.clickOnView(solo.getView("btn_filter"));
+
+		Action.enterCategoryClothesPage(solo);
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+		solo.waitForText(ValidationText.COMMODITY, 1, 3000);
+		solo.clickOnText(ValidationText.COMMODITY);
+
 		View advancedView = (View) solo.getView("menu_filter");
-		assertTrue("Advanced button not found!", advancedView.isShown());
+		assertTrue("'Advanced' button not found!", advancedView.isShown());
+
 	}
 
-	// 1938061:check unselected button function.
+	// 1938061:Check unselected button function.
 	public void testUnselectedButtonFunction() throws Exception {
 
-		enterClassification();
-		
-		TextView storeName = (TextView)solo.getView("listitem_productlist_store_name");
+		Action.enterCategoryClothesPage(solo);
+		TextView storeName = (TextView) solo
+				.getView("listitem_productlist_store_name");
 		String original = storeName.getText().toString().trim();
 		// Go to advanced sort page.
 		Action.enterAdvancedSortPage(solo);
 
-		// solo.clickOnToggleButton("可刷卡");
 		ToggleButton tb = (ToggleButton) solo.getView("tb_cc");
 
 		solo.clickOnView(tb);
-		solo.sleep(3000);
-		assertTrue(" '可刷卡'  button unselected.", tb.isChecked());
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
+		assertTrue(" 'Credit cards accepted'  button unselected.",
+				tb.isChecked());
 		solo.clickOnView(tb);
-		solo.sleep(3000);
-		assertFalse("'可刷卡'  button  selected.", tb.isChecked());
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
+		assertFalse("'Credit cards accepted'  button  selected.",
+				tb.isChecked());
 		Action.clickText(solo, ValidationText.OK);
-		TextView storeNames = (TextView)solo.getView("listitem_productlist_store_name");
-		assertTrue("Item list has changed.", original.equals(storeNames.getText().toString().trim()));
+		TextView storeNames = (TextView) solo
+				.getView("listitem_productlist_store_name");
+		assertTrue("Item list has changed.",
+				original.equals(storeNames.getText().toString().trim()));
 
 	}
-	
-	// 1938124:check enter to item page in large photo view.
+
+	// 1938124:Check enter to item page in large photo view.
 	public void testEnterToItemPageInLargeView() throws Exception {
 
-			enterClassification();
-			Action.setLargePhotoViewStyleAfterSearch(solo);	 
-			solo.clickInList(1);
-			solo.sleep(5000);
-			View imageView = (View) solo.getView("productitem_images");
-			assertTrue("Not in item page.", imageView.isShown());
+		Action.enterCategoryClothesPage(solo);
+		Action.setLargePhotoViewStyleAfterSearch(solo);
+		solo.clickInList(1);
+		solo.sleep(ValidationText.WAIT_TIME_LONG);
+		View imageView = (View) solo.getView("productitem_images");
+		assertTrue("Not enter the item page in large view.",
+				imageView.isShown());
 
-		}
+		// Restore to list view.
+		Action.setListViewStyleAfterSearch(solo);
+
+	}
 }

@@ -1,15 +1,37 @@
+/*
+ * This is automated script about "DiscoveryStream".
+ * 
+ * You can run these test cases either on the emulator or on device. 
+ * By Eclipse:
+ * Right click the test project and select Run As --> Run As Android JUnit Test
+ * By Ant:
+ * 1.Run "android update test-project -m [path to target application] -p [path to the test folder]"  in command line .
+ * 2."ant test"
+ * By using instrument command:
+ * Run all test project:adb shell am instrument -w com.yahoo.mobile.client.android.ecstore.test/android.test.InstrumentationTestRunner
+ * Just run category:adb shell am instrument -e class com.yahoo.mobile.client.android.ecstore.test.DiscoveryStream.DiscoveryStream -w com.yahoo.mobile.client.android.ecstore.test/android.test.InstrumentationTestRunner
+ * 
+ * @author SYMBIO.
+ * @version YAHOO APP:1.2.4
+ * 
+ */
+
 package com.yahoo.mobile.client.android.ecstore.test.DiscoveryStream;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
-import android.view.View;
+import android.widget.TextView;
 
 import com.robotium.solo.Solo;
+import com.yahoo.mobile.client.android.ecstore.Assert.Assert;
+import com.yahoo.mobile.client.android.ecstore.test.TestHelper;
+import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 
 @SuppressLint("NewApi")
-public class DiscoveryStream extends ActivityInstrumentationTestCase2 {
+public class DiscoveryStream extends ActivityInstrumentationTestCase2<Activity> {
 	private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
-	private static Class launcherActivityClass;
+	private static Class<?> launcherActivityClass;
 	private Solo solo;
 	static {
 
@@ -22,15 +44,16 @@ public class DiscoveryStream extends ActivityInstrumentationTestCase2 {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	public DiscoveryStream() throws ClassNotFoundException {
-		super(launcherActivityClass);
+		super((Class<Activity>)launcherActivityClass);
 	}
 
 	@Override
 	protected void setUp() throws Exception {
 
 		solo = new Solo(getInstrumentation(), getActivity());
-		// Assert.testFirstLaunch(solo);
+		Assert.testFirstLaunch(solo);
 	}
 
 	@Override
@@ -43,12 +66,11 @@ public class DiscoveryStream extends ActivityInstrumentationTestCase2 {
 	// 1954564:Verify pull down to refresh .
 	public void testPullDownToRefresh() throws Exception {
 		
-		solo.sleep(20000);
-		solo.clickOnView(solo.getView("tab_image", 0));
-		//android.widget.ListView listView0 = (android.widget.ListView) solo.getView(android.widget.ListView.class, 0);
-
-		View image = (View)solo.getView("listitem_discoverylist_top10_image",0);
-		solo.drag(100, 100, image.getY(), image.getY()+300, 3);
-		solo.sleep(5000);
+		solo.waitForActivity("ECStoreActivity", 2000);
+		solo.waitForText(ValidationText.NEWS, 1, 3000);
+		TestHelper.swipeDown(solo, 10);
+		TextView pullRefresh = (TextView)solo.getView("pull_to_refresh_text");
+		assertTrue("Refresh failed",pullRefresh.isShown());
+		
 	}
 }

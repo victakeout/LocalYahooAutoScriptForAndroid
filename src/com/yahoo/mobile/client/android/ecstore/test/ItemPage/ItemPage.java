@@ -36,7 +36,7 @@ public class ItemPage extends ActivityInstrumentationTestCase2 {
 	protected void setUp() throws Exception {
 
 		solo = new Solo(getInstrumentation(), getActivity());
-		//Assert.testFirstLaunch(solo);
+		// Assert.testFirstLaunch(solo);
 	}
 
 	@Override
@@ -52,11 +52,12 @@ public class ItemPage extends ActivityInstrumentationTestCase2 {
 		Account.JudgementAccountLogin(solo);
 		Action.enterToItemPage(solo);
 		TestHelper.swipeUp2(solo, 1);
-		solo.clickOnText(ValidationText.Sales_Promotion);
-		solo.clickOnText(ValidationText.Discount);
+		solo.clickOnText(ValidationText.SALES_PROMOTION);
+		solo.clickOnText(ValidationText.DISCOUNT);
 		solo.sleep(15000);
 		View webpage = (View) solo.getView("webpage", 0);
 		assertTrue("No promotion link displayed. ", webpage.isShown());
+		
 	}
 
 	// 1953617:verify for full discount
@@ -65,11 +66,12 @@ public class ItemPage extends ActivityInstrumentationTestCase2 {
 		Account.JudgementAccountLogin(solo);
 		Action.enterToItemPage(solo);
 		TestHelper.swipeUp2(solo, 1);
-		solo.clickOnText(ValidationText.Sales_Promotion);
-		solo.clickOnText(ValidationText.Full);
+		solo.clickOnText(ValidationText.SALES_PROMOTION);
+		solo.clickOnText(ValidationText.FULL);
 		solo.sleep(15000);
 		View webpage = (View) solo.getView("webpage", 0);
 		assertTrue("No promotion link displayed. ", webpage.isShown());
+		
 	}
 
 	// 1953614:verify for All customers the full discount.
@@ -78,11 +80,12 @@ public class ItemPage extends ActivityInstrumentationTestCase2 {
 		Account.JudgementAccountLogin(solo);
 		Action.enterToItemPage(solo);
 		TestHelper.swipeUp2(solo, 1);
-		solo.clickOnText(ValidationText.Sales_Promotion);
-		solo.clickOnText(ValidationText.Full);
+		solo.clickOnText(ValidationText.SALES_PROMOTION);
+		solo.clickOnText(ValidationText.FULL);
 		solo.sleep(15000);
 		View webpage = (View) solo.getView("webpage", 0);
 		assertTrue("No promotion link displayed. ", webpage.isShown());
+		
 	}
 
 	// 1959927:Verify user can add an item to shopping cart
@@ -99,16 +102,16 @@ public class ItemPage extends ActivityInstrumentationTestCase2 {
 		Account.JudgementAccountLogin(solo);
 		Action.enterToItemPage(solo);
 		TestHelper.swipeUp(solo, 1);
-		solo.clickOnText(ValidationText.Share_Product);
+		solo.clickOnText(ValidationText.SHARE_PRODUCT);
 		View share = (View) solo.getView("alertTitle", 1);
 		assertEquals("Share frame not pop up. ", share.isShown());
+		
 	}
 
 	// 1953636:verify favorite items
 	public void testVerifyFavoriteitems() throws Exception {
 
 		Account.JudgementAccountLogin(solo);
-
 		Action.removeFavoriteItem(solo);
 		Action.enterToItemPage(solo);
 		solo.goBack();
@@ -116,7 +119,7 @@ public class ItemPage extends ActivityInstrumentationTestCase2 {
 		TextView storeName = (TextView) solo.getView(
 				"listitem_productlist_store_name", 0);
 		solo.clickOnView(solo.getView("tab_image", 4));
-		solo.clickOnText(ValidationText.Product_Collection);
+		solo.clickOnText(ValidationText.PRODUCT_COLLECTION);
 		solo.sleep(5000);
 		TextView collectStoreName = (TextView) solo.getView(
 				"listitem_productlist_store_name", 0);
@@ -131,20 +134,22 @@ public class ItemPage extends ActivityInstrumentationTestCase2 {
 
 		Action.enterToItemPage(solo);
 		TestHelper.swipeUp(solo, 1);
-		Action.clickText(solo, ValidationText.Payment);
+		Action.clickText(solo, ValidationText.PAYMENT);
 		TextView payInfoATM = (TextView) solo.getView("pay_info", 1);
 		TextView payInfoVisa = (TextView) solo.getView("pay_info", 2);
 		assertTrue(
 				"Payment page not contain any item.",
 				payInfoATM.isShown() && payInfoVisa.isShown()
-						&& solo.searchText(ValidationText.Post));
+						&& solo.searchText(ValidationText.POST));
+		
 	}
 
 	// 1953627:Verify Shopping methods
 	public void testVerifyShoppingMethods() throws Exception {
+		
 		Action.enterToItemPage(solo);
 		TestHelper.swipeUp(solo, 1);
-		Action.clickText(solo, ValidationText.Shopping_tips);
+		Action.clickText(solo, ValidationText.SHOPPING_TIPS);
 		TextView ShoppingTips = (TextView) solo.getView("text_must_know", 3);
 		assertTrue("Shopping tips not show.", ShoppingTips.isShown());
 
@@ -152,15 +157,16 @@ public class ItemPage extends ActivityInstrumentationTestCase2 {
 
 	// 1953629:Verify the classification in current store page.
 	public void testVerifyCurrentStorePage() throws Exception {
+		
 		Action.enterToItemPage(solo);
 		TestHelper.swipeUp(solo, 1);
-		Action.clickText(solo, ValidationText.See_All_Store_Product);
-		Action.clickText(solo, ValidationText.Categories);
+		Action.clickText(solo, ValidationText.SEE_ALL_STORE_PRODUCT);
+		Action.clickText(solo, ValidationText.CATEGORIES);
 		// TextView ShoppingTips = (TextView)solo.getView("text_must_know",3);
 		assertTrue(
 				"Shopping tips not show.",
-				solo.searchText(ValidationText.Categories)
-						&& solo.searchText(ValidationText.Commodity));
+				solo.searchText(ValidationText.CATEGORIES)
+						&& solo.searchText(ValidationText.COMMODITY));
 
 	}
 
@@ -168,22 +174,23 @@ public class ItemPage extends ActivityInstrumentationTestCase2 {
 	public void testVerifyCommodityPage() throws Exception {
 		Action.enterToItemPage(solo);
 		TestHelper.swipeUp(solo, 1);
-		Action.clickText(solo, ValidationText.See_All_Store_Product);
+		Action.clickText(solo, ValidationText.SEE_ALL_STORE_PRODUCT);
 		assertTrue(
 				"Shopping tips not show.",
-				solo.searchText(ValidationText.Categories)
-						&& solo.searchText(ValidationText.Commodity));
+				solo.searchText(ValidationText.CATEGORIES)
+						&& solo.searchText(ValidationText.COMMODITY));
 
 	}
 
 	// 1953631:verify share product Layer.
 	public void testShareProductPage() throws Exception {
+		
 		Action.enterToItemPage(solo);
 		TestHelper.swipeUp(solo, 1);
-		Action.clickText(solo, ValidationText.Share_Product);
-		
+		Action.clickText(solo, ValidationText.SHARE_PRODUCT);
+
 		solo.getCurrentActivity().getClass();
-		
+
 		View share = (View) solo.getView("alertTitle", 1);
 		assertTrue("Share window not pop up.", share.isShown());
 

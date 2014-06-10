@@ -1,14 +1,28 @@
+/*
+ * This is automated script about "Checkout".
+ * 
+ * You can run these test cases either on the emulator or on device. 
+ * By Eclipse:
+ * Right click the test project and select Run As --> Run As Android JUnit Test
+ * By Ant:
+ * 1.Run "android update test-project -m [path to target application] -p [path to the test folder]"  in command line .
+ * 2."ant test"
+ * By using instrument command:
+ * Run all test project:adb shell am instrument -w com.yahoo.mobile.client.android.ecstore.test/android.test.InstrumentationTestRunner
+ * Just run category:adb shell am instrument -e class com.yahoo.mobile.client.android.ecstore.test.Checkout.Checkout -w com.yahoo.mobile.client.android.ecstore.test/android.test.InstrumentationTestRunner
+ * 
+ * @author SYMBIO.
+ * @version YAHOO APP:1.2.4
+ * 
+ */
+
 package com.yahoo.mobile.client.android.ecstore.test.Checkout;
 
 import android.annotation.SuppressLint;
 import android.test.ActivityInstrumentationTestCase2;
-import android.util.Log;
-import android.view.Display;
-import android.view.View;
-import android.widget.TextView;
 
 import com.robotium.solo.Solo;
-import com.robotium.solo.WebElement;
+
 import com.yahoo.mobile.client.android.ecstore.Account.Account;
 import com.yahoo.mobile.client.android.ecstore.Action.Action;
 import com.yahoo.mobile.client.android.ecstore.Assert.Assert;
@@ -41,7 +55,7 @@ public class Checkout extends ActivityInstrumentationTestCase2 {
 	protected void setUp() throws Exception {
 
 		solo = new Solo(getInstrumentation(), getActivity());
-		// Assert.testFirstLaunch(solo);
+		Assert.testFirstLaunch(solo);
 	}
 
 	@Override
@@ -51,35 +65,27 @@ public class Checkout extends ActivityInstrumentationTestCase2 {
 		super.tearDown();
 	}
 
-	@SuppressWarnings("deprecation")
-	public static void swipeUp(Solo solo, int stepCount) {
-		Display display = solo.getCurrentActivity().getWindowManager()
-				.getDefaultDisplay();
-		int width = display.getWidth();
-		int height = display.getHeight();
-		float yStart = height - 100;
-		float yEnd = 100;
-		solo.drag(width / 2, width / 2, yStart, yEnd, stepCount);
-	}
 
 	// 1959918:Verify user can change other delivery places
-	// Cannot swipe screen now.ME
 	public void testChangeOtherDeliveryPlaces() throws Exception {
 
-		 
-		/* Account.JudgementAccountLogin(solo); 
-		 Action.enterToItemPage(solo);
-		 Action.addToShoppingCart(solo);*/
+		Account.JudgementAccountLogin(solo);
+		Action.enterToItemPage(solo);
+		Action.addToShoppingCart(solo);
 
 		solo.clickOnView(solo.getView("tab_image", 3));
 		solo.clickOnView(solo.getView("ecshopping_cart_store_name", 0));
-		solo.sleep(20000);
+		solo.sleep(ValidationText.WAIT_TIME_LONGER);
 		TestHelper.swipeUp(solo, 2);
-		solo.sleep(5000);
-		Action.clickElementsInWebviewByClassname(solo,
-				"container");
+		solo.sleep(ValidationText.WAIT_TIME_LONG);
 
-	//	Action.clickElementsInWebviewByText(solo, "我要結帳");
-
+		Action.clickElementsInWebviewByText(solo, ValidationText.WANT_CHECKOUT);
+		solo.sleep(ValidationText.WAIT_TIME_LONG);
+		TestHelper.swipeUp(solo, 2);
+		solo.sleep(ValidationText.WAIT_TIME_LONG);
+		Action.clickElementsInWebviewByText(solo,
+				ValidationText.RESELECT_OTHER_STORE);
+		solo.sleep(ValidationText.WAIT_TIME_LONGER);
+		Action.searchTextOnWebview(solo, ValidationText.TAI_BEI);
 	}
 }

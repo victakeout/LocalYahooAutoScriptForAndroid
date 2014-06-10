@@ -2,76 +2,85 @@ package com.yahoo.mobile.client.android.ecstore.Action;
 
 import java.util.ArrayList;
 
+import android.content.Context;
+import android.util.Log;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+
 import com.robotium.solo.Solo;
 import com.robotium.solo.WebElement;
 import com.yahoo.mobile.client.android.ecstore.Assert.Assert;
 import com.yahoo.mobile.client.android.ecstore.test.TestHelper;
 import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 
-import android.content.Context;
-import android.util.Log;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
-
 public class Action {
 
-	// clear history information then navigate to main screen
+	// Clear history information then navigate to main screen.
 	public static void clearHistoryInfomation(Solo solo) throws Exception {
 
 		// Go to main screen
 		solo.waitForActivity("ECStoreActivity", 2000);
-		solo.waitForText(ValidationText.News, 1, 3000);
+		solo.waitForText(ValidationText.NEWS, 1, 3000);
 		junit.framework.Assert.assertTrue("Navigate to main screen failed.",
-				solo.searchText(ValidationText.News));
+				solo.searchText(ValidationText.NEWS));
 		// click on up icon
 		solo.sleep(3000);
 		clickHomeButtonOnScreen(solo);
 
 		// clear history information and back
-		solo.waitForText(ValidationText.Setting, 1, 3000);
-		solo.clickOnText(ValidationText.Setting);
-		solo.waitForText(ValidationText.Clear_Search_History, 1, 3000);
-		solo.clickOnText(ValidationText.Clear_Search_History);
+		solo.waitForText(ValidationText.SETTING, 1, 3000);
+		solo.clickOnText(ValidationText.SETTING);
+		solo.waitForText(ValidationText.CLEAR_SEARCH_HISTORY, 1, 3000);
+		solo.clickOnText(ValidationText.CLEAR_SEARCH_HISTORY);
 		solo.clickOnView(solo.getView("button1"));
 		solo.clickOnView(solo.getView("home"));// home 1
 		solo.sleep(3000);
 
 	}
 
-	// go to advanced screen.
+	// Go to advanced screen.
 	public static void enterAdvancedPage(Solo solo) {
-		solo.waitForText(ValidationText.Commodity, 1, 3000);
-		solo.clickOnText(ValidationText.Commodity);
+		solo.waitForText(ValidationText.COMMODITY, 1, 3000);
+		solo.clickOnText(ValidationText.COMMODITY);
 		solo.clickOnView(solo.getView("menu_filter"));
 
 	}
 
-	// go to advanced sort screen.
+	// Go to clothes page.
+	public static void enterCategoryClothesPage(Solo solo) throws Exception {
+
+		solo.waitForActivity("ECSplashActivity", 3000);
+		Action.clickText(solo, ValidationText.ALL_CATEGORIES);
+		Action.clickText(solo, ValidationText.APPAREL);
+
+	}
+
+	// Go to advanced sort screen.
 	public static void enterAdvancedSortPage(Solo solo) {
-		solo.waitForText(ValidationText.Commodity, 1, 3000);
-		solo.clickOnText(ValidationText.Commodity);
+		solo.waitForText(ValidationText.COMMODITY, 1, 3000);
+		solo.clickOnText(ValidationText.COMMODITY);
 		solo.clickOnView(solo.getView("menu_filter"));
 		solo.sleep(3000);
 		solo.clickOnView(solo.getView("btn_filter"));
 
 	}
 
-	// go to browser mode screen.
+	// Go to browser mode screen.
 	public static void enterAdvancedBrowserModePage(Solo solo) {
-		solo.waitForText(ValidationText.Commodity, 1, 3000);
-		solo.clickOnText(ValidationText.Commodity);
+		solo.waitForText(ValidationText.COMMODITY, 1, 3000);
+		solo.clickOnText(ValidationText.COMMODITY);
 		solo.clickOnView(solo.getView("menu_filter"));
 		solo.sleep(3000);
 		solo.clickOnView(solo.getView("btn_browse_mode"));
-		solo.sleep(3000);
+		solo.sleep(5000);
 
 	}
 
-	// go to main screen and click search icon
+	// Go to main screen and click search icon.
 	public static void clickSearchButtonOnScreen(Solo solo) throws Exception {
 
 		View iv = solo.getView("menu_search", 0);
@@ -88,7 +97,7 @@ public class Action {
 
 	}
 
-	// add data in textview
+	// Add data in text view.
 	public static void addInitializeData(Solo solo, int textview_id, String data)
 			throws Exception {
 
@@ -103,26 +112,52 @@ public class Action {
 		solo.sleep(3000);
 	}
 
-	// Navigate to category screen
+	// Navigate to category screen.
 	public static void navigateToCategoryScreen(Solo solo) throws Exception {
 
 		solo.clickOnView(solo.getView("tab_text", 2));
-		solo.clickOnText(ValidationText.All_Categories);
+		solo.clickOnText(ValidationText.ALL_CATEGORIES);
 		com.yahoo.mobile.client.android.ecstore.Assert.Assert
 				.CategoryListShow(solo);
 
 	}
 
-	// Navigate to favorite store screen
+	// Navigate to favorite store screen.
 	public static void navigateToFavoriteStoreScreen(Solo solo)
 			throws Exception {
 
 		solo.clickOnView(solo.getView("tab_text", 1));
-		solo.clickOnText(ValidationText.Favorite_Stores);
+		solo.clickOnText(ValidationText.FAVORITE_STORES);
 		TextView favorite = (TextView) solo.getView("tab_text", 1);
 		junit.framework.Assert.assertTrue(
 				"Not highligh to favorite store tab bar.",
 				favorite.isSelected());
+
+	}
+
+	// Remove favorite store .
+	public static void removeFavoriteStore(Solo solo) throws Exception {
+
+		solo.clickOnView(solo.getView("tab_text", 1));
+
+		try {
+			TextView storeName = (TextView) solo
+					.getView("listitem_favoritestore_storename");
+
+			do {
+				solo.clickLongOnView(storeName);
+				solo.sleep(ValidationText.WAIT_TIME_SHORT);
+				Button ok = (Button) solo.getView("button1");
+				solo.clickOnView(ok);
+				solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+			} while (!storeName.isShown());
+
+		} catch (AssertionError e) {
+			junit.framework.Assert.assertTrue("Not fully deleted.", true);
+		}
+		TextView noResult = (TextView) solo.getView("no_result_text", 1);
+		junit.framework.Assert.assertTrue("There are some shops exist.",
+				noResult.isShown());
 
 	}
 
@@ -133,7 +168,7 @@ public class Action {
 		return count;
 	}
 
-	// click plus in open window
+	// Click plus in open window.
 	public static void clickPlusInOpenWindow(Solo solo, String viewid,
 			int plusid) throws Exception {
 
@@ -144,7 +179,7 @@ public class Action {
 
 	}
 
-	// return value in textview
+	// Return value in text view.
 	public static String getValuesInTextview(Solo solo, String textviewid)
 			throws Exception {
 
@@ -157,7 +192,7 @@ public class Action {
 
 	}
 
-	// return value in textview,multi-same textview
+	// Return value in text view,multi-same text view
 	public static String getValuesInTextview(Solo solo, String textviewid,
 			int v_id) throws Exception {
 
@@ -169,7 +204,7 @@ public class Action {
 
 	}
 
-	// is view shown
+	// Is view shown.
 	public static boolean getIsViewShown(Solo solo, String viewid)
 			throws Exception {
 
@@ -179,7 +214,7 @@ public class Action {
 		return view.isShown();
 	}
 
-	// is view shown
+	// Is view shown.
 	public static boolean getIsViewShown(Solo solo, String viewid, int id)
 			throws Exception {
 
@@ -190,7 +225,7 @@ public class Action {
 
 	}
 
-	// click view
+	// Click view.
 	public static void clickView(Solo solo, String viewid) throws Exception {
 
 		View view = solo.getView(viewid);
@@ -199,7 +234,7 @@ public class Action {
 
 	}
 
-	// click view
+	// Click view.
 	public static void clickView(Solo solo, String viewid, int id)
 			throws Exception {
 
@@ -209,7 +244,7 @@ public class Action {
 
 	}
 
-	// click text
+	// Click text.
 	public static void clickText(Solo solo, String text) throws Exception {
 
 		solo.waitForText(text, 1, 3000);
@@ -218,7 +253,7 @@ public class Action {
 
 	}
 
-	// add history information in search bar
+	// Add history information in search bar
 	public static void addHistoryInfomationInSearchBar(Solo solo,
 			String[] searchKeys) throws Exception {
 
@@ -252,7 +287,7 @@ public class Action {
 
 	}
 
-	// Item list-list view
+	// Item list-list view.
 	public static void setListViewStyleAfterSearch(Solo solo) throws Exception {
 
 		enterAdvancedBrowserModePage(solo);
@@ -260,7 +295,7 @@ public class Action {
 		solo.sleep(3000);
 	}
 
-	// Item list-Photo grid view
+	// Item list-Photo grid view.
 	public static void setSmallPhotoViewStyleAfterSearch(Solo solo)
 			throws Exception {
 
@@ -269,7 +304,7 @@ public class Action {
 		solo.sleep(3000);
 	}
 
-	// Item list-Large photo view
+	// Item list-Large photo view.
 	public static void setLargePhotoViewStyleAfterSearch(Solo solo)
 			throws Exception {
 
@@ -289,8 +324,10 @@ public class Action {
 		// junit.framework.Assert.assertTrue("Remove failed.",solo.waitForText("此商品收藏已移除"));
 	}
 
-	// click Star Icon .
+	// Click Star Icon.
 	static int counts = 0;
+	static View radioButtons;
+
 	public static void clickStarIconNote(Solo solo) throws Exception {
 
 		View star = (View) solo.getView("star_button", counts);
@@ -298,13 +335,13 @@ public class Action {
 		boolean alreadyAdd;
 
 		// Get toast text.
-		if (solo.waitForText(ValidationText.Has_added_collection)) {
-			alreadyAdd = solo.waitForText(ValidationText.Has_added_collection);
+		if (solo.waitForText(ValidationText.HAS_ADDED_COLLECTION)) {
+			alreadyAdd = solo.waitForText(ValidationText.HAS_ADDED_COLLECTION);
 			junit.framework.Assert.assertTrue("Add failed.", alreadyAdd);
 		} else {
 			solo.sleep(1000);
 			solo.clickOnView(star);
-			alreadyAdd = solo.waitForText(ValidationText.Has_added_collection);
+			alreadyAdd = solo.waitForText(ValidationText.HAS_ADDED_COLLECTION);
 			junit.framework.Assert.assertTrue("Add failed.", alreadyAdd);
 
 		}
@@ -328,10 +365,10 @@ public class Action {
 			shopCart = solo.getView("productitem_btn_add_to_shopping_cart");
 			solo.clickOnView(shopCart);
 		}
-		View RadioButtons;
+
 		// Select product property if it exists.
 		try {
-			RadioButtons = (View) solo.getView(
+			radioButtons = (View) solo.getView(
 					"product_item_spec_item_selections", 0);
 		} catch (AssertionError e) {
 			TestHelper.swipeUp2(solo, 2);
@@ -348,7 +385,7 @@ public class Action {
 			solo.clickOnView(RadioButton);
 			solo.searchText(ValidationText.OK);
 			solo.clickOnButton(ValidationText.OK);
-			solo.waitForText(ValidationText.Already_Add_Shopping_Cart, 1, 6000);
+			solo.waitForText(ValidationText.ALREADY_ADD_SHOPPING_CART, 1, 6000);
 			solo.sleep(5000);
 			buddle = solo.getView("tab_badge", 3);
 			junit.framework.Assert.assertTrue("No items in shopping cart.",
@@ -402,14 +439,14 @@ public class Action {
 		}
 	}
 
-	// enter to product item detail page.
+	// Enter to product item detail page.
 	static int count = 1;
 
 	public static void enterToItemPage(Solo solo) throws Exception {
 
-		Action.clickText(solo, ValidationText.All_Categories);
-		Action.clickText(solo, ValidationText.Apparel);
-		Action.clickText(solo, ValidationText.Commodity);
+		Action.clickText(solo, ValidationText.ALL_CATEGORIES);
+		Action.clickText(solo, ValidationText.APPAREL);
+		Action.clickText(solo, ValidationText.COMMODITY);
 		solo.sleep(2000);
 		solo.clickInList(count);
 		count++;
@@ -418,13 +455,13 @@ public class Action {
 
 	}
 
-	// enter to product item detail page2.
+	// Enter to product item detail page2.
 
 	public static void makeBrowseRecord(Solo solo, int counts) throws Exception {
 
-		Action.clickText(solo, ValidationText.All_Categories);
-		Action.clickText(solo, ValidationText.Apparel);
-		Action.clickText(solo, ValidationText.Commodity);
+		Action.clickText(solo, ValidationText.ALL_CATEGORIES);
+		Action.clickText(solo, ValidationText.APPAREL);
+		Action.clickText(solo, ValidationText.COMMODITY);
 		solo.sleep(2000);
 		for (int i = 1; i <= counts; i++) {
 			solo.clickInList(i);
@@ -445,12 +482,12 @@ public class Action {
 
 	}
 
-	// click elements from web view by ClassName.
+	// Click elements from web view by ClassName.
 	public static void clickElementsInWebviewByClassname(Solo solo, String text)
 			throws Exception {
 		for (WebElement web : solo.getCurrentWebElements()) {
-			 Log.i("number","ClassNme:"+ web.getClassName().toString());
-			 Log.i("number","Text:"+ web.getText().toString());
+			Log.i("number", "ClassNme:" + web.getClassName().toString());
+			Log.i("number", "Text:" + web.getText().toString());
 
 			if (web.getClassName().toString().equals(text)) {
 				solo.clickOnWebElement(web);
@@ -460,7 +497,7 @@ public class Action {
 
 	}
 
-	// click elements from web view by text.
+	// Click elements from web view by text.
 
 	public static void clickElementsInWebviewByText(Solo solo, String text)
 			throws Exception {
@@ -476,7 +513,7 @@ public class Action {
 		}
 	}
 
-	// Search text on webview.
+	// Search text on web view.
 	static boolean actual = false;
 
 	public static void searchTextOnWebview(Solo solo, String text)
@@ -493,13 +530,13 @@ public class Action {
 		junit.framework.Assert.assertTrue("Text not found", actual);
 	}
 
-	// enter to
+	// Enter to jacket.
 	public static void enterToJacket(Solo solo) throws Exception {
 		solo.clickOnView(solo.getView("tab_text", 2));
-		Action.clickText(solo, ValidationText.Apparel);
-		Action.clickText(solo, ValidationText.Popular_Women);
-		Action.clickText(solo, ValidationText.Jacket);
-		Action.clickText(solo, ValidationText.Categories);
+		Action.clickText(solo, ValidationText.APPAREL);
+		Action.clickText(solo, ValidationText.POPULAR_WOMEN);
+		Action.clickText(solo, ValidationText.JACKET);
+		Action.clickText(solo, ValidationText.CATEGORIES);
 	}
 
 	public static void deleteProductCollected(Solo solo) throws Exception {
@@ -507,18 +544,17 @@ public class Action {
 		TextView OutNumberTwo = null;
 		try {
 			OutNumberTwo = (TextView) solo.getView("profile_bt_favorite_count");
-			solo.clickOnView(OutNumberTwo);		
+			solo.clickOnView(OutNumberTwo);
 			int number = Integer.parseInt(OutNumberTwo.getText().toString());
-		 
-				for (int i = 0; i < number; i++) {
-					View img = (View) solo.getView("listitem_productlist_image");
-					solo.clickLongOnView(img);
-					// Confirm remove it.
-					solo.clickOnView(solo.getView("button1"));
-					solo.sleep(2000);
-				}
-		 
-			
+
+			for (int i = 0; i < number; i++) {
+				View img = (View) solo.getView("listitem_productlist_image");
+				solo.clickLongOnView(img);
+				// Confirm remove it.
+				solo.clickOnView(solo.getView("button1"));
+				solo.sleep(2000);
+			}
+
 		} catch (AssertionError e) {
 			junit.framework.Assert.assertTrue("No item need delete.", true);
 		}
