@@ -1,6 +1,25 @@
+/*
+ * This is automated script about "Sidebar".
+ * 
+ * You can run these test cases either on the emulator or on device. 
+ * By Eclipse:
+ * Right click the test project and select Run As --> Run As Android JUnit Test
+ * By Ant:
+ * 1.Run "android update test-project -m [path to target application] -p [path to the test folder]"  in command line .
+ * 2."ant test"
+ * By using instrument command:
+ * Run all test project:adb shell am instrument -w com.yahoo.mobile.client.android.ecstore.test/android.test.InstrumentationTestRunner
+ * Just run Sidebar:adb shell am instrument -e class com.yahoo.mobile.client.android.ecstore.test.Sidebar.Sidebar -w com.yahoo.mobile.client.android.ecstore.test/android.test.InstrumentationTestRunner
+ * 
+ * @author SYMBIO.
+ * @version YAHOO APP:1.2.4
+ * 
+ */
+
 package com.yahoo.mobile.client.android.ecstore.test.Sidebar;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 import android.view.View;
@@ -14,9 +33,9 @@ import com.yahoo.mobile.client.android.ecstore.Action.Action;
 import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 
 @SuppressLint("NewApi")
-public class Sidebar extends ActivityInstrumentationTestCase2 {
+public class Sidebar extends ActivityInstrumentationTestCase2<Activity> {
 	private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
-	private static Class launcherActivityClass;
+	private static Class<?> launcherActivityClass;
 	private Solo solo;
 	static {
 
@@ -31,7 +50,7 @@ public class Sidebar extends ActivityInstrumentationTestCase2 {
 
 	@SuppressWarnings("unchecked")
 	public Sidebar() throws ClassNotFoundException {
-		super(launcherActivityClass);
+		super((Class<Activity>)launcherActivityClass);
 	}
 
 	@Override
@@ -49,7 +68,7 @@ public class Sidebar extends ActivityInstrumentationTestCase2 {
 		super.tearDown();
 	}
 
-	// 1959892:Verify user can edit category preferences.
+	// 1959892:Verify user can edit category preferences
 	public void testEditCategorypreferences() throws Exception {
 
 		Account.JudgementAccountLogin(solo);
@@ -70,7 +89,7 @@ public class Sidebar extends ActivityInstrumentationTestCase2 {
 		}
 	}
 
-	// 1977532:verify settings screen.
+	// 1977532:Verify settings screen
 	public void testSettingsButton() throws Exception {
 		
 		Account.JudgementAccountLogin(solo);
@@ -88,15 +107,15 @@ public class Sidebar extends ActivityInstrumentationTestCase2 {
 		
 		//Disable the toggle button and go to browse product.
 		solo.clickOnView(browse_History);
-		solo.sleep(1000);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		Action.clickText(solo, ValidationText.CLEAN_BROWSE_RECORD);
 		Action.clickText(solo, ValidationText.OK);
 		solo.goBack();
 		Action.enterToItemPage(solo);
 		solo.clickOnView(solo.getView("tab_image", 4));
-		solo.sleep(2000);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		Action.clickText(solo, ValidationText.RECENT_BROWSE);
-		solo.sleep(15000);
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 		TextView no_Result = (TextView)solo.getView("no_result_text",1);	
 		assertTrue("Exist some browse record displayed",no_Result.isShown());
 		solo.goBack();
@@ -105,9 +124,10 @@ public class Sidebar extends ActivityInstrumentationTestCase2 {
 		solo.goBack();
 		Action.clickSearchButtonOnScreen(solo);
 		Action.searchAfterPutData(solo, 0, "a");
-		solo.sleep(1000);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		solo.goBack();
-		solo.sleep(1000);
+		
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		Action.clickHomeButtonOnScreen(solo);
 		Action.clickText(solo, ValidationText.SETTING);
 		Switch browse_Historys = (Switch)solo.getView("switchWidget",1);
@@ -116,6 +136,7 @@ public class Sidebar extends ActivityInstrumentationTestCase2 {
 		Action.clickText(solo, ValidationText.OK);
 		solo.goBack(); 
 		Action.clickSearchButtonOnScreen(solo);
+		
 		boolean icon = false;
 		try{
 			View Plugs = (View)solo.getView("search_fill_up",1);

@@ -38,8 +38,8 @@ public class TestHelper {
 				.getDefaultDisplay();
 		int width = display.getWidth();
 		int height = display.getHeight();
-		float yStart = (height/2) - (height/3);
-		float yEnd = (height/2) + (height/3);
+		float yStart = (height / 2) - (height / 3);
+		float yEnd = (height / 2) + (height / 3);
 		solo.drag(width / 2, width / 2, yStart, yEnd, stepCount);
 	}
 
@@ -67,7 +67,8 @@ public class TestHelper {
 	}
 
 	/*
-	 * Compare the location of two views. Parameters: 1. solo 2. view_id_1 3.
+	 * Compare the location of two views.
+	 * @ Parameters: 1. solo 2. view_id_1 3.
 	 * view_id_2 4. KeyString. values: 1. up; 2.down; 3. left; 4. right
 	 */
 	@SuppressLint("NewApi")
@@ -75,11 +76,11 @@ public class TestHelper {
 			int view_F_id, String view_S, int View_S_id, int keyString) {
 
 		View view1 = solo.getView(view_F, view_F_id);
-		Log.i("number", "View1X:"+String.valueOf(view1.getX()));
-		Log.i("number", "View1Y:"+String.valueOf(view1.getY()));
+		Log.i("number", "View1X:" + String.valueOf(view1.getX()));
+		Log.i("number", "View1Y:" + String.valueOf(view1.getY()));
 		View view2 = solo.getView(view_S, View_S_id);
-		Log.i("number", "View2X:"+String.valueOf(view2.getX()));
-		Log.i("number", "View2Y:"+String.valueOf(view2.getY()));
+		Log.i("number", "View2X:" + String.valueOf(view2.getX()));
+		Log.i("number", "View2Y:" + String.valueOf(view2.getY()));
 		if (keyString > 4 || keyString < 1) {
 			Assert.assertTrue("Position parameter is error.", false);
 		}

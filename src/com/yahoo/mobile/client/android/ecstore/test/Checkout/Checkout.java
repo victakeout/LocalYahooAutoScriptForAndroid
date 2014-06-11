@@ -9,7 +9,7 @@
  * 2."ant test"
  * By using instrument command:
  * Run all test project:adb shell am instrument -w com.yahoo.mobile.client.android.ecstore.test/android.test.InstrumentationTestRunner
- * Just run category:adb shell am instrument -e class com.yahoo.mobile.client.android.ecstore.test.Checkout.Checkout -w com.yahoo.mobile.client.android.ecstore.test/android.test.InstrumentationTestRunner
+ * Just run Checkout:adb shell am instrument -e class com.yahoo.mobile.client.android.ecstore.test.Checkout.Checkout -w com.yahoo.mobile.client.android.ecstore.test/android.test.InstrumentationTestRunner
  * 
  * @author SYMBIO.
  * @version YAHOO APP:1.2.4
@@ -66,7 +66,7 @@ public class Checkout extends ActivityInstrumentationTestCase2 {
 	}
 
 
-	// 1959918:Verify user can change other delivery places
+	// 1959918:Verify that user can change other delivery places
 	public void testChangeOtherDeliveryPlaces() throws Exception {
 
 		Account.JudgementAccountLogin(solo);
@@ -78,14 +78,19 @@ public class Checkout extends ActivityInstrumentationTestCase2 {
 		solo.sleep(ValidationText.WAIT_TIME_LONGER);
 		TestHelper.swipeUp(solo, 2);
 		solo.sleep(ValidationText.WAIT_TIME_LONG);
-
+		
+		//Click check out button on web view.
 		Action.clickElementsInWebviewByText(solo, ValidationText.WANT_CHECKOUT);
+		
 		solo.sleep(ValidationText.WAIT_TIME_LONG);
 		TestHelper.swipeUp(solo, 2);
 		solo.sleep(ValidationText.WAIT_TIME_LONG);
+		
+		//Click "Select other store" text to re_selection.
 		Action.clickElementsInWebviewByText(solo,
 				ValidationText.RESELECT_OTHER_STORE);
 		solo.sleep(ValidationText.WAIT_TIME_LONGER);
 		Action.searchTextOnWebview(solo, ValidationText.TAI_BEI);
+		
 	}
 }

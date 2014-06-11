@@ -1,6 +1,24 @@
+/*
+ * This is automated script about "StorePage".
+ * 
+ * You can run these test cases either on the emulator or on device. 
+ * By Eclipse:
+ * Right click the test project and select Run As --> Run As Android JUnit Test
+ * By Ant:
+ * 1.Run "android update test-project -m [path to target application] -p [path to the test folder]"  in command line .
+ * 2."ant test"
+ * By using instrument command:
+ * Run all test project:adb shell am instrument -w com.yahoo.mobile.client.android.ecstore.test/android.test.InstrumentationTestRunner
+ * Just run StorePage:adb shell am instrument -e class com.yahoo.mobile.client.android.ecstore.test.StorePage.StorePage -w com.yahoo.mobile.client.android.ecstore.test/android.test.InstrumentationTestRunner
+ * 
+ * @author SYMBIO.
+ * @version YAHOO APP:1.2.4
+ * 
+ */
 package com.yahoo.mobile.client.android.ecstore.test.StorePage;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 import android.view.View;
@@ -13,9 +31,9 @@ import com.yahoo.mobile.client.android.ecstore.test.TestHelper;
 import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 
 @SuppressLint("NewApi")
-public class StorePage extends ActivityInstrumentationTestCase2 {
+public class StorePage extends ActivityInstrumentationTestCase2<Activity> {
 	private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
-	private static Class launcherActivityClass;
+	private static Class<?> launcherActivityClass;
 	private Solo solo;
 	static {
 
@@ -28,8 +46,9 @@ public class StorePage extends ActivityInstrumentationTestCase2 {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	public StorePage() throws ClassNotFoundException {
-		super(launcherActivityClass);
+		super((Class<Activity>)launcherActivityClass);
 	}
 
 	@Override
@@ -46,7 +65,7 @@ public class StorePage extends ActivityInstrumentationTestCase2 {
 		super.tearDown();
 	}
 
-	// 1959904:Verify user can check purchasing info from store page.
+	// 1959904:Verify user can check purchasing info from store page
 	public void testPurchasingInfoFromStorePage() throws Exception {
 
 		Account.JudgementAccountLogin(solo);
@@ -55,31 +74,33 @@ public class StorePage extends ActivityInstrumentationTestCase2 {
 
 		solo.clickOnView(solo.getView("tab_image", 3));
 		solo.clickOnView(solo.getView("ecshopping_cart_store_name", 0));
-		solo.sleep(15000);
-		// click store logo.
+		solo.sleep(ValidationText.WAIT_TIME_LONGER);
+		
+		// click store LOGO.
 		Action.clickElementsInWebviewByClassname(solo, "pimg");
-		solo.sleep(10000);
+		solo.sleep(ValidationText.WAIT_TIME_LONG);
 		TestHelper.swipeUp(solo, 1);
 		solo.clickOnText(ValidationText.SHOPPING_TIPS);
-		solo.sleep(2000);
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 
 		// Get the shopping tips text view.
 		TextView mustKnow = (TextView) solo.getView("text_must_know");
 		assertTrue("Shopping Tips not display", mustKnow.isShown());
 	}
 
-	// 1959901:Verify all classification and product page.
+	// 1959901:Verify all classification and product page
 	public void testClassificationAndProductPage() throws Exception {
 
 		Account.JudgementAccountLogin(solo);
 		Action.enterToItemPage(solo);
 		TestHelper.swipeUp(solo, 1);
 		solo.clickOnText(ValidationText.SEE_ALL_STORE_PRODUCT);
-		solo.sleep(2000);
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 		solo.clickOnView(solo.getView("imageButton", 2));
 
 		solo.clickOnView(solo.getView("storeinfo_addfav"));
-		solo.sleep(1000);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
+		
 		if (solo.waitForText(ValidationText.HAS_REMOVED_COMMODITY)) {
 			solo.clickOnView(solo.getView("storeinfo_addfav"));
 		}
@@ -88,16 +109,19 @@ public class StorePage extends ActivityInstrumentationTestCase2 {
 		Action.navigateToFavoriteStoreScreen(solo);
 		solo.clickOnView(solo.getView("option_button"));
 		solo.clickOnText(ValidationText.CATEGORIES);
-		solo.sleep(5000);
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 		solo.clickOnText(ValidationText.COMMODITY);
-		solo.sleep(5000);
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 		solo.clickOnText(ValidationText.CATEGORIES);
+		
 		View categoryThumb = (View) solo.getView("category_thumb_expand");
 		assertTrue("category thumb is not show.", categoryThumb.isShown());
+		
 	}
 
-	// 1959887:Verify purchase person-time.
+	// 1959887:Verify purchase person-time
 	public void testPurchasePersontime() throws Exception {
+		
 		// click search button
 		Action.clickSearchButtonOnScreen(solo);
 		// input keyword and search
@@ -120,4 +144,5 @@ public class StorePage extends ActivityInstrumentationTestCase2 {
 		Log.i("number", number);
 		assertTrue("buyer infomation format incorrect", isNum);
 	}
+	
 }

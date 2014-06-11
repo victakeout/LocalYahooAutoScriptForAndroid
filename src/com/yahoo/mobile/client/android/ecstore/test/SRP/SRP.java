@@ -1,8 +1,27 @@
+/*
+ * This is automated script about "SRP".
+ * 
+ * You can run these test cases either on the emulator or on device. 
+ * By Eclipse:
+ * Right click the test project and select Run As --> Run As Android JUnit Test
+ * By Ant:
+ * 1.Run "android update test-project -m [path to target application] -p [path to the test folder]"  in command line .
+ * 2."ant test"
+ * By using instrument command:
+ * Run all test project:adb shell am instrument -w com.yahoo.mobile.client.android.ecstore.test/android.test.InstrumentationTestRunner
+ * Just run SRP:adb shell am instrument -e class com.yahoo.mobile.client.android.ecstore.test.SRP.SRP -w com.yahoo.mobile.client.android.ecstore.test/android.test.InstrumentationTestRunner
+ * 
+ * @author SYMBIO.
+ * @version YAHOO APP:1.2.4
+ * 
+ */
+
 package com.yahoo.mobile.client.android.ecstore.test.SRP;
 
 import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 import android.view.View;
@@ -24,7 +43,7 @@ import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class SRP extends ActivityInstrumentationTestCase2 {
 	private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
-	private static Class launcherActivityClass;
+	private static Class<?> launcherActivityClass;
 	private Solo solo;
 	static {
 
@@ -38,7 +57,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 	}
 
 	public SRP() throws ClassNotFoundException {
-		super(launcherActivityClass);
+		super((Class<Activity>) launcherActivityClass);
 	}
 
 	@Override
@@ -55,34 +74,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		super.tearDown();
 	}
 
-	/*
-	 * // 1937914:back to category tab //delete public void
-	 * testBackToCategoryTab() throws Exception {
-	 * 
-	 * Action.navigateToCategoryScreen(solo);
-	 * 
-	 * Action.clickSearchButtonOnScreen(solo); Action.searchAfterPutData(solo,
-	 * 0, ValidationText.Jacket);
-	 * 
-	 * Action.clickHomeButtonOnScreen(solo);
-	 * 
-	 * solo.scrollToTop(); Assert.CategoryListShow(solo);
-	 * 
-	 * }
-	 */
-
-	// 1937918:check 'Tab' display.
+	// 1937918:Check 'Tab' display
 	public void testTabDisplay() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
-
+		Action.enterToJacketAfterSearch(solo);
 		assertTrue(
 				"Goods or stores is not display.",
 				solo.searchText(ValidationText.COMMODITY)
@@ -90,34 +85,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	/*
-	 * // 1937919:Default to choose “商品” Tab. public void testDefaultTab()
-	 * throws Exception {
-	 * 
-	 * // navigate to category screen Action.navigateToCategoryScreen(solo);
-	 * 
-	 * // click search button Action.clickSearchButtonOnScreen(solo);
-	 * 
-	 * // input keyword and search Action.searchAfterPutData(solo, 0,
-	 * ValidationText.Jacket);
-	 * 
-	 * assertTrue("Goods tab is not selected.", Action.getIsViewShown(solo,
-	 * "star_button"));
-	 * 
-	 * }
-	 */
-
-	// 1937920:Navigate to store tab.
+	// 1937920:Navigate to store tab
 	public void testStoreTab() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		// click on store tab
 		Action.clickView(solo, "category_tab_primary_title", 1);
@@ -127,17 +98,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937921:go back to goods tab.
+	// 1937921:Go back to goods tab
 	public void testBackToGoodsTab() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		// click on store tab
 		Action.clickView(solo, "category_tab_primary_title", 1);
@@ -150,17 +114,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937924:check Goods result text
+	// 1937924:Check Goods result text
 	public void testSearchGoodsResultText() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		// get the text of search result
 		String str = Action.getValuesInTextview(solo,
@@ -172,17 +129,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937925:check store result text
+	// 1937925:Check store result text
 	public void testSearchStoreResultText() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		// click on store tab
 		Action.clickView(solo, "category_tab_primary_title", 1);
@@ -196,17 +146,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937927:default show 20 items.
+	// 1937927:default show 20 items
 	public void testDefaultDisplay20Items() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		GridView gv = (GridView) solo.getView("gridview");
 
@@ -215,17 +158,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937928:Load more items.
+	// 1937928:Load more items
 	public void testLoadMoreItems() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		// Action.closeSoftKeyBoard(solo);
 
@@ -233,7 +169,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		for (int k = 0; k < 4; k++) {
 			TestHelper.swipeDown(solo, 1);
 		}
-		solo.sleep(3000);
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 
 		// get the numbers of grid view
 		GridView gv = (GridView) solo.getView("gridview");
@@ -243,17 +179,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937931:check advanced page
+	// 1937931:Check advanced page
 	public void testCheckAdvancedPage() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		// navigate to Advanced screen
 		Action.enterAdvancedPage(solo);
@@ -262,17 +191,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937932:Check if default to choose “sort” Tab
+	// 1937932:Check if default to choose "sort" tab
 	public void testDefaultChooseSortTab() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 		// navigate to Advanced screen
 		Action.enterAdvancedPage(solo);
 
@@ -286,14 +208,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 	// 1937933:Display sort tab
 	public void testNavigateToSortTab() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		// navigate to Advanced screen
 		Action.enterAdvancedPage(solo);
@@ -303,17 +218,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937934: display Filter tab
+	// 1937934: Display Filter tab
 	public void testNavigateToFilterTab() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		// navigate to Filter screen
 		Action.enterAdvancedSortPage(solo);
@@ -323,17 +231,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937935: check sort tab items
+	// 1937935: Check sort tab items
 	public void testCheckSortTabItems() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		// navigate to Advanced screen
 		Action.enterAdvancedPage(solo);
@@ -355,17 +256,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937940: check Layout
+	// 1937940: Check Layout
 	public void testCheckLayoutOfFilterTab() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		// navigate to Filter screen
 		Action.enterAdvancedSortPage(solo);
@@ -375,17 +269,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937944:check the function of “確定”button
+	// 1937944:Check the function of "OK" button
 	public void testCheckConfirmButtonFunction() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		// navigate to Filter screen
 		Action.enterAdvancedSortPage(solo);
@@ -404,17 +291,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937949:unselected “可刷卡”
+	// 1937949:Unselected "Credit cards"
 	public void testUnselectedCanSwipeFunction() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		// navigate to Filter screen
 		Action.enterAdvancedSortPage(solo);
@@ -429,17 +309,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 				((ToggleButton) solo.getView(view_id)).isChecked());
 	}
 
-	// 1937950: check HasVideo display
+	// 1937950:Check HasVideo display
 	public void testHasVideoDisplay() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		// navigate to Filter screen
 		Action.enterAdvancedSortPage(solo);
@@ -453,17 +326,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937952:unselected “有影音”
+	// 1937952:Unselected "A/V"
 	public void testUnselectedHasVideoFunction() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		// navigate to Filter screen
 		Action.enterAdvancedSortPage(solo);
@@ -481,17 +347,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937955:unselected "0利率"
+	// 1937955:Unselected "0 interest rate"
 	public void testUnselectedZeroIntFunction() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		// navigate to Filter screen
 		Action.enterAdvancedSortPage(solo);
@@ -507,17 +366,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937958:unselected "可分期"
+	// 1937958:Unselected "Installment"
 	public void testUnselectedccInstallFunction() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		// navigate to Filter screen
 		Action.enterAdvancedSortPage(solo);
@@ -533,17 +385,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937961:unselected "超商付款"
+	// 1937961:Unselected "Payment"
 	public void testUnselectedCvsPayFunction() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		// navigate to Filter screen
 		Action.enterAdvancedSortPage(solo);
@@ -561,39 +406,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	/*
-	 * // 1937964:unselected "超商取貨" public void testCvsPickDisplay() throws
-	 * Exception {
-	 * 
-	 * // navigate to category screen Action.navigateToCategoryScreen(solo);
-	 * 
-	 * // click search button Action.clickSearchButtonOnScreen(solo);
-	 * 
-	 * // input keyword and search Action.searchAfterPutData(solo, 0,
-	 * ValidationText.Jacket);
-	 * 
-	 * // navigate to Filter screen Action.enterAdvancedSortPage(solo);
-	 * 
-	 * // Action.closeSoftKeyBoard(solo);
-	 * 
-	 * String view_id = "tb_cvs_pick"; Action.clickView(solo, view_id);
-	 * assertTrue("Cvs pay button is not selected.", ((ToggleButton)
-	 * solo.getView(view_id)).isChecked());
-	 * 
-	 * }
-	 */
-
-	// 1937964:unselected "超商取貨"
+	// 1937964:Unselected "Super pickups"
 	public void testUnselectedCvsPickFunction() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		// navigate to Filter screen
 		Action.enterAdvancedSortPage(solo);
@@ -614,14 +430,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 	// 1937965:HasStock option display
 	public void testHasStockOptionDisplay() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		// navigate to Filter screen
 		Action.enterAdvancedSortPage(solo);
@@ -635,17 +444,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937967:unselected "有現貨"
+	// 1937967:Unselected "Has Stock"
 	public void testUnselectedHasStockFunction() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		// navigate to Filter screen
 		Action.enterAdvancedSortPage(solo);
@@ -663,17 +465,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937970:unselected "有圖片"
+	// 1937970:Unselected "Has Image"
 	public void testUnselectedHasImageFunction() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		// navigate to Filter screen
 		Action.enterAdvancedSortPage(solo);
@@ -693,17 +488,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937973:unselected "優良商店"
+	// 1937973:Unselected "Superior Shop"
 	public void testUnselectedisSuperiorFunction() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		// navigate to Filter screen
 		Action.enterAdvancedSortPage(solo);
@@ -722,17 +510,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937976:Navigate to itempage
+	// 1937976:Navigate to item page
 	public void testNavigateToItemPageByClickPicture() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		Action.setListViewStyleAfterSearch(solo);
 
@@ -743,17 +524,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937979:Navigate to itempage
+	// 1937979:Navigate to item page
 	public void testNavigateToItemPageByClickGoodsName() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		Action.setListViewStyleAfterSearch(solo);
 
@@ -764,17 +538,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937980:Check the commodity price display.
+	// 1937980:Check the commodity price display
 	public void testCommodityPriceDisplayInListStyle() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		// list style
 		Action.setListViewStyleAfterSearch(solo);
@@ -794,14 +561,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 	// 1937981:Store name on the right of store evaluation
 	public void testGoodsEvaluationDisplay() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		// list style
 		Action.setListViewStyleAfterSearch(solo);
@@ -821,14 +581,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 	// 1937982:Commodity prices are on the left of stars
 	public void testStarsDisplay() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		// list style
 		Action.setListViewStyleAfterSearch(solo);
@@ -842,20 +595,13 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		}
 	}
 
-	// 1937983:Check to click the start icon without login.
+	// 1937983:Check to click the start icon without login
 	public void testStarIconWithoutLogin() throws Exception {
 
 		// Account.accountLogIn(solo);
 		Account.JudgementAccountWithoutLogin(solo);
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		Action.setListViewStyleAfterSearch(solo);
 
@@ -873,14 +619,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		// Account.accountLogIn(solo);
 		Account.JudgementAccountWithoutLogin(solo);
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		Action.setListViewStyleAfterSearch(solo);
 
@@ -900,17 +639,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 			assertTrue("Add failed.", false);
 	}
 
-	// 1937985: check browser mode icon display
+	// 1937985:Check browser mode icon display
 	public void testBroserModelDisplay() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		Action.setListViewStyleAfterSearch(solo);
 
@@ -921,17 +653,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937986:check small picture icon
+	// 1937986:Check small picture icon
 	public void testSmallPictureDisplay() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		// small picture style
 		Action.setSmallPhotoViewStyleAfterSearch(solo);
@@ -943,17 +668,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937993:Check the commodity price display.
+	// 1937993:Check the commodity price display
 	public void testCommodityPriceDisplay() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		// small picture style
 		Action.setSmallPhotoViewStyleAfterSearch(solo);
@@ -973,14 +691,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 	// 1937995:Check the Star icon display
 	public void testStarIconDisplay() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		Action.setSmallPhotoViewStyleAfterSearch(solo);
 
@@ -989,20 +700,13 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937996:Check to click the start icon without login.
+	// 1937996:Check to click the start icon without login
 	public void testStarIconWithoutLoginInSmallPictureStyle() throws Exception {
 
 		// Account.accountLogIn(solo);
 		Account.JudgementAccountWithoutLogin(solo);
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		Action.setSmallPhotoViewStyleAfterSearch(solo);
 
@@ -1020,14 +724,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		// Account.accountLogIn(solo);
 		Account.JudgementAccountWithoutLogin(solo);
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		Action.setSmallPhotoViewStyleAfterSearch(solo);
 
@@ -1047,17 +744,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 			assertTrue("Add failed.", false);
 	}
 
-	// 1937998:check large picture icon
+	// 1937998:Check large picture icon
 	public void testLargePictureDisplay() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		Action.setLargePhotoViewStyleAfterSearch(solo);
 
@@ -1068,17 +758,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938001:navigate to item page
+	// 1938001:Navigate to item page
 	public void testNavigateToItemPageInLargeStyle() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		Action.setLargePhotoViewStyleAfterSearch(solo);
 
@@ -1089,17 +772,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938005:Check the commodity price display.
+	// 1938005:Check the commodity price display
 	public void testCommodityPriceDisplayInLargeStyle() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		// large picture style
 		Action.setLargePhotoViewStyleAfterSearch(solo);
@@ -1121,14 +797,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 	// 1938006:Store name on the right of store evaluation
 	public void testGoodsEvaluationDisplayInLargeStyle() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		// large picture style
 		Action.setLargePhotoViewStyleAfterSearch(solo);
@@ -1148,14 +817,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 	// 1938007:Commodity prices are on the left of stars
 	public void testStarsDisplayInLargeStyle() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		// large picture style
 		Action.setLargePhotoViewStyleAfterSearch(solo);
@@ -1170,20 +832,13 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938008:Check to click the start icon without login.
+	// 1938008:Check to click the start icon without login
 	public void testStarIconWithoutLoginInLargeStyle() throws Exception {
 
 		// Account.accountLogIn(solo);
 		Account.JudgementAccountWithoutLogin(solo);
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		// large picture style
 		Action.setLargePhotoViewStyleAfterSearch(solo);
@@ -1196,17 +851,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938013:"共XXX筆" is displayed
+	// 1938013:"Total XXX " is displayed
 	public void testSearchResultDisplay() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		// click on store tab
 		Action.clickView(solo, "category_tab_primary_title", 1);
@@ -1221,17 +869,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938015:back to category tab
+	// 1938015:Back to category tab
 	public void testBackToCategoryTabFromStoreTab() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		// click on store tab
 		Action.clickView(solo, "category_tab_primary_title", 1);
@@ -1243,40 +884,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	/*
-	 * // 1938023:Store Logo below store name public void testStoreNameDisplay()
-	 * throws Exception {
-	 * 
-	 * // navigate to category screen Action.navigateToCategoryScreen(solo);
-	 * 
-	 * // click search button Action.clickSearchButtonOnScreen(solo);
-	 * 
-	 * // input keyword and search Action.searchAfterPutData(solo, 0,
-	 * ValidationText.Jacket);
-	 * 
-	 * // click on store tab Action.clickView(solo,
-	 * "category_tab_primary_title", 1);
-	 * 
-	 * // compare the position of two views boolean flag =
-	 * TestHelper.positionCompare(solo, "listitem_storelist_image", 0,
-	 * "listitem_storelist_store_namerow", 0, 1);
-	 * 
-	 * if (!flag) { assertTrue("Store Logo is not below store name.", false); }
-	 * 
-	 * }
-	 */
-
-	// 1938024:navigate to store page
+	// 1938024:Navigate to store page
 	public void testNavigateToStorePage() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		// click on store tab
 		Action.clickView(solo, "category_tab_primary_title", 1);
@@ -1296,17 +907,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938025:store name blew store count
+	// 1938025:Store name blew store count
 	public void testStoreCountDisplay() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		// click on store tab
 		Action.clickView(solo, "category_tab_primary_title", 1);
@@ -1322,17 +926,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938026:navigate to store item list page
+	// 1938026:Navigate to store item list page
 	public void testNavigateToStoreItemListPage() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		// click on store tab
 		Action.clickView(solo, "category_tab_primary_title", 1);
@@ -1355,14 +952,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 	// 1938027:Goods number on the right of evaluate
 	public void testEvaluateDisplay() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		// click on store tab
 		Action.clickView(solo, "category_tab_primary_title", 1);
@@ -1381,14 +971,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 	// 1938029: Goods evaluate on the right of heart icon
 	public void testHeartIconDisplay() throws Exception {
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		// click on store tab
 		Action.clickView(solo, "category_tab_primary_title", 1);
@@ -1410,14 +993,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		// Account.accountLogIn(solo);
 		Account.JudgementAccountWithoutLogin(solo);
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		// click on store tab
 		Action.clickView(solo, "category_tab_primary_title", 1);
@@ -1430,20 +1006,13 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938031:Shop to join the collection list,
+	// 1938031:Shop to join the collection list
 	public void testAddStoreIntoCollectList() throws Exception {
 
 		// Account.accountLogIn(solo);
 		Account.JudgementAccountWithoutLogin(solo);
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
-
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		// click on store tab
 		Action.clickView(solo, "category_tab_primary_title", 1);
@@ -1471,40 +1040,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		}
 	}
 
-	/*
-	 * // 1937978:check products name display. public void
-	 * testProductsNameTwoLine() throws Exception {
-	 * 
-	 * // navigate to category screen Action.navigateToCategoryScreen(solo);
-	 * 
-	 * // click search button Action.clickSearchButtonOnScreen(solo);
-	 * 
-	 * // input keyword and search Action.searchAfterPutData(solo, 0,
-	 * ValidationText.Jacket);
-	 * 
-	 * try { TextView tv = (TextView) solo.getView("listitem_productlist_title",
-	 * 1); Log.i("number", String.valueOf(tv.getMaxLines()));
-	 * assertTrue("Not 2 lines.", tv.getMaxLines() == 2); } catch
-	 * (AssertionError e) { // input keyword and search
-	 * Action.searchAfterPutData(solo, 0, ValidationText.Jacket); TextView tv =
-	 * (TextView) solo.getView("listitem_productlist_title", 1);
-	 * assertTrue("Not 2 lines.", tv.getMaxLines() == 2); } }
-	 */
-
-	/*
-	 * // 1937913:check header display. // delete public void testHeaderResult()
-	 * throws Exception {
-	 * 
-	 * // navigate to category screen Action.navigateToCategoryScreen(solo);
-	 * 
-	 * // click search button Action.clickSearchButtonOnScreen(solo);
-	 * 
-	 * // input keyword and search Action.searchAfterPutData(solo, 0,
-	 * ValidationText.Jacket);
-	 * 
-	 * assertTrue("some icon not exists.", solo.getView("").isShown()); }
-	 */
-	// 1977511:verify shouldn't duplicate keyword in search box
+	// 1977511:Verify shouldn't duplicate keyword in search box
 	public void testInputKeywords() throws Exception {
 
 		// click search button
@@ -1524,7 +1060,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937914:Verify“back”icon function.
+	// 1937914:Verify "back" icon function
 	public void testClickBackFunction() throws Exception {
 
 		Action.clickText(solo, ValidationText.ALL_CATEGORIES);
@@ -1537,7 +1073,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.navigateToCategoryScreen(solo);
 	}
 
-	// 1937989:Verify click product image in grid view.
+	// 1937989:Verify click product image in grid view
 	public void testClickProductImageInGridView() throws Exception {
 
 		Action.clickText(solo, ValidationText.ALL_CATEGORIES);
@@ -1558,7 +1094,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.setListViewStyleAfterSearch(solo);
 	}
 
-	// 1938004:Verify click product name in large photo view.
+	// 1938004:Verify click product name in large photo view
 	public void testClickProductNameInLargePhotoView() throws Exception {
 
 		Action.clickText(solo, ValidationText.ALL_CATEGORIES);
@@ -1578,46 +1114,31 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Action.setListViewStyleAfterSearch(solo);
 	}
 
-	// 1938009:Click star icon to add the product to favorite list.
+	// 1938009:Click star icon to add the product to favorite list
 	public void testClickStarIconAddToFavoriteList() throws Exception {
 
 		Account.JudgementAccountWithoutLogin(solo);
-		Action.clickText(solo, ValidationText.ALL_CATEGORIES);
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 		Account.JudgementAccountLogin(solo);
 		solo.clickOnView(solo.getView("tab_image", 2));
 		solo.sleep(3000);
 		Action.clickStarIconNote(solo);
 	}
 
-	// 1937926:check the default browse mode.
+	// 1937926:Check the default browse mode
 	public void testCheckTheDefaultBrowseMode() throws Exception {
 
-		Action.clickText(solo, ValidationText.ALL_CATEGORIES);
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		GridView lv = (GridView) solo.getView("gridview", 0);
 		int defaultItems = lv.getCount();
 		assertEquals("The default browse mode is listview.", 21, defaultItems);
 	}
 
-	// 1937943:Check confirm button display.
+	// 1937943:Check confirm button display
 	public void testCheckConfirmButtonInAdvancedPage() throws Exception {
 
-		Action.clickText(solo, ValidationText.ALL_CATEGORIES);
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 		// navigate to Advanced screen
 		solo.clickOnView(solo.getView("menu_filter"));
 		Action.clickText(solo, ValidationText.FILTER);
@@ -1625,15 +1146,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 				solo.searchText(ValidationText.OK));
 	}
 
-	// 1937941:Check cancel button display.
+	// 1937941:Check cancel button display
 	public void testCheckCancelButtonInAdvancedPage() throws Exception {
 
-		Action.clickText(solo, ValidationText.ALL_CATEGORIES);
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 		// navigate to Advanced screen
 		solo.clickOnView(solo.getView("menu_filter"));
 		Action.clickText(solo, ValidationText.FILTER);
@@ -1643,60 +1159,48 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 				solo.searchText(ValidationText.CANCEL));
 	}
 
-	// 1937929:click"All classification"button in search result.
+	// 1937929:Click"All classification"button in search result
 	public void testClickAllclassificaitonButton() throws Exception {
 
-		solo.clickOnView(solo.getView("tab_image", 2));
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 		solo.clickOnView(solo.getView("tab_image", 2));
 		Action.navigateToCategoryScreen(solo);
 
 	}
 
-	// 1937974:Check product image display.
+	// 1937974:Check product image display
 	public void testProductImageDisplay() throws Exception {
 
-		solo.clickOnView(solo.getView("tab_image", 2));
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 		ImageView product = (ImageView) solo.getView(
 				"listitem_productlist_image", 0);
 		assertTrue("Product image not displayed.", product.isShown());
 	}
 
-	// 1938010:Check tab status.
+	// 1938010:Check tab status
 	public void testVerifyTabDisplayStatus() throws Exception {
-		solo.clickOnView(solo.getView("tab_image", 2));
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+
+		Action.enterToJacketAfterSearch(solo);
 		Action.clickText(solo, ValidationText.SHOP);
 		TextView shop = (TextView) solo
 				.getView("category_tab_primary_title", 1);
 		assertTrue("Shop tab not highlight.", shop.isShown());
+
 	}
 
-	// 1938011:Check shop tab list show.
+	// 1938011:Check shop tab list show
 	public void testShopTabListDisplay() throws Exception {
-		solo.clickOnView(solo.getView("tab_image", 2));
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+
+		Action.enterToJacketAfterSearch(solo);
 		Action.clickText(solo, ValidationText.SHOP);
 		ImageView storeListImage = (ImageView) solo.getView(
 				"listitem_storelist_image", 0);
 		assertTrue("Store list displayed incorrect.", storeListImage.isShown());
 	}
 
-	// 1938012:Product list tab display.
+	// 1938012:Product list tab display
 	public void testProductTabDisplay() throws Exception {
+
 		solo.clickOnView(solo.getView("tab_image", 2));
 		Action.clickText(solo, ValidationText.APPAREL);
 		Action.clickText(solo, ValidationText.HANSHEN_BRAND);
@@ -1710,14 +1214,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		assertTrue("Store list displayed incorrect.", storeListImage.isShown());
 	}
 
-	// 1938014:Check header in search result.
+	// 1938014:Check header in search result
 	public void testHeaderInSearchResult() throws Exception {
 
-		solo.clickOnView(solo.getView("tab_image", 2));
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 
 		View back = (View) solo.getView("home", 1);
 
@@ -1729,13 +1229,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 				back.isShown() && keywords.isShown() && advanced.isShown());
 	}
 
-	// 1938016:click search icon in search store page.
+	// 1938016:Click search icon in search store page
 	public void testClickSearchIconInSearchStorePage() throws Exception {
-		solo.clickOnView(solo.getView("tab_image", 2));
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+
+		Action.enterToJacketAfterSearch(solo);
 		Action.clickText(solo, ValidationText.SHOP);
 		ImageView storeListImage = (ImageView) solo.getView(
 				"listitem_storelist_image", 0);
@@ -1744,16 +1241,13 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		solo.clickOnView(iv);
 		View keywords = (View) solo.getView("search_autocompletetext");
 		assertTrue("Search component not displayed.", keywords.isShown());
+
 	}
 
-	// 1938032:click “Advanced” button in store page.
+	// 1938032:Click "Advanced" button in store page
 	public void testClickAdvancedButtonInStorePage() throws Exception {
 
-		solo.clickOnView(solo.getView("tab_image", 2));
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+		Action.enterToJacketAfterSearch(solo);
 		Action.clickText(solo, ValidationText.SHOP);
 		ImageView storeListImage = (ImageView) solo.getView(
 				"listitem_storelist_image", 0);
@@ -1782,13 +1276,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		}
 	}
 
-	// 1938033:Verify the price" low to high" Sort.
+	// 1938033:Verify the price" low to high" Sort
 	public void testThePriceLowToHigh() throws Exception {
-		solo.clickOnView(solo.getView("tab_image", 2));
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+
+		Action.enterToJacketAfterSearch(solo);
 		Action.clickText(solo, ValidationText.SHOP);
 		ImageView storeListImage = (ImageView) solo.getView(
 				"listitem_storelist_image", 0);
@@ -1811,13 +1302,10 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 				.substring(1)) < Integer.valueOf(priceTwoNumber.substring(1)));
 	}
 
-	// 1938034:Verify the price" high to low" Sort.
+	// 1938034:Verify the price" high to low" Sort
 	public void testThePriceHighToLow() throws Exception {
-		solo.clickOnView(solo.getView("tab_image", 2));
-		// click search button
-		Action.clickSearchButtonOnScreen(solo);
-		// input keyword and search
-		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+
+		Action.enterToJacketAfterSearch(solo);
 		Action.clickText(solo, ValidationText.SHOP);
 		ImageView storeListImage = (ImageView) solo.getView(
 				"listitem_storelist_image", 0);
@@ -1840,5 +1328,7 @@ public class SRP extends ActivityInstrumentationTestCase2 {
 		Log.i("number", "priceTwoNumber" + priceTwoNumber);
 		assertTrue("Sort function incorrect.", Integer.valueOf(priceOneNumber
 				.substring(1)) > Integer.valueOf(priceTwoNumber.substring(1)));
+
 	}
+
 }

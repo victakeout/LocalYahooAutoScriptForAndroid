@@ -9,17 +9,27 @@ import com.robotium.solo.Solo;
 import com.yahoo.mobile.client.android.ecstore.Action.Action;
 import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 
+/**
+ * 
+ * Contains assert methods examples is navigateToSortTab().
+ * 
+ * @author SYMBIO
+ * 
+ * 
+ */
+
+
 public class Assert {
 
-	// Check whether the application is first started.
+	// Asserts that the application is first started
 	public static void testFirstLaunch(Solo solo) throws Exception {
-		solo.sleep(3000);
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(solo.getCurrentActivity());
 		boolean flag = prefs.getBoolean("Time", false);
 
 		if (!flag) {
-			View versionAlert ;
+			View versionAlert;
 			try {
 				versionAlert = (View) solo.getView("alertTitle");
 				if (versionAlert.isShown())
@@ -32,15 +42,15 @@ public class Assert {
 			try {
 				View skip = (View) solo.getView("welcome_skip");
 				if (skip.isShown()) {
-					solo.sleep(2000);
+					solo.sleep(ValidationText.WAIT_TIME_SHORT);
 					solo.clickOnView(skip);
 				} else {
-					solo.sleep(1000);
+					solo.sleep(ValidationText.WAIT_TIME_SHORT);
 					solo.clickOnView(solo.getView("welcome_btn"));
 				}
 				View personal = (View) solo
 						.getView("category_editor_ok_btn", 0);
-				solo.sleep(1000);
+				solo.sleep(ValidationText.WAIT_TIME_SHORT);
 				solo.clickOnView(personal);
 				SharedPreferences.Editor editor = prefs.edit();
 				editor.putBoolean("Time", true);
@@ -73,7 +83,7 @@ public class Assert {
 		}
 	}
 
-	// check if soft keyboard is open
+	// Asserts that soft keyboard is open
 	public static void softKeyboardIsOpen(Solo solo) throws Exception {
 
 		InputMethodManager imm = (InputMethodManager) solo.getCurrentActivity()
@@ -83,7 +93,7 @@ public class Assert {
 
 	}
 
-	// check if navigate to search result page
+	// Asserts that device navigate to search result page
 	public static void navigateToResultPage(Solo solo) throws Exception {
 
 		solo.waitForText(ValidationText.RESULTS_VALUE, 1, 3000);
@@ -93,7 +103,7 @@ public class Assert {
 						&& solo.searchText(ValidationText.COMMODITY));
 	}
 
-	//
+	// Asserts that text view is null
 	public static void clearSuccess(Solo solo, String textviewid)
 			throws Exception {
 
@@ -103,7 +113,7 @@ public class Assert {
 
 	}
 
-	// check all Category item are show.
+	// Asserts that All category item are show
 	public static void CategoryListShow(Solo solo) throws Exception {
 
 		String[] CategoryList = ValidationText.CATEGORYLIST;
@@ -117,7 +127,7 @@ public class Assert {
 
 	}
 
-	// is 服飾L2層分類 list show
+	// Asserts that apparel L2 list is show
 	public static void costumeL2ListShow(Solo solo) throws Exception {
 
 		String[] CostumeList = ValidationText.COSTUMELIST;
@@ -129,7 +139,7 @@ public class Assert {
 		}
 	}
 
-	// is 流行女裝category list show
+	// Asserts that Fashion apparel L2 list is show
 	public static void womenClothingCategoryListShow(Solo solo)
 			throws Exception {
 
@@ -142,13 +152,15 @@ public class Assert {
 		}
 	}
 
+	// Asserts that the search result is null
 	public static void noResultDisplay(Solo solo) throws Exception {
 
 		solo.waitForText(ValidationText.RESULTS_VALUE, 1, 3000);
-		junit.framework.Assert.assertTrue("There have searched esults.",
+		junit.framework.Assert.assertTrue("There have searched results.",
 				solo.searchText(ValidationText.SORRY_TEXT));
 	}
 
+	// Asserts that to navigate to sort tab
 	public static void navigateToSortTab(Solo solo) throws Exception {
 
 		String[] CategoryList = ValidationText.CATEGORYLIST_TAB1;
@@ -160,6 +172,7 @@ public class Assert {
 		}
 	}
 
+	// Asserts that to navigate to filter tab
 	public static void navigateToFilterTab(Solo solo) throws Exception {
 
 		String[] CategoryList = ValidationText.CATEGORYLIST_TAB2;
@@ -171,6 +184,7 @@ public class Assert {
 		}
 	}
 
+	// Asserts that the filter layout.
 	public static void checkFilterLayout(Solo solo) throws Exception {
 
 		View ScrollBar = solo.getView("seekbar", 0);

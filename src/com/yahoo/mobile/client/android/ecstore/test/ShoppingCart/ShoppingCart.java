@@ -1,8 +1,25 @@
+/*
+ * This is automated script about "ShoppingCart".
+ * 
+ * You can run these test cases either on the emulator or on device. 
+ * By Eclipse:
+ * Right click the test project and select Run As --> Run As Android JUnit Test
+ * By Ant:
+ * 1.Run "android update test-project -m [path to target application] -p [path to the test folder]"  in command line .
+ * 2."ant test"
+ * By using instrument command:
+ * Run all test project:adb shell am instrument -w com.yahoo.mobile.client.android.ecstore.test/android.test.InstrumentationTestRunner
+ * Just run ShoppingCart:adb shell am instrument -e class com.yahoo.mobile.client.android.ecstore.test.ShoppingCart.ShoppingCart -w com.yahoo.mobile.client.android.ecstore.test/android.test.InstrumentationTestRunner
+ * 
+ * @author SYMBIO.
+ * @version YAHOO APP:1.2.4
+ * 
+ */
+
 package com.yahoo.mobile.client.android.ecstore.test.ShoppingCart;
 
-import java.util.ArrayList;
-
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 import android.view.View;
@@ -18,10 +35,9 @@ import com.yahoo.mobile.client.android.ecstore.test.TestHelper;
 import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 
 @SuppressLint("NewApi")
-@SuppressWarnings("rawtypes")
-public class ShoppingCart extends ActivityInstrumentationTestCase2 {
+public class ShoppingCart extends ActivityInstrumentationTestCase2<Activity> {
 	private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
-	private static Class launcherActivityClass;
+	private static Class<?> launcherActivityClass;
 	private Solo solo;
 	static {
 
@@ -36,14 +52,14 @@ public class ShoppingCart extends ActivityInstrumentationTestCase2 {
 
 	@SuppressWarnings("unchecked")
 	public ShoppingCart() throws ClassNotFoundException {
-		super(launcherActivityClass);
+		super((Class<Activity>)launcherActivityClass);
 	}
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		solo = new Solo(getInstrumentation(), getActivity());
-		// Assert.testFirstLaunch(solo);
+		Assert.testFirstLaunch(solo);
 
 	}
 
@@ -54,41 +70,15 @@ public class ShoppingCart extends ActivityInstrumentationTestCase2 {
 		super.tearDown();
 	}
 
-	// 1959883:Verify the number of bottom bubble on shopping cart after deleted
-	// all products.
+	/*1959883:Verify the number of bottom bubble displayed on shopping cart after deleted
+	 all products.*/
 	public void testNumberBubbleDisplayAfterDelete() throws Exception {
 
 		Account.JudgementAccountLogin(solo);
 		Action.enterToItemPage(solo);
 		Action.addToShoppingCart(solo);
 		Action.removeShoppingCart(solo);
-	}
-
-	public void testNumberBubbleDisplay() throws Exception {
-
-		Account.JudgementAccountLogin(solo);
-		Action.enterToItemPage(solo);
-
-		Log.i("number", solo.getCurrentActivity().getClass().toString());
-		// Swipe the screen until the buy button displayed.
-		TestHelper.swipeUp2(solo, 2);
-		View shopCart;
-		try {
-			shopCart = solo.getView("productitem_btn_purchase_now");
-			solo.clickOnView(shopCart);
-
-		} catch (AssertionError e) {
-
-			TestHelper.swipeUp2(solo, 2);
-			shopCart = solo.getView("productitem_btn_purchase_now");
-			solo.clickOnView(shopCart);
-		}
-
-		TextView actionBar = (TextView) solo.getView("action_bar_title", 3);
-		Log.i("number", actionBar.getText().toString());
-		assertTrue("Not enter the shopping page", actionBar.getText()
-				.toString().equals(ValidationText.OWN_SHOPPING_CART));
-
+		
 	}
 
 	// 1959911:Verify shopping cart & next buy
@@ -100,12 +90,13 @@ public class ShoppingCart extends ActivityInstrumentationTestCase2 {
 		Action.addToShoppingCart(solo);
 		solo.clickOnView(solo.getView("tab_image", 3));
 		solo.clickOnView(solo.getView("ecshopping_cart_store_name", 0));
-		solo.sleep(10000);
+		solo.sleep(ValidationText.WAIT_TIME_LONG);
 		Action.clickElementsInWebviewByText(solo, "goNextBuy updateItemClick");
 
 		// Search "Confirm"button on alert window.
 		Action.clickElementsInWebviewByText(solo, "confirm");
-		solo.sleep(5000);
+		solo.sleep(ValidationText.WAIT_TIME_LONG);
+		
 		// Tap "Next Buy" button on web view.
 		Action.clickElementsInWebviewByText(solo, ValidationText.NEXT_BUY);
 		boolean expected = false;
@@ -133,14 +124,14 @@ public class ShoppingCart extends ActivityInstrumentationTestCase2 {
 
 		solo.clickOnView(solo.getView("tab_image", 3));
 		solo.clickOnView(solo.getView("ecshopping_cart_store_name", 0));
-		solo.sleep(15000);
+		solo.sleep(ValidationText.WAIT_TIME_LONGER);
 		Action.clickElementsInWebviewByClassname(solo,
 				"goNextBuy updateItemClick");
 
-		solo.sleep(5000);
+		solo.sleep(ValidationText.WAIT_TIME_LONG);
 		// Search "Confirm"button on alert window.
 		Action.clickElementsInWebviewByText(solo, ValidationText.OK);
-		solo.sleep(5000);
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 		solo.clickOnView(solo.getView("tab_image", 3));
 		TextView shoppingCart = (TextView) solo.getView(
 				"ecshopping_cart_store_count", 0);
@@ -153,27 +144,28 @@ public class ShoppingCart extends ActivityInstrumentationTestCase2 {
 						+ Integer.valueOf(nextBuy.getText().toString()) == 3);
 	}
 
-	// 1977500:Verify the page whether refresh OK.
+	// 1977500:Verify the page whether refresh OK
 	public void testRefreshWhenBack() throws Exception {
+		
 		Account.JudgementAccountLogin(solo);
 		Action.clickText(solo, ValidationText.ALL_CATEGORIES);
 		Action.clickText(solo, ValidationText.APPAREL);
 		Action.clickText(solo, ValidationText.COMMODITY);
-		solo.sleep(2000);
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 		Action.clickStarIconNote(solo);
 
 		solo.clickOnView(solo.getView("tab_image", 3));
 		solo.clickOnView(solo.getView("ecshopping_cart_store_name", 0));
-		solo.sleep(15000);
+		solo.sleep(ValidationText.WAIT_TIME_LONGER);
 		Action.clickElementsInWebviewByClassname(solo, "pimg");
 		solo.goBack();
-		solo.sleep(15000);
+		solo.sleep(ValidationText.WAIT_TIME_LONGER);
 		View webpage = (View) solo.getView("webpage", 0);
 		assertTrue("This page incorrect.", webpage.isShown());
 
 	}
 
-	// 1977496:Verify check out.
+	// 1977496:Verify check out
 	public void testCheckout() throws Exception {
 
 		Account.JudgementAccountLogin(solo);
@@ -181,31 +173,34 @@ public class ShoppingCart extends ActivityInstrumentationTestCase2 {
 		Action.addToShoppingCart(solo);
 		solo.clickOnView(solo.getView("tab_image", 3));
 		solo.clickOnView(solo.getView("ecshopping_cart_store_name", 0));
-		solo.sleep(15000);
+		solo.sleep(ValidationText.WAIT_TIME_LONGER);
 		TestHelper.swipeUp(solo, 1);
 		Action.clickElementsInWebviewByText(solo, ValidationText.WANT_CHECKOUT);
 		Action.searchTextOnWebview(solo,ValidationText.BUY_INFO);
+		
 	}
 
-	// 1959885：Verify shoppingcart details info.
+	// 1959885：Verify shopping cart details info
 	public void testShoppingcartDetail() throws Exception {
 
 		Account.JudgementAccountLogin(solo);
+		
 		// Action.removeShoppingCart(solo);
 		Action.enterToItemPage(solo);
+		
 		Action.addToShoppingCart(solo);
 		solo.clickOnView(solo.getView("tab_image", 3));
 		solo.clickOnView(solo.getView("ecshopping_cart_store_name", 0));
-		solo.sleep(15000);
+		solo.sleep(ValidationText.WAIT_TIME_LONGER);
 		Action.clickElementsInWebviewByClassname(solo, "updateItemChange");
+		
 		// Action.searchTextOnWebview(solo, "1");
 		CheckedTextView number = (CheckedTextView) solo.getView("text1", 0);
 		assertTrue("", number.isChecked());
 
 	}
 
-	// 1959903：Verify user can view next buy items then view shopping cart
-	// items.
+	// 1959903：Verify user can view next buy items and view shopping cart items
 	public void testViewNextbuyAndShoppingCartItem() throws Exception {
 
 		Account.JudgementAccountLogin(solo);
@@ -216,17 +211,20 @@ public class ShoppingCart extends ActivityInstrumentationTestCase2 {
 		}
 		solo.clickOnView(solo.getView("tab_image", 3));
 		solo.clickOnView(solo.getView("ecshopping_cart_store_name", 0));
-		solo.sleep(10000);
+		solo.sleep(ValidationText.WAIT_TIME_LONGER);
 		Action.clickElementsInWebviewByText(solo, "goNextBuy updateItemClick");
 
 		// Search "Confirm"button on alert window.
 		Action.clickElementsInWebviewByText(solo, "confirm");
-		solo.sleep(5000);
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+		
 	}
 
 	//1977534:verify delete function
 	public void testVerifyDeleteFunction() throws Exception {
+		
 		Account.JudgementAccountLogin(solo);
 		Action.removeShoppingCart(solo);
+		
 	}
 }

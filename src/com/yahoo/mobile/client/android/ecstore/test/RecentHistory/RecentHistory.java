@@ -1,22 +1,37 @@
+/*
+ * This is automated script about "RecentHistory".
+ * 
+ * You can run these test cases either on the emulator or on device. 
+ * By Eclipse:
+ * Right click the test project and select Run As --> Run As Android JUnit Test
+ * By Ant:
+ * 1.Run "android update test-project -m [path to target application] -p [path to the test folder]"  in command line .
+ * 2."ant test"
+ * By using instrument command:
+ * Run all test project:adb shell am instrument -w com.yahoo.mobile.client.android.ecstore.test/android.test.InstrumentationTestRunner
+ * Just run RecentHistory:adb shell am instrument -e class com.yahoo.mobile.client.android.ecstore.test.RecentHistory.RecentHistory -w com.yahoo.mobile.client.android.ecstore.test/android.test.InstrumentationTestRunner
+ * 
+ * @author SYMBIO.
+ * @version YAHOO APP:1.2.4
+ * 
+ */
+
 package com.yahoo.mobile.client.android.ecstore.test.RecentHistory;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
-import android.util.Log;
 import android.widget.Switch;
 import android.widget.TextView;
 
 import com.robotium.solo.Solo;
-import com.yahoo.mobile.client.android.ecstore.Account.Account;
-import com.yahoo.mobile.client.android.ecstore.Action.Action;
 import com.yahoo.mobile.client.android.ecstore.Assert.Assert;
 import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 
 @SuppressLint("NewApi")
-@SuppressWarnings("rawtypes")
-public class RecentHistory extends ActivityInstrumentationTestCase2 {
+public class RecentHistory extends ActivityInstrumentationTestCase2<Activity> {
 	private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
-	private static Class launcherActivityClass;
+	private static Class<?> launcherActivityClass;
 	private Solo solo;
 	static {
 
@@ -31,7 +46,7 @@ public class RecentHistory extends ActivityInstrumentationTestCase2 {
 
 	@SuppressWarnings("unchecked")
 	public RecentHistory() throws ClassNotFoundException {
-		super(launcherActivityClass);
+		super((Class<Activity>)launcherActivityClass);
 	}
 
 	@Override
@@ -49,7 +64,7 @@ public class RecentHistory extends ActivityInstrumentationTestCase2 {
 		super.tearDown();
 	}
 
-	// 1900011: verify settings screen
+	// 1900011: Verify settings screen
 	public void testVerifySettingsScreen() throws Exception {
 
 		// Go to main screen
@@ -59,7 +74,7 @@ public class RecentHistory extends ActivityInstrumentationTestCase2 {
 				solo.searchText(ValidationText.NEWS));
 
 		// click "up" icon
-		solo.sleep(3000);
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 		solo.clickOnView(solo.getView("home"));
 		solo.waitForText(ValidationText.SETTING, 1, 3000);
 		solo.clickOnText(ValidationText.SETTING);
@@ -80,12 +95,5 @@ public class RecentHistory extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1900004:verify can browse recent items in「商品」tab
-	public void testVerifyBrowseRecentItems() throws Exception {
-
-		// Account.JudgementAccountLogin(solo);
-		Action.makeBrowseRecord(solo, 20);
-		solo.clickOnView(solo.getView("tab_image", 4));
-		solo.clickOnText(ValidationText.RECENT_BROWSE);
-	}
+	
 }

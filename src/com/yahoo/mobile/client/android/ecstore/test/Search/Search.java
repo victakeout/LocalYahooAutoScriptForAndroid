@@ -1,12 +1,30 @@
+/*
+ * This is automated script about "Search".
+ * 
+ * You can run these test cases either on the emulator or on device. 
+ * By Eclipse:
+ * Right click the test project and select Run As --> Run As Android JUnit Test
+ * By Ant:
+ * 1.Run "android update test-project -m [path to target application] -p [path to the test folder]"  in command line .
+ * 2."ant test"
+ * By using instrument command:
+ * Run all test project:adb shell am instrument -w com.yahoo.mobile.client.android.ecstore.test/android.test.InstrumentationTestRunner
+ * Just run Search:adb shell am instrument -e class com.yahoo.mobile.client.android.ecstore.test.Search.Search -w com.yahoo.mobile.client.android.ecstore.test/android.test.InstrumentationTestRunner
+ * 
+ * @author SYMBIO.
+ * @version YAHOO APP:1.2.4
+ * 
+ */
+
 package com.yahoo.mobile.client.android.ecstore.test.Search;
 
 import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -18,10 +36,9 @@ import com.yahoo.mobile.client.android.ecstore.Assert.Assert;
 import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 
 @SuppressLint("NewApi")
-@SuppressWarnings({ "unchecked", "rawtypes" })
-public class Search extends ActivityInstrumentationTestCase2 {
+public class Search extends ActivityInstrumentationTestCase2<Activity> {
 	private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
-	private static Class launcherActivityClass;
+	private static Class<?> launcherActivityClass;
 	private Solo solo;
 	static {
 
@@ -33,15 +50,16 @@ public class Search extends ActivityInstrumentationTestCase2 {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public Search() throws ClassNotFoundException {
-		super(launcherActivityClass);
+		super((Class<Activity>) launcherActivityClass);
 	}
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		solo = new Solo(getInstrumentation(), getActivity());
-		// Assert.testFirstLaunch(solo);
+		Assert.testFirstLaunch(solo);
 
 	}
 
@@ -52,7 +70,7 @@ public class Search extends ActivityInstrumentationTestCase2 {
 		super.tearDown();
 	}
 
-	// 1937852:check search icon.
+	// 1937852:Check search icon
 	public void testSearchBar() throws Exception {
 
 		// clear history information then back to home screen
@@ -70,7 +88,7 @@ public class Search extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937854:check tips text indicated in search bar.
+	// 1937854:Check tips text indicated in search bar
 	public void testSearchBarBackgroundText() throws Exception {
 
 		// clear history information then back to home screen
@@ -83,7 +101,7 @@ public class Search extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937855:Picture "超" is shown
+	// 1937855:Picture "Super" is shown
 	public void testPictureChaoIsShown() throws Exception {
 
 		// clear history information then back to home screen
@@ -93,11 +111,11 @@ public class Search extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		assertTrue("Picture is not shown In the upper left corner",
-				Action.getIsViewShown(solo, "id/home", 1));
+				Action.getIsViewShown(solo, "home", 1));
 
 	}
 
-	// 1937856：back to the previous screen
+	// 1937856：Back to the previous screen
 	public void testBackToPreviousScreen() throws Exception {
 
 		// clear history information then back to home screen
@@ -116,18 +134,19 @@ public class Search extends ActivityInstrumentationTestCase2 {
 	// 1937857:10 auto-complete suggestions under search bar
 	public void testListUnderSearchBar() throws Exception {
 
-		// clear history information then back to home screen
+		// clear history information then back to home screen.
 		Action.clearHistoryInfomation(solo);
 
 		// click on search button on home screen
 		Action.clickSearchButtonOnScreen(solo);
 
-		// element and test_data
+		// element and test_data.
 		Action.addInitializeData(solo, 0, "h");
-		solo.sleep(3000);
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 
-		// Get list view numbers
+		// Get list view numbers.
 		int Lv_numbers = Action.getListviewOnCurrentScreen(solo);
+
 		if (Lv_numbers == 3) {
 			// get the number of list
 			ArrayList<ListView> listview = solo.getCurrentViews(ListView.class);
@@ -136,55 +155,54 @@ public class Search extends ActivityInstrumentationTestCase2 {
 					count, 10);
 		} else
 			assertTrue("Suggestions list is not appear.", false);
-
 	}
 
-	// 1937858:“+” icon is shown
+	// 1937858:"+" icon is shown
 	public void testPlusIsShownOnListView() throws Exception {
 
-		// clear history information then back to home screen
+		// clear history information then back to home screen.
 		Action.clearHistoryInfomation(solo);
 
-		// click on search button on home screen
+		// click on search button on home screen.
 		Action.clickSearchButtonOnScreen(solo);
 
-		// element and test_data
+		// element and test_data.
 		Action.addInitializeData(solo, 0, "h");
-		solo.sleep(3000);
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 
 		assertTrue("Plus is shown on suggest list",
 				Action.getIsViewShown(solo, "search_fill_up"));
 
 	}
 
-	// 1937859:add suggestion into search bar by clicking “+” icon
+	// 1937859:Add suggestion into search bar by clicking "+" icon
 	public void testAddSuggestionIntoSearchBar() throws Exception {
 
-		// clear history information then back to home screen
+		// clear history information then back to home screen.
 		Action.clearHistoryInfomation(solo);
 
-		// click on search button on home screen
+		// click on search button on home screen.
 		Action.clickSearchButtonOnScreen(solo);
 
-		// element and test_data
+		// element and test_data.
 		Action.addInitializeData(solo, 0, "h");
-		solo.sleep(3000);
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 
-		// value where in front of "+"
+		// value where in front of "+".
 		String tv_value = Action.getValuesInTextview(solo,
 				"id/search_suggestion_text", 0);
 
-		// click "+" in list suggestion window
+		// click "+" in list suggestion window.
 		Action.clickPlusInOpenWindow(solo, "search_fill_up", 0);
 
-		// get the value in search bar
+		// get the value in search bar.
 		String barvalue = Action.getValuesInTextview(solo,
 				"search_autocompletetext");
 		assertEquals("Add suggestion failed.", barvalue, tv_value);
 
 	}
 
-	// 1937860:change suggestion info if clicking “+” icon again
+	// 1937860:Change suggestion info if clicking "+" icon again
 	public void testChangeSuggestionInSearchBar() throws Exception {
 
 		// clear history information then back to home screen
@@ -200,7 +218,7 @@ public class Search extends ActivityInstrumentationTestCase2 {
 		// click plus twice
 		for (int i = 0; i < 2; i++) {
 			// value where in front of "+"
-			solo.sleep(3000);
+			solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 			tv_value = Action.getValuesInTextview(solo,
 					"id/search_suggestion_text", 0);
 			Action.clickPlusInOpenWindow(solo, "search_fill_up", 0);
@@ -223,7 +241,7 @@ public class Search extends ActivityInstrumentationTestCase2 {
 
 		// element and test_data
 		Action.addInitializeData(solo, 0, "h");
-		solo.sleep(3000);
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 
 		// click "+" in list suggestion window
 		Action.clickPlusInOpenWindow(solo, "search_fill_up", 0);
@@ -236,7 +254,7 @@ public class Search extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937862: hide search clear icon
+	// 1937862:Hide search clear icon
 	public void testSearchClearHidden() throws Exception {
 
 		// clear history information then back to home screen
@@ -246,11 +264,11 @@ public class Search extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		assertFalse("Search clear icon is not hidden.",
-				Action.getIsViewShown(solo, "id/search_clear"));
+				Action.getIsViewShown(solo, "search_clear"));
 
 	}
 
-	// 1937863: show search clear icon
+	// 1937863:Show search clear icon
 	public void testSearchClearAppear() throws Exception {
 
 		// clear history information then back to home screen
@@ -261,39 +279,39 @@ public class Search extends ActivityInstrumentationTestCase2 {
 
 		// element and test_data
 		Action.addInitializeData(solo, 0, "h");
-		solo.sleep(3000);
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 
 		assertTrue("Search clear icon is not shown.",
-				Action.getIsViewShown(solo, "id/search_clear"));
+				Action.getIsViewShown(solo, "search_clear"));
 
 	}
 
-	// 1937864: clear input value in search bar
+	// 1937864:Clear input value in search bar
 	public void testClearValueInSearchBar() throws Exception {
 
-		// clear history information then back to home screen
+		// clear history information then back to home screen.
 		Action.clearHistoryInfomation(solo);
 
-		// click on search button on home screen
+		// click on search button on home screen.
 		Action.clickSearchButtonOnScreen(solo);
 
-		// element and test_data
+		// element and test_data.
 		Action.addInitializeData(solo, 0, "h");
-		solo.sleep(3000);
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 
-		// get input value in search bar
+		// get input value in search bar.
 		String barvalue = Action.getValuesInTextview(solo,
 				"search_autocompletetext");
 		assertTrue("Value in search bar is empty.", barvalue.length() > 0);
 
-		// click clear icon
-		Action.clickView(solo, "id/search_clear");
+		// click clear icon.
+		Action.clickView(solo, "search_clear");
 
 		Assert.clearSuccess(solo, "search_autocompletetext");
 
 	}
 
-	// 1937865:delete a character by click delete button on keyboard
+	// 1937865:Delete a character by click delete button on keyboard
 	public void testDeleteByKeywords() throws Exception {
 
 		// clear history information then back to home screen
@@ -307,18 +325,19 @@ public class Search extends ActivityInstrumentationTestCase2 {
 		String barvalue = Action.getValuesInTextview(solo,
 				"search_autocompletetext");
 
-		solo.sendKey(112);// delete key on keyboard
-		solo.sleep(3000);
+		// delete key on keyboard
+		solo.sendKey(112);
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 		String barvalue2 = Action.getValuesInTextview(solo,
 				"search_autocompletetext");
 
-		// input keyword then list suggestion in openwindow
+		// input keyword then list suggestion in open window.
 		assertEquals("Delete more than one characters every times.",
 				barvalue.length() - 1, barvalue2.length());
 
 	}
 
-	// 1937866: input keywords to search
+	// 1937866:Input keywords to search
 	public void testSearchByKeywords() throws Exception {
 
 		// clear history information then back to home screen
@@ -329,20 +348,20 @@ public class Search extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937867 :list suggestion
+	// 1937867:List suggestion
 	public void testListSuggestionUnderSearchBar() throws Exception {
 
-		// clear history information then back to home screen
+		// clear history information then back to home screen.
 		Action.clearHistoryInfomation(solo);
 
-		// click on search button on home screen
+		// click on search button on home screen.
 		Action.clickSearchButtonOnScreen(solo);
 
-		// fill in keyword then click search button
+		// fill in keyword then click search button.
 		Action.addInitializeData(solo, 0, ValidationText.DONG);
-		solo.sleep(3000);
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 
-		// input keyword then list suggestion in openwindow
+		// input keyword then list suggestion in open window.
 		assertTrue("Suggestion list is not shown",
 				Action.getIsViewShown(solo, "id/search_suggestion_text"));
 
@@ -358,7 +377,7 @@ public class Search extends ActivityInstrumentationTestCase2 {
 		Action.clickSearchButtonOnScreen(solo);
 
 		Action.addInitializeData(solo, 0, "h");
-		solo.sleep(3000);
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 
 		// value in the first line
 		String suggestion_record = Action.getValuesInTextview(solo,
@@ -366,6 +385,7 @@ public class Search extends ActivityInstrumentationTestCase2 {
 
 		// click "+" in list suggestion window
 		Action.clickPlusInOpenWindow(solo, "search_fill_up", 0);
+
 		// back to home screen after search
 		solo.pressSoftKeyboardSearchButton();
 		Assert.navigateToResultPage(solo);
@@ -433,8 +453,9 @@ public class Search extends ActivityInstrumentationTestCase2 {
 
 			Action.clickView(solo, "search_autocompletetext");
 			Action.closeSoftKeyBoard(solo);
-			solo.sleep(2000);
+			solo.sleep(ValidationText.WAIT_TIME_SHORT);
 			solo.scrollToBottom();
+
 			// click "+" icon in the last of suggestion list
 			Action.clickPlusInOpenWindow(solo, "search_fill_up", 9);
 
@@ -447,12 +468,14 @@ public class Search extends ActivityInstrumentationTestCase2 {
 
 			// click on search button on home screen
 			Action.clickSearchButtonOnScreen(solo);
+
 			// get the text in the first line of suggestion list
 			String suggestion_record = Action.getValuesInTextview(solo,
 					"id/search_suggestion_text", 0);
 			String searchKey = searchKeys[1 + j];
 			assertEquals("The order of suggestion list is not correct.",
 					suggestion_record, searchKey);
+
 			// click back icon
 			Action.clickHomeButtonOnScreen(solo);
 		}
@@ -474,6 +497,7 @@ public class Search extends ActivityInstrumentationTestCase2 {
 		// get the number of list
 		ArrayList<ListView> listview = solo.getCurrentViews(ListView.class);
 		int count = listview.get(0).getCount();
+
 		// display 10 search records
 		assertEquals("Auto-complete suggestions number is more than 10.",
 				count, 10);
@@ -481,8 +505,10 @@ public class Search extends ActivityInstrumentationTestCase2 {
 		// close soft keyboard
 		Action.closeSoftKeyBoard(solo);
 
-		// get the value of suggestion list and verify whether the suggestion
-		// list is correct
+		/*
+		 * get the value of suggestion list and verify whether the suggestion
+		 * list is correct
+		 */
 		for (int j = 0; j < 10; j++) {
 			String suggestion_record = Action.getValuesInTextview(solo,
 					"id/search_suggestion_text", j);
@@ -536,12 +562,12 @@ public class Search extends ActivityInstrumentationTestCase2 {
 	}
 
 	// 1937875:No search suggestions displayed View
-	public void testNoResultByarbInput() throws Exception {
+	public void testNoResultByInput() throws Exception {
 
 		// clear history information then back to home screen
 		Action.clearHistoryInfomation(solo);
 
-		// listview numbers before clicking search icon
+		// list view numbers before clicking search icon
 		int listview1 = Action.getListviewOnCurrentScreen(solo);
 
 		// click on search button on home screen
@@ -549,7 +575,7 @@ public class Search extends ActivityInstrumentationTestCase2 {
 
 		Action.addInitializeData(solo, 0, "yeruieujeueu");
 
-		// listview after clicking search icon
+		// list view after clicking search icon
 		int listview2 = Action.getListviewOnCurrentScreen(solo);
 
 		assertEquals("Suggestion list is shown", listview1, listview2);
@@ -562,13 +588,13 @@ public class Search extends ActivityInstrumentationTestCase2 {
 		// clear history information then back to home screen
 		Action.clearHistoryInfomation(solo);
 
-		// listview numbers before clicking search icon
+		// list view numbers before clicking search icon
 		int listview1 = Action.getListviewOnCurrentScreen(solo);
 
 		// click on search button on home screen
 		Action.clickSearchButtonOnScreen(solo);
 
-		// listview after clicking search icon
+		// list view after clicking search icon
 		int listview2 = Action.getListviewOnCurrentScreen(solo);
 
 		assertEquals("Suggestion list is shown", listview1, listview2);
@@ -593,7 +619,7 @@ public class Search extends ActivityInstrumentationTestCase2 {
 			tv_value = Action.getValuesInTextview(solo,
 					"id/search_suggestion_text", 0);
 			Action.clickPlusInOpenWindow(solo, "search_fill_up", 0);
-			solo.sleep(3000);
+			solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 		}
 		String barvalue = Action.getValuesInTextview(solo,
 				"search_autocompletetext");
@@ -618,7 +644,7 @@ public class Search extends ActivityInstrumentationTestCase2 {
 		Action.clickPlusInOpenWindow(solo, "search_fill_up", 0);
 
 		// click clear icon
-		Action.clickView(solo, "id/search_clear");
+		Action.clickView(solo, "search_clear");
 
 		Assert.clearSuccess(solo, "search_autocompletetext");
 
@@ -640,7 +666,7 @@ public class Search extends ActivityInstrumentationTestCase2 {
 		Action.clickPlusInOpenWindow(solo, "search_fill_up", 0);
 
 		// click clear icon
-		Action.clickView(solo, "id/search_clear");
+		Action.clickView(solo, "search_clear");
 
 		Assert.clearSuccess(solo, "search_autocompletetext");
 
@@ -673,12 +699,12 @@ public class Search extends ActivityInstrumentationTestCase2 {
 		// navigate to category screen
 		Action.navigateToCategoryScreen(solo);
 
-		assertTrue("Search icon is hidden.", solo.getView("id/menu_search", 0)
+		assertTrue("Search icon is hidden.", solo.getView("menu_search", 0)
 				.isShown());
 
 	}
 
-	// 1937888:test search icon clicking
+	// 1937888:Verify search icon click
 	public void testSearchIconClicking() throws Exception {
 
 		// clear history information then back to home screen
@@ -694,7 +720,7 @@ public class Search extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937889:back to L1層分類 list
+	// 1937889:Back to L1 layer category list
 	public void testBackToHomeList() throws Exception {
 
 		// clear history information then back to home screen
@@ -714,7 +740,7 @@ public class Search extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937890:back to 服飾L2層分類 list
+	// 1937890:Back to layer 2 category list
 	public void testBackToCostumeList() throws Exception {
 
 		// clear history information then back to home screen
@@ -736,7 +762,7 @@ public class Search extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937891:back to 流行女裝 list
+	// 1937891:Back to fashion list
 	public void testBackToWomenClothingList() throws Exception {
 
 		// clear history information then back to home screen
@@ -766,7 +792,7 @@ public class Search extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937892:back to 流行女裝>上衣 list
+	// 1937892:Back to appeal list
 	public void testBackToCoatList() throws Exception {
 
 		// clear history information then back to home screen
@@ -796,7 +822,7 @@ public class Search extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937896: navigate to no result page
+	// 1937896:Navigate to no result page
 	public void testNavigateToNoResultItemListPage() throws Exception {
 
 		// clear history information then back to home screen
@@ -820,7 +846,7 @@ public class Search extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937905:Categories Tab-Itemlist search with no result display
+	// 1937905:Categories item list search with no result display
 	public void testNavigateToCategoriesNoResultPage() throws Exception {
 
 		// clear history information then back to home screen
@@ -857,14 +883,14 @@ public class Search extends ActivityInstrumentationTestCase2 {
 		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// click clear icon
-		Action.clickView(solo, "id/search_clear");
+		Action.clickView(solo, "search_clear");
 
 		assertTrue("The search results is not belong to all categories.",
 				solo.searchText(ValidationText.SEARCH_ALL_CATEGORIES));
 
 	}
 
-	// 1937909:Search in L4分類
+	// 1937909:Search in L4 classification
 	public void testSearchInLfour() throws Exception {
 
 		// clear history information then back to home screen
@@ -879,7 +905,7 @@ public class Search extends ActivityInstrumentationTestCase2 {
 		Action.clickText(solo, ValidationText.JACKET);
 
 		// click on goods tab
-		Action.clickView(solo, "id/category_tab_primary_title", 1);
+		Action.clickView(solo, "category_tab_primary_title", 1);
 		// click search button
 		Action.clickSearchButtonOnScreen(solo);
 
@@ -887,13 +913,13 @@ public class Search extends ActivityInstrumentationTestCase2 {
 		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		// click clear icon
-		Action.clickView(solo, "id/search_clear");
+		Action.clickView(solo, "search_clear");
 		assertTrue("The search results is not belong to L4 categories.",
 				solo.searchText(ValidationText.SEARCH_TOP));
 
 	}
 
-	// 1937912:check search result.
+	// 1937912:Check search result
 	public void testSearchResult() throws Exception {
 
 		// navigate to category screen
@@ -924,8 +950,9 @@ public class Search extends ActivityInstrumentationTestCase2 {
 		solo.goBack();
 		TextView searchText = (TextView) solo.getView("action_bar_title", 0);
 		Log.i("number", searchText.getText().toString());
-		assertTrue("Not enter to T-shirt category!", searchText.getText()
+		assertTrue("Not enter T-shirt category!", searchText.getText()
 				.toString().equals(ValidationText.T_SHIRT));
+
 	}
 
 	// 1937894:The L6 layer classification click returns Icon
@@ -941,6 +968,7 @@ public class Search extends ActivityInstrumentationTestCase2 {
 		Log.i("number", searchText.getText().toString());
 		assertTrue("Not enter to Sleeve Shirt category!", searchText.getText()
 				.toString().trim().equals(ValidationText.NO_SLEEVE_SHIRT));
+
 	}
 
 	// 1937909:Search in L4 classification
@@ -953,7 +981,7 @@ public class Search extends ActivityInstrumentationTestCase2 {
 		// element and test_data
 		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
-		solo.sleep(3000);
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 		TextView searchText = (TextView) solo.getView("action_bar_title", 0);
 		Log.i("number", searchText.getText().toString());
 		assertTrue("Not enter to Jacket category!", searchText.getText()
@@ -961,18 +989,20 @@ public class Search extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937898:click search icon
+	// 1937898:Click search icon
 	public void testClickSearchIcon() throws Exception {
 
 		solo.clickOnView(solo.getView("tab_text", 2));
 		Action.clickSearchButtonOnScreen(solo);
-		// element and test_data
+
+		// Input test data.
 		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 		assertTrue("Not enter to search page.",
 				solo.searchText(ValidationText.RESULTS_VALUE));
+
 	}
 
-	// 1937899:Click return icon in L2 item list.
+	// 1937899:Click return icon in L2 item list
 	public void testClickReturnIconInL2() throws Exception {
 
 		Action.clickText(solo, ValidationText.ALL_CATEGORIES);
@@ -983,7 +1013,7 @@ public class Search extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937900:Click return icon in L3 item list.
+	// 1937900:Click return icon in L3 item list
 	public void testClickReturnIconInL3() throws Exception {
 
 		solo.clickOnView(solo.getView("tab_text", 2));
@@ -999,7 +1029,7 @@ public class Search extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937901:Click return icon in L4 item list.
+	// 1937901:Click return icon in L4 item list
 	public void testClickReturnIconInL4() throws Exception {
 
 		Action.enterToJacket(solo);
@@ -1012,7 +1042,7 @@ public class Search extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937902:Click return icon in L5 item list.
+	// 1937902:Click return icon in L5 item list
 	public void testClickReturnIconInL5() throws Exception {
 
 		Action.enterToJacket(solo);
@@ -1026,7 +1056,7 @@ public class Search extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937903:Click return icon in L6 item list.
+	// 1937903:Click return icon in L6 item list
 	public void testClickReturnIconInL6() throws Exception {
 
 		Action.enterToJacket(solo);
@@ -1041,18 +1071,20 @@ public class Search extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1937904:Input keywords and search.
+	// 1937904:Input keywords and search
 	public void testInputkeywordsAndSearch() throws Exception {
 
 		Action.clickText(solo, ValidationText.ALL_CATEGORIES);
 		Action.clickText(solo, ValidationText.APPAREL);
 		Action.clickText(solo, ValidationText.COMMODITY);
 		Action.clickSearchButtonOnScreen(solo);
-		// element and test_data
+		// Input test data.
 		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
-		// if find product and store tab,we can confirm already in search
-		// result.
+		/*
+		 * if find product and store tab,we can confirm already in search
+		 * result.
+		 */
 		TextView product = (TextView) solo.getView(
 				"category_tab_primary_title", 0);
 		TextView store = (TextView) solo.getView("category_tab_primary_title",
@@ -1061,16 +1093,18 @@ public class Search extends ActivityInstrumentationTestCase2 {
 				&& store.isShown());
 	}
 
-	// 1937906:Search in L1 category.
+	// 1937906:Search in L1 category
 	public void testSearchInL1Category() throws Exception {
 
 		Action.clickText(solo, ValidationText.ALL_CATEGORIES);
 		Action.clickSearchButtonOnScreen(solo);
-		// element and test_data
+		// Input test data.
 		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
-		// if find product and store tab,we can confirm already in search
-		// result.
+		/*
+		 * if find product and store tab,we can confirm already in search
+		 * result.
+		 */
 		TextView product = (TextView) solo.getView(
 				"category_tab_primary_title", 0);
 		TextView store = (TextView) solo.getView("category_tab_primary_title",
@@ -1079,18 +1113,21 @@ public class Search extends ActivityInstrumentationTestCase2 {
 				&& store.isShown());
 	}
 
-	// 1937907:Search in L2 category.
+	// 1937907:Search in L2 category
 	public void testSearchInL2Category() throws Exception {
 
 		Action.clickText(solo, ValidationText.ALL_CATEGORIES);
 		Action.clickText(solo, ValidationText.APPAREL);
 		Action.clickText(solo, ValidationText.COMMODITY);
 		Action.clickSearchButtonOnScreen(solo);
-		// element and test_data
+
+		// Input test data.
 		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
-		// if find product and store tab,we can confirm already in search
-		// result.
+		/*
+		 * if find product and store tab,we can confirm already in search
+		 * result.
+		 */
 		TextView product = (TextView) solo.getView(
 				"category_tab_primary_title", 0);
 		TextView store = (TextView) solo.getView("category_tab_primary_title",
@@ -1099,20 +1136,23 @@ public class Search extends ActivityInstrumentationTestCase2 {
 				&& store.isShown());
 	}
 
-	// 1937908:Search in L3 category.
+	// 1937908:Search in L3 category
 	public void testSearchInL3Category() throws Exception {
 
 		Action.clickText(solo, ValidationText.ALL_CATEGORIES);
 		Action.clickText(solo, ValidationText.APPAREL);
 		Action.clickText(solo, ValidationText.POPULAR_WOMEN);
 		Action.clickSearchButtonOnScreen(solo);
-		// element and test_data
+
+		// Input test data.
 		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		TextView searchText = (TextView) solo.getView("action_bar_title", 0);
 
-		// if find product and store tab,we can confirm already in search
-		// result.
+		/*
+		 * if find product and store tab,we can confirm already in search
+		 * result.
+		 */
 		TextView product = (TextView) solo.getView(
 				"category_tab_primary_title", 0);
 		TextView store = (TextView) solo.getView("category_tab_primary_title",
@@ -1125,18 +1165,22 @@ public class Search extends ActivityInstrumentationTestCase2 {
 								.equals(ValidationText.POPULAR_WOMEN));
 	}
 
-	// 1937910:Search in L5 category.
+	// 1937910:Search in L5 category
 	public void testSearchInL5Category() throws Exception {
+
 		Action.enterToJacket(solo);
 		Action.clickText(solo, ValidationText.T_SHIRT);
 		Action.clickSearchButtonOnScreen(solo);
-		// element and test_data
+
+		// Input test data.
 		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
 
 		TextView searchText = (TextView) solo.getView("action_bar_title", 0);
 
-		// if find product and store tab,we can confirm already in search
-		// result.
+		/*
+		 * if find product and store tab,we can confirm already in search
+		 * result.
+		 */
 		TextView product = (TextView) solo.getView(
 				"category_tab_primary_title", 0);
 		TextView store = (TextView) solo.getView("category_tab_primary_title",
@@ -1152,7 +1196,7 @@ public class Search extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// // 1937911:Search in L6 category.
+	// 1937911:Search in L6 category
 	public void testSearchInL6Category() throws Exception {
 
 		Action.enterToJacket(solo);
@@ -1160,10 +1204,14 @@ public class Search extends ActivityInstrumentationTestCase2 {
 		Action.clickText(solo, ValidationText.CATEGORIES);
 		Action.clickText(solo, ValidationText.NO_SLEEVE_SHIRT);
 		Action.clickSearchButtonOnScreen(solo);
-		// element and test_data
+
+		// Input test data.
 		Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
-		// if find product and store tab,we can confirm already in search
-		// result.
+
+		/*
+		 * if find product and store tab,we can confirm already in search
+		 * result.
+		 */
 		TextView product = (TextView) solo.getView(
 				"category_tab_primary_title", 0);
 		TextView store = (TextView) solo.getView("category_tab_primary_title",
@@ -1176,44 +1224,48 @@ public class Search extends ActivityInstrumentationTestCase2 {
 						&& store.isShown()
 						&& searchText.getText().toString().trim()
 								.equals(ValidationText.NO_SLEEVE_SHIRT));
+
 	}
 
-	// 1959905:Verify "搜索全部商店" function.
+	// 1959905:Verify "Search all the shops" function
 	public void testSearchAllStore() throws Exception {
 
 		Action.clickSearchButtonOnScreen(solo);
-		// element and test_data
+
+		// Input test data.
 		Action.searchAfterPutData(solo, 0, ValidationText.DONG_JING);
 
 		Action.clickText(solo, ValidationText.SHOP);
 		ImageView dongjing = (ImageView) solo.getView(
 				"listitem_storelist_image", 0);
 		solo.clickOnView(dongjing);
-		solo.sleep(1000);
-		// Action.clickSearchButtonOnScreen(solo);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
+
 		View iv = solo.getView("menu_search");
 		solo.clickOnView(iv);
 
 		Action.searchAfterPutData(solo, 0, ValidationText.MODEL);
-		/* Button optionButton = (Button)solo.getView("option_button",2); */
+
 		solo.clickOnText(ValidationText.SEARCH_ALL_STORE);
-		solo.sleep(1000);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		assertFalse("Search all store button still exist.",
 				solo.getView("option_button").isShown());
+
 	}
 
-	// 1977507:verify search result when enter special characters in search box.
+	// 1977507:Verify search result when enter special characters in search box
 	public void testEnterSpecialCharactersToSearch() throws Exception {
 
 		Account.JudgementAccountLogin(solo);
 		Action.clickSearchButtonOnScreen(solo);
-		// element and test_data
+
+		// Input test data.
 		Action.searchAfterPutData(solo, 0, ValidationText.SPECIAL);
 		assertTrue("No result note pop up.",
 				solo.searchText(ValidationText.RESULTS_VALUE));
 	}
 
-	// 1959914:Verify user can access store page by tapping store logo
+	// 1959914:Verify user can access store page by tapping store LOGO
 	public void testEnterStorePageByTapLog() throws Exception {
 
 		// click on search button on home screen
@@ -1224,7 +1276,7 @@ public class Search extends ActivityInstrumentationTestCase2 {
 		solo.sleep(5000);
 		Action.clickText(solo, ValidationText.SHOP);
 
-		// Get and tap store logo.
+		// Get and tap store LOGO.
 		ImageView StoreLog = (ImageView) solo
 				.getView("listitem_storelist_image");
 		solo.clickOnView(StoreLog);
@@ -1240,5 +1292,7 @@ public class Search extends ActivityInstrumentationTestCase2 {
 						.equals(ValidationText.CATEGORIES)
 						&& product.getText().toString().trim()
 								.equals(ValidationText.COMMODITY));
+
 	}
+
 }

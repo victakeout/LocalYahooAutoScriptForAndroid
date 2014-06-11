@@ -10,9 +10,18 @@ import android.widget.TextView;
 import com.robotium.solo.Solo;
 import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 
+/**
+ * 
+ * Contains account login,logout,and account status methods examples is JudgementAccountWithoutLogin().
+ * 
+ * @author SYMBIO
+ * 
+ * 
+ **/
+
 public class Account {
 
-	// Over 18 yeas old account login .
+	// Over 18 yeas old account login
 	public static void overAccountLogIn(Solo solo) throws Exception {
 
 		solo.clickOnView(solo.getView("tab_image", 4));
@@ -24,15 +33,15 @@ public class Account {
 			removeAccount(solo);
 		}
 
-		// Input Yahoo account in account text field.
+		// Input YAHOO account in account text field.
 		solo.typeText(0, "mobileappstore3");
 
-		// Input Yahoo password in password text field.
+		// Input YAHOO password in password text field.
 		solo.typeText(1, "A1234qwer");
 
 		// Click sign button
 		solo.clickOnButton(ValidationText.LOG_IN);
-		solo.sleep(15000);
+		solo.sleep(ValidationText.WAIT_TIME_LONGER);
 		solo.waitForView(solo.getView("tab_image", 4));
 		solo.clickOnView(solo.getView("tab_image", 4));
 
@@ -43,7 +52,7 @@ public class Account {
 
 	}
 
-	// Under 18 years of age account login.
+	// Under 18 years of age account login
 	public static void underAccountLogIn(Solo solo) throws Exception {
 
 		solo.clickOnView(solo.getView("tab_image", 4));
@@ -55,15 +64,15 @@ public class Account {
 			removeAccount(solo);
 		}
 
-		// Input Yahoo account in account text field.
+		// Input YAHOO account in account text field.
 		solo.typeText(0, "mobileappstore");
 
-		// Input Yahoo password in password text field.
+		// Input YAHOO password in password text field.
 		solo.typeText(1, "A1234qwer");
 
 		// Click sign button
 		solo.clickOnButton(ValidationText.LOG_IN);
-		solo.sleep(10000);
+		solo.sleep(ValidationText.WAIT_TIME_LONG);
 		solo.clickOnView(solo.getView("tab_image", 4));
 
 		// Assert if the accountProfile is visible,then login successfully.
@@ -73,11 +82,11 @@ public class Account {
 
 	}
 
-	// Account Log out.
+	// Account Log out
 	public static void accountLogOut(Solo solo) throws Exception {
 
 		solo.clickOnView(solo.getView("tab_image", 4));
-		solo.sleep(1000);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		solo.clickOnView(solo.getView("profile_photo_image"));
 
 		/*
@@ -91,7 +100,7 @@ public class Account {
 				logoutComfirmDialog.isShown());
 
 		solo.clickOnButton(ValidationText.OK);
-		solo.sleep(2000);
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 		junit.framework.Assert.assertFalse("Logout confirm dialog is show.",
 				logoutComfirmDialog.isShown());
 
@@ -101,7 +110,7 @@ public class Account {
 	public static void removeAccount(Solo solo) throws Exception {
 
 		solo.clickOnView(solo.getView("tab_image", 4));
-		solo.sleep(2000);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 
 		// Click on the button in the upper right-hand corner
 		ImageView editButton = (ImageView) solo.getView("edit_account_button");
@@ -129,28 +138,33 @@ public class Account {
 
 		// The last time to confirm .
 		solo.clickOnView(removeButton);
-		solo.sleep(2000);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 
-		// Assert the remove button whether exists.
+		// Assert the remove button exists.
 		junit.framework.Assert.assertFalse("Remove account failed.",
 				removeButton.isShown());
 
 	}
 
-	// Judgment account whether logout.
+	// Judgment account whether logout
 	public static void JudgementAccountWithoutLogin(Solo solo) throws Exception {
 
 		solo.clickOnView(solo.getView("tab_image", 4));
-		solo.sleep(2000);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 
-		// Search "建立帳號" aims to verify that not any account log in.
+		// Search "Set up account" aims to verify that not any account log in.
 		boolean createAccount = solo.searchText(ValidationText.CREATE_ACCOUNT);
 
-		// Search "新增帳號" aims to verify that hava account exist but not log in.
+		/*
+		 * Search "New account" aims to verify that have account exist but not
+		 * log in.
+		 */
 		boolean newAccount = solo.searchText(ValidationText.NEW_ADD_ACCOUNT);
 
-		// if createAccount or newAccount button can be found,we can make sure
-		// that account status is not log in.
+		/*
+		 * if createAccount or newAccount button can be found,we can make sure
+		 * that account status is not log in.
+		 */
 		if (createAccount || newAccount) {
 			junit.framework.Assert.assertTrue("Account has login",
 					createAccount || newAccount);
@@ -161,27 +175,34 @@ public class Account {
 
 	}
 
-	// Login if not account or account not login.
+	// Login if not account or account not login
 	public static void JudgementAccountLogin(Solo solo) throws Exception {
 
 		solo.clickOnView(solo.getView("tab_image", 4));
-		solo.sleep(2000);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 
-		// Search "建立帳號" aims to verify that not any account log in.
+		// Search "Set up account" aims to verify that not any account log in.
 		boolean createAccount = solo.searchText(ValidationText.CREATE_ACCOUNT);
 
-		// Search "新增帳號" aims to verify that hava account exist but not log in.
+		/*
+		 * Search "New account" aims to verify that have account exist but not
+		 * log in.
+		 */
 		boolean newAccount = solo.searchText(ValidationText.NEW_ADD_ACCOUNT);
 
-		// if createAccount or newAccount button can be found,we can make sure
-		// that account status is not log in.
+		/*
+		 * if createAccount or newAccount button can be found,we can make sure
+		 * that account status is not log in.
+		 */
 		if (createAccount) {
+
 			solo.goBack();
 			overAccountLogIn(solo);
+
 		} else if (newAccount) {
 			ImageView profile = (ImageView) solo.getView("imageProfile");
 			solo.clickOnView(profile);
-			solo.sleep(5000);
+			solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 		} else {
 			solo.goBack();
 		}

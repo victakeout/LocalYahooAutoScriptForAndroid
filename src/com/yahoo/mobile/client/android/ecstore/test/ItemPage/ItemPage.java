@@ -1,6 +1,25 @@
+/*
+ * This is automated script about "ItemPage".
+ * 
+ * You can run these test cases either on the emulator or on device. 
+ * By Eclipse:
+ * Right click the test project and select Run As --> Run As Android JUnit Test
+ * By Ant:
+ * 1.Run "android update test-project -m [path to target application] -p [path to the test folder]"  in command line .
+ * 2."ant test"
+ * By using instrument command:
+ * Run all test project:adb shell am instrument -w com.yahoo.mobile.client.android.ecstore.test/android.test.InstrumentationTestRunner
+ * Just run ItemPage:adb shell am instrument -e class com.yahoo.mobile.client.android.ecstore.test.ItemPage.ItemPage -w com.yahoo.mobile.client.android.ecstore.test/android.test.InstrumentationTestRunner
+ * 
+ * @author SYMBIO.
+ * @version YAHOO APP:1.2.4
+ * 
+ */
+
 package com.yahoo.mobile.client.android.ecstore.test.ItemPage;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.view.View;
 import android.widget.TextView;
@@ -13,9 +32,9 @@ import com.yahoo.mobile.client.android.ecstore.test.TestHelper;
 import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 
 @SuppressLint("NewApi")
-public class ItemPage extends ActivityInstrumentationTestCase2 {
+public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
 	private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
-	private static Class launcherActivityClass;
+	private static Class<?> launcherActivityClass;
 	private Solo solo;
 	static {
 
@@ -28,15 +47,16 @@ public class ItemPage extends ActivityInstrumentationTestCase2 {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	public ItemPage() throws ClassNotFoundException {
-		super(launcherActivityClass);
+		super((Class<Activity>)launcherActivityClass);
 	}
 
 	@Override
 	protected void setUp() throws Exception {
 
 		solo = new Solo(getInstrumentation(), getActivity());
-		// Assert.testFirstLaunch(solo);
+		Assert.testFirstLaunch(solo);
 	}
 
 	@Override
@@ -54,7 +74,7 @@ public class ItemPage extends ActivityInstrumentationTestCase2 {
 		TestHelper.swipeUp2(solo, 1);
 		solo.clickOnText(ValidationText.SALES_PROMOTION);
 		solo.clickOnText(ValidationText.DISCOUNT);
-		solo.sleep(15000);
+		solo.sleep(ValidationText.WAIT_TIME_LONGER);
 		View webpage = (View) solo.getView("webpage", 0);
 		assertTrue("No promotion link displayed. ", webpage.isShown());
 		
@@ -68,13 +88,13 @@ public class ItemPage extends ActivityInstrumentationTestCase2 {
 		TestHelper.swipeUp2(solo, 1);
 		solo.clickOnText(ValidationText.SALES_PROMOTION);
 		solo.clickOnText(ValidationText.FULL);
-		solo.sleep(15000);
+		solo.sleep(ValidationText.WAIT_TIME_LONGER);
 		View webpage = (View) solo.getView("webpage", 0);
 		assertTrue("No promotion link displayed. ", webpage.isShown());
 		
 	}
 
-	// 1953614:verify for All customers the full discount.
+	// 1953614:verify for All customers the full discount
 	public void testAllCustomersDiscount() throws Exception {
 
 		Account.JudgementAccountLogin(solo);
@@ -82,7 +102,7 @@ public class ItemPage extends ActivityInstrumentationTestCase2 {
 		TestHelper.swipeUp2(solo, 1);
 		solo.clickOnText(ValidationText.SALES_PROMOTION);
 		solo.clickOnText(ValidationText.FULL);
-		solo.sleep(15000);
+		solo.sleep(ValidationText.WAIT_TIME_LONGER);
 		View webpage = (View) solo.getView("webpage", 0);
 		assertTrue("No promotion link displayed. ", webpage.isShown());
 		
@@ -96,7 +116,7 @@ public class ItemPage extends ActivityInstrumentationTestCase2 {
 		Action.addToShoppingCart(solo);
 	}
 
-	// 1959893:Verify Sharing method can be shown.
+	// 1959893:Verify Sharing method can be shown
 	public void testSharingMethod() throws Exception {
 
 		Account.JudgementAccountLogin(solo);
@@ -120,7 +140,7 @@ public class ItemPage extends ActivityInstrumentationTestCase2 {
 				"listitem_productlist_store_name", 0);
 		solo.clickOnView(solo.getView("tab_image", 4));
 		solo.clickOnText(ValidationText.PRODUCT_COLLECTION);
-		solo.sleep(5000);
+		solo.sleep(ValidationText.WAIT_TIME_LONG);
 		TextView collectStoreName = (TextView) solo.getView(
 				"listitem_productlist_store_name", 0);
 		assertEquals(
@@ -129,7 +149,7 @@ public class ItemPage extends ActivityInstrumentationTestCase2 {
 						.equals(collectStoreName.getText().toString()));
 	}
 
-	// 1953626:verify Payment.
+	// 1953626:verify Payment
 	public void testVerifyPayment() throws Exception {
 
 		Action.enterToItemPage(solo);
@@ -155,7 +175,7 @@ public class ItemPage extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1953629:Verify the classification in current store page.
+	// 1953629:Verify the classification in current store page
 	public void testVerifyCurrentStorePage() throws Exception {
 		
 		Action.enterToItemPage(solo);
@@ -170,7 +190,7 @@ public class ItemPage extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1953630:Verify the Commodity in current store page.
+	// 1953630:Verify the Commodity in current store page
 	public void testVerifyCommodityPage() throws Exception {
 		Action.enterToItemPage(solo);
 		TestHelper.swipeUp(solo, 1);
@@ -182,7 +202,7 @@ public class ItemPage extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1953631:verify share product Layer.
+	// 1953631:verify share product Layer
 	public void testShareProductPage() throws Exception {
 		
 		Action.enterToItemPage(solo);

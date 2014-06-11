@@ -9,7 +9,7 @@
  * 2."ant test"
  * By using instrument command:
  * Run all test project:adb shell am instrument -w com.yahoo.mobile.client.android.ecstore.test/android.test.InstrumentationTestRunner
- * Just run category:adb shell am instrument -e class com.yahoo.mobile.client.android.ecstore.test.FavoriteItems.FavoriteItems -w com.yahoo.mobile.client.android.ecstore.test/android.test.InstrumentationTestRunner
+ * Just run FavoriteItems:adb shell am instrument -e class com.yahoo.mobile.client.android.ecstore.test.FavoriteItems.FavoriteItems -w com.yahoo.mobile.client.android.ecstore.test/android.test.InstrumentationTestRunner
  * 
  * @author SYMBIO.
  * @version YAHOO APP:1.2.4
@@ -49,7 +49,7 @@ public class FavoriteItems extends ActivityInstrumentationTestCase2<Activity> {
 
 	@SuppressWarnings("unchecked")
 	public FavoriteItems() throws ClassNotFoundException {
-		super((Class<Activity>)launcherActivityClass);
+		super((Class<Activity>) launcherActivityClass);
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public class FavoriteItems extends ActivityInstrumentationTestCase2<Activity> {
 		super.tearDown();
 	}
 
-	// 1959929: Verify that user can add favorite item.
+	// 1959929: Verify that user can add favorite item
 	public void testVerifyAddFavoriteItem() throws Exception {
 
 		Account.JudgementAccountLogin(solo);
@@ -79,12 +79,14 @@ public class FavoriteItems extends ActivityInstrumentationTestCase2<Activity> {
 		solo.scrollToTop();
 		Action.clickText(solo, ValidationText.APPAREL);
 		Action.clickText(solo, ValidationText.COMMODITY);
+		
+		//Checks if the star button is shown.
 		View star = (View) solo.getView("star_button", 0);
 		assertTrue("Star icon not checked.", star.isShown());
 
 	}
 
-	// 1959923:Verify store rate from items collected.
+	// 1959923:Verify store rate from items collected
 	public void testVerifyStoreRate() throws Exception {
 
 		Account.JudgementAccountLogin(solo);
@@ -95,13 +97,13 @@ public class FavoriteItems extends ActivityInstrumentationTestCase2<Activity> {
 
 		solo.clickOnView(solo.getView("tab_image", 4));
 		solo.clickOnText(ValidationText.PRODUCT_COLLECTION);
-		solo.sleep(10000);
+		solo.sleep(ValidationText.WAIT_TIME_LONG);
 		TextView price = (TextView) solo.getView(
 				"listitem_productlist_store_rating", 0);
 		Log.i("number", (String) price.getText());
 		String sr = price.getText().toString();
 
-		// Judgment whether the price matches the format of 'x.x'.
+		// Judgment whether the price matches the format of 'x.x'
 		boolean isNum = sr.matches("^[0-9].[0-9]");
 
 		assertTrue(

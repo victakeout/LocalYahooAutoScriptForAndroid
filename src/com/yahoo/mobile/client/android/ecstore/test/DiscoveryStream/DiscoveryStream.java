@@ -9,7 +9,7 @@
  * 2."ant test"
  * By using instrument command:
  * Run all test project:adb shell am instrument -w com.yahoo.mobile.client.android.ecstore.test/android.test.InstrumentationTestRunner
- * Just run category:adb shell am instrument -e class com.yahoo.mobile.client.android.ecstore.test.DiscoveryStream.DiscoveryStream -w com.yahoo.mobile.client.android.ecstore.test/android.test.InstrumentationTestRunner
+ * Just run DiscoveryStream:adb shell am instrument -e class com.yahoo.mobile.client.android.ecstore.test.DiscoveryStream.DiscoveryStream -w com.yahoo.mobile.client.android.ecstore.test/android.test.InstrumentationTestRunner
  * 
  * @author SYMBIO.
  * @version YAHOO APP:1.2.4
@@ -63,12 +63,14 @@ public class DiscoveryStream extends ActivityInstrumentationTestCase2<Activity> 
 		super.tearDown();
 	}
 
-	// 1954564:Verify pull down to refresh .
+	// 1954564:Verify pull down to refresh
 	public void testPullDownToRefresh() throws Exception {
 		
 		solo.waitForActivity("ECStoreActivity", 2000);
 		solo.waitForText(ValidationText.NEWS, 1, 3000);
 		TestHelper.swipeDown(solo, 10);
+		
+		//Checks if the pull refresh text is shown.
 		TextView pullRefresh = (TextView)solo.getView("pull_to_refresh_text");
 		assertTrue("Refresh failed",pullRefresh.isShown());
 		

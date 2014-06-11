@@ -1,25 +1,42 @@
+/*
+ * This is automated script about "FavoriteStore".
+ * 
+ * You can run these test cases either on the emulator or on device. 
+ * By Eclipse:
+ * Right click the test project and select Run As --> Run As Android JUnit Test
+ * By Ant:
+ * 1.Run "android update test-project -m [path to target application] -p [path to the test folder]"  in command line .
+ * 2."ant test"
+ * By using instrument command:
+ * Run all test project:adb shell am instrument -w com.yahoo.mobile.client.android.ecstore.test/android.test.InstrumentationTestRunner
+ * Just run FavoriteStore:adb shell am instrument -e class com.yahoo.mobile.client.android.ecstore.test.FavoriteStore.FavoriteStore -w com.yahoo.mobile.client.android.ecstore.test/android.test.InstrumentationTestRunner
+ * 
+ * @author SYMBIO.
+ * @version YAHOO APP:1.2.4
+ * 
+ */
+
 package com.yahoo.mobile.client.android.ecstore.test.FavoriteStore;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.robotium.solo.Solo;
-import com.robotium.solo.WebElement;
 import com.yahoo.mobile.client.android.ecstore.Account.Account;
 import com.yahoo.mobile.client.android.ecstore.Action.Action;
 import com.yahoo.mobile.client.android.ecstore.Assert.Assert;
 import com.yahoo.mobile.client.android.ecstore.test.TestHelper;
 import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 
+
 @SuppressLint("NewApi")
-@SuppressWarnings("rawtypes")
-public class FavoriteStore extends ActivityInstrumentationTestCase2 {
+public class FavoriteStore extends ActivityInstrumentationTestCase2<Activity> {
 	private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
-	private static Class launcherActivityClass;
+	private static Class<?> launcherActivityClass;
 	private Solo solo;
 	static {
 
@@ -34,14 +51,14 @@ public class FavoriteStore extends ActivityInstrumentationTestCase2 {
 
 	@SuppressWarnings("unchecked")
 	public FavoriteStore() throws ClassNotFoundException {
-		super(launcherActivityClass);
+		super((Class<Activity>) launcherActivityClass);
 	}
 
 	@Override
 	protected void setUp() throws Exception {
 
 		solo = new Solo(getInstrumentation(), getActivity());
-		// Assert.testFirstLaunch(solo);
+		Assert.testFirstLaunch(solo);
 	}
 
 	@Override
@@ -51,8 +68,10 @@ public class FavoriteStore extends ActivityInstrumentationTestCase2 {
 		super.tearDown();
 	}
 
-	// 1959875:Verify user logout,then login again,the display of the favorite
-	// store list.
+	/*
+	 * 1959875:Verify user logout,then login again,the display of the favorite
+	 * store list.
+	 */
 	public void testFavoriteStoreLoginAndLogout() throws Exception {
 
 		Account.JudgementAccountWithoutLogin(solo);
@@ -66,21 +85,23 @@ public class FavoriteStore extends ActivityInstrumentationTestCase2 {
 		// Account login
 		Account.JudgementAccountLogin(solo);
 
-		solo.sleep(3000);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		solo.clickOnView(solo.getView("tab_image", 1));
 		solo.takeScreenshot("Favorite_Store_List_Show", 100);
-		solo.sleep(10000);
+		solo.sleep(ValidationText.WAIT_TIME_LONG);
 		assertFalse("Text not found.", noResult.isShown());
 		solo.sleep(3000);
 
 	}
 
-	// 1959886:Verify the page display when user is logged in and has no
-	// favorite stores.
+	/*
+	 * 1959886:Verify the page display when user is logged in and has no
+	 * favorite stores.
+	 */
 	public void testNoFavoriteStoreWhenLogin() throws Exception {
 
-		 Account.JudgementAccountLogin(solo);
-		 Action.removeFavoriteStore(solo);
+		Account.JudgementAccountLogin(solo);
+		Action.removeFavoriteStore(solo);
 	}
 
 	// 1954571:Verify 18禁items displayed in favorite stores
@@ -107,7 +128,7 @@ public class FavoriteStore extends ActivityInstrumentationTestCase2 {
 		}
 
 		// Wait for added to favorite list
-		solo.sleep(3000);
+		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 		solo.clickOnView(solo.getView("tab_image", 4));
 		solo.clickOnView(solo.getView("profile_bt_favorite_text", 0));
 		Action.clickView(solo, "listitem_productlist_image");
@@ -121,7 +142,7 @@ public class FavoriteStore extends ActivityInstrumentationTestCase2 {
 
 		Account.JudgementAccountWithoutLogin(solo);
 		solo.clickOnView(solo.getView("tab_image", 1));
-		solo.sleep(2000);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		Button loginButton = (Button) solo.getView("option_button", 1);
 		assertTrue("No login button displayed!", loginButton.isShown());
 
@@ -132,9 +153,9 @@ public class FavoriteStore extends ActivityInstrumentationTestCase2 {
 
 		Account.JudgementAccountLogin(solo);
 		solo.clickOnView(solo.getView("tab_image", 1));
-		solo.sleep(2000);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		solo.clickOnText(ValidationText.MAYBE_LIKE);
-		solo.sleep(15000);
+		solo.sleep(ValidationText.WAIT_TIME_LONGER);
 		View recommend = (View) solo.getView("listitem_recommended_image1", 0);
 		solo.clickOnView(recommend);
 		View banner = (View) solo.getView("img_store_banner", 0);
@@ -142,15 +163,17 @@ public class FavoriteStore extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1959907:Verify the number of store items,collected number with my
-	// favorite store
+	/*
+	 * 1959907:Verify the number of store items,collected number with my
+	 * favorite store
+	 */
 	public void testNumberOfStoreAndCollectedItems() throws Exception {
 
 		Account.JudgementAccountLogin(solo);
 		solo.clickOnView(solo.getView("tab_image", 1));
-		solo.sleep(2000);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		solo.clickOnText(ValidationText.MAYBE_LIKE);
-		solo.sleep(15000);
+		solo.sleep(ValidationText.WAIT_TIME_LONGER);
 
 		TextView productCount = (TextView) solo
 				.getView("listitem_recommended_item_count");
@@ -167,27 +190,34 @@ public class FavoriteStore extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1959896：Verify user can clicking promotion item link in store promotion
-	// page
+	/*
+	 * 1959896：Verify user can clicking promotion item link in store promotion
+	 * page
+	 */
 	public void testEnterToPromotionItems() throws Exception {
 
 		Account.JudgementAccountLogin(solo);
 		solo.clickOnView(solo.getView("tab_image", 1));
-		solo.sleep(2000);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		solo.clickOnText(ValidationText.MAYBE_LIKE);
-		solo.sleep(20000);
+		solo.sleep(ValidationText.WAIT_TIME_LONGER);
 		View recommend = (View) solo.getView("listitem_recommended_image1", 0);
 		solo.clickOnView(recommend);
+
+		// Checks if the banner is show.
 		View banner = (View) solo.getView("img_store_banner", 0);
-		assertTrue("Not enter to recommended page.", banner.isShown());
-		solo.sleep(2000);
+		assertTrue("Not enter recommended page.", banner.isShown());
+
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		View option = (View) solo.getView("imageButton", 2);
 		solo.clickOnView(option);
 		solo.sleep(ValidationText.WAIT_TIME_LONG);
+		
 		TextView promotion = (TextView) solo.getView(
 				"listitem_productlist_title", 1);
 		solo.clickOnView(promotion);
 		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+		
 		TestHelper.swipeUp(solo, 1);
 		TextView promotionContent = (TextView) solo
 				.getView("listitem_btn_desc");
@@ -196,10 +226,13 @@ public class FavoriteStore extends ActivityInstrumentationTestCase2 {
 
 		TextView link = (TextView) solo.getView("productitem_promotion_name");
 		assertTrue("Click promotion item link failed. ", link.isShown());
+
 	}
 
-	// 1959888:Verify Just added favorite store can be displayed on my favorite
-	// stores tab
+	/*
+	 * 1959888:Verify Just added favorite store can be displayed on my favorite
+	 * stores tab
+	 */
 	public void testAddFavoriteStore() throws Exception {
 
 		Account.JudgementAccountLogin(solo);
@@ -221,14 +254,19 @@ public class FavoriteStore extends ActivityInstrumentationTestCase2 {
 
 		// Get toast text.
 		if (solo.waitForText(ValidationText.HAS_ADDED_COMMODITY)) {
+
 			alreadyAdd = solo.waitForText(ValidationText.HAS_ADDED_COMMODITY);
 			assertTrue("Add failed.", alreadyAdd);
+
 		} else {
+
 			solo.sleep(1000);
 			solo.clickOnView(solo.getView("heart_button", 0));
 			alreadyAdd = solo.waitForText(ValidationText.HAS_ADDED_COMMODITY);
 			assertTrue("Add failed.", alreadyAdd);
+
 		}
+		
 		solo.clickOnView(solo.getView("tab_image", 1));
 		View shop = (View) solo.getView("listitem_favoritestore_image1", 0);
 		assertTrue("Add to favorite store failed.", shop.isShown());

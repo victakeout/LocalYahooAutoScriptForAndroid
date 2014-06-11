@@ -1,20 +1,38 @@
+/*
+ * This is automated script about "Functional".
+ * 
+ * You can run these test cases either on the emulator or on device. 
+ * By Eclipse:
+ * Right click the test project and select Run As --> Run As Android JUnit Test
+ * By Ant:
+ * 1.Run "android update test-project -m [path to target application] -p [path to the test folder]"  in command line .
+ * 2."ant test"
+ * By using instrument command:
+ * Run all test project:adb shell am instrument -w com.yahoo.mobile.client.android.ecstore.test/android.test.InstrumentationTestRunner
+ * Just run Functional:adb shell am instrument -e class com.yahoo.mobile.client.android.ecstore.test.Functional.Functional -w com.yahoo.mobile.client.android.ecstore.test/android.test.InstrumentationTestRunner
+ * 
+ * @author SYMBIO.
+ * @version YAHOO APP:1.2.4
+ * 
+ */
+
 package com.yahoo.mobile.client.android.ecstore.test.Functional;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Switch;
 
 import com.robotium.solo.Solo;
 import com.yahoo.mobile.client.android.ecstore.Account.Account;
-import com.yahoo.mobile.client.android.ecstore.Action.Action;
+import com.yahoo.mobile.client.android.ecstore.Assert.Assert;
 import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 
 @SuppressLint("NewApi")
-public class Functional extends ActivityInstrumentationTestCase2 {
+public class Functional extends ActivityInstrumentationTestCase2<Activity> {
 	private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
-	private static Class launcherActivityClass;
+	private static Class<?> launcherActivityClass;
 	private Solo solo;
 	static {
 
@@ -29,14 +47,14 @@ public class Functional extends ActivityInstrumentationTestCase2 {
 
 	@SuppressWarnings("unchecked")
 	public Functional() throws ClassNotFoundException {
-		super(launcherActivityClass);
+		super((Class<Activity>)launcherActivityClass);
 	}
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		solo = new Solo(getInstrumentation(), getActivity());
-		// Assert.testFirstLaunch(solo);
+		Assert.testFirstLaunch(solo);
 
 	}
 
@@ -47,7 +65,7 @@ public class Functional extends ActivityInstrumentationTestCase2 {
 		super.tearDown();
 	}
 
-	// 1977448:[notification]turn on/off marketing notifications.
+	// 1977448:[notification]turn on/off marketing notifications
 	public void testMarktingNotificationTurnOnOff() throws Exception {
 
 		Account.JudgementAccountLogin(solo);
@@ -56,43 +74,16 @@ public class Functional extends ActivityInstrumentationTestCase2 {
 		// clear history information and back
 		solo.waitForText(ValidationText.SETTING, 1, 3000);
 		solo.clickOnText(ValidationText.SETTING);
-		solo.sleep(2000);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		Switch notification = (Switch) solo.getView("switchWidget", 2);
 
 		assertTrue("Notification switch is off", notification.isChecked());
-		solo.sleep(1000);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		solo.clickOnView(notification);
-		solo.sleep(1000);
+		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		assertFalse("Notification switch is on.", notification.isChecked());
 
 	}
 
-	// 1977478:[barcode]Discovery Stream root view
-	public void testDiscoveryStreamFromDiscoveryStream() throws Exception {
-		Account.JudgementAccountLogin(solo);
-		Action.clickSearchButtonOnScreen(solo);
-		ImageView barcode = (ImageView) solo.getView("search_barcode_scan");
-		solo.clickOnView(barcode);
-
-	}
-
-	// 1977479:[barcode]Discovery Stream root view
-	public void testDiscoveryStreamFromFavoriteStore() throws Exception {
-		Account.JudgementAccountLogin(solo);
-		solo.clickOnView(solo.getView("tab_image", 1));
-		Action.clickSearchButtonOnScreen(solo);
-		ImageView barcode = (ImageView) solo.getView("search_barcode_scan");
-		solo.clickOnView(barcode);
-
-	}
-
-	// 1977480:[barcode]Discovery Stream root view
-	public void testDiscoveryStreamFromCategory() throws Exception {
-		Account.JudgementAccountLogin(solo);
-		solo.clickOnView(solo.getView("tab_image", 2));
-		Action.clickSearchButtonOnScreen(solo);
-		ImageView barcode = (ImageView) solo.getView("search_barcode_scan");
-		solo.clickOnView(barcode);
-
-	}
+	
 }

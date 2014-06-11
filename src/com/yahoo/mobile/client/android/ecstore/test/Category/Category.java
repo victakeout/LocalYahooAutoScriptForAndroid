@@ -71,7 +71,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 		super.tearDown();
 	}
 
-	// 1938037:Check back function.
+	// 1938037:Check back function
 	public void testBackFunction() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
@@ -81,7 +81,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938041:Check tab display.
+	// 1938041:Check tab display
 	public void testTab() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
@@ -94,7 +94,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938036:Check header items.
+	// 1938036:Check header items
 	public void testHeader() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
@@ -115,7 +115,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938042:Check sort tab items all display.
+	// 1938042:Check sort tab items all display
 	public void testSortTab() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
@@ -128,7 +128,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938043:Check can return to item list.
+	// 1938043:Check can return to item list
 	public void testItemList() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
@@ -140,7 +140,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938052:Check "Search Clothing" text is show in search bar.
+	// 1938052:Check "Search Clothing" text is show in search bar
 	public void testSearchbarDefault() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
@@ -151,7 +151,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938053:Check can switch to sort tab.
+	// 1938053:Check can switch to sort tab
 	public void testSort() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
@@ -167,7 +167,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938054:Check switch to filter sort tab.
+	// 1938054:Check switch to filter sort tab
 	public void testFilterSort() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
@@ -186,7 +186,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938060:Check the sort layout.
+	// 1938060:Check the sort layout
 	public void testSortLayout() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
@@ -208,7 +208,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938055: verify the order of sort items.
+	// 1938055: verify the order of sort items
 	public void testSortOptions() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
@@ -249,7 +249,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938047:Check default items display.
+	// 1938047:Check default items display
 	public void testCheckTheDefaultItems() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
@@ -261,7 +261,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938048:Check auto load more data.
+	// 1938048:Check auto load more data
 	public void testAutoLoadMore() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
@@ -279,7 +279,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938069:Check "Credit cards accepted" can changed to unselected.
+	// 1938069:Check "Credit cards accepted" can changed to unselected
 	public void testCreditCardMode() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
@@ -301,7 +301,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938072:Check "A/V" can changed to unselected.
+	// 1938072:Check "A/V" can changed to unselected
 	public void testHasVideoMode() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
@@ -321,7 +321,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938075:Check "Zero Interest Rate" can changed to unselected.
+	// 1938075:Check "Zero Interest Rate" can changed to unselected
 	public void testZeroInterestMode() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
@@ -340,7 +340,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 		assertFalse("'Zero Interest Rate'  button  selected.", tb.isChecked());
 	}
 
-	// 1938078:Check "Installments" can changed to unselected.
+	// 1938078:Check "Installments" can changed to unselected
 	public void testInstallmentsMode() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
@@ -360,7 +360,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938081:Check "Payments" can changed to unselected.
+	// 1938081:Check "Payments" can changed to unselected
 	public void testSupermarketPaymentMode() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
@@ -380,7 +380,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938084:Check "Pickup" can changed to unselected.
+	// 1938084:Check "Pickup" can changed to unselected
 	public void testSupermarketPickupMode() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
@@ -400,7 +400,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938087:Check "Has Stock" can changed to unselected.
+	// 1938087:Check "Has Stock" can changed to unselected
 	public void testHasStockMode() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
@@ -420,7 +420,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938090:Check "Has Image" can changed to unselected.
+	// 1938090:Check "Has Image" can changed to unselected
 	public void testHasImageMode() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
@@ -440,7 +440,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938093:Check "SuperiorStore" can changed to unselected.
+	// 1938093:Check "SuperiorStore" can changed to unselected
 	public void testSuperiorStoreMode() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
@@ -460,7 +460,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938100:Check the commodity price display.
+	// 1938100:Check the commodity price display
 	public void testCommodityPriceDisplay() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
@@ -487,7 +487,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938101:Check the Shops score display.
+	// 1938101:Check the Shops score display
 	public void testShopsScoreDisplay() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
@@ -526,7 +526,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938130:Check "All Categories" at the bottom of the screen.
+	// 1938130:Check "All Categories" at the bottom of the screen
 	public void testAllClassificationExist() throws Exception {
 
 		View classificationIcon = (View) solo.getView("tab_image", 2);
@@ -540,7 +540,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938131:Check all classification item page.
+	// 1938131:Check all classification item page
 	public void testAllClassificationItemPage() throws Exception {
 
 		solo.clickOnView(solo.getView("tab_image", 2));
@@ -548,7 +548,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938133:Check the screen top text.
+	// 1938133:Check the screen top text
 	public void testClassificationTextOnTheTop() throws Exception {
 
 		solo.clickOnView(solo.getView("tab_image", 2));
@@ -561,7 +561,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938141:Check latest update side bar.
+	// 1938141:Check latest update side bar
 	public void testLatestUpdateSidebar() throws Exception {
 
 		solo.clickOnView(solo.getView("tab_image", 2));
@@ -577,7 +577,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938143:Check most favorite store side bar.
+	// 1938143:Check most favorite store side bar
 	public void testMostFavoriteSidebar() throws Exception {
 
 		solo.clickOnView(solo.getView("tab_image", 2));
@@ -610,7 +610,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938147:Check my account side bar.
+	// 1938147:Check my account side bar
 	public void testMyAccountSidebar() throws Exception {
 
 		solo.clickOnView(solo.getView("tab_image", 2));
@@ -629,7 +629,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938149:Check 'Apparel' is displayed on the top of the screen.
+	// 1938149:Check 'Apparel' is displayed on the top of the screen
 	public void testDressDisplayedOnTheScreen() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
@@ -641,7 +641,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938150:Check 'Beauty' is displayed on the top of the screen.
+	// 1938150:Check 'Beauty' is displayed on the top of the screen
 	public void testMakeupDisplayedOnTheScreen() throws Exception {
 
 		solo.clickOnView(solo.getView("tab_image", 2));
@@ -654,8 +654,10 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938151:Check 'Shoes/Bags/Accessories' is displayed on the top of the
-	// screen.
+	/*
+	 * 1938151:Check 'Shoes/Bags/Accessories' is displayed on the top of the
+	 * screen
+	 */
 	public void testAccessoriesDisplayedOnTheScreen() throws Exception {
 
 		solo.clickOnView(solo.getView("tab_image", 2));
@@ -668,7 +670,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938152:Check 'Mummy/Baby' is displayed on the top of the screen.
+	// 1938152:Check 'Mummy/Baby' is displayed on the top of the screen
 	public void testBabyDisplayedOnTheScreen() throws Exception {
 
 		solo.clickOnView(solo.getView("tab_image", 2));
@@ -683,8 +685,10 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938153:Check 'Computers_Peripherals' is displayed on the top of the
-	// screen.
+	/*
+	 * 1938153:Check 'Computers_Peripherals' is displayed on the top of the
+	 * screen
+	 */
 	public void testComputerDisplayedOnTheScreen() throws Exception {
 
 		solo.clickOnView(solo.getView("tab_image", 2));
@@ -698,7 +702,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938154:Check 'Homeappliances_AV' is displayed on the top of the screen.
+	// 1938154:Check 'Homeappliances_AV' is displayed on the top of the screen
 	public void testHouseholdAppliancesDisplayedOnTheScreen() throws Exception {
 
 		solo.clickOnView(solo.getView("tab_image", 2));
@@ -715,7 +719,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938155:Check 'Camera_Mobile_Toys' is displayed on the top of the screen.
+	// 1938155:Check 'Camera_Mobile_Toys' is displayed on the top of the screen
 	public void testFasionDigitalDisplayedOnTheScreen() throws Exception {
 
 		solo.clickOnView(solo.getView("tab_image", 2));
@@ -730,8 +734,10 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938156:Check 'Gourmet/Health/Beverage' is displayed on the top of the
-	// screen.
+	/*
+	 * 1938156:Check 'GOURMET/Health/Beverage' is displayed on the top of the
+	 * screen
+	 */
 	public void testFoodDisplayedOnTheScreen() throws Exception {
 
 		solo.clickOnView(solo.getView("tab_image", 2));
@@ -745,8 +751,10 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938157:Check 'Medical/Commodity/Pet' is displayed on the top of the
-	// screen.
+	/*
+	 * 1938157:Check 'Medical/Commodity/Pet' is displayed on the top of the
+	 * screen
+	 */
 	public void testCleanDisplayedOnTheScreen() throws Exception {
 
 		solo.clickOnView(solo.getView("tab_image", 2));
@@ -760,8 +768,10 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938158:Check 'Home/Bedding/Furniture' is displayed on the top of the
-	// screen.
+	/*
+	 * 1938158:Check 'Home/Bedding/Furniture' is displayed on the top of the
+	 * screen
+	 */
 	public void testHomeDisplayedOnTheScreen() throws Exception {
 
 		solo.clickOnView(solo.getView("tab_image", 2));
@@ -779,8 +789,10 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938160:Check 'Books/Stationery/Video' is displayed on the top of the
-	// screen.
+	/*
+	 * 1938160:Check 'Books/STATIONERY/Video' is displayed on the top of the
+	 * screen
+	 */
 	public void testBookDisplayedOnTheScreen() throws Exception {
 
 		solo.clickOnView(solo.getView("tab_image", 2));
@@ -794,9 +806,8 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938103:Check to click the start icon without login.
+	// 1938103:Check to click the start icon without login
 	public void testStarIconWithoutLogin() throws Exception {
-
 
 		Account.JudgementAccountWithoutLogin(solo);
 		Action.enterCategoryClothesPage(solo);
@@ -815,7 +826,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938104:Check to click the start icon when login.
+	// 1938104:Check to click the start icon when login
 	public void testStartIconWhenLogin() throws Exception {
 
 		Account.JudgementAccountLogin(solo);
@@ -825,7 +836,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 		Action.clickStarIconNote(solo);
 	}
 
-	// 1938116:Check to click the start icon without login in grid view.
+	// 1938116:Check to click the start icon without login in grid view
 	public void testStarIconWithoutLoginInGridView() throws Exception {
 
 		// Account.accountLogIn(solo);
@@ -852,7 +863,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938117:Check to click the start icon in grid view when login.
+	// 1938117:Check to click the start icon in grid view when login
 	public void testStartIconInGridViewWhenLogin() throws Exception {
 
 		Account.JudgementAccountLogin(solo);
@@ -871,7 +882,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938115:Check the Star icon display in grid view.
+	// 1938115:Check the Star icon display in grid view
 	public void testStarIconDisplayInGridView() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
@@ -889,7 +900,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938113:Check the commodity price displays in grid view.
+	// 1938113:Check the commodity price displays in grid view
 	public void testCommodityPriceDisplayInGridView() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
@@ -913,7 +924,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 		Action.setListViewStyleAfterSearch(solo);
 	}
 
-	// 1938114:Check the Shops score displays in grid view.
+	// 1938114:Check the Shops score displays in grid view
 	public void testShopsScoreDisplayInGridView() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
@@ -940,7 +951,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938125:Check the commodity price displays in large photo view.
+	// 1938125:Check the commodity price displays in large photo view
 	public void testCommodityPriceDisplayInLargePhotoView() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
@@ -966,7 +977,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938126:Check the Shops score displays in large photo view.
+	// 1938126:Check the Shops score displays in large photo view
 	public void testShopsScoreDisplayInLargePhotoView() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
@@ -997,7 +1008,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938127:Check the Star icon display in large photo view.
+	// 1938127:Check the Star icon display in large photo view
 	public void testStarIconDisplayInLargePhotoView() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
@@ -1015,7 +1026,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938128:Check to click the start icon without login in large photo view.
+	// 1938128:Check to click the start icon without login in large photo view
 	public void testStarIconWithoutLoginInLargePhotoView() throws Exception {
 
 		// Change the item view to photo large photo view
@@ -1041,7 +1052,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938129:Check to click the start icon in large photo view when login.
+	// 1938129:Check to click the start icon in large photo view when login
 	public void testStartIconInLargePhotoViewWhenLogin() throws Exception {
 
 		Account.JudgementAccountLogin(solo);
@@ -1064,7 +1075,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938045:Check search result.
+	// 1938045:Check search result
 	public void testSearchResult() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
@@ -1095,7 +1106,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938049:Check advanced page tab display.
+	// 1938049:Check advanced page tab display
 	public void testAdvancedPage() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
@@ -1123,7 +1134,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938099:Check enter to item page.
+	// 1938099:Check enter to item page
 	public void testTapProductName() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
@@ -1136,7 +1147,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938046:Check the default browse mode.
+	// 1938046:Check the default browse mode
 	public void testDefaultBrowseMode() throws Exception {
 
 		solo.clickOnView(solo.getView("tab_image", 2));
@@ -1160,7 +1171,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938050:Check the default advanced tab.
+	// 1938050:Check the default advanced tab
 	public void testDefaultAdvancedTabMode() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
@@ -1173,7 +1184,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1953657:verify side bar edit category function.
+	// 1953657:verify side bar edit category function
 	public void testEditFavoriteCategoryBySidebar() throws Exception {
 
 		Account.JudgementAccountLogin(solo);
@@ -1216,7 +1227,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1954573:Verify 18 restrict page cancel button.
+	// 1954573:Verify 18 restrict page cancel button
 	public void testLeaveRestrictPage() throws Exception {
 
 		Account.JudgementAccountLogin(solo);
@@ -1240,7 +1251,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938064:Verify "Confirm" button function.
+	// 1938064:Verify "Confirm" button function
 	public void testConfirmButtonFuction() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
@@ -1257,7 +1268,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938096:Click product image in list view.
+	// 1938096:Click product image in list view
 	public void testClickProductImageInListview() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
@@ -1274,7 +1285,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938109:Click product image in Grid view.
+	// 1938109:Click product image in Grid view
 	public void testClickProductImageInGridview() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
@@ -1299,7 +1310,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938121:Click product image in list view.
+	// 1938121:Click product image in list view
 	public void testClickProductImageInLargePhotoview() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
@@ -1322,7 +1333,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938039:Input keywords and search.
+	// 1938039:Input keywords and search
 	public void testInputKeywordsSearch() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
@@ -1347,7 +1358,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938044:Check "Advanced" button display.
+	// 1938044:Check "Advanced" button display
 	public void testAdvancedButtonDisplay() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
@@ -1360,7 +1371,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938061:Check unselected button function.
+	// 1938061:Check unselected button function
 	public void testUnselectedButtonFunction() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
@@ -1388,7 +1399,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 
 	}
 
-	// 1938124:Check enter to item page in large photo view.
+	// 1938124:Check enter to item page in large photo view
 	public void testEnterToItemPageInLargeView() throws Exception {
 
 		Action.enterCategoryClothesPage(solo);
