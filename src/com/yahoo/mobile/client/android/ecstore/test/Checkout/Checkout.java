@@ -19,6 +19,7 @@
 package com.yahoo.mobile.client.android.ecstore.test.Checkout;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 
 import com.robotium.solo.Solo;
@@ -30,10 +31,9 @@ import com.yahoo.mobile.client.android.ecstore.test.TestHelper;
 import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 
 @SuppressLint("NewApi")
-@SuppressWarnings("rawtypes")
-public class Checkout extends ActivityInstrumentationTestCase2 {
+public class Checkout extends ActivityInstrumentationTestCase2<Activity> {
 	private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
-	private static Class launcherActivityClass;
+	private static Class<?> launcherActivityClass;
 	private Solo solo;
 	static {
 
@@ -48,7 +48,7 @@ public class Checkout extends ActivityInstrumentationTestCase2 {
 
 	@SuppressWarnings("unchecked")
 	public Checkout() throws ClassNotFoundException {
-		super(launcherActivityClass);
+		super((Class<Activity>) launcherActivityClass);
 	}
 
 	@Override
@@ -65,7 +65,6 @@ public class Checkout extends ActivityInstrumentationTestCase2 {
 		super.tearDown();
 	}
 
-
 	// 1959918:Verify that user can change other delivery places
 	public void testChangeOtherDeliveryPlaces() throws Exception {
 
@@ -78,19 +77,19 @@ public class Checkout extends ActivityInstrumentationTestCase2 {
 		solo.sleep(ValidationText.WAIT_TIME_LONGER);
 		TestHelper.swipeUp(solo, 2);
 		solo.sleep(ValidationText.WAIT_TIME_LONG);
-		
-		//Click check out button on web view.
+
+		// Click check out button on web view.
 		Action.clickElementsInWebviewByText(solo, ValidationText.WANT_CHECKOUT);
-		
+
 		solo.sleep(ValidationText.WAIT_TIME_LONG);
 		TestHelper.swipeUp(solo, 2);
 		solo.sleep(ValidationText.WAIT_TIME_LONG);
-		
-		//Click "Select other store" text to re_selection.
+
+		// Click "Select other store" text to re_selection.
 		Action.clickElementsInWebviewByText(solo,
 				ValidationText.RESELECT_OTHER_STORE);
 		solo.sleep(ValidationText.WAIT_TIME_LONGER);
 		Action.searchTextOnWebview(solo, ValidationText.TAI_BEI);
-		
+
 	}
 }

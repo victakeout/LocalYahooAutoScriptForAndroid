@@ -19,6 +19,7 @@
 package com.yahoo.mobile.client.android.ecstore.test.Category;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 import android.view.View;
@@ -36,10 +37,10 @@ import com.yahoo.mobile.client.android.ecstore.Assert.Assert;
 import com.yahoo.mobile.client.android.ecstore.test.TestHelper;
 import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 
-@SuppressWarnings("rawtypes")
-public class Category extends ActivityInstrumentationTestCase2 {
+
+public class Category extends ActivityInstrumentationTestCase2<Activity> {
 	private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
-	private static Class launcherActivityClass;
+	private static Class<?> launcherActivityClass;
 	private Solo solo;
 	private boolean isNum;
 	static {
@@ -54,7 +55,7 @@ public class Category extends ActivityInstrumentationTestCase2 {
 	@SuppressWarnings("unchecked")
 	@SuppressLint("NewApi")
 	public Category() throws ClassNotFoundException {
-		super(launcherActivityClass);
+		super((Class<Activity>)launcherActivityClass);
 	}
 
 	@Override
