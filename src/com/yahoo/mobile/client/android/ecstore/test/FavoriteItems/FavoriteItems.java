@@ -70,7 +70,7 @@ public class FavoriteItems extends ActivityInstrumentationTestCase2<Activity> {
 	// 1959929: Verify that user can add favorite item
 	public void testVerifyAddFavoriteItem() throws Exception {
 
-		Account.JudgementAccountLogin(solo);
+		Account.judgementAccountLogin(solo);
 		Action.enterCategoryClothesPage(solo);
 		Action.clickText(solo, ValidationText.COMMODITY);
 		solo.sleep(ValidationText.WAIT_TIME_SHORT);
@@ -89,7 +89,7 @@ public class FavoriteItems extends ActivityInstrumentationTestCase2<Activity> {
 	// 1959923:Verify store rate from items collected
 	public void testVerifyStoreRate() throws Exception {
 
-		Account.JudgementAccountLogin(solo);
+		Account.judgementAccountLogin(solo);
 		Action.enterCategoryClothesPage(solo);
 		Action.clickText(solo, ValidationText.COMMODITY);
 		solo.sleep(ValidationText.WAIT_TIME_SHORT);

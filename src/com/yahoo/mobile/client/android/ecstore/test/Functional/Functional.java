@@ -68,7 +68,7 @@ public class Functional extends ActivityInstrumentationTestCase2<Activity> {
 	// 1977448:[notification]turn on/off marketing notifications
 	public void testMarktingNotificationTurnOnOff() throws Exception {
 
-		Account.JudgementAccountLogin(solo);
+		Account.judgementAccountLogin(solo);
 		View iv = solo.getView("home");
 		solo.clickOnView(iv);
 		// clear history information and back

@@ -74,7 +74,7 @@ public class FavoriteStore extends ActivityInstrumentationTestCase2<Activity> {
 	 */
 	public void testFavoriteStoreLoginAndLogout() throws Exception {
 
-		Account.JudgementAccountWithoutLogin(solo);
+		Account.judgementAccountWithoutLogin(solo);
 		solo.clickOnView(solo.getView("tab_image", 1));
 		solo.sleep(10000);
 		solo.waitForView(solo.getView("no_result_text", 1));
@@ -83,7 +83,7 @@ public class FavoriteStore extends ActivityInstrumentationTestCase2<Activity> {
 				.toString());
 
 		// Account login
-		Account.JudgementAccountLogin(solo);
+		Account.judgementAccountLogin(solo);
 
 		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		solo.clickOnView(solo.getView("tab_image", 1));
@@ -100,14 +100,14 @@ public class FavoriteStore extends ActivityInstrumentationTestCase2<Activity> {
 	 */
 	public void testNoFavoriteStoreWhenLogin() throws Exception {
 
-		Account.JudgementAccountLogin(solo);
+		Account.judgementAccountLogin(solo);
 		Action.removeFavoriteStore(solo);
 	}
 
 	// 1954571:Verify 18禁items displayed in favorite stores
 	public void testRestricted() throws Exception {
 
-		Account.JudgementAccountLogin(solo);
+		Account.judgementAccountLogin(solo);
 
 		// click on search button on home screen
 		Action.clickSearchButtonOnScreen(solo);
@@ -140,7 +140,7 @@ public class FavoriteStore extends ActivityInstrumentationTestCase2<Activity> {
 	// 1959912:Verify there is an indicator to allow user login in
 	public void testFavoriteStoresWhenLogout() throws Exception {
 
-		Account.JudgementAccountWithoutLogin(solo);
+		Account.judgementAccountWithoutLogin(solo);
 		solo.clickOnView(solo.getView("tab_image", 1));
 		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		Button loginButton = (Button) solo.getView("option_button", 1);
@@ -151,7 +151,7 @@ public class FavoriteStore extends ActivityInstrumentationTestCase2<Activity> {
 	// 1959922:Verify user can access correct store page from recommendation.
 	public void testAccessRecommendationStore() throws Exception {
 
-		Account.JudgementAccountLogin(solo);
+		Account.judgementAccountLogin(solo);
 		solo.clickOnView(solo.getView("tab_image", 1));
 		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		solo.clickOnText(ValidationText.MAYBE_LIKE);
@@ -169,7 +169,7 @@ public class FavoriteStore extends ActivityInstrumentationTestCase2<Activity> {
 	 */
 	public void testNumberOfStoreAndCollectedItems() throws Exception {
 
-		Account.JudgementAccountLogin(solo);
+		Account.judgementAccountLogin(solo);
 		solo.clickOnView(solo.getView("tab_image", 1));
 		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		solo.clickOnText(ValidationText.MAYBE_LIKE);
@@ -196,7 +196,7 @@ public class FavoriteStore extends ActivityInstrumentationTestCase2<Activity> {
 	 */
 	public void testEnterToPromotionItems() throws Exception {
 
-		Account.JudgementAccountLogin(solo);
+		Account.judgementAccountLogin(solo);
 		solo.clickOnView(solo.getView("tab_image", 1));
 		solo.sleep(ValidationText.WAIT_TIME_SHORT);
 		solo.clickOnText(ValidationText.MAYBE_LIKE);
@@ -235,7 +235,7 @@ public class FavoriteStore extends ActivityInstrumentationTestCase2<Activity> {
 	 */
 	public void testAddFavoriteStore() throws Exception {
 
-		Account.JudgementAccountLogin(solo);
+		Account.judgementAccountLogin(solo);
 		// navigate to category screen
 		Action.navigateToCategoryScreen(solo);
 

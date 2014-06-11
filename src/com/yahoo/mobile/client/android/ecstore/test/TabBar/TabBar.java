@@ -60,10 +60,13 @@ public class TabBar extends ActivityInstrumentationTestCase2<Activity> {
 		super.tearDown();
 	}
 
-	// 1977546:Verify tab bar can switch
-	public void testTabbarSwitch() throws Exception {
+	/**
+     * 1977546:Verify tab bar can switch.
+     * @throws Exception if has error
+     */
+	public final void testTabbarSwitch() throws Exception {
 
-		Account.JudgementAccountLogin(solo);
+		Account.judgementAccountLogin(solo);
 
 		// navigate to category screen
 		Action.navigateToCategoryScreen(solo);

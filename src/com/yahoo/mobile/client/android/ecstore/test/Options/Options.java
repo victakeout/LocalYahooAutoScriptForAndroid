@@ -29,67 +29,70 @@ import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 
 @SuppressLint("NewApi")
 public class Options extends ActivityInstrumentationTestCase2<Activity> {
-	private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
-	private static Class<?> launcherActivityClass;
-	private Solo solo;
-	static {
+    private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
+    private static Class<?> launcherActivityClass;
+    private Solo solo;
+    static {
 
-		try {
-			launcherActivityClass = Class
-					.forName(LAUNCHER_ACTIVITY_FULL_CLASSNAME);
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException(e);
-		}
+        try {
+            launcherActivityClass = Class
+                    .forName(LAUNCHER_ACTIVITY_FULL_CLASSNAME);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
-	}
+    }
 
-	@SuppressWarnings("unchecked")
-	public Options() throws ClassNotFoundException {
-		super((Class<Activity>) launcherActivityClass);
-	}
+    @SuppressWarnings("unchecked")
+    public Options() throws ClassNotFoundException {
+        super((Class<Activity>) launcherActivityClass);
+    }
 
-	@Override
-	protected void setUp() throws Exception {
+    @Override
+    protected void setUp() throws Exception {
 
-		solo = new Solo(getInstrumentation(), getActivity());
-		Assert.testFirstLaunch(solo);
-	}
+        solo = new Solo(getInstrumentation(), getActivity());
+        Assert.testFirstLaunch(solo);
+    }
 
-	@Override
-	public void tearDown() throws Exception {
+    @Override
+    public void tearDown() throws Exception {
 
-		solo.finishOpenedActivities();
-		super.tearDown();
-	}
+        solo.finishOpenedActivities();
+        super.tearDown();
+    }
 
-	// 1959919:Verify 0 result function on leaf-category
-	public void testZeroResultDisplayed() throws Exception {
+    /**
+     * 1959919:Verify 0 result function on leaf-category.
+     * @throws Exception if has error
+     */
+    public final void testZeroResultDisplayed() throws Exception {
 
-		solo.clickOnView(solo.getView("tab_image", 2));
-		Action.clickText(solo, ValidationText.HOME_BEDDING_FURNITURE);
-		solo.sleep(ValidationText.WAIT_TIME_LONGER);
-		Action.clickText(solo, ValidationText.HANSHEN_HOME_LIFE);
-		solo.sleep(ValidationText.WAIT_TIME_LONG);
+        solo.clickOnView(solo.getView("tab_image", 2));
+        Action.clickText(solo, ValidationText.HOME_BEDDING_FURNITURE);
+        solo.sleep(ValidationText.WAIT_TIME_LONGER);
+        Action.clickText(solo, ValidationText.HANSHEN_HOME_LIFE);
+        solo.sleep(ValidationText.WAIT_TIME_LONG);
 
-		// Scroll to 10DAYS Science and Technology Museum of sleep
-		android.widget.ListView listView1 = (android.widget.ListView) solo
-				.getView(android.widget.ListView.class, 1);
-		solo.scrollListToLine(listView1, 13);
+        // Scroll to 10DAYS Science and Technology Museum of sleep
+        android.widget.ListView listView1 = (android.widget.ListView) solo
+                .getView(android.widget.ListView.class, 1);
+        solo.scrollListToLine(listView1, 13);
 
-		Action.clickText(solo, ValidationText.Hanshen_Ten_Days);
-		Action.clickText(solo, ValidationText.CATEGORIES);
-		Action.clickText(solo, ValidationText.Hanshen_Memory_Mattress);
+        Action.clickText(solo, ValidationText.Hanshen_Ten_Days);
+        Action.clickText(solo, ValidationText.CATEGORIES);
+        Action.clickText(solo, ValidationText.Hanshen_Memory_Mattress);
 
-		// Get the result page
-		TextView zeroResult = (TextView) solo
-				.getView("category_tab_secondary_title");
-		assertTrue("There are some products displayed.", zeroResult.getText()
-				.toString().trim().equals(ValidationText.ZERO_RESULT));
+        // Get the result page
+        TextView zeroResult = (TextView) solo
+                .getView("category_tab_secondary_title");
+        assertTrue("There are some products displayed.", zeroResult.getText()
+                .toString().trim().equals(ValidationText.ZERO_RESULT));
 
-		solo.clickOnView(solo.getView("menu_filter"));
-		assertTrue("Advanced page not pop up!",
-				solo.searchText(ValidationText.SORT));
+        solo.clickOnView(solo.getView("menu_filter"));
+        assertTrue("Advanced page not pop up!",
+                solo.searchText(ValidationText.SORT));
 
-	}
+    }
 
 }

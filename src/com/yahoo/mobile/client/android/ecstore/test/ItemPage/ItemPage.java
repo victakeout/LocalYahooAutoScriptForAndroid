@@ -69,7 +69,7 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
 	// 1953619:verify for the single commodity discount
 	public void testSingleCommodityDiscount() throws Exception {
 
-		Account.JudgementAccountLogin(solo);
+		Account.judgementAccountLogin(solo);
 		Action.enterToItemPage(solo);
 		TestHelper.swipeUp2(solo, 1);
 		solo.clickOnText(ValidationText.SALES_PROMOTION);
@@ -83,7 +83,7 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
 	// 1953617:verify for full discount
 	public void testFullDiscount() throws Exception {
 
-		Account.JudgementAccountLogin(solo);
+		Account.judgementAccountLogin(solo);
 		Action.enterToItemPage(solo);
 		TestHelper.swipeUp2(solo, 1);
 		solo.clickOnText(ValidationText.SALES_PROMOTION);
@@ -97,7 +97,7 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
 	// 1953614:verify for All customers the full discount
 	public void testAllCustomersDiscount() throws Exception {
 
-		Account.JudgementAccountLogin(solo);
+		Account.judgementAccountLogin(solo);
 		Action.enterToItemPage(solo);
 		TestHelper.swipeUp2(solo, 1);
 		solo.clickOnText(ValidationText.SALES_PROMOTION);
@@ -111,7 +111,7 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
 	// 1959927:Verify user can add an item to shopping cart
 	public void testAddItemToShoppingCart() throws Exception {
 
-		Account.JudgementAccountLogin(solo);
+		Account.judgementAccountLogin(solo);
 		Action.enterToItemPage(solo);
 		Action.addToShoppingCart(solo);
 	}
@@ -119,7 +119,7 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
 	// 1959893:Verify Sharing method can be shown
 	public void testSharingMethod() throws Exception {
 
-		Account.JudgementAccountLogin(solo);
+		Account.judgementAccountLogin(solo);
 		Action.enterToItemPage(solo);
 		TestHelper.swipeUp(solo, 1);
 		solo.clickOnText(ValidationText.SHARE_PRODUCT);
@@ -131,7 +131,7 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
 	// 1953636:verify favorite items
 	public void testVerifyFavoriteitems() throws Exception {
 
-		Account.JudgementAccountLogin(solo);
+		Account.judgementAccountLogin(solo);
 		Action.removeFavoriteItem(solo);
 		Action.enterToItemPage(solo);
 		solo.goBack();

@@ -68,7 +68,7 @@ public class Checkout extends ActivityInstrumentationTestCase2<Activity> {
 	// 1959918:Verify that user can change other delivery places
 	public void testChangeOtherDeliveryPlaces() throws Exception {
 
-		Account.JudgementAccountLogin(solo);
+		Account.judgementAccountLogin(solo);
 		Action.enterToItemPage(solo);
 		Action.addToShoppingCart(solo);
 

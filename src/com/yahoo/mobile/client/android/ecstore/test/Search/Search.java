@@ -736,7 +736,7 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 		Action.clickHomeButtonOnScreen(solo);
 
 		solo.scrollToTop();
-		Assert.CategoryListShow(solo);
+		Assert.categoryListShow(solo);
 
 	}
 
@@ -1256,7 +1256,7 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 	// 1977507:Verify search result when enter special characters in search box
 	public void testEnterSpecialCharactersToSearch() throws Exception {
 
-		Account.JudgementAccountLogin(solo);
+		Account.judgementAccountLogin(solo);
 		Action.clickSearchButtonOnScreen(solo);
 
 		// Input test data.

@@ -59,23 +59,27 @@ public class StorePage extends ActivityInstrumentationTestCase2<Activity> {
 	}
 
 	@Override
-	public void tearDown() throws Exception {
+	public final void tearDown() throws Exception {
 
 		solo.finishOpenedActivities();
 		super.tearDown();
 	}
 
-	// 1959904:Verify user can check purchasing info from store page
-	public void testPurchasingInfoFromStorePage() throws Exception {
+	/**
+     * 1959904:Verify user can check purchasing info from store page.
+     * @throws Exception if has error
+     */
+	public final void testPurchasingInfoFromStorePage() throws Exception {
 
-		Account.JudgementAccountLogin(solo);
+		Account.judgementAccountLogin(solo);
 		Action.enterToItemPage(solo);
 		Action.addToShoppingCart(solo);
 
-		solo.clickOnView(solo.getView("tab_image", 3));
+		solo.clickOnView(solo.getView("tab_image",
+		        Action.VIEW_ID_THREE));
 		solo.clickOnView(solo.getView("ecshopping_cart_store_name", 0));
 		solo.sleep(ValidationText.WAIT_TIME_LONGER);
-		
+
 		// click store LOGO.
 		Action.clickElementsInWebviewByClassname(solo, "pimg");
 		solo.sleep(ValidationText.WAIT_TIME_LONG);
@@ -88,10 +92,14 @@ public class StorePage extends ActivityInstrumentationTestCase2<Activity> {
 		assertTrue("Shopping Tips not display", mustKnow.isShown());
 	}
 
-	// 1959901:Verify all classification and product page
-	public void testClassificationAndProductPage() throws Exception {
 
-		Account.JudgementAccountLogin(solo);
+	/**
+     * 1959901:Verify all classification and product page.
+     * @throws Exception if has error
+     */
+	public final void testClassificationAndProductPage() throws Exception {
+
+		Account.judgementAccountLogin(solo);
 		Action.enterToItemPage(solo);
 		TestHelper.swipeUp(solo, 1);
 		solo.clickOnText(ValidationText.SEE_ALL_STORE_PRODUCT);
@@ -100,7 +108,7 @@ public class StorePage extends ActivityInstrumentationTestCase2<Activity> {
 
 		solo.clickOnView(solo.getView("storeinfo_addfav"));
 		solo.sleep(ValidationText.WAIT_TIME_SHORT);
-		
+
 		if (solo.waitForText(ValidationText.HAS_REMOVED_COMMODITY)) {
 			solo.clickOnView(solo.getView("storeinfo_addfav"));
 		}
@@ -113,15 +121,21 @@ public class StorePage extends ActivityInstrumentationTestCase2<Activity> {
 		solo.clickOnText(ValidationText.COMMODITY);
 		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 		solo.clickOnText(ValidationText.CATEGORIES);
-		
-		View categoryThumb = (View) solo.getView("category_thumb_expand");
-		assertTrue("category thumb is not show.", categoryThumb.isShown());
-		
+
+		View categoryThumb = (View) solo.getView(
+		        "category_thumb_expand");
+		assertTrue("category thumb is not show.",
+		        categoryThumb.isShown());
+
 	}
 
-	// 1959887:Verify purchase person-time
-	public void testPurchasePersontime() throws Exception {
-		
+
+	/**
+     * 1959887:Verify purchase person-time.
+     * @throws Exception if has error
+     */
+	public final void testPurchasePersontime() throws Exception {
+
 		// click search button
 		Action.clickSearchButtonOnScreen(solo);
 		// input keyword and search
@@ -131,7 +145,8 @@ public class StorePage extends ActivityInstrumentationTestCase2<Activity> {
 				"listitem_storelist_store_name", 0);
 		solo.clickOnView(dongjing);
 
-		TextView buyer = (TextView) solo.getView("listitem_productlist_buyers",
+		TextView buyer = (TextView) solo.getView(
+		        "listitem_productlist_buyers",
 				1);
 		String buyers = buyer.getText().toString();
 		String number = buyers.substring(0, buyers.lastIndexOf("人"));
@@ -144,5 +159,5 @@ public class StorePage extends ActivityInstrumentationTestCase2<Activity> {
 		Log.i("number", number);
 		assertTrue("buyer infomation format incorrect", isNum);
 	}
-	
+
 }

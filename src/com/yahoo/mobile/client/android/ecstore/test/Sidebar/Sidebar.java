@@ -30,123 +30,132 @@ import android.widget.TextView;
 import com.robotium.solo.Solo;
 import com.yahoo.mobile.client.android.ecstore.Account.Account;
 import com.yahoo.mobile.client.android.ecstore.Action.Action;
+import com.yahoo.mobile.client.android.ecstore.Assert.Assert;
 import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 
 @SuppressLint("NewApi")
 public class Sidebar extends ActivityInstrumentationTestCase2<Activity> {
-	private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
-	private static Class<?> launcherActivityClass;
-	private Solo solo;
-	static {
+    private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
+    private static Class<?> launcherActivityClass;
+    private Solo solo;
+    static {
 
-		try {
-			launcherActivityClass = Class
-					.forName(LAUNCHER_ACTIVITY_FULL_CLASSNAME);
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException(e);
-		}
+        try {
+            launcherActivityClass = Class
+                    .forName(LAUNCHER_ACTIVITY_FULL_CLASSNAME);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
-	}
+    }
 
-	@SuppressWarnings("unchecked")
-	public Sidebar() throws ClassNotFoundException {
-		super((Class<Activity>)launcherActivityClass);
-	}
+    @SuppressWarnings("unchecked")
+    public Sidebar() throws ClassNotFoundException {
+        super((Class<Activity>) launcherActivityClass);
+    }
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
-		solo = new Solo(getInstrumentation(), getActivity());
-		// Assert.testFirstLaunch(solo);
+    @Override
+    protected void setUp() throws Exception {
+        super.setUp();
+        solo = new Solo(getInstrumentation(), getActivity());
+        Assert.testFirstLaunch(solo);
 
-	}
+    }
 
-	@Override
-	public void tearDown() throws Exception {
+    @Override
+    public void tearDown() throws Exception {
 
-		solo.finishOpenedActivities();
-		super.tearDown();
-	}
+        solo.finishOpenedActivities();
+        super.tearDown();
+    }
 
-	// 1959892:Verify user can edit category preferences
-	public void testEditCategorypreferences() throws Exception {
+    /**
+     *  1959892:Verify user can edit category preferences.
+     * @throws Exception  if has error
+     */
+    public final void testEditCategorypreferences() throws Exception {
 
-		Account.JudgementAccountLogin(solo);
-		// click on up icon
-		Action.clickHomeButtonOnScreen(solo);
-		solo.clickOnText(ValidationText.EDIT_FAVORITE_CATEGORY);
+        Account.judgementAccountLogin(solo);
+        // click on up icon
+        Action.clickHomeButtonOnScreen(solo);
+        solo.clickOnText(ValidationText.EDIT_FAVORITE_CATEGORY);
 
-		// Get the grid view count.
-		GridView lv = (GridView) solo.getView("category_editor_grid");
-		assertTrue("Not enter to edit category screen. ", lv.isShown());
-		Log.i("number", String.valueOf(lv.getCount()));
+        // Get the grid view count.
+        GridView lv = (GridView) solo.getView("category_editor_grid");
+        assertTrue("Not enter to edit category screen. ", lv.isShown());
+        Log.i("number", String.valueOf(lv.getCount()));
 
-		for (int i = 0; i < lv.getCount(); i++) {
-			View category = (View) solo.getView("category_editor_grid_button",
-					i);
-			solo.clickOnView(category);
-			assertTrue("Category item is not selected.", category.isPressed());
-		}
-	}
+        for (int i = 0; i < lv.getCount(); i++) {
+            View category = (View) solo.getView("category_editor_grid_button",
+                    i);
+            solo.clickOnView(category);
+            assertTrue("Category item is not selected.", category.isPressed());
+        }
+    }
 
-	// 1977532:Verify settings screen
-	public void testSettingsButton() throws Exception {
-		
-		Account.JudgementAccountLogin(solo);
-		// click on up icon		
-		Action.clickHomeButtonOnScreen(solo);
-		Action.clickText(solo, ValidationText.SETTING);
-		
-		//Recent browse text.
-		TextView recent = (TextView)solo.getView("title",3);
-		assertTrue("Cannot fount recent browse text.",recent.getText().toString().trim().equals(ValidationText.RECENT_BROWSE));
-		
-		//Get the toggle button status.
-		Switch browse_History = (Switch)solo.getView("switchWidget",1);
-		assertTrue("Notification switch is off", browse_History.isChecked());
-		
-		//Disable the toggle button and go to browse product.
-		solo.clickOnView(browse_History);
-		solo.sleep(ValidationText.WAIT_TIME_SHORT);
-		Action.clickText(solo, ValidationText.CLEAN_BROWSE_RECORD);
-		Action.clickText(solo, ValidationText.OK);
-		solo.goBack();
-		Action.enterToItemPage(solo);
-		solo.clickOnView(solo.getView("tab_image", 4));
-		solo.sleep(ValidationText.WAIT_TIME_SHORT);
-		Action.clickText(solo, ValidationText.RECENT_BROWSE);
-		solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
-		TextView no_Result = (TextView)solo.getView("no_result_text",1);	
-		assertTrue("Exist some browse record displayed",no_Result.isShown());
-		solo.goBack();
-		
-		//Search  product.
-		solo.goBack();
-		Action.clickSearchButtonOnScreen(solo);
-		Action.searchAfterPutData(solo, 0, "a");
-		solo.sleep(ValidationText.WAIT_TIME_SHORT);
-		solo.goBack();
-		
-		solo.sleep(ValidationText.WAIT_TIME_SHORT);
-		Action.clickHomeButtonOnScreen(solo);
-		Action.clickText(solo, ValidationText.SETTING);
-		Switch browse_Historys = (Switch)solo.getView("switchWidget",1);
-		solo.clickOnView(browse_Historys);
-		Action.clickText(solo, ValidationText.CLEAR_SEARCH_HISTORY);
-		Action.clickText(solo, ValidationText.OK);
-		solo.goBack(); 
-		Action.clickSearchButtonOnScreen(solo);
-		
-		boolean icon = false;
-		try{
-			View Plugs = (View)solo.getView("search_fill_up",1);
-			assertFalse("Search history exist.",Plugs.isShown());
- 		}catch(AssertionError e){
-			icon =true;
-			assertTrue("Search history exist.",icon);
-		}
-		
-		 
-		
-	}
+    /**
+     * 1977532:Verify settings screen.
+     * @throws Exception  if has error
+     */
+    public final void testSettingsButton() throws Exception {
+
+        Account.judgementAccountLogin(solo);
+        // click on up icon
+        Action.clickHomeButtonOnScreen(solo);
+        Action.clickText(solo, ValidationText.SETTING);
+
+        // Recent browse text.
+        TextView recent = (TextView) solo.getView(
+                "title", Action.VIEW_ID_THREE);
+        assertTrue("Cannot fount recent browse text.", recent.getText()
+                .toString().trim().equals(ValidationText.RECENT_BROWSE));
+
+        // Get the toggle button status.
+        Switch browseHistory = (
+                Switch) solo.getView("switchWidget", 1);
+        assertTrue("Notification switch is off", browseHistory.isChecked());
+
+        // Disable the toggle button and go to browse product.
+        solo.clickOnView(browseHistory);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        Action.clickText(solo, ValidationText.CLEAN_BROWSE_RECORD);
+        Action.clickText(solo, ValidationText.OK);
+        solo.goBack();
+        Action.enterToItemPage(solo);
+        solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_FOUR));
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        Action.clickText(solo, ValidationText.RECENT_BROWSE);
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+        TextView noResult = (
+                TextView) solo.getView("no_result_text", 1);
+        assertTrue("Exist some browse record displayed", noResult.isShown());
+        solo.goBack();
+
+        // Search product.
+        solo.goBack();
+        Action.clickSearchButtonOnScreen(solo);
+        Action.searchAfterPutData(solo, 0, "a");
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.goBack();
+
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        Action.clickHomeButtonOnScreen(solo);
+        Action.clickText(solo, ValidationText.SETTING);
+        Switch browseHistorys = (Switch) solo.getView("switchWidget", 1);
+        solo.clickOnView(browseHistorys);
+        Action.clickText(solo, ValidationText.CLEAR_SEARCH_HISTORY);
+        Action.clickText(solo, ValidationText.OK);
+        solo.goBack();
+        Action.clickSearchButtonOnScreen(solo);
+
+        boolean icon = false;
+        try {
+            View plugs = (View) solo.getView("search_fill_up", 1);
+            assertFalse("Search history exist.", plugs.isShown());
+        } catch (AssertionError e) {
+            icon = true;
+            assertTrue("Search history exist.", icon);
+        }
+
+    }
 }
