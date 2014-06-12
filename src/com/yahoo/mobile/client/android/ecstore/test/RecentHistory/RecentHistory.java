@@ -1,19 +1,23 @@
 /*
  * This is automated script about "RecentHistory".
- * 
- * You can run these test cases either on the emulator or on device. 
+ *
+ * You can run these test cases either on the emulator or on device.
  * By Eclipse:
  * Right click the test project and select Run As --> Run As Android JUnit Test
  * By Ant:
- * 1.Run "android update test-project -m [path to target application] -p [path to the test folder]"  in command line .
+ * 1.Run "android update test-project -m [path to target application] -p
+ *  [path to the test folder]"  in command line .
  * 2."ant test"
  * By using instrument command:
- * Run all test project:adb shell am instrument -w com.yahoo.mobile.client.android.ecstore.test/android.test.InstrumentationTestRunner
- * Just run RecentHistory:adb shell am instrument -e class com.yahoo.mobile.client.android.ecstore.test.RecentHistory.RecentHistory -w com.yahoo.mobile.client.android.ecstore.test/android.test.InstrumentationTestRunner
- * 
+ * Run all test project:adb shell am instrument -w com.yahoo.mobile.client
+ * .android.ecstore.test/android.test.InstrumentationTestRunner
+ * Just run RecentHistory:adb shell am instrument -e class com.yahoo.mobile
+ * .client.android.ecstore.test.RecentHistory.RecentHistory -w com.yahoo.mobile
+ * .client.android.ecstore.test/android.test.InstrumentationTestRunner
+ *
  * @author SYMBIO.
  * @version YAHOO APP:1.2.4
- * 
+ *
  */
 
 package com.yahoo.mobile.client.android.ecstore.test.RecentHistory;
@@ -29,10 +33,26 @@ import com.yahoo.mobile.client.android.ecstore.Action.Action;
 import com.yahoo.mobile.client.android.ecstore.Assert.Assert;
 import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 
+/**
+ * @author Administrator
+ *
+ */
 @SuppressLint("NewApi")
 public class RecentHistory extends ActivityInstrumentationTestCase2<Activity> {
-    private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
+    /**
+     * Declare application main activity.
+     */
+    private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME =
+            "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
+
+    /**
+     * Declare a variable of type Class for start tested program.
+     */
     private static Class<?> launcherActivityClass;
+
+    /**
+     * Declare a Solo object.
+     */
     private Solo solo;
     static {
 
@@ -45,13 +65,16 @@ public class RecentHistory extends ActivityInstrumentationTestCase2<Activity> {
 
     }
 
+    /**
+     * @throws ClassNotFoundException if has error
+     */
     @SuppressWarnings("unchecked")
     public RecentHistory() throws ClassNotFoundException {
         super((Class<Activity>) launcherActivityClass);
     }
 
     @Override
-    protected void setUp() throws Exception {
+    protected final void setUp() throws Exception {
         super.setUp();
         solo = new Solo(getInstrumentation(), getActivity());
         Assert.testFirstLaunch(solo);
@@ -59,7 +82,7 @@ public class RecentHistory extends ActivityInstrumentationTestCase2<Activity> {
     }
 
     @Override
-    public void tearDown() throws Exception {
+    public final void tearDown() throws Exception {
 
         solo.finishOpenedActivities();
         super.tearDown();

@@ -1,19 +1,23 @@
 /*
  * This is automated script about "MyAccount".
- * 
- * You can run these test cases either on the emulator or on device. 
+ *
+ * You can run these test cases either on the emulator or on device.
  * By Eclipse:
  * Right click the test project and select Run As --> Run As Android JUnit Test
  * By Ant:
- * 1.Run "android update test-project -m [path to target application] -p [path to the test folder]"  in command line .
+ * 1.Run "android update test-project -m [path to target application] -p
+ *  [path to the test folder]"  in command line .
  * 2."ant test"
  * By using instrument command:
- * Run all test project:adb shell am instrument -w com.yahoo.mobile.client.android.ecstore.test/android.test.InstrumentationTestRunner
- * Just run MyAccount:adb shell am instrument -e class com.yahoo.mobile.client.android.ecstore.test.MyAccount.MyAccount -w com.yahoo.mobile.client.android.ecstore.test/android.test.InstrumentationTestRunner
- * 
+ * Run all test project:adb shell am instrument -w com.yahoo.mobile.
+ * client.android.ecstore.test/android.test.InstrumentationTestRunner
+ * Just run MyAccount:adb shell am instrument -e class com.yahoo.mobile.
+ * client.android.ecstore.test.MyAccount.MyAccount -w com.yahoo.mobile.
+ * client.android.ecstore.test/android.test.InstrumentationTestRunner
+ *
  * @author SYMBIO.
  * @version YAHOO APP:1.2.4
- * 
+ *
  */
 
 package com.yahoo.mobile.client.android.ecstore.test.MyAccount;
@@ -32,10 +36,27 @@ import com.yahoo.mobile.client.android.ecstore.Assert.Assert;
 import com.yahoo.mobile.client.android.ecstore.test.TestHelper;
 import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 
+/**
+ * @author Administrator
+ *
+ */
 @SuppressLint("NewApi")
 public class MyAccount extends ActivityInstrumentationTestCase2<Activity> {
-    private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
+
+    /**
+     * Declare application main activity.
+     */
+    private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME =
+            "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
+
+    /**
+     * Declare a variable of type Class for start tested program.
+     */
     private static Class<?> launcherActivityClass;
+
+    /**
+     * Declare a Solo object.
+     */
     private Solo solo;
     static {
 
@@ -48,13 +69,16 @@ public class MyAccount extends ActivityInstrumentationTestCase2<Activity> {
 
     }
 
+    /**
+     * @throws ClassNotFoundException if has error
+     */
     @SuppressWarnings("unchecked")
     public MyAccount() throws ClassNotFoundException {
         super((Class<Activity>) launcherActivityClass);
     }
 
     @Override
-    protected void setUp() throws Exception {
+    protected final void setUp() throws Exception {
 
         solo = new Solo(getInstrumentation(), getActivity());
         Assert.testFirstLaunch(solo);
@@ -191,7 +215,7 @@ public class MyAccount extends ActivityInstrumentationTestCase2<Activity> {
 
     }
 
- 
+
     /**
      * 1977523:verify recent history is no data.
      * @throws Exception if has error
@@ -224,16 +248,17 @@ public class MyAccount extends ActivityInstrumentationTestCase2<Activity> {
 
         Account.judgementAccountLogin(solo);
         Action.enterToItemPage(solo);
-        solo.clickOnView(solo.getView("tab_image", 4));
+        solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_FOUR));
         Action.clickText(solo, ValidationText.RECENT_BROWSE);
         View img = (View) solo.getView("listitem_productlist_image");
         solo.clickLongOnView(img);
 
         // Confirm remove it.
         solo.clickOnView(solo.getView("button1"));
-        TextView NoResult = (TextView) solo.getView("no_result_text", 1);
+        TextView noResult = (TextView)
+                solo.getView("no_result_text", 1);
         assertTrue("There are some product info displayed. ",
-                NoResult.isShown());
+                noResult.isShown());
 
     }
 
@@ -271,7 +296,7 @@ public class MyAccount extends ActivityInstrumentationTestCase2<Activity> {
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
 
         TextView results = (TextView) solo.getView("tx_header", 1);
-        String counts = results.getText().toString().trim().substring(6, 7);
+        String counts = results.getText().toString().trim().substring(6,7);
         Log.i("number", "counts:" + counts);
 
         solo.sleep(ValidationText.WAIT_TIME_MIDDLE);

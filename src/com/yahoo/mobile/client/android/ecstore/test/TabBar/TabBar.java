@@ -1,19 +1,21 @@
+
 /*
  * This is automated script about "TabBar".
- * 
- * You can run these test cases either on the emulator or on device. 
+ * You can run these test cases either on the emulator or on device.
  * By Eclipse:
  * Right click the test project and select Run As --> Run As Android JUnit Test
  * By Ant:
- * 1.Run "android update test-project -m [path to target application] -p [path to the test folder]"  in command line .
+ * 1.Run "android update test-project -m [path to target application] -p
+ * [path to the test folder]"  in command line.
  * 2."ant test"
  * By using instrument command:
- * Run all test project:adb shell am instrument -w com.yahoo.mobile.client.android.ecstore.test/android.test.InstrumentationTestRunner
- * Just run TabBar:adb shell am instrument -e class com.yahoo.mobile.client.android.ecstore.test.TabBar.TabBar -w com.yahoo.mobile.client.android.ecstore.test/android.test.InstrumentationTestRunner
- * 
+ * Run all test project:adb shell am instrument -w com.yahoo.mobile.client.
+ * android.ecstore.test/android.test.InstrumentationTestRunner
+ * Just run TabBar:adb shell am instrument -e class com.yahoo.mobile.
+ * client.android.ecstore.test.TabBar.TabBar -w com.yahoo.mobile.
+ * client.android.ecstore.test/android.test.InstrumentationTestRunner
  * @author SYMBIO.
  * @version YAHOO APP:1.2.4
- * 
  */
 package com.yahoo.mobile.client.android.ecstore.test.TabBar;
 
@@ -25,54 +27,82 @@ import com.robotium.solo.Solo;
 import com.yahoo.mobile.client.android.ecstore.Account.Account;
 import com.yahoo.mobile.client.android.ecstore.Action.Action;
 
+/**
+ * @author Administrator
+ *
+ */
 @SuppressLint("NewApi")
 public class TabBar extends ActivityInstrumentationTestCase2<Activity> {
-	private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
-	private static Class<?> launcherActivityClass;
-	private Solo solo;
-	static {
 
-		try {
-			launcherActivityClass = Class
-					.forName(LAUNCHER_ACTIVITY_FULL_CLASSNAME);
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException(e);
-		}
+    /**
+     * Declare application main activity.
+     */
+    private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME =
+            "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
 
-	}
+    /**
+     * Declare a variable of type Class for start tested program.
+     */
+    private static Class<?> launcherActivityClass;
 
-	@SuppressWarnings("unchecked")
-	public TabBar() throws ClassNotFoundException {
-		super((Class<Activity>)launcherActivityClass);
-	}
+    /**
+     * Declare a Solo object.
+     */
+    private Solo solo;
+    static {
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
-		solo = new Solo(getInstrumentation(), getActivity());
+        try {
+            launcherActivityClass = Class
+                    .forName(LAUNCHER_ACTIVITY_FULL_CLASSNAME);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
-	}
+    }
 
-	@Override
-	public void tearDown() throws Exception {
+    /**
+     * @throws ClassNotFoundException if has error
+     */
+    @SuppressWarnings("unchecked")
+    public TabBar() throws ClassNotFoundException {
+        super((Class<Activity>) launcherActivityClass);
+    }
 
-		solo.finishOpenedActivities();
-		super.tearDown();
-	}
+    @Override
+    protected final void setUp() throws Exception {
 
-	/**
+       /*setUp() is run before a test case is started.
+       This is where the solo object is created.*/
+
+        super.setUp();
+        solo = new Solo(getInstrumentation(), getActivity());
+
+    }
+
+    @Override
+    public final void tearDown() throws Exception {
+
+      /*  tearDown() is run after a test case has finished.
+          finishOpenedActivities() will finish all the activities that
+          have been opened during the test execution. */
+
+        solo.finishOpenedActivities();
+        super.tearDown();
+    }
+
+    /**
      * 1977546:Verify tab bar can switch.
      * @throws Exception if has error
      */
-	public final void testTabbarSwitch() throws Exception {
+    public final void testTabbarSwitch() throws Exception {
 
-		Account.judgementAccountLogin(solo);
+        Account.judgementAccountLogin(solo);
 
-		// navigate to category screen
-		Action.navigateToCategoryScreen(solo);
+        // navigate to category screen
+        Action.navigateToCategoryScreen(solo);
 
-		// navigate to favorite store screen
-		Action.navigateToFavoriteStoreScreen(solo);
+        // navigate to favorite store screen
+        Action.navigateToFavoriteStoreScreen(solo);
 
-	}
+    }
 }

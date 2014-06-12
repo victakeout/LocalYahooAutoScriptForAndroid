@@ -1,12 +1,7 @@
-package com.yahoo.mobile.client.android.ecstore.test.Category;
-
 /**
-* Domain classes used to produce .....
-* <p>
-* These classes contain the ......
-* </p>
-*
-* @since 1.0
-* @author somebody
-* @version 1.0
+* This classes contains  automated script about "Category".
+* @author SYMBIO
+* @version YAHOO APP:1.2.4
 */
+
+package com.yahoo.mobile.client.android.ecstore.test.Category;
