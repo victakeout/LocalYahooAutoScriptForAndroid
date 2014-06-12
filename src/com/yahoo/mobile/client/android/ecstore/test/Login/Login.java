@@ -2,12 +2,15 @@
  * This is automated script about "Login".
  *
  * You can run these test cases either on the emulator or on device.
+ *
  * By Eclipse:
  * Right click the test project and select Run As --> Run As Android JUnit Test
+ *
  * By Ant:
  * 1.Run "android update test-project -m [path to target application] -p
  *  [path to the test folder]"  in command line .
  * 2."ant test"
+ *
  * By using instrument command:
  * Run all test project:adb shell am instrument -w com.yahoo.mobile.client
  * .android.ecstore.test/android.test.InstrumentationTestRunner
