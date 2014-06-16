@@ -28,6 +28,7 @@ package com.yahoo.mobile.client.android.ecstore.test.ItemPage;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -83,7 +84,7 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
     protected final void setUp() throws Exception {
 
         solo = new Solo(getInstrumentation(), getActivity());
-        Assert.testFirstLaunch(solo);
+       // Assert.testFirstLaunch(solo);
     }
 
     @Override
@@ -166,8 +167,9 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
         Action.enterToItemPage(solo);
         TestHelper.swipeUp(solo, 1);
         solo.clickOnText(ValidationText.SHARE_PRODUCT);
-        View share = (View) solo.getView("alertTitle", 1);
-        assertEquals("Share frame not pop up. ", share.isShown());
+
+        assertEquals("Share frame not pop up. ", solo.searchText(
+                ValidationText.SHARE_PRODUCT));
 
     }
 
@@ -184,16 +186,18 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
         Action.clickStarIconNote(solo);
         TextView storeName = (TextView) solo.getView(
                 "listitem_productlist_store_name", 0);
+        Log.i("number", "1"+storeName.getText().toString().trim());
         solo.clickOnView(solo.getView("tab_image",
                 Action.VIEW_ID_FOUR));
         solo.clickOnText(ValidationText.PRODUCT_COLLECTION);
         solo.sleep(ValidationText.WAIT_TIME_LONG);
         TextView collectStoreName = (TextView) solo.getView(
                 "listitem_productlist_store_name", 0);
-        assertEquals(
+        Log.i("number", "2"+collectStoreName.getText().toString().trim());
+        assertTrue(
                 "Product not added to favorite list. ",
-                storeName.getText().toString()
-                .equals(collectStoreName.getText().toString()));
+                storeName.getText().toString().trim()
+                .equals(collectStoreName.getText().toString().trim()));
     }
 
 
@@ -276,8 +280,8 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
 
         solo.getCurrentActivity().getClass();
 
-        View share = (View) solo.getView("alertTitle", 1);
-        assertTrue("Share window not pop up.", share.isShown());
-
+        assertFalse("Share window not pop up.", solo.searchText(
+                "ValidationText.SHARE_PRODUCT"));
+        solo.goBack();
     }
 }

@@ -37,7 +37,6 @@ import com.robotium.solo.Solo;
 import com.robotium.solo.WebElement;
 import com.yahoo.mobile.client.android.ecstore.Account.Account;
 import com.yahoo.mobile.client.android.ecstore.Action.Action;
-import com.yahoo.mobile.client.android.ecstore.Assert.Assert;
 import com.yahoo.mobile.client.android.ecstore.test.TestHelper;
 import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 
@@ -86,7 +85,7 @@ public class ShoppingCart extends ActivityInstrumentationTestCase2<Activity> {
     protected final void setUp() throws Exception {
         super.setUp();
         solo = new Solo(getInstrumentation(), getActivity());
-        Assert.testFirstLaunch(solo);
+       // Assert.testFirstLaunch(solo);
 
     }
 
@@ -220,7 +219,7 @@ public class ShoppingCart extends ActivityInstrumentationTestCase2<Activity> {
         solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_THREE));
         solo.clickOnView(solo.getView("ecshopping_cart_store_name", 0));
         solo.sleep(ValidationText.WAIT_TIME_LONGER);
-        TestHelper.swipeUp(solo, 1);
+        TestHelper.swipeUp(solo, 2);
         Action.clickElementsInWebviewByText(solo, ValidationText.WANT_CHECKOUT);
         Action.searchTextOnWebview(solo, ValidationText.BUY_INFO);
 

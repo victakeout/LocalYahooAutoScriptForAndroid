@@ -522,14 +522,32 @@ public final class Action {
      */
     public static void removeFavoriteItem(final Solo solo) throws Exception {
 
-        solo.clickLongOnView(solo.getView("listitem_productlist_image", 0));
+        solo.clickOnView(solo.getView("tab_image", VIEW_ID_FOUR));
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.clickOnText(ValidationText.PRODUCT_COLLECTION);
+        solo.sleep(ValidationText.WAIT_TIME_LONG);
+        if(solo.searchText(ValidationText.ALREAD_ADDED)){
+            TextView  title = (TextView)solo.getView ("tx_header",0);
+            Log.i("number", title.getText().toString().trim().substring(5,6));
+            if (title.isShown()) {
+                String number = title.getText().toString().trim().substring(5,6);
+                int numbers = Integer.parseInt(number);
+                for (int f = 0 ; f < numbers ; f++){
+                    solo.clickLongOnView(solo.getView(
+                            "listitem_productlist_image", 0));
+                    solo.sleep(ValidationText.WAIT_TIME_SHORT);
+                    solo.clickOnButton(ValidationText.OK);
+                    solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+                }
+                junit.framework.Assert.assertFalse(
+                        "Did not remove all.",title.isShown());
 
-        // Confirm remove it.
-        solo.clickOnView(solo.getView("button1"));
-
-        /*       junit.framework.Assert.assertTrue("Remove failed.",
-         * solo.waitForText("此商品收藏已移除"));
-*/
+            } else {
+                junit.framework.Assert.assertTrue("Did not remove all",true);
+            }
+        }else{
+                junit.framework.Assert.assertTrue("Did not remove all",true);
+        }
         }
 
 
@@ -579,7 +597,10 @@ public final class Action {
 
         Log.i("number", solo.getCurrentActivity().getClass().toString());
         // Swipe the screen until the buy button displayed.
-        TestHelper.swipeUp2(solo, 2);
+        TestHelper.swipeUp2(solo, 1);
+        solo.scrollListToTop(0);
+
+
         View shopCart;
         try {
             shopCart = solo.getView("productitem_btn_add_to_shopping_cart");
@@ -588,9 +609,14 @@ public final class Action {
         } catch (AssertionError e) {
 
             TestHelper.swipeUp2(solo, 2);
+            try {
             shopCart = solo.getView("productitem_btn_add_to_shopping_cart");
             solo.clickOnView(shopCart);
-
+            } catch (AssertionError a) {
+                TestHelper.swipeUp2(solo, 2);
+                shopCart = solo.getView("productitem_btn_add_to_shopping_cart");
+                solo.clickOnView(shopCart);
+            }
         }
 
         // Select product property if it exists.
@@ -598,7 +624,7 @@ public final class Action {
             radioButtons = (View) solo.getView(
                     "product_item_spec_item_selections", 0);
         } catch (AssertionError e) {
-            TestHelper.swipeUp2(solo, 2);
+            TestHelper.swipeUp(solo, 2);
             solo.sleep(ValidationText.WAIT_TIME_SHORT);
             View shopCarts = solo
                     .getView("productitem_btn_add_to_shopping_cart");

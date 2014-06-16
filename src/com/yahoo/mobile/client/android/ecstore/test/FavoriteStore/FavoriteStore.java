@@ -329,4 +329,24 @@ public class FavoriteStore extends ActivityInstrumentationTestCase2<Activity> {
                 "listitem_favoritestore_image1", 0);
         assertTrue("Add to favorite store failed.", shop.isShown());
     }
+
+    /**
+     * 1954565:Verify pull down to refresh function.
+     * @throws Exception if has error
+     */
+    public final void testFavoriteStoreRefresh()
+            throws Exception {
+
+        solo.waitForActivity("ECStoreActivity",
+                ValidationText.WAIT_TIME_SHORT);
+
+        solo.clickOnView(solo.getView("tab_image",1));
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        TestHelper.swipeDown(solo, 10);
+
+        //Checks if the pull refresh text is shown.
+        TextView pullRefresh = (TextView)
+                solo.getView("pull_to_refresh_text");
+        assertTrue("Refresh failed", pullRefresh.isShown());
+    }
 }

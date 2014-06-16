@@ -89,6 +89,8 @@ public class ValidationText {
 	public static final String HAS_ADDED_COMMODITY = "已加入最愛商店";
 
 	public static final String HAS_REMOVED_COMMODITY = "此最愛商店已移除";
+	
+	public static final String ALREAD_ADDED = "你已收藏了";
 
 	public static final String VERSION_UPDATE = "版本更新";
 
