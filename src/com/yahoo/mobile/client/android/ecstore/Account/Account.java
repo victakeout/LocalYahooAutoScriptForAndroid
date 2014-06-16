@@ -208,6 +208,7 @@ public final class Account {
      */
     public static void judgementAccountLogin(final Solo solo) throws Exception {
 
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
         solo.clickOnView(solo.getView("tab_image", VIEW_ID));
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
 

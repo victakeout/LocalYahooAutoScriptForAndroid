@@ -134,6 +134,7 @@ public final class Action {
         solo.waitForText(ValidationText.COMMODITY, 1,
                 ValidationText.WAIT_TIME_SHORT);
         solo.clickOnText(ValidationText.COMMODITY);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
         solo.clickOnView(solo.getView("menu_filter"));
         solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
         solo.clickOnView(solo.getView("btn_browse_mode"));
@@ -150,6 +151,7 @@ public final class Action {
     public static void clickSearchButtonOnScreen(final Solo solo)
             throws Exception {
 
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
         View iv = solo.getView("menu_search", 0);
         solo.clickOnView(iv);
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
@@ -588,6 +590,7 @@ public final class Action {
             TestHelper.swipeUp2(solo, 2);
             shopCart = solo.getView("productitem_btn_add_to_shopping_cart");
             solo.clickOnView(shopCart);
+
         }
 
         // Select product property if it exists.
@@ -686,7 +689,9 @@ public final class Action {
     public static void enterToItemPage(final Solo solo)
             throws Exception {
 
-        Action.clickText(solo, ValidationText.ALL_CATEGORIES);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.clickOnView(solo.getView("tab_image", 2));
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
         Action.clickText(solo, ValidationText.APPAREL);
         Action.clickText(solo, ValidationText.COMMODITY);
         solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
@@ -823,9 +828,11 @@ public final class Action {
 
         // navigate to category screen
         solo.clickOnView(solo.getView("tab_image", VIEW_ID_TWO));
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
 
         // click search button
         Action.clickSearchButtonOnScreen(solo);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
 
         // input keyword and search
         Action.searchAfterPutData(solo, 0, ValidationText.JACKET);

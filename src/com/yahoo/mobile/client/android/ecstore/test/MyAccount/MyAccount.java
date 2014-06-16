@@ -127,7 +127,7 @@ public class MyAccount extends ActivityInstrumentationTestCase2<Activity> {
         solo.goBack();
         Account.overAccountLogIn(solo);
         solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_FOUR));
-        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+        solo.sleep(ValidationText.WAIT_TIME_LONG);
 
         // Get the favorite item count and forced convert "String" to "Int".
         TextView favoriteItemsRecheck = (TextView) solo
@@ -226,7 +226,13 @@ public class MyAccount extends ActivityInstrumentationTestCase2<Activity> {
     public final void testRecentHistoryNoData() throws Exception {
 
         Account.judgementAccountLogin(solo);
-        Action.clearHistoryInfomation(solo);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        Action.clickHomeButtonOnScreen(solo);
+        solo.clickOnText(ValidationText.SETTING);
+        solo.clickOnText(ValidationText.CLEAN_BROWSE_RECORD);
+        solo.clickOnView(solo.getView("button1"));
+        solo.goBack();
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
         solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_FOUR));
         Action.clickText(solo, ValidationText.RECENT_BROWSE);
         solo.sleep(ValidationText.WAIT_TIME_LONG);
@@ -353,7 +359,9 @@ public class MyAccount extends ActivityInstrumentationTestCase2<Activity> {
         Action.enterToItemPage(solo);
         solo.goBack();
         Action.clickStarIconNote(solo);
+        solo.goBack();
         solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_FOUR));
+        solo.sleep(ValidationText.WAIT_TIME_LONG);
 
         // Get the favorite count.
         TextView outNumber = (TextView) solo
@@ -361,8 +369,13 @@ public class MyAccount extends ActivityInstrumentationTestCase2<Activity> {
         int outNumbers = Integer.valueOf(outNumber.getText().toString());
         Log.i("number", "OutNumbers:" + outNumber.getText().toString());
 
-        Action.enterToItemPage(solo);
-        solo.goBack();
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.clickOnView(solo.getView("tab_image", 2));
+        solo.scrollToTop();
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        Action.clickText(solo, ValidationText.APPAREL);
+        Action.clickText(solo, ValidationText.COMMODITY);
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 
         // Click star icon to add to favorite.
         Action.clickStarIconNote(solo);

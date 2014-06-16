@@ -158,6 +158,7 @@ public class SRP extends ActivityInstrumentationTestCase2 <Activity> {
 
         Action.enterToJacketAfterSearch(solo);
 
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
         // get the text of search result
         String str = Action.getValuesInTextview(solo,
                 "category_tab_secondary_title", 0).replace(
@@ -216,7 +217,7 @@ public class SRP extends ActivityInstrumentationTestCase2 <Activity> {
 
         // swipe 4 times
         for (int k = 0; k < Action.VIEW_ID_FOUR; k++) {
-            TestHelper.swipeDown(solo, 1);
+            TestHelper.swipeUp(solo, 1);
         }
         solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 
@@ -395,12 +396,13 @@ public class SRP extends ActivityInstrumentationTestCase2 <Activity> {
         // navigate to Filter screen
         Action.enterAdvancedSortPage(solo);
 
-        // Action.closeSoftKeyBoard(solo);
+        // Get "hasVideo" button.
+        ToggleButton tb = (ToggleButton) solo.getView("tb_hasvideo");
+        solo.clickOnView(tb);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
 
-        String view_id = "tb_Hasvideo";
-        Action.clickView(solo, view_id);
         assertTrue("Has video button is not selected.",
-                ((ToggleButton) solo.getView(view_id)).isChecked());
+                tb.isChecked());
 
     }
 
@@ -709,7 +711,8 @@ public class SRP extends ActivityInstrumentationTestCase2 <Activity> {
 
         // compare the position of two views
         boolean flag = TestHelper.positionCompare(solo,
-                "listitem_productlist_price", 0, "star_button", 0, 3);
+                "listitem_productlist_price", 0, "star_button", 0,
+                Action.VIEW_ID_THREE);
 
         if (!flag) {
             assertTrue("Commodity prices are not on the left of stars.", false);
@@ -761,12 +764,12 @@ public class SRP extends ActivityInstrumentationTestCase2 <Activity> {
 
         Action.clickView(solo, "star_button", 0);
 
-        if (solo.waitForText(ValidationText.HAS_ADDED_COLLECTION, 1, 12000)
+        if (solo.waitForText(ValidationText.HAS_ADDED_COLLECTION, 1,
+                ValidationText.WAIT_TIME_LONG)
                 || solo.waitForText(ValidationText.HAS_REMOVED_COLLECTION, 1,
                         ValidationText.WAIT_TIME_LONGER)) {
             solo.sleep(ValidationText.WAIT_TIME_SHORT);
-         }
-        else {
+        } else {
             assertTrue("Add failed.", false);
         }
     }
@@ -892,12 +895,12 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
 
         Action.clickView(solo, "star_button", 0);
 
-        if (solo.waitForText(ValidationText.HAS_ADDED_COLLECTION, 1, 12000)
+        if (solo.waitForText(ValidationText.HAS_ADDED_COLLECTION, 1,
+                ValidationText.WAIT_TIME_LONG)
                 || solo.waitForText(ValidationText.HAS_REMOVED_COLLECTION, 1,
                         ValidationText.WAIT_TIME_LONGER)) {
             solo.sleep(ValidationText.WAIT_TIME_SHORT);
-         }
-        else {
+         } else {
             assertTrue("Add failed.", false);
         }
     }
@@ -916,7 +919,7 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
 
         assertTrue("Large pictrue icon is not selected! ",
                 ((RadioButton) solo.getView("btn_list_large")).isChecked());
-
+        Action.setListViewStyleAfterSearch(solo);
     }
 
     /**
@@ -1042,6 +1045,8 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
 
         // click on store tab
         Action.clickView(solo, "category_tab_primary_title", 1);
+
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 
         // get the text of search result
         String str = Action.getValuesInTextview(solo,
@@ -1493,8 +1498,10 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
         ImageView storeListImage = (ImageView) solo.getView(
                 "listitem_storelist_image", 0);
         solo.clickOnView(storeListImage);
-        View iv = solo.getView("menu_search", 1);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        View iv = solo.getView("menu_search");
         solo.clickOnView(iv);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
         View keywords = (View) solo.getView("search_autocompletetext");
         assertTrue("Search component not displayed.", keywords.isShown());
 
@@ -1562,7 +1569,7 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
         String priceTwoNumber = priceTwo.getText().toString().trim();
         Log.i("number", "priceTwoNumber" + priceTwoNumber);
         assertTrue("Sort function incorrect.", Integer.valueOf(priceOneNumber
-                .substring(1)) < Integer.valueOf(priceTwoNumber.substring(1)));
+                .substring(1)) <= Integer.valueOf(priceTwoNumber.substring(1)));
     }
 
     /**
@@ -1579,21 +1586,36 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
         View iv = solo.getView("menu_filter");
         solo.clickOnView(iv);
+
+        //Set the view to list view.
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+        solo.clickOnView(solo.getView("btn_browse_mode"));
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+        solo.clickOnView(solo.getView("btn_list_small"));
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+
+        View ivs = solo.getView("menu_filter");
+        solo.clickOnView(ivs);
+        Action.clickText(solo, ValidationText.SORT);
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
         Action.clickText(solo, ValidationText.HIGH_TO_LOW);
         solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+
         TextView priceOne = (TextView) solo.getView(
                 "listitem_productlist_price", 0);
+
         String priceOneNumber = priceOne.getText().toString()
                 .replaceAll(",", "").trim();
         Log.i("number", "priceOneNumber" + priceOneNumber);
+
         TextView priceTwo = (TextView) solo.getView(
                 "listitem_productlist_price", 1);
         String priceTwoNumber = priceTwo.getText().toString()
                 .replaceAll(",", "").trim();
+
         Log.i("number", "priceTwoNumber" + priceTwoNumber);
         assertTrue("Sort function incorrect.", Integer.valueOf(priceOneNumber
-                .substring(1)) > Integer.valueOf(priceTwoNumber.substring(1)));
+                .substring(1)) >= Integer.valueOf(priceTwoNumber.substring(1)));
 
     }
 

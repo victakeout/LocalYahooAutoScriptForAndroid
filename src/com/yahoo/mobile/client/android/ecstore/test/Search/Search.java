@@ -191,14 +191,14 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
         // Get list view numbers.
         int lvNumbers = Action.getListviewOnCurrentScreen(solo);
 
-        if (lvNumbers == 3){
+        if (lvNumbers == 3) {
             // get the number of list
             ArrayList<ListView> listview =
                     solo.getCurrentViews(ListView.class);
             int count = listview.get(0).getCount();
             assertEquals("Auto-complete suggestions number"
-                    + "is more than 10.",count, 10);
-        }else
+                    + "is more than 10.",count,10);
+        } else
             assertTrue("Suggestions list is not appear.", false);
     }
 
@@ -552,8 +552,6 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
             // click "+" icon in the last of suggestion list
             Action.clickPlusInOpenWindow(solo, "search_fill_up", 9);
 
-        /*  click search button and navigate to
-            search result screen*/
             solo.pressSoftKeyboardSearchButton();
             Assert.navigateToResultPage(solo);
 
@@ -608,10 +606,9 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
         // close soft keyboard
         Action.closeSoftKeyBoard(solo);
 
-        /*
-         * get the value of suggestion list and verify
-         * whether the suggestion list is correct
-         */
+         /* get the value of suggestion list and verify
+          whether the suggestion list is correct*/
+
         for (int j = 0; j < 10; j++) {
             String suggestionRecord =
                     Action.getValuesInTextview(solo,
@@ -1130,8 +1127,8 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
         TextView searchText = (TextView)
                 solo.getView("action_bar_title", 0);
         Log.i("number", searchText.getText().toString());
-        assertTrue("Not enter T-shirt category!", searchText.getText()
-                .toString().equals(ValidationText.T_SHIRT));
+        assertEquals(ValidationText.T_SHIRT.trim(), searchText.getText()
+                .toString().trim());
 
     }
 
@@ -1539,11 +1536,23 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
         ImageView storeLog = (ImageView) solo
                 .getView("listitem_storelist_image");
         solo.clickOnView(storeLog);
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+
+        //Change the view to list view.
+        solo.clickOnView(solo.getView("menu_filter"));
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.clickOnView(solo.getView("btn_browse_mode"));
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.clickOnView(solo.getView("btn_list_small"));
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+
         TextView category = (TextView) solo.getView(
                 "category_tab_primary_title", 0);
         Log.i("number", category.getText().toString());
+
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
         TextView product = (TextView) solo.getView(
-                "category_tab_primary_title", 2);
+                "category_tab_primary_title", 1);
         Log.i("number", product.getText().toString());
         assertTrue(
                 "Not tap store logo.",

@@ -129,24 +129,25 @@ public class StorePage extends ActivityInstrumentationTestCase2<Activity> {
         Account.judgementAccountLogin(solo);
         Action.enterToItemPage(solo);
         TestHelper.swipeUp(solo, 1);
+        try {
         solo.clickOnText(ValidationText.SEE_ALL_STORE_PRODUCT);
+        } catch (AssertionError e) {
+            TestHelper.swipeUp(solo, 1);
+            solo.clickOnText(ValidationText.SEE_ALL_STORE_PRODUCT);
+        }
         solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
-        solo.clickOnView(solo.getView("imageButton", 2));
+
+        View more = (View) solo.getView("menu_storeinfo");
+        solo.clickOnView(more);
 
         solo.clickOnView(solo.getView("storeinfo_addfav"));
-        solo.sleep(ValidationText.WAIT_TIME_SHORT);
 
         if (solo.waitForText(ValidationText.HAS_REMOVED_COMMODITY)) {
             solo.clickOnView(solo.getView("storeinfo_addfav"));
         }
 
         solo.goBack();
-        Action.navigateToFavoriteStoreScreen(solo);
-        solo.clickOnView(solo.getView("option_button"));
-        solo.clickOnText(ValidationText.CATEGORIES);
-        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
-        solo.clickOnText(ValidationText.COMMODITY);
-        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+
         solo.clickOnText(ValidationText.CATEGORIES);
 
         View categoryThumb = (View) solo.getView(
@@ -172,19 +173,23 @@ public class StorePage extends ActivityInstrumentationTestCase2<Activity> {
                 "listitem_storelist_store_name", 0);
         solo.clickOnView(dongjing);
 
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+
         TextView buyer = (TextView) solo.getView(
                 "listitem_productlist_buyers",
                 1);
         String buyers = buyer.getText().toString();
         String number = buyers.substring(0, buyers.lastIndexOf("人"));
         if (number.contains(",")) {
-            number.replaceAll(",", "");
+           String numbers = number.replaceAll(",", "");
+            boolean isNum = numbers.matches("[0-9]+");
+            Log.i("number", numbers);
+            assertTrue("buyer infomation format incorrect", isNum);
+        } else {
             boolean isNum = number.matches("[0-9]+");
+            Log.i("number", number);
             assertTrue("buyer infomation format incorrect", isNum);
         }
-        boolean isNum = number.matches("[0-9]+");
-        Log.i("number", number);
-        assertTrue("buyer infomation format incorrect", isNum);
     }
 
 }

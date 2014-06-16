@@ -732,7 +732,7 @@ public class Category extends ActivityInstrumentationTestCase2<Activity> {
         solo.clickOnView(solo.getView("tab_image", 2));
 
         TextView shoppingCart = (TextView) solo.getView("tab_text" ,
-                Action.VIEW_ID_TWO);
+                Action.VIEW_ID_THREE);
         boolean text = shoppingCart.getText().toString()
                 .equals(ValidationText.SHOPPING_CART);
 
@@ -985,7 +985,6 @@ public class Category extends ActivityInstrumentationTestCase2<Activity> {
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
         View star = (View) solo.getView("star_button", 0);
         solo.clickOnView(star);
-        solo.sleep(ValidationText.WAIT_TIME_SHORT);
 
         // Get toast text.
         TextView toastTextView = (TextView) solo.getView("message", 0);
@@ -1115,7 +1114,7 @@ public class Category extends ActivityInstrumentationTestCase2<Activity> {
     /**
      * 1938114:Check the Shops score displays in grid view.
      * @throws Exception if has error
-     */
+     *//*
     public final void testShopsScoreDisplayInGridView()
             throws Exception {
 
@@ -1142,7 +1141,7 @@ public class Category extends ActivityInstrumentationTestCase2<Activity> {
         // Restore to list view.
         Action.setListViewStyleAfterSearch(solo);
 
-    }
+    }*/
 
     /**
      * 1938125:Check the commodity price displays in large photo view.
@@ -1238,6 +1237,11 @@ public class Category extends ActivityInstrumentationTestCase2<Activity> {
     public final void testStarIconWithoutLoginInLargePhotoView()
             throws Exception {
 
+        solo.waitForText(ValidationText.ALL_CATEGORIES);
+        Account.judgementAccountWithoutLogin(solo);
+
+        Action.enterCategoryClothesPage(solo);
+
         // Change the item view to photo large photo view
         Action.setLargePhotoViewStyleAfterSearch(solo);
 
@@ -1246,15 +1250,10 @@ public class Category extends ActivityInstrumentationTestCase2<Activity> {
 
         Action.clickText(solo, ValidationText.COMMODITY);
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
-        View star = (View) solo.getView("star_button", 1);
+        View star = (View) solo.getView("star_button", 0);
         solo.clickOnView(star);
-
-        // Get toast text.
-        TextView toastTextView = (TextView) solo.getView("message", 0);
-        if (toastTextView != null) {
-            String toastText = toastTextView.getText().toString();
-            assertEquals(toastText, ValidationText.PLEASE_LOGIN_ACCOUNT);
-        }
+        assertTrue("toastText", solo.waitForText(ValidationText.
+                PLEASE_LOGIN_ACCOUNT));
 
         // Restore to list view.
         Action.setListViewStyleAfterSearch(solo);
