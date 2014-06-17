@@ -124,11 +124,13 @@ public class ShoppingCart extends ActivityInstrumentationTestCase2<Activity> {
         solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_THREE));
         solo.clickOnView(solo.getView("ecshopping_cart_store_name", 0));
         solo.sleep(ValidationText.WAIT_TIME_LONG);
-        Action.clickElementsInWebviewByText(solo, "goNextBuy updateItemClick");
+        Action.clickElementsInWebviewByClassname(solo,
+                "goNextBuy updateItemClick");
 
-        // Search "Confirm"button on alert window.
-        Action.clickElementsInWebviewByText(solo, "confirm");
         solo.sleep(ValidationText.WAIT_TIME_LONG);
+        // Search "Confirm"button on alert window.
+        Action.clickElementsInWebviewByText(solo, ValidationText.OK);
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 
         // Tap "Next Buy" button on web view.
         Action.clickElementsInWebviewByText(solo, ValidationText.NEXT_BUY);
@@ -155,7 +157,7 @@ public class ShoppingCart extends ActivityInstrumentationTestCase2<Activity> {
 
         for (int i = 0; i < Action.VIEW_ID_THREE; i++) {
             solo.scrollToTop();
-            Action.enterToItemPage(solo);
+            Action.enterToItemPages(solo);
             Action.addToShoppingCart(solo);
         }
 
@@ -168,18 +170,20 @@ public class ShoppingCart extends ActivityInstrumentationTestCase2<Activity> {
         solo.sleep(ValidationText.WAIT_TIME_LONG);
         // Search "Confirm"button on alert window.
         Action.clickElementsInWebviewByText(solo, ValidationText.OK);
-        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+        solo.sleep(ValidationText.WAIT_TIME_LONG);
         solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_THREE));
         TextView shoppingCart = (TextView) solo.getView(
                 "ecshopping_cart_store_count", 0);
         TextView nextBuy = (TextView) solo.getView(
                 "ecshopping_cart_store_count", 1);
+        Log.i("number", shoppingCart.getText().toString());
+        Log.i("number", nextBuy.getText().toString());
 
         assertTrue(
                 "Total number displayed incorrect",
                 Integer.valueOf(shoppingCart.getText().toString())
                         + Integer.valueOf(nextBuy.getText().toString())
-                        == Action.VIEW_ID_THREE);
+                        == Action.VIEW_ID_TWO);
     }
 
 
@@ -190,11 +194,8 @@ public class ShoppingCart extends ActivityInstrumentationTestCase2<Activity> {
     public final void testRefreshWhenBack() throws Exception {
 
         Account.judgementAccountLogin(solo);
-        Action.clickText(solo, ValidationText.ALL_CATEGORIES);
-        Action.clickText(solo, ValidationText.APPAREL);
-        Action.clickText(solo, ValidationText.COMMODITY);
-        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
-        Action.clickStarIconNote(solo);
+        Action.enterToItemPage(solo);
+        Action.addToShoppingCart(solo);
 
         solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_THREE));
         solo.clickOnView(solo.getView("ecshopping_cart_store_name", 0));
@@ -244,8 +245,8 @@ public class ShoppingCart extends ActivityInstrumentationTestCase2<Activity> {
         Action.clickElementsInWebviewByClassname(solo, "updateItemChange");
 
         // Action.searchTextOnWebview(solo, "1");
-        CheckedTextView number = (CheckedTextView) solo.getView("text1", 0);
-        assertTrue("", number.isChecked());
+        TextView number = (TextView) solo.getView("text1",0);
+        assertTrue("number is not checked.", number.isActivated());
 
     }
 
@@ -256,6 +257,7 @@ public class ShoppingCart extends ActivityInstrumentationTestCase2<Activity> {
     public final void testViewNextbuyAndShoppingCartItem() throws Exception {
 
         Account.judgementAccountLogin(solo);
+        Action.removeShoppingCart(solo);
         for (int i = 0; i < Action.VIEW_ID_THREE; i++) {
             solo.scrollToTop();
             Action.enterToItemPage(solo);
@@ -264,11 +266,16 @@ public class ShoppingCart extends ActivityInstrumentationTestCase2<Activity> {
         solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_THREE));
         solo.clickOnView(solo.getView("ecshopping_cart_store_name", 0));
         solo.sleep(ValidationText.WAIT_TIME_LONGER);
-        Action.clickElementsInWebviewByText(solo, "goNextBuy updateItemClick");
+        Action.clickElementsInWebviewByClassname(solo,
+                "goNextBuy updateItemClick");
 
+        solo.sleep(ValidationText.WAIT_TIME_LONG);
         // Search "Confirm"button on alert window.
-        Action.clickElementsInWebviewByText(solo, "confirm");
+        Action.clickElementsInWebviewByText(solo, ValidationText.OK);
         solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+        solo.clickOnView(solo.getView( "tab_image",3 ) );
+        assertTrue("No next buy item.", solo.searchText(
+                ValidationText.NEXT_BUY));
 
     }
 

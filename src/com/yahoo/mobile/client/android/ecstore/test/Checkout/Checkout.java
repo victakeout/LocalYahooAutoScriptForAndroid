@@ -97,6 +97,7 @@ public class Checkout extends ActivityInstrumentationTestCase2<Activity> {
     public final void testChangeOtherDeliveryPlaces() throws Exception {
 
         Account.judgementAccountLogin(solo);
+        Action.removeShoppingCart(solo);
         Action.enterToItemPage(solo);
         Action.addToShoppingCart(solo);
 

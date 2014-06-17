@@ -245,17 +245,18 @@ public final class Action {
         solo.clickOnView(solo.getView("tab_text", 1));
 
         try {
-            TextView storeName = (TextView) solo
+            View storeName = (View) solo
                     .getView("listitem_favoritestore_storename");
+            View url = (View)solo.getView (
+                    "listitem_favoritestore_image1");
+                for (int i = 0 ; i <= 10 ; i ++) {
+                    solo.clickLongOnView(storeName);
+                    solo.sleep(ValidationText.WAIT_TIME_SHORT);
+                    Button ok = (Button) solo.getView("button1");
+                    solo.clickOnView(ok);
+                    solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 
-            do {
-                solo.clickLongOnView(storeName);
-                solo.sleep(ValidationText.WAIT_TIME_SHORT);
-                Button ok = (Button) solo.getView("button1");
-                solo.clickOnView(ok);
-                solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
-            } while (!storeName.isShown());
-
+                }
         } catch (AssertionError e) {
             junit.framework.Assert.assertTrue("Not fully deleted.", true);
         }
@@ -532,7 +533,7 @@ public final class Action {
             if (title.isShown()) {
                 String number = title.getText().toString().trim().substring(5,6);
                 int numbers = Integer.parseInt(number);
-                for (int f = 0 ; f < numbers ; f++){
+                for (int f = 0 ; f < numbers ; f++ ) {
                     solo.clickLongOnView(solo.getView(
                             "listitem_productlist_image", 0));
                     solo.sleep(ValidationText.WAIT_TIME_SHORT);
@@ -545,8 +546,8 @@ public final class Action {
             } else {
                 junit.framework.Assert.assertTrue("Did not remove all",true);
             }
-        }else{
-                junit.framework.Assert.assertTrue("Did not remove all",true);
+        } else {
+                junit.framework.Assert.assertTrue("Did not remove all",true );
         }
         }
 
@@ -596,11 +597,10 @@ public final class Action {
             throws Exception {
 
         Log.i("number", solo.getCurrentActivity().getClass().toString());
-        // Swipe the screen until the buy button displayed.
-        TestHelper.swipeUp2(solo, 1);
-        solo.scrollListToTop(0);
-
-
+        // Swipe the screen until the buy button display.
+      //  TestHelper.swipeUp2(solo, 1);
+        TestHelper.swipeUp(solo, 1);
+       solo.sleep(ValidationText.WAIT_TIME_SHORT);
         View shopCart;
         try {
             shopCart = solo.getView("productitem_btn_add_to_shopping_cart");
@@ -609,14 +609,10 @@ public final class Action {
         } catch (AssertionError e) {
 
             TestHelper.swipeUp2(solo, 2);
-            try {
+
             shopCart = solo.getView("productitem_btn_add_to_shopping_cart");
             solo.clickOnView(shopCart);
-            } catch (AssertionError a) {
-                TestHelper.swipeUp2(solo, 2);
-                shopCart = solo.getView("productitem_btn_add_to_shopping_cart");
-                solo.clickOnView(shopCart);
-            }
+
         }
 
         // Select product property if it exists.
@@ -702,10 +698,6 @@ public final class Action {
     }
 
 
-    /**
-     * define the count initial value.
-     */
-    private static int count = 1;
 
     /**
      * Enter product item detail page.
@@ -719,12 +711,38 @@ public final class Action {
         solo.clickOnView(solo.getView("tab_image", 2));
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
         Action.clickText(solo, ValidationText.APPAREL);
-        Action.clickText(solo, ValidationText.COMMODITY);
-        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
-        solo.clickInList(count);
-        count++;
-        Log.i("number", String.valueOf(count));
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        Action.clickText(solo, ValidationText.COMMODITY);
+        solo.sleep(ValidationText.WAIT_TIME_LONG);
+        solo.clickInList(1);
+        //solo.sleep(ValidationText.WAIT_TIME_SHORT);
+
+    }
+
+    /**
+     * define the count initial value.
+     */
+    private static int Counts = 1;
+
+    /**
+     * Enter product item detail page.
+     * @param solo the Solo instance
+     * @throws Exception if has error
+     */
+    public static void enterToItemPages(final Solo solo)
+            throws Exception {
+
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.clickOnView(solo.getView("tab_image", 2));
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        Action.clickText(solo, ValidationText.APPAREL);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        Action.clickText(solo, ValidationText.COMMODITY);
+        solo.sleep(ValidationText.WAIT_TIME_LONG);
+        solo.clickInList(Counts);
+        Counts++;
+        Log.i("number", String.valueOf(Counts));
+        //solo.sleep(ValidationText.WAIT_TIME_SHORT);
 
     }
 

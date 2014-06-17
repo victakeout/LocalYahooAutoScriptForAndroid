@@ -27,6 +27,8 @@ package com.yahoo.mobile.client.android.ecstore.test.ItemPage;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.content.Context;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 import android.view.View;
@@ -84,7 +86,7 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
     protected final void setUp() throws Exception {
 
         solo = new Solo(getInstrumentation(), getActivity());
-       // Assert.testFirstLaunch(solo);
+        Assert.testFirstLaunch(solo);
     }
 
     @Override
@@ -101,8 +103,16 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
     public final void testSingleCommodityDiscount() throws Exception {
 
         Account.judgementAccountLogin(solo);
-        Action.enterToItemPage(solo);
-        TestHelper.swipeUp2(solo, 1);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.clickOnView(solo.getView("tab_image", 2));
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        Action.clickText(solo, ValidationText.APPAREL);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        Action.clickText(solo, ValidationText.COMMODITY);
+        solo.sleep(ValidationText.WAIT_TIME_LONG);
+        solo.clickInList(1);
+      //  solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        TestHelper.swipeUp(solo, 1);
         solo.clickOnText(ValidationText.SALES_PROMOTION);
         solo.clickOnText(ValidationText.DISCOUNT);
         solo.sleep(ValidationText.WAIT_TIME_LONGER);
@@ -120,7 +130,8 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
 
         Account.judgementAccountLogin(solo);
         Action.enterToItemPage(solo);
-        TestHelper.swipeUp2(solo, 1);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        TestHelper.swipeUp(solo, 1);
         solo.clickOnText(ValidationText.SALES_PROMOTION);
         solo.clickOnText(ValidationText.FULL);
         solo.sleep(ValidationText.WAIT_TIME_LONGER);
@@ -137,7 +148,8 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
 
         Account.judgementAccountLogin(solo);
         Action.enterToItemPage(solo);
-        TestHelper.swipeUp2(solo, 1);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        TestHelper.swipeUp(solo, 1);
         solo.clickOnText(ValidationText.SALES_PROMOTION);
         solo.clickOnText(ValidationText.FULL);
         solo.sleep(ValidationText.WAIT_TIME_LONGER);
@@ -157,22 +169,7 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
         Action.addToShoppingCart(solo);
     }
 
-    /**
-     * 1959893:Verify Sharing method can be shown.
-     * @throws Exception if has error
-     */
-    public final void testSharingMethod() throws Exception {
-
-        Account.judgementAccountLogin(solo);
-        Action.enterToItemPage(solo);
-        TestHelper.swipeUp(solo, 1);
-        solo.clickOnText(ValidationText.SHARE_PRODUCT);
-
-        assertEquals("Share frame not pop up. ", solo.searchText(
-                ValidationText.SHARE_PRODUCT));
-
-    }
-
+  
     /**
      * 1953636:verify favorite items.
      * @throws Exception if has error
@@ -181,7 +178,14 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
 
         Account.judgementAccountLogin(solo);
         Action.removeFavoriteItem(solo);
-        Action.enterToItemPage(solo);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.clickOnView(solo.getView("tab_image", 2));
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        Action.clickText(solo, ValidationText.APPAREL);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        Action.clickText(solo, ValidationText.COMMODITY);
+        solo.sleep(ValidationText.WAIT_TIME_LONG);
+        solo.clickInList(1);
         solo.goBack();
         Action.clickStarIconNote(solo);
         TextView storeName = (TextView) solo.getView(
@@ -208,6 +212,15 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
     public final void testVerifyPayment() throws Exception {
 
         Action.enterToItemPage(solo);
+        solo.clickInList(1);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.clickOnView(solo.getView("tab_image", 2));
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        Action.clickText(solo, ValidationText.APPAREL);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        Action.clickText(solo, ValidationText.COMMODITY);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.clickInList(1);
         TestHelper.swipeUp(solo, 1);
         Action.clickText(solo, ValidationText.PAYMENT);
         TextView payInfoATM = (TextView) solo.getView("pay_info", 1);
@@ -225,7 +238,15 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
      */
     public final void testVerifyShoppingMethods() throws Exception {
 
-        Action.enterToItemPage(solo);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.clickOnView(solo.getView("tab_image", 2));
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        Action.clickText(solo, ValidationText.APPAREL);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        Action.clickText(solo, ValidationText.COMMODITY);
+        solo.sleep(ValidationText.WAIT_TIME_LONG);
+        solo.clickInList(1);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
         TestHelper.swipeUp(solo, 1);
         Action.clickText(solo, ValidationText.SHOPPING_TIPS);
         TextView shoppingTips = (TextView)
@@ -241,6 +262,15 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
     public final void testVerifyCurrentStorePage() throws Exception {
 
         Action.enterToItemPage(solo);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.clickOnView(solo.getView("tab_image", 2));
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        Action.clickText(solo, ValidationText.APPAREL);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        Action.clickText(solo, ValidationText.COMMODITY);
+        solo.sleep(ValidationText.WAIT_TIME_LONG);
+        solo.clickInList(1);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
         TestHelper.swipeUp(solo, 1);
         Action.clickText(solo, ValidationText.SEE_ALL_STORE_PRODUCT);
         Action.clickText(solo, ValidationText.CATEGORIES);
@@ -257,7 +287,17 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
      * @throws Exception if has error
      */
     public final void testVerifyCommodityPage() throws Exception {
-        Action.enterToItemPage(solo);
+        
+        Account.judgementAccountLogin(solo);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.clickOnView(solo.getView("tab_image", 2));
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        Action.clickText(solo, ValidationText.APPAREL);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        Action.clickText(solo, ValidationText.COMMODITY);
+        solo.sleep(ValidationText.WAIT_TIME_LONG);
+        solo.clickInList(1);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
         TestHelper.swipeUp(solo, 1);
         Action.clickText(solo, ValidationText.SEE_ALL_STORE_PRODUCT);
         assertTrue(
@@ -268,20 +308,6 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
     }
 
 
-    /**
-     * 1953631:verify share product Layer.
-     * @throws Exception if has error
-     */
-    public final void testShareProductPage() throws Exception {
-
-        Action.enterToItemPage(solo);
-        TestHelper.swipeUp(solo, 1);
-        Action.clickText(solo, ValidationText.SHARE_PRODUCT);
-
-        solo.getCurrentActivity().getClass();
-
-        assertFalse("Share window not pop up.", solo.searchText(
-                "ValidationText.SHARE_PRODUCT"));
-        solo.goBack();
-    }
+   
+   
 }

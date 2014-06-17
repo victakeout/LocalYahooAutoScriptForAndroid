@@ -1619,4 +1619,23 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
 
     }
 
+    /**
+     * 1938017:Input keywords search.
+     * @throws Exception  if has error
+     */
+    public final void testInputKeywordsSearch() throws Exception {
+
+        Action.enterToJacketAfterSearch(solo);
+        Action.clickText(solo, ValidationText.SHOP);
+
+        solo.goBack();
+        // click search button
+        Action.clickSearchButtonOnScreen(solo);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+
+        // input keyword and search
+        Action.searchAfterPutData(solo, 0, ValidationText.APPLE);
+        assertTrue("Not found iphone relevant info.",
+                solo.searchText(ValidationText.APPLE));
+    }
 }

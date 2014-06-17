@@ -191,5 +191,63 @@ public class StorePage extends ActivityInstrumentationTestCase2<Activity> {
             assertTrue("buyer infomation format incorrect", isNum);
         }
     }
+    /**
+     * 1959898:Verify add favorite store without login.
+     * @throws Exception if has error
+     */
+    public final void testAddFavoriteStoreWithoutLogin() throws Exception {
 
+        Account.judgementAccountWithoutLogin(solo);
+        solo.clickOnView(solo.getView("tab_image",1));
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.clickOnText(ValidationText.MAYBE_LIKE);
+        solo.sleep(ValidationText.WAIT_TIME_LONGER);
+        View recommend = (View) solo.getView(
+                "listitem_recommended_image1", 0);
+        solo.clickOnView(recommend);
+
+        // Checks if the banner is show.
+        View banner = (View) solo.getView("img_store_banner", 0);
+        assertTrue("Not enter recommended page.", banner.isShown());
+
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+
+        View more = (View) solo.getView("menu_storeinfo");
+        solo.clickOnView(more);
+
+        solo.clickOnView(solo.getView("storeinfo_addfav"));
+        assertTrue("Account has login.", solo.waitForText(
+                ValidationText.PLEASE_LOGIN_ACCOUNT));
+    }
+
+    /**
+     * 1959924:Verify user can view store promotion.
+     * @throws Exception if has error
+     */
+    public final void testViewStorePromotion() throws Exception {
+
+        Account.judgementAccountLogin(solo);
+        solo.clickOnView(solo.getView("tab_image",1));
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.clickOnText(ValidationText.MAYBE_LIKE);
+        solo.sleep(ValidationText.WAIT_TIME_LONGER);
+        View recommend = (View) solo.getView(
+                "listitem_recommended_image1", 0);
+        solo.clickOnView(recommend);
+
+        // Checks if the banner is show.
+        View banner = (View) solo.getView("img_store_banner", 0);
+        assertTrue("Not enter recommended page.", banner.isShown());
+
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+
+        View more = (View) solo.getView("menu_storeinfo");
+        solo.clickOnView(more);
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+        solo.clickOnText(ValidationText.SALES_PROMOTION);
+
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        assertTrue("Account has login.", solo.searchText(
+                ValidationText.SALES_PROMOTION));
+    }
 }

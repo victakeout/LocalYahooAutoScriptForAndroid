@@ -21,6 +21,8 @@ public class ValidationText {
 	public static final String SEARCH_ALL_CATEGORIES = "搜尋全部分類";
 
 	public static final String NEWS = "最新動態";
+	
+	public static final String YOUR_FAVORITE = "你的最愛";
 
 	public static final String DONG = "東";
 	

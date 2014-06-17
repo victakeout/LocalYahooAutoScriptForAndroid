@@ -61,7 +61,7 @@ public class TestHelper {
 		int width = display.getWidth();
 		int height = display.getHeight();
 		float yStart = height - 200;
-		float yEnd = height - 280;
+		float yEnd = height - 260;
 		solo.drag(width / 2, width / 2, yStart, yEnd, stepCount);
 		solo.sleep(1000);
 	}

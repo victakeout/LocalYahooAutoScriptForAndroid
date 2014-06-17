@@ -330,10 +330,10 @@ public class FavoriteStore extends ActivityInstrumentationTestCase2<Activity> {
         assertTrue("Add to favorite store failed.", shop.isShown());
     }
 
-    /**
+   /* *//**
      * 1954565:Verify pull down to refresh function.
      * @throws Exception if has error
-     */
+     *//*
     public final void testFavoriteStoreRefresh()
             throws Exception {
 
@@ -349,4 +349,36 @@ public class FavoriteStore extends ActivityInstrumentationTestCase2<Activity> {
                 solo.getView("pull_to_refresh_text");
         assertTrue("Refresh failed", pullRefresh.isShown());
     }
+
+    *//**
+     * 1954610:Verify pull down to refresh function in favorite store.
+     * @throws Exception if has error
+     *//*
+    public final void testFavoriteStoreAllRefresh()
+            throws Exception {
+        Account.judgementAccountLogin(solo);
+        solo.waitForActivity("ECStoreActivity",
+                ValidationText.WAIT_TIME_SHORT);
+
+        solo.clickOnView(solo.getView("tab_image",1));
+        solo.waitForText(ValidationText.YOUR_FAVORITE, 1,
+                ValidationText.WAIT_TIME_SHORT);
+        for(int i = 0;i<10;i++){
+            TestHelper.swipeDown(solo, 1);
+        }
+ 
+
+        //Checks if the pull refresh text is shown.
+        TextView pullRefresh = (TextView)
+                solo.getView("pull_to_refresh_text");
+        assertTrue("Refresh failed", pullRefresh.isShown());
+
+        solo.clickOnText(ValidationText.MAYBE_LIKE);
+        TestHelper.swipeDown(solo, 1);
+
+        //Checks if the pull refresh text is shown.
+        TextView pullRefreshs = (TextView)
+                solo.getView("pull_to_refresh_text");
+        assertTrue("Refresh failed", pullRefreshs.isShown());
+    }*/
 }
