@@ -113,7 +113,12 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
         solo.clickInList(1);
       //  solo.sleep(ValidationText.WAIT_TIME_SHORT);
         TestHelper.swipeUp(solo, 1);
-        solo.clickOnText(ValidationText.SALES_PROMOTION);
+        try {
+            solo.clickOnText(ValidationText.SALES_PROMOTION);
+        } catch (AssertionError e) {
+            TestHelper.swipeUp(solo, 1);
+            solo.clickOnText(ValidationText.SALES_PROMOTION);
+        }
         solo.clickOnText(ValidationText.DISCOUNT);
         solo.sleep(ValidationText.WAIT_TIME_LONGER);
         View webpage = (View) solo.getView("webpage", 0);
@@ -222,7 +227,12 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
         solo.clickInList(1);
         TestHelper.swipeUp(solo, 1);
-        Action.clickText(solo, ValidationText.PAYMENT);
+        try {
+            Action.clickText(solo, ValidationText.PAYMENT);
+        } catch (AssertionError e) {
+            TestHelper.swipeUp(solo, 1);
+            Action.clickText(solo, ValidationText.PAYMENT);
+        }
         TextView payInfoATM = (TextView) solo.getView("pay_info", 1);
         TextView payInfoVisa = (TextView) solo.getView("pay_info", 2);
         assertTrue(
@@ -250,8 +260,9 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
         TestHelper.swipeUp(solo, 1);
         Action.clickText(solo, ValidationText.SHOPPING_TIPS);
         TextView shoppingTips = (TextView)
-                solo.getView("text_must_know", Action.VIEW_ID_THREE);
-        assertTrue("Shopping tips not show.", shoppingTips.isShown());
+                solo.getView("action_bar_title");
+        assertTrue("Shopping tips not show.", shoppingTips.getText().
+                toString().trim().equals(ValidationText.SHOPPING_TIPS));
 
     }
 

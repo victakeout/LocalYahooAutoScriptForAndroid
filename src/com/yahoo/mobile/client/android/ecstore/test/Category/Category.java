@@ -90,6 +90,7 @@ public class Category extends ActivityInstrumentationTestCase2<Activity> {
     protected final void setUp() throws Exception {
         solo = new Solo(getInstrumentation(), getActivity());
         Assert.testFirstLaunch(solo);
+        System.gc();
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
     }
 
@@ -97,6 +98,7 @@ public class Category extends ActivityInstrumentationTestCase2<Activity> {
     public final void tearDown() throws Exception {
 
         solo.finishOpenedActivities();
+        System.gc();
         super.tearDown();
     }
 
