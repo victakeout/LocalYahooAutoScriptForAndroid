@@ -920,6 +920,8 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
         solo.scrollToTop();
         Action.clickText(solo, ValidationText.APPAREL);
 
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+
         Action.clickText(solo, ValidationText.POPULAR_WOMEN);
 
         // click search button
@@ -953,6 +955,8 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
         solo.scrollToTop();
         Action.clickText(solo, ValidationText.APPAREL);
+
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 
         Action.clickText(solo, ValidationText.POPULAR_WOMEN);
 
@@ -989,6 +993,8 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
         solo.scrollToTop();
         Action.clickText(solo, ValidationText.APPAREL);
 
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+
         Action.clickText(solo, ValidationText.POPULAR_WOMEN);
 
         // click search button
@@ -1017,6 +1023,8 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
         solo.scrollToTop();
         Action.clickText(solo, ValidationText.APPAREL);
+
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 
         Action.clickText(solo, ValidationText.COMMODITY);
 

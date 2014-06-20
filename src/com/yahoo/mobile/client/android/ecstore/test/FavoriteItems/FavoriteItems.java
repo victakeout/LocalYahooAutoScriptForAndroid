@@ -127,6 +127,7 @@ public class FavoriteItems extends ActivityInstrumentationTestCase2<Activity> {
         Action.clickText(solo, ValidationText.COMMODITY);
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
         Action.clickStarIconNote(solo);
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 
         solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_FOUR));
         solo.clickOnText(ValidationText.PRODUCT_COLLECTION);

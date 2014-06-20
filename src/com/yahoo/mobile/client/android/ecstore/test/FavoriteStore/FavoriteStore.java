@@ -165,9 +165,12 @@ public class FavoriteStore extends ActivityInstrumentationTestCase2<Activity> {
         // Wait for added to favorite list
         solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
         solo.clickOnView(solo.getView("tab_image",
-                ValidationText.WAIT_TIME_MIDDLE));
+               Action.VIEW_ID_FOUR));
+
         solo.clickOnView(solo.getView("profile_bt_favorite_text", 0));
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
         Action.clickView(solo, "listitem_productlist_image");
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
         View restricted = solo.getView("content");
         assertTrue("Restrict image not show!", restricted.isShown());
 
@@ -255,31 +258,28 @@ public class FavoriteStore extends ActivityInstrumentationTestCase2<Activity> {
         View recommend = (View) solo.getView(
                 "listitem_recommended_image1", 0);
         solo.clickOnView(recommend);
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 
         // Checks if the banner is show.
         View banner = (View) solo.getView("img_store_banner", 0);
         assertTrue("Not enter recommended page.", banner.isShown());
 
-        solo.sleep(ValidationText.WAIT_TIME_SHORT);
-        View option = (View) solo.getView("imageButton", 2);
-        solo.clickOnView(option);
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+
+        View more = (View) solo.getView("menu_storeinfo");
+        solo.clickOnView(more);
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+        solo.clickOnText(ValidationText.SALES_PROMOTION);
         solo.sleep(ValidationText.WAIT_TIME_LONG);
 
-        TextView promotion = (TextView) solo.getView(
-                "listitem_productlist_title", 1);
+        View promotion = (View) solo.getView(
+                "productitem_promotion_name", Action.VIEW_ID_ZERO);
         solo.clickOnView(promotion);
-        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 
-        TestHelper.swipeUp(solo, 1);
-        TextView promotionContent = (TextView) solo
-                .getView("listitem_btn_desc");
-        solo.clickOnView(promotionContent);
-        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+        solo.sleep(ValidationText.WAIT_TIME_LONGER);
 
-        TextView link = (TextView) solo.getView(
-                "productitem_promotion_name");
-        assertTrue("Click promotion item link failed. ",
-                link.isShown());
+        assertTrue("Promotion page cannot be opened.",
+                solo.getView("webpage", Action.VIEW_ID_ZERO).isShown());
 
     }
 
@@ -329,56 +329,49 @@ public class FavoriteStore extends ActivityInstrumentationTestCase2<Activity> {
                 "listitem_favoritestore_image1", 0);
         assertTrue("Add to favorite store failed.", shop.isShown());
     }
+    //2014-06-20
 
-   /* *//**
+    /**
      * 1954565:Verify pull down to refresh function.
      * @throws Exception if has error
-     *//*
+     */
     public final void testFavoriteStoreRefresh()
             throws Exception {
 
         solo.waitForActivity("ECStoreActivity",
                 ValidationText.WAIT_TIME_SHORT);
 
-        solo.clickOnView(solo.getView("tab_image",1));
-        solo.sleep(ValidationText.WAIT_TIME_SHORT);
-        TestHelper.swipeDown(solo, 10);
+        solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_ONE));
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+        TestHelper.swipeDown(solo, 20);
+        assertTrue("Refresh failed", solo.waitForText(ValidationText.WAIT));
 
-        //Checks if the pull refresh text is shown.
-        TextView pullRefresh = (TextView)
-                solo.getView("pull_to_refresh_text");
-        assertTrue("Refresh failed", pullRefresh.isShown());
     }
 
-    *//**
+    /**
      * 1954610:Verify pull down to refresh function in favorite store.
      * @throws Exception if has error
-     *//*
+     */
     public final void testFavoriteStoreAllRefresh()
             throws Exception {
         Account.judgementAccountLogin(solo);
         solo.waitForActivity("ECStoreActivity",
                 ValidationText.WAIT_TIME_SHORT);
 
-        solo.clickOnView(solo.getView("tab_image",1));
+        solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_ONE));
         solo.waitForText(ValidationText.YOUR_FAVORITE, 1,
-                ValidationText.WAIT_TIME_SHORT);
-        for(int i = 0;i<10;i++){
-            TestHelper.swipeDown(solo, 1);
-        }
- 
+                ValidationText.WAIT_TIME_MIDDLE);
+        TestHelper.swipeDown(solo, 20);
 
         //Checks if the pull refresh text is shown.
-        TextView pullRefresh = (TextView)
-                solo.getView("pull_to_refresh_text");
-        assertTrue("Refresh failed", pullRefresh.isShown());
+        assertTrue("Refresh failed", solo.waitForText(ValidationText.WAIT));
 
         solo.clickOnText(ValidationText.MAYBE_LIKE);
-        TestHelper.swipeDown(solo, 1);
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+        TestHelper.swipeDown(solo, 20);
 
-        //Checks if the pull refresh text is shown.
-        TextView pullRefreshs = (TextView)
-                solo.getView("pull_to_refresh_text");
-        assertTrue("Refresh failed", pullRefreshs.isShown());
-    }*/
+        assertTrue("Refresh failed", solo.waitForText(ValidationText.WAIT));
+
+    }
+
 }

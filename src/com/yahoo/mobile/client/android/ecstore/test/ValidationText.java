@@ -15,6 +15,8 @@ public class ValidationText {
 	public static final String SKIP = "略過";
 
 	public static final String TO_USE = "前往使用";
+	
+	public static final String TO_LATEST_STATUS = "前往最新動態";
 
 	public static final String PERSONALIZED = "建立個人化的購物體驗";
 	 

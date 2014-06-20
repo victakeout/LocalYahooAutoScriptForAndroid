@@ -111,13 +111,17 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
         Action.clickText(solo, ValidationText.COMMODITY);
         solo.sleep(ValidationText.WAIT_TIME_LONG);
         solo.clickInList(1);
-      //  solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
         TestHelper.swipeUp(solo, 1);
         try {
+
             solo.clickOnText(ValidationText.SALES_PROMOTION);
+
         } catch (AssertionError e) {
+
             TestHelper.swipeUp(solo, 1);
             solo.clickOnText(ValidationText.SALES_PROMOTION);
+
         }
         solo.clickOnText(ValidationText.DISCOUNT);
         solo.sleep(ValidationText.WAIT_TIME_LONGER);
@@ -174,7 +178,7 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
         Action.addToShoppingCart(solo);
     }
 
-  
+
     /**
      * 1953636:verify favorite items.
      * @throws Exception if has error
@@ -192,17 +196,19 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
         solo.sleep(ValidationText.WAIT_TIME_LONG);
         solo.clickInList(1);
         solo.goBack();
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
         Action.clickStarIconNote(solo);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
         TextView storeName = (TextView) solo.getView(
                 "listitem_productlist_store_name", 0);
-        Log.i("number", "1"+storeName.getText().toString().trim());
+        Log.i("number", "1" + storeName.getText().toString().trim());
         solo.clickOnView(solo.getView("tab_image",
                 Action.VIEW_ID_FOUR));
         solo.clickOnText(ValidationText.PRODUCT_COLLECTION);
         solo.sleep(ValidationText.WAIT_TIME_LONG);
         TextView collectStoreName = (TextView) solo.getView(
                 "listitem_productlist_store_name", 0);
-        Log.i("number", "2"+collectStoreName.getText().toString().trim());
+        Log.i("number", "2" +   collectStoreName.getText().toString().trim());
         assertTrue(
                 "Product not added to favorite list. ",
                 storeName.getText().toString().trim()

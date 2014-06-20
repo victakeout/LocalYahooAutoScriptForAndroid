@@ -30,6 +30,7 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.widget.TextView;
 
 import com.robotium.solo.Solo;
+import com.yahoo.mobile.client.android.ecstore.Account.Account;
 import com.yahoo.mobile.client.android.ecstore.Action.Action;
 import com.yahoo.mobile.client.android.ecstore.Assert.Assert;
 import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
@@ -95,7 +96,13 @@ public class Options extends ActivityInstrumentationTestCase2<Activity> {
      */
     public final void testZeroResultDisplayed() throws Exception {
 
+        Account.judgementAccountLogin(solo);
         solo.clickOnView(solo.getView("tab_image", 2));
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        android.widget.ListView listView = (android.widget.ListView) solo
+                .getView(android.widget.ListView.class, 0);
+        solo.scrollListToLine(listView, 9);
+
         Action.clickText(solo, ValidationText.HOME_BEDDING_FURNITURE);
         solo.sleep(ValidationText.WAIT_TIME_LONGER);
         Action.clickText(solo, ValidationText.HANSHEN_HOME_LIFE);
