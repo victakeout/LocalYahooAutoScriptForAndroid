@@ -860,7 +860,7 @@ public class Category extends ActivityInstrumentationTestCase2<Activity> {
      * 1938154:Check 'Homeappliances_AV' is displayed on the top of the screen.
      * @throws Exception if has error
      */
-     public final void testHouseholdAppliancesDisplayedOnTheScreen()
+    public final void testHouseholdAppliancesDisplayedOnTheScreen()
              throws Exception {
 
         solo.clickOnView(solo.getView("tab_image", 2));
@@ -881,7 +881,7 @@ public class Category extends ActivityInstrumentationTestCase2<Activity> {
      * 1938155:Check 'Camera_Mobile_Toys' is displayed on the top of the screen.
      * @throws Exception if has error
      */
-     public final void testFasionDigitalDisplayedOnTheScreen()
+    public final void testFasionDigitalDisplayedOnTheScreen()
              throws Exception {
 
         solo.clickOnView(solo.getView("tab_image", 2));
@@ -1097,7 +1097,7 @@ public class Category extends ActivityInstrumentationTestCase2<Activity> {
         Action.setSmallPhotoViewStyleAfterSearch(solo);
 
         Action.clickText(solo, ValidationText.COMMODITY);
-        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
         TextView price = (TextView) solo.getView("listitem_productlist_price",
                 0);
         String sr = price.getText().toString();
@@ -1692,47 +1692,5 @@ public class Category extends ActivityInstrumentationTestCase2<Activity> {
 
     }
 
-    //2014-06-20
-    /**
-     * 1953649:Check edit category preferences.
-     * @throws Exception if has error
-     */
-    public final void testEditPreferencesFromAccount() throws Exception {
-
-       // Account.judgementAccountLogin(solo);
-        solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_FOUR));
-        solo.clickOnText(ValidationText.EDIT_FAVORITE_CATEGORY);
-
-        // Get the grid view count.
-        GridView lv = (GridView) solo.getView("category_editor_grid");
-        Log.i("number", String.valueOf(lv.getCount()));
-
-        for (int i = 0; i < lv.getCount(); i++) {
-            View category = (View) solo.getView("category_editor_grid_button",
-                    i);
-            solo.clickOnView(category);
-            assertTrue("Category item is not selected.",
-                    category.isInTouchMode());
-        }
-
-        solo.clickOnText(ValidationText.TO_LATEST_STATUS);
-
-        solo.sleep(ValidationText.WAIT_TIME_SHORT);
-
-        // click on up icon
-        Action.clickHomeButtonOnScreen(solo);
-        solo.clickOnText(ValidationText.EDIT_FAVORITE_CATEGORY);
-        solo.sleep(ValidationText.WAIT_TIME_SHORT);
-
-        for (int i = 0; i < lv.getCount(); i++) {
-            View categorys = (View) solo.getView("category_editor_grid_button",
-                    i);
-            solo.clickOnView(categorys);
-            assertTrue("Category item is selected.", categorys.isPressed());
-        }
-        solo.sleep(ValidationText.WAIT_TIME_SHORT);
-        solo.clickOnText(ValidationText.TO_LATEST_STATUS);
-        solo.sleep(ValidationText.WAIT_TIME_SHORT);
-    }
 
 }

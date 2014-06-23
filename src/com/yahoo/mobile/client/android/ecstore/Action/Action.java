@@ -64,6 +64,10 @@ public final class Action {
         solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
         clickHomeButtonOnScreen(solo);
 
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        TestHelper.swipeUp(solo, 1);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+
         // clear history information and back
         solo.waitForText(ValidationText.SETTING, 1,
                 ValidationText.WAIT_TIME_SHORT);
@@ -182,7 +186,7 @@ public final class Action {
      */
     public static void addInitializeData(final Solo solo,
             final int textviewId, final String data)throws Exception {
-
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
         solo.enterText(textviewId, data);
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
     }
@@ -423,7 +427,7 @@ public final class Action {
             throws Exception {
 
         solo.waitForText(text, 1,
-                ValidationText.WAIT_TIME_SHORT);
+                ValidationText.WAIT_TIME_MIDDLE);
         solo.clickOnText(text);
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
 

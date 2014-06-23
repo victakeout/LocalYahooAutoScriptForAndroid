@@ -988,11 +988,11 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
         }
 
     }
-
-    /**
+/*
+    *//**
      * 1938007:Commodity prices are on the left of stars.
      * @throws Exception  if has error
-     */
+     *//*
     public final void testStarsDisplayInLargeStyle() throws Exception {
 
         Action.enterToJacketAfterSearch(solo);
@@ -1010,10 +1010,10 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
 
     }
 
-    /**
+    *//**
      * 1938008:Check to click the start icon without login.
      * @throws Exception   if has error
-     */
+     *//*
     public final void testStarIconWithoutLoginInLargeStyle() throws Exception {
 
         // Account.accountLogIn(solo);
@@ -1035,10 +1035,10 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
 
     }
 
-    /**
+    *//**
      * 1938013:"Total XXX " is displayed.
      * @throws Exception  if has error
-     */
+     *//*
     public final void testSearchResultDisplay() throws Exception {
 
         Action.enterToJacketAfterSearch(solo);
@@ -1058,10 +1058,10 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
 
     }
 
-    /**
+    *//**
      * 1938015:Back to category tab.
      * @throws Exception  if has error
-     */
+     *//*
     public final void testBackToCategoryTabFromStoreTab() throws Exception {
 
         Action.enterToJacketAfterSearch(solo);
@@ -1076,10 +1076,10 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
 
     }
 
-    /**
+    *//**
      * 1938024:Navigate to store page.
      * @throws Exception   if has error
-     */
+     *//*
     public final void testNavigateToStorePage() throws Exception {
 
         Action.enterToJacketAfterSearch(solo);
@@ -1102,10 +1102,10 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
 
     }
 
-    /**
+    *//**
      * 1938025:Store name blew store count.
      * @throws Exception  if has error
-     */
+     *//*
     public final void testStoreCountDisplay() throws Exception {
 
         Action.enterToJacketAfterSearch(solo);
@@ -1124,10 +1124,10 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
 
     }
 
-    /**
+    *//**
      * 1938026:Navigate to store item list page.
      * @throws Exception  if has error
-     */
+     *//*
     public final void testNavigateToStoreItemListPage() throws Exception {
 
         Action.enterToJacketAfterSearch(solo);
@@ -1150,10 +1150,10 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
 
     }
 
-    /**
+    *//**
      * 1938027:Goods number on the right of evaluate.
      * @throws Exception  if has error
-     */
+     *//*
     public final void testEvaluateDisplay() throws Exception {
 
         Action.enterToJacketAfterSearch(solo);
@@ -1172,10 +1172,10 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
 
     }
 
-    /**
+    *//**
      * 1938029: Goods evaluate on the right of heart icon.
      * @throws Exception  if has error
-     */
+     *//*
     public final void testHeartIconDisplay() throws Exception {
 
         Action.enterToJacketAfterSearch(solo);
@@ -1195,10 +1195,10 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
 
     }
 
-    /**
+    *//**
      * 1938030:Navigate to login screen.
      * @throws Exception if has error
-     */
+     *//*
     public final void testNavigateToLoginScreen() throws Exception {
 
         // Account.accountLogIn(solo);
@@ -1218,10 +1218,10 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
         }
     }
 
-    /**
+    *//**
      * 1938031:Shop to join the collection list.
      * @throws Exception  if has error
-     */
+     *//*
     public final void testAddStoreIntoCollectList() throws Exception {
 
         // Account.accountLogIn(solo);
@@ -1255,10 +1255,10 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
         }
     }
 
-    /**
+    *//**
      * 1977511:Verify shouldn't duplicate keyword in search box.
      * @throws Exception  if has error
-     */
+     *//*
     public final void testInputKeywords() throws Exception {
 
         // click search button
@@ -1278,10 +1278,10 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
 
     }
 
-    /**
+    *//**
      * 1937914:Verify "back" icon function.
      * @throws Exception  if has error
-     */
+     *//*
     public final void testClickBackFunction() throws Exception {
 
         Action.clickText(solo, ValidationText.ALL_CATEGORIES);
@@ -1294,10 +1294,10 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
         Action.navigateToCategoryScreen(solo);
     }
 
-    /**
+    *//**
      * 1937989:Verify click product image in grid view.
      * @throws Exception   if has error
-     */
+     *//*
     public final void testClickProductImageInGridView() throws Exception {
 
         Action.clickText(solo, ValidationText.ALL_CATEGORIES);
@@ -1318,10 +1318,10 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
         Action.setListViewStyleAfterSearch(solo);
     }
 
-    /**
+    *//**
      * 1938004:Verify click product name in large photo view.
      * @throws Exception  if has error
-     */
+     *//*
     public final void testClickProductNameInLargePhotoView() throws Exception {
 
         Action.clickText(solo, ValidationText.ALL_CATEGORIES);
@@ -1341,10 +1341,10 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
         Action.setListViewStyleAfterSearch(solo);
     }
 
-    /**
+    *//**
      * 1938009:Click star icon to add the product to favorite list.
      * @throws Exception  if has error
-     */
+     *//*
     public final void testClickStarIconAddToFavoriteList() throws Exception {
 
         Account.judgementAccountWithoutLogin(solo);
@@ -1355,10 +1355,10 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
         Action.clickStarIconNote(solo);
     }
 
-    /**
+    *//**
      * 1937926:Check the default browse mode.
      * @throws Exception  if has error
-     */
+     *//*
     public final void testCheckTheDefaultBrowseMode() throws Exception {
 
         Action.enterToJacketAfterSearch(solo);
@@ -1369,10 +1369,10 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
                 , Action.DEFAULT_LISTVIEW_COUNT, defaultItems);
     }
 
-    /**
+    *//**
      * 1937943:Check confirm button display.
      * @throws Exception  if has error
-     */
+     *//*
     public final void testCheckConfirmButtonInAdvancedPage() throws Exception {
 
         Action.enterToJacketAfterSearch(solo);
@@ -1383,10 +1383,10 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
                 solo.searchText(ValidationText.OK));
     }
 
-    /**
+    *//**
      * 1937941:Check cancel button display.
      * @throws Exception  if has error
-     */
+     *//*
     public final void testCheckCancelButtonInAdvancedPage() throws Exception {
 
         Action.enterToJacketAfterSearch(solo);
@@ -1399,10 +1399,10 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
                 solo.searchText(ValidationText.CANCEL));
     }
 
-    /**
+    *//**
      * 1937929:Click"All classification"button in search result.
      * @throws Exception  if has error
-     */
+     *//*
     public final void testClickAllclassificaitonButton() throws Exception {
 
         Action.enterToJacketAfterSearch(solo);
@@ -1411,10 +1411,10 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
 
     }
 
-    /**
+    *//**
      * 1937974:Check product image display.
      * @throws Exception   if has error
-     */
+     *//*
     public final void testProductImageDisplay() throws Exception {
 
         Action.enterToJacketAfterSearch(solo);
@@ -1423,10 +1423,10 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
         assertTrue("Product image not displayed.", product.isShown());
     }
 
-    /**
+    *//**
      * 1938010:Check tab status.
      * @throws Exception   if has error
-     */
+     *//*
     public final void testVerifyTabDisplayStatus() throws Exception {
 
         Action.enterToJacketAfterSearch(solo);
@@ -1437,10 +1437,10 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
 
     }
 
-    /**
+    *//**
      * 1938011:Check shop tab list show.
      * @throws Exception  if has error
-     */
+     *//*
     public final void testShopTabListDisplay() throws Exception {
 
         Action.enterToJacketAfterSearch(solo);
@@ -1450,10 +1450,10 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
         assertTrue("Store list displayed incorrect.", storeListImage.isShown());
     }
 
-    /**
+    *//**
      * 1938012:Product list tab display.
      * @throws Exception  if has error
-     */
+     *//*
     public final void testProductTabDisplay() throws Exception {
 
         solo.clickOnView(solo.getView("tab_image", 2));
@@ -1469,10 +1469,10 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
         assertTrue("Store list displayed incorrect.", storeListImage.isShown());
     }
 
-    /**
+    *//**
      * 1938014:Check header in search result.
      * @throws Exception  if has error
-     */
+     *//*
     public final void testHeaderInSearchResult() throws Exception {
 
         Action.enterToJacketAfterSearch(solo);
@@ -1487,10 +1487,10 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
                 back.isShown() && keywords.isShown() && advanced.isShown());
     }
 
-    /**
+    *//**
      * 1938016:Click search icon in search store page.
      * @throws Exception  if has error
-     */
+     *//*
     public final void testClickSearchIconInSearchStorePage() throws Exception {
 
         Action.enterToJacketAfterSearch(solo);
@@ -1507,10 +1507,10 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
 
     }
 
-    /**
+    *//**
      * 1938032:Click "Advanced" button in store page.
      * @throws Exception  if has error
-     */
+     *//*
     public final void testClickAdvancedButtonInStorePage() throws Exception {
 
         Action.enterToJacketAfterSearch(solo);
@@ -1543,10 +1543,10 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
         }
     }
 
-    /**
+    *//**
      * 1938033:Verify the price" low to high" Sort.
      * @throws Exception  if has error
-     */
+     *//*
     public final void testThePriceLowToHigh() throws Exception {
 
         Action.enterToJacketAfterSearch(solo);
@@ -1572,10 +1572,10 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
                 .substring(1)) <= Integer.valueOf(priceTwoNumber.substring(1)));
     }
 
-    /**
+    *//**
      * 1938034:Verify the price" high to low" Sort.
      * @throws Exception  if has error
-     */
+     *//*
     public final void testThePriceHighToLow() throws Exception {
 
         Action.enterToJacketAfterSearch(solo);
@@ -1619,10 +1619,10 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
 
     }
 
-    /**
+    *//**
      * 1938017:Input keywords search.
      * @throws Exception  if has error
-     */
+     *//*
     public final void testInputKeywordsSearch() throws Exception {
 
         Action.enterToJacketAfterSearch(solo);
@@ -1637,5 +1637,5 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
         Action.searchAfterPutData(solo, 0, ValidationText.APPLE);
         assertTrue("Not found iphone relevant info.",
                 solo.searchText(ValidationText.APPLE));
-    }
+    }*/
 }
