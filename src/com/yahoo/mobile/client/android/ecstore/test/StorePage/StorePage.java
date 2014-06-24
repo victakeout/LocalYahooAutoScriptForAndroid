@@ -111,6 +111,7 @@ public class StorePage extends ActivityInstrumentationTestCase2<Activity> {
         Action.clickElementsInWebviewByClassname(solo, "pimg");
         solo.sleep(ValidationText.WAIT_TIME_LONG);
         TestHelper.swipeUp(solo, 1);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
         solo.clickOnText(ValidationText.SHOPPING_TIPS);
         solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 
@@ -118,7 +119,6 @@ public class StorePage extends ActivityInstrumentationTestCase2<Activity> {
         TextView mustKnow = (TextView) solo.getView("text_must_know");
         assertTrue("Shopping Tips not display", mustKnow.isShown());
     }
-
 
     /**
      * 1959901:Verify all classification and product page.
@@ -156,7 +156,6 @@ public class StorePage extends ActivityInstrumentationTestCase2<Activity> {
                 categoryThumb.isShown());
 
     }
-
 
     /**
      * 1959887:Verify purchase person-time.
@@ -251,7 +250,6 @@ public class StorePage extends ActivityInstrumentationTestCase2<Activity> {
                 ValidationText.SALES_PROMOTION));
     }
 
-    //2014-06-20
     /**
      * 1959890:Verify the store custom categories is show correct.
      * @throws Exception if has error

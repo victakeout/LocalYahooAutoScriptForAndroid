@@ -112,6 +112,7 @@ public class Checkout extends ActivityInstrumentationTestCase2<Activity> {
         solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
         solo.clickOnText("7-11");
         solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+        TestHelper.swipeUp(solo, 1);
 
         // Click check out button on web view.
         Action.clickElementsInWebviewByText(solo,

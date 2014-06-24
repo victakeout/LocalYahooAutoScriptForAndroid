@@ -38,6 +38,7 @@ import com.robotium.solo.Solo;
 import com.yahoo.mobile.client.android.ecstore.Account.Account;
 import com.yahoo.mobile.client.android.ecstore.Action.Action;
 import com.yahoo.mobile.client.android.ecstore.Assert.Assert;
+import com.yahoo.mobile.client.android.ecstore.test.TestHelper;
 import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 
 /**
@@ -106,6 +107,7 @@ public class Sidebar extends ActivityInstrumentationTestCase2<Activity> {
         Account.judgementAccountLogin(solo);
         // click on up icon
         Action.clickHomeButtonOnScreen(solo);
+
         solo.clickOnText(ValidationText.EDIT_FAVORITE_CATEGORY);
 
         // Get the grid view count.
@@ -130,6 +132,11 @@ public class Sidebar extends ActivityInstrumentationTestCase2<Activity> {
         Account.judgementAccountLogin(solo);
         // click on up icon
         Action.clickHomeButtonOnScreen(solo);
+
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        TestHelper.swipeUp(solo, 1);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+
         Action.clickText(solo, ValidationText.SETTING);
 
         // Recent browse text.

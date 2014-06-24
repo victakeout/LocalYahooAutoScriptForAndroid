@@ -34,6 +34,7 @@ import android.widget.TextView;
 import com.robotium.solo.Solo;
 import com.yahoo.mobile.client.android.ecstore.Action.Action;
 import com.yahoo.mobile.client.android.ecstore.Assert.Assert;
+import com.yahoo.mobile.client.android.ecstore.test.TestHelper;
 import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 
 /**
@@ -107,6 +108,11 @@ public class RecentHistory extends ActivityInstrumentationTestCase2<Activity> {
         // click "up" icon
         solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
         solo.clickOnView(solo.getView("home"));
+
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        TestHelper.swipeUp(solo, 1);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+
         solo.waitForText(ValidationText.SETTING, 1,
                 ValidationText.WAIT_TIME_SHORT);
         solo.clickOnText(ValidationText.SETTING);

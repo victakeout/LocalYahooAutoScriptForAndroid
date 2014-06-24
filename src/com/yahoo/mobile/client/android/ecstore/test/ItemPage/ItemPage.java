@@ -325,6 +325,5 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
     }
 
 
-   
-   
+
 }

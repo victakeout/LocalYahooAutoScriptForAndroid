@@ -228,6 +228,11 @@ public class MyAccount extends ActivityInstrumentationTestCase2<Activity> {
         Account.judgementAccountLogin(solo);
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
         Action.clickHomeButtonOnScreen(solo);
+
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        TestHelper.swipeUp(solo, 1);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+
         solo.clickOnText(ValidationText.SETTING);
         solo.clickOnText(ValidationText.CLEAN_BROWSE_RECORD);
         solo.clickOnView(solo.getView("button1"));

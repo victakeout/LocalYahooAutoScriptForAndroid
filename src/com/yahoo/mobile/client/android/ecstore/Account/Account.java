@@ -62,7 +62,7 @@ public final class Account {
         // Assert if the accountProfile is visible,then login successfully.
         View accountProfile = (View) solo.getView("profile_photo_image", 0);
         junit.framework.Assert.assertTrue("Log in failed.",
-                accountProfile.isShown()); 
+            accountProfile.isShown()); 
 
     }
 

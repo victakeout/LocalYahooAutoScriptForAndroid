@@ -34,6 +34,7 @@ import android.widget.Switch;
 import com.robotium.solo.Solo;
 import com.yahoo.mobile.client.android.ecstore.Account.Account;
 import com.yahoo.mobile.client.android.ecstore.Assert.Assert;
+import com.yahoo.mobile.client.android.ecstore.test.TestHelper;
 import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 
 /**
@@ -102,6 +103,11 @@ public class Functional extends ActivityInstrumentationTestCase2<Activity> {
         Account.judgementAccountLogin(solo);
         View iv = solo.getView("home");
         solo.clickOnView(iv);
+
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        TestHelper.swipeUp(solo, 1);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+
         // clear history information and back
         solo.waitForText(ValidationText.SETTING, 1,
                 ValidationText.WAIT_TIME_MIDDLE);

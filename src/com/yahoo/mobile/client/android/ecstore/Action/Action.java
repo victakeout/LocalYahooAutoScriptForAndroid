@@ -248,7 +248,7 @@ public final class Action {
     public static void removeFavoriteStore(final Solo solo) throws Exception {
 
         solo.clickOnView(solo.getView("tab_text", 1));
-
+        solo.sleep(ValidationText.WAIT_TIME_LONG);
         try {
             View storeName = (View) solo
                     .getView("listitem_favoritestore_storename");
@@ -259,7 +259,7 @@ public final class Action {
                     solo.sleep(ValidationText.WAIT_TIME_SHORT);
                     Button ok = (Button) solo.getView("button1");
                     solo.clickOnView(ok);
-                    solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+                    solo.sleep(ValidationText.WAIT_TIME_LONG);
 
                 }
         } catch (AssertionError e) {
@@ -626,8 +626,8 @@ public final class Action {
             radioButtons = (View) solo.getView(
                     "product_item_spec_item_selections", 0);
         } catch (AssertionError e) {
-            TestHelper.swipeUp(solo, 2);
-            solo.sleep(ValidationText.WAIT_TIME_SHORT);
+            TestHelper.swipeUp2(solo, 2);
+           // solo.sleep(ValidationText.WAIT_TIME_SHORT);
             View shopCarts = solo
                     .getView("productitem_btn_add_to_shopping_cart");
             solo.clickOnView(shopCarts);
@@ -646,6 +646,9 @@ public final class Action {
             buddle = solo.getView("tab_badge", VIEW_ID_THREE);
             junit.framework.Assert.assertTrue("No items in shopping cart.",
                     buddle.isShown());
+        } else {
+            junit.framework.Assert.assertTrue("Add failed.",
+                   true);
         }
 
         solo.goBack();
