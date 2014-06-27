@@ -24,6 +24,10 @@ public class ValidationText {
 
 	public static final String NEWS = "最新動態";
 	
+	public static final String PLUS_PURCHASE = "加購商品";
+	
+	public static final String ADDITIONAL_GIFT = "附送贈品";
+	
 	public static final String YOUR_FAVORITE = "你的最愛";
 
 	public static final String DONG = "東";
@@ -31,14 +35,22 @@ public class ValidationText {
 	public static final String DONG_J = "東京";
 	
 	public static final String DONG_JING = "東京著衣";
+	
+	public static final String DONG_JING_AUTHENTIC = "東京正宗";
 
 	public static final String APPAREL = "服飾";
+	
+	public static final String GIFT = "贈品";
 
 	public static final String POPULAR_WOMEN = "流行女裝";
 
 	public static final String JACKET = "上衣";
 
 	public static final String T_SHIRT = "T恤";
+	
+	public static final String S = "s";
+	
+	public static final String ESCAPE_CHARACTER = "#39";
 	
 	public static final String NO_SLEEVE_SHIRT = "無袖T恤";
 	
@@ -253,5 +265,8 @@ public class ValidationText {
 	public static final String[] CATEGORYLIST_TAB3 = { "排序", "瀏覽模式", "篩選" };
 	
 	public static final String[] ADVANCED_SORT = { "購買人次最高", "最新上架", "價錢低到高" , "價錢高到低"};
+
+	public static final String[] FILTER_ALL = { "tb_cc", "tb_cczeroint", "tb_ccinstall" , "tb_cvs_pay","tb_cvs_pick","tb_hasstock",
+	    "tb_hasvideo","tb_hasimage","tb_issuperior" };
 
 }

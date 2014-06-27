@@ -1647,5 +1647,30 @@ public class Category extends ActivityInstrumentationTestCase2<Activity> {
 
     }
 
+    /**
+     * 1959881:Verify the sort function.
+     * @throws Exception if has error
+     */
+    public final void testVerifyTheSortFunction() throws Exception {
 
+       Action.enterToItemPage(solo);
+       solo.goBack();
+       solo.sleep(ValidationText.WAIT_TIME_SHORT);
+       solo.clickOnView(solo.getView("menu_filter"));
+       solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+       solo.clickOnText(ValidationText.LOW_TO_HIGH);
+
+       solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+       TextView priceOne = (TextView) solo.getView(
+               "listitem_productlist_price", 0);
+       String priceOneNumber = priceOne.getText().toString().trim();
+       Log.i("number", "priceOneNumber" + priceOneNumber);
+       TextView priceTwo = (TextView) solo.getView(
+               "listitem_productlist_price", 1);
+       String priceTwoNumber = priceTwo.getText().toString().trim();
+       Log.i("number", "priceTwoNumber" + priceTwoNumber);
+
+       assertTrue("Sort function incorrect.", Integer.valueOf(priceOneNumber
+               .substring(1)) <= Integer.valueOf(priceTwoNumber.substring(1)));
+    }
 }

@@ -40,6 +40,7 @@ import com.robotium.solo.Solo;
 import com.yahoo.mobile.client.android.ecstore.Account.Account;
 import com.yahoo.mobile.client.android.ecstore.Action.Action;
 import com.yahoo.mobile.client.android.ecstore.Assert.Assert;
+import com.yahoo.mobile.client.android.ecstore.test.TestHelper;
 import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 
 /**
@@ -1568,6 +1569,130 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
                 && product.getText().toString().trim()
                 .equals(ValidationText.COMMODITY));
 
+    }
+
+    /**
+     * 1937868:Verify user can search directly without input any data.
+     * @throws Exception if has error
+     */
+    public final void testSearchDirectlyWithoutData() throws Exception {
+
+        // click on search button on home screen
+        Action.clickSearchButtonOnScreen(solo);
+
+        // fill in null keyword then click search button
+        Action.searchAfterPutData(solo, 0, "");
+
+
+        View top = (View) solo.getView("listitem_discoverylist_top10_image",
+                Action.VIEW_ID_ZERO);
+        assertTrue("Not in latest page.", top.isShown());
+
+    }
+
+    /**
+     * 1937880:Verify voice icon displays.
+     * @throws Exception if has error
+     */
+    public final void testVerifyVoiceIcon() throws Exception {
+
+        // click on search button on home screen
+        Action.clickSearchButtonOnScreen(solo);
+
+        View voice = (View) solo.getView("search_voice");
+        assertTrue("Not in latest page.", voice.isShown());
+
+    }
+
+    /**
+     * 1977509:Verify Search all category button can work in
+     *  category of product tab.
+     * @throws Exception if has error
+     */
+    public final void testVerifyAllCategoryButtonWorkWell() throws Exception {
+
+        Action.enterCategoryClothesPage(solo);
+
+        // Go to advanced sort page.
+        Action.enterAdvancedSortPage(solo);
+
+        for (int i = 0; i < ValidationText.FILTER_ALL.length; i++) {
+           View grid = (View) solo.getView(ValidationText.FILTER_ALL[i]);
+            solo.clickOnView(grid);
+        }
+        solo.clickOnText(ValidationText.OK);
+        assertFalse("Search all category button displayed!",
+                solo.searchButton(ValidationText.SEARCH_ALL_CATEGORIES));
+
+        solo.clickOnText(ValidationText.CATEGORIES);
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+        solo.clickOnText(ValidationText.POPULAR_WOMEN);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+
+        // Go to advanced sort page.
+        Action.enterAdvancedSortPage(solo);
+        for (int i = 0; i < ValidationText.FILTER_ALL.length; i++) {
+            View grid = (View) solo.getView(ValidationText.FILTER_ALL[i]);
+             solo.clickOnView(grid);
+         }
+         solo.clickOnText(ValidationText.OK);
+         assertFalse("Search all category button displayed!",
+                 solo.searchButton(ValidationText.SEARCH_ALL_CATEGORIES));
+
+         solo.clickOnText(ValidationText.CATEGORIES);
+         solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+         solo.clickOnText(ValidationText.JACKET);
+
+      // Go to advanced sort page.
+         Action.enterAdvancedSortPage(solo);
+         for (int i = 0; i < ValidationText.FILTER_ALL.length; i++) {
+             View grid = (View) solo.getView(ValidationText.FILTER_ALL[i]);
+              solo.clickOnView(grid);
+          }
+          solo.clickOnText(ValidationText.OK);
+          assertFalse("Search all category button displayed!",
+                  solo.searchButton(ValidationText.SEARCH_ALL_CATEGORIES));
+    }
+
+    /**
+     * 1959884:Verify Shopping Tips,when the store has no promotion.
+     * @throws Exception if has error
+     */
+    public final void testShoppingTips() throws Exception {
+
+        solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_TWO));
+
+        // click on search button on home screen
+        Action.clickSearchButtonOnScreen(solo);
+
+       Action.searchAfterPutData(solo, 0, ValidationText.DONG_J);
+       solo.clickOnText(ValidationText.SHOP);
+       solo.sleep(ValidationText.WAIT_TIME_SHORT);
+       try {
+           solo.clickOnText(ValidationText.DONG_JING_AUTHENTIC);
+       } catch (AssertionError e) {
+           TestHelper.swipeUp(solo, 1);
+           solo.clickOnText(ValidationText.DONG_JING_AUTHENTIC);
+       }
+
+       solo.sleep(ValidationText.WAIT_TIME_LONG);
+       View image = (View) solo.getView("listitem_productlist_image",
+               Action.VIEW_ID_ZERO);
+       solo.clickOnView(image);
+       solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+       TestHelper.swipeUp(solo, 1);
+       solo.sleep(ValidationText.WAIT_TIME_SHORT);
+
+       TextView promotion = (TextView) solo.getView("listitem_btn_desc",
+               Action.VIEW_ID_ZERO);
+      // boolean isShow = solo.searchText(ValidationText.SALES_PROMOTION);
+       assertFalse("Exist promotion activity.", promotion.isShown());
+
+       solo.sleep(ValidationText.WAIT_TIME_SHORT);
+       solo.clickOnText(ValidationText.SHOPPING_TIPS);
+       solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+       assertTrue("Shopping tips page is not show.",
+               solo.getView("text_must_know").isShown());
     }
 
 }

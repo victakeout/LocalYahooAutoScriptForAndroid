@@ -25,10 +25,9 @@
 
 package com.yahoo.mobile.client.android.ecstore.test.ItemPage;
 
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.ActivityManager;
-import android.content.Context;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 import android.view.View;
@@ -304,7 +303,7 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
      * @throws Exception if has error
      */
     public final void testVerifyCommodityPage() throws Exception {
-        
+
         Account.judgementAccountLogin(solo);
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
         solo.clickOnView(solo.getView("tab_image", 2));
@@ -324,6 +323,142 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
 
     }
 
+    /**
+     * 1959931:Verify repeat go to item page check the number of premiums.
+     * @throws Exception if has error
+     */
+    public final void testCheckPremiunsAndPlusPurchase() throws Exception {
 
+        Account.judgementAccountLogin(solo);
+        Action.clickSearchButtonOnScreen(solo);
+        Action.searchAfterPutData(solo, 0, ValidationText.GIFT);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        TextView storeName = (TextView) solo.getView(
+                "listitem_productlist_store_name", 0);
 
+        solo.clickOnView(storeName);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        TestHelper.swipeUp(solo, 1);
+
+        //Additional gift
+        TextView bubbleOne = (TextView)
+                solo.getView("listitem_bubble", Action.VIEW_ID_ZERO);
+        //Plus purchase product
+        TextView bubbleTwo = (TextView)
+                solo.getView("listitem_bubble", Action.VIEW_ID_ONE);
+
+        solo.goBack();
+        TextView storeNames = (TextView) solo.getView(
+                "listitem_productlist_store_name", 0);
+        solo.clickOnView(storeNames);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        TestHelper.swipeUp(solo, 1);
+
+        //Additional gift
+        TextView bubbleOneSecond = (TextView)
+                solo.getView("listitem_bubble", Action.VIEW_ID_ZERO);
+        //Plus purchase product
+        TextView bubbleTwoSecond = (TextView)
+                solo.getView("listitem_bubble", Action.VIEW_ID_ONE);
+
+        assertTrue("Number inconsistency.", bubbleOne.getText().toString()
+        .equals(bubbleOneSecond.getText().toString()) && bubbleTwo.
+        getText().toString().equals(bubbleTwoSecond.getText().toString()));
+    }
+
+    /**
+     * 1953620:verify gifts displayed in the shopping cart.
+     * @throws Exception if has error
+     */
+    public final void testGiftsDisplayedInTheShoppingcart() throws Exception {
+
+        Account.judgementAccountLogin(solo);
+        Action.removeShoppingCart(solo);
+        solo.goBack();
+        solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_ZERO));
+        Action.clickSearchButtonOnScreen(solo);
+        Action.searchAfterPutData(solo, 0, ValidationText.GIFT);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        TextView storeName = (TextView) solo.getView(
+                "listitem_productlist_store_name", 0);
+
+        solo.clickOnView(storeName);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        TestHelper.swipeUp(solo, 1);
+        Action.addToShoppingCart(solo);
+        solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_THREE));
+        solo.clickOnView(solo.getView("ecshopping_cart_store_name", 0));
+        solo.sleep(ValidationText.WAIT_TIME_LONGER);
+        Action.searchTextOnWebview(solo, ValidationText.GIFT);
+
+    }
+
+    /**
+     * 1953623:Verify plus purchase product displayed in the shopping cart.
+     * @throws Exception if has error
+     */
+    public final void testPlusPurchaseProductDisplayedInTheShoppingcart()
+            throws Exception {
+
+        Account.judgementAccountLogin(solo);
+        Action.removeShoppingCart(solo);
+        solo.goBack();
+        solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_ZERO));
+        Action.clickSearchButtonOnScreen(solo);
+        Action.searchAfterPutData(solo, 0, ValidationText.GIFT);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        TextView storeName = (TextView) solo.getView(
+                "listitem_productlist_store_name", 0);
+
+        solo.clickOnView(storeName);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        TestHelper.swipeUp(solo, 1);
+
+        solo.clickOnText(ValidationText.PLUS_PURCHASE);
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+
+        TextView addon = (TextView) solo.getView("addon_title");
+        solo.clickOnView(addon);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.goBack();
+
+        Action.addToShoppingCart(solo);
+        solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_THREE));
+        solo.clickOnView(solo.getView("ecshopping_cart_store_name", 0));
+        solo.sleep(ValidationText.WAIT_TIME_LONGER);
+        Action.searchTextOnWebview(solo, ValidationText.PLUS_PURCHASE);
+
+    }
+
+    /**
+     * 1959917:Verify item link,promotion link,gift link work well.
+     * @throws Exception if has error
+     */
+    public final void testItemPromotionGiftlinkWorkWell() throws Exception {
+
+        Account.judgementAccountLogin(solo);
+        Action.removeShoppingCart(solo);
+        solo.goBack();
+        solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_ZERO));
+        Action.clickSearchButtonOnScreen(solo);
+        Action.searchAfterPutData(solo, 0, ValidationText.GIFT);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        TextView storeName = (TextView) solo.getView(
+                "listitem_productlist_store_name", 0);
+
+        solo.clickOnView(storeName);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        TestHelper.swipeUp(solo, 1);
+
+        Action.addToShoppingCart(solo);
+        TextView storeNamee = (TextView) solo.getView(
+                "listitem_productlist_store_name", 0);
+        solo.clickOnView(storeNamee);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        TestHelper.swipeUp(solo, 1);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.clickOnText(ValidationText.ADDITIONAL_GIFT);
+        assertTrue("Not enter gift page !",
+                solo.searchText(ValidationText.GIFT));
+    }
 }

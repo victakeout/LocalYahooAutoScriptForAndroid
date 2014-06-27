@@ -748,13 +748,48 @@ public final class Action {
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
         Action.clickText(solo, ValidationText.COMMODITY);
         solo.sleep(ValidationText.WAIT_TIME_LONG);
-        solo.clickInList(Counts);
+        try {
+
+            solo.clickInList(Counts);
+
+        } catch (AssertionError e) {
+            TestHelper.swipeUp2(solo, 1);
+            solo.clickInList(Counts);
+        }
         Counts++;
         Log.i("number", String.valueOf(Counts));
         //solo.sleep(ValidationText.WAIT_TIME_SHORT);
 
     }
 
+    /**
+     * define the count initial value.
+     */
+    private static int number = 1;
+
+    /**
+     * Enter product item detail page.
+     * @param solo the Solo instance
+     * @throws Exception if has error
+     */
+    public static void loopEnterAndBack(final Solo solo, int numbers)
+            throws Exception {
+
+        for (int i = 0; i<numbers; i++) {
+
+            solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+            solo.clickInList(number);
+            number++;
+            solo.goBack();
+            Log.i("number", String.valueOf(number));
+            if(number %4 ==0){
+                number = 1;
+                
+            }
+        }
+
+
+    }
     /**
      * Enter product item detail page2.
      * @param solo the Solo instance

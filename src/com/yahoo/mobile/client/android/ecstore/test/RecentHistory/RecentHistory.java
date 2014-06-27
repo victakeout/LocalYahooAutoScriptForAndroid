@@ -28,10 +28,12 @@ package com.yahoo.mobile.client.android.ecstore.test.RecentHistory;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
+import android.util.Log;
 import android.widget.Switch;
 import android.widget.TextView;
 
 import com.robotium.solo.Solo;
+import com.yahoo.mobile.client.android.ecstore.Account.Account;
 import com.yahoo.mobile.client.android.ecstore.Action.Action;
 import com.yahoo.mobile.client.android.ecstore.Assert.Assert;
 import com.yahoo.mobile.client.android.ecstore.test.TestHelper;
@@ -93,6 +95,22 @@ public class RecentHistory extends ActivityInstrumentationTestCase2<Activity> {
     }
 
     /**
+     * @throws Exception if has error
+     */
+    public final void loopBrowse() throws Exception {
+        
+        for (int x = 1;x<7;x++) {
+            
+            solo.clickInList(x);
+            solo.sleep(ValidationText.WAIT_TIME_SHORT);
+            Action.clickText(solo, ValidationText.COMMODITY);
+            Action.loopEnterAndBack(solo, 3);
+            solo.goBack();
+            Log.i("number", "x"+String.valueOf(x));
+        }
+
+    }
+    /**
      * 1900011: Verify settings screen.
      * @throws Exception if has error
      */
@@ -135,5 +153,24 @@ public class RecentHistory extends ActivityInstrumentationTestCase2<Activity> {
                         && toggle.isChecked());
 
     }
+    /**
+     * 1900004: Verify can browse recent items in「Product」tab .
+     * @throws Exception if has error
+     */
+    public final void testVerifyCanBrowseRecentItems() throws Exception {
 
+       // Account.judgementAccountLogin(solo);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.clickOnView(solo.getView("tab_image", 2));
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        Action.clickText(solo, ValidationText.APPAREL);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        Action.clickText(solo, ValidationText.COMMODITY);
+        Action.loopEnterAndBack(solo, 3);
+
+        solo.clickOnText(ValidationText.CATEGORIES);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        loopBrowse();
+
+    }
 }

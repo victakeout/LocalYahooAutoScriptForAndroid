@@ -283,4 +283,54 @@ public class StorePage extends ActivityInstrumentationTestCase2<Activity> {
         assertTrue("Not enter recommended page.", images.isShown());
     }
 
+    /**
+     * 1959906:Verify store promotion item's display.
+     * @throws Exception if has error
+     */
+    public final void testStorePromotionItemDisplay() throws Exception {
+
+        Account.judgementAccountLogin(solo);
+        Action.enterToItemPage(solo);
+        Action.addToShoppingCart(solo);
+        solo.goBack();
+        solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_THREE));
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.clickOnView(solo.getView("ecshopping_cart_store_name", 0));
+        solo.sleep(ValidationText.WAIT_TIME_LONG);
+
+        // click store LOGO.
+        Action.clickElementsInWebviewByClassname(solo, "pimg");
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        TestHelper.swipeUp(solo, 1);
+        solo.clickOnText(ValidationText.SALES_PROMOTION);
+        View promotion = (View) solo.getView(
+                "productitem_promotion_name", Action.VIEW_ID_ZERO);
+        solo.clickOnView(promotion);
+
+        solo.sleep(ValidationText.WAIT_TIME_LONGER);
+
+        assertTrue("Promotion page cannot be opened.",
+                solo.getView("webpage", Action.VIEW_ID_ZERO).isShown());
+    }
+
+    /**
+     * 1959913:Verify user can access store page by tapping store logo.
+     * @throws Exception if has error
+     */
+    public final void testAccessStoreByLogo() throws Exception {
+
+        Account.judgementAccountLogin(solo);
+        solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_ONE));
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.clickOnText(ValidationText.MAYBE_LIKE);
+        solo.sleep(ValidationText.WAIT_TIME_LONGER);
+        View recommend = (View) solo.getView(
+                "listitem_recommended_image1", 0);
+        solo.clickOnView(recommend);
+
+        // Checks if the banner is show.
+        View banner = (View) solo.getView("img_store_banner", 0);
+        assertTrue("Not enter store page.", banner.isShown());
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+    }
 }

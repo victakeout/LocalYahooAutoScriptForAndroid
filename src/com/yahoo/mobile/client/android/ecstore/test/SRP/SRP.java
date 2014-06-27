@@ -1642,4 +1642,145 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
         assertTrue("Not found iphone relevant info.",
                 solo.searchText(ValidationText.APPLE));
     }
+
+    /**
+     * 1937930:Verify browse by classified search results.
+     * @throws Exception  if has error
+     */
+    public final void testBrowseByClassifiedSearchResults() throws Exception {
+
+       Action.enterCategoryClothesPage(solo);
+       solo.sleep(ValidationText.WAIT_TIME_SHORT);
+       solo.clickOnText(ValidationText.HANSHEN_BRAND);
+       Action.clickSearchButtonOnScreen(solo);
+       Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+       solo.sleep(ValidationText.WAIT_TIME_LONG);
+       solo.clickOnView(solo.getView("tab_image",
+               Action.VIEW_ID_TWO));
+       Action.navigateToCategoryScreen(solo);
+    }
+
+    /**
+     * 1937938:Verify the price order by "low to high".
+     * @throws Exception  if has error
+     */
+    public final void testPriceOrderByIncrease() throws Exception {
+
+        Action.enterToJacketAfterSearch(solo);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.clickOnView(solo.getView("menu_filter"));
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+        solo.clickOnText(ValidationText.LOW_TO_HIGH);
+
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+        TextView priceOne = (TextView) solo.getView(
+                "listitem_productlist_price", 0);
+        String priceOneNumber = priceOne.getText().toString().trim();
+        Log.i("number", "priceOneNumber" + priceOneNumber);
+        TextView priceTwo = (TextView) solo.getView(
+                "listitem_productlist_price", 1);
+        String priceTwoNumber = priceTwo.getText().toString().trim();
+        Log.i("number", "priceTwoNumber" + priceTwoNumber);
+
+        assertTrue("Sort function incorrect.", Integer.valueOf(priceOneNumber
+                .substring(1)) <= Integer.valueOf(priceTwoNumber.substring(1)));
+
+    }
+
+    /**
+     * 1937939:Verify the price order by "High to Low".
+     * @throws Exception  if has error
+     */
+    public final void testPriceOrderByDecrease() throws Exception {
+
+        Action.enterToJacketAfterSearch(solo);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.clickOnView(solo.getView("menu_filter"));
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+        solo.clickOnText(ValidationText.HIGH_TO_LOW);
+
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+        TextView priceOne = (TextView) solo.getView(
+                "listitem_productlist_price", 0);
+        String priceOneNumber = priceOne.getText().toString()
+                .replaceAll(",", "").trim();
+        Log.i("number", "priceOneNumber" + priceOneNumber);
+        TextView priceTwo = (TextView) solo.getView(
+                "listitem_productlist_price", 1);
+        String priceTwoNumber = priceTwo.getText().toString()
+                .replaceAll(",", "").trim();
+        Log.i("number", "priceTwoNumber" + priceTwoNumber);
+
+        assertTrue("Sort function incorrect.", Integer.valueOf(priceOneNumber
+                .substring(1)) >= Integer.valueOf(priceTwoNumber.substring(1)));
+
+    }
+
+    /**
+     * 1938018:Verify open and close search bar.
+     * @throws Exception  if has error
+     */
+    public final void testSearchbarOpenClose() throws Exception {
+
+        Action.enterToJacketAfterSearch(solo);
+        solo.clickOnText(ValidationText.SHOP);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.clickOnView(solo.getView("listitem_storelist_image",
+                Action.VIEW_ID_ZERO));
+        Action.clickSearchButtonOnScreen(solo);
+        solo.goBack();
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        View storeName = (View) solo.getView("img_store_banner",
+                Action.VIEW_ID_ZERO);
+        assertTrue("Not back to store page.", storeName.isShown());
+    }
+
+    /**
+     * 1938019:Verify default store number.
+     * @throws Exception  if has error
+     */
+    public final void testDefaultStoreNumber() throws Exception {
+
+        Action.enterCategoryClothesPage(solo);
+        Action.clickSearchButtonOnScreen(solo);
+        Action.searchAfterPutData(solo, 0, ValidationText.S);
+        solo.sleep(ValidationText.WAIT_TIME_LONG);
+        solo.clickOnText(ValidationText.SHOP);
+
+        TextView result = (TextView) solo.getView(
+                "category_tab_secondary_title", Action.VIEW_ID_ONE);
+        String number = result.getText().toString().trim().substring(0,2);
+        Log.i("number", number);
+        assertTrue("Default item less 20.", Integer.parseInt(number) >= 20);
+    }
+
+    /**
+     * 1937942:Verify can cancel select item.
+     * @throws Exception  if has error
+     */
+    public final void testCancelSelected() throws Exception {
+
+        Action.enterCategoryClothesPage(solo);
+        Action.clickSearchButtonOnScreen(solo);
+        Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
+        solo.sleep(ValidationText.WAIT_TIME_LONG);
+        solo.clickOnText(ValidationText.COMMODITY);
+        View ivs = solo.getView("menu_filter");
+        solo.clickOnView(ivs);
+        Action.clickText(solo, ValidationText.FILTER);
+
+        // solo.clickOnToggleButton("可刷卡");
+        ToggleButton tb = (ToggleButton) solo.getView("tb_cc");
+        solo.clickOnView(tb);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        assertTrue(" 'Credit cards accepted'  button unselected.",
+                tb.isChecked());
+        solo.clickOnText(ValidationText.CANCEL);
+        View iv = solo.getView("menu_filter");
+        solo.clickOnView(iv);
+        Action.clickText(solo, ValidationText.FILTER);
+        ToggleButton tbs = (ToggleButton) solo.getView("tb_cc");
+        assertFalse("'Credit cards accepted'  button  selected.",
+                tbs.isChecked());
+    }
 }
