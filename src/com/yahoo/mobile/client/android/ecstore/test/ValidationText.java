@@ -7,39 +7,43 @@ public class ValidationText {
 	public static final int WAIT_TIME_MIDDLE = 5000;
 	
 	public static final int WAIT_TIME_LONG = 10000;
-	
+
 	public static final int WAIT_TIME_LONGER = 20000;
-	
+
 	public static final String WAIT = "等等";
-	
+
 	public static final String SKIP = "略過";
 
+	public static final String NOTIFICATION = "通知";
+
 	public static final String TO_USE = "前往使用";
-	
+
+	public static final String ZERO_PRODUCT = "0 件商品";
+
 	public static final String TO_LATEST_STATUS = "前往最新動態";
 
 	public static final String PERSONALIZED = "建立個人化的購物體驗";
-	 
+
 	public static final String SEARCH_ALL_CATEGORIES = "搜尋全部分類";
 
 	public static final String NEWS = "最新動態";
-	
+
 	public static final String PLUS_PURCHASE = "加購商品";
-	
+
 	public static final String ADDITIONAL_GIFT = "附送贈品";
-	
+
 	public static final String YOUR_FAVORITE = "你的最愛";
 
 	public static final String DONG = "東";
-	
+
 	public static final String DONG_J = "東京";
-	
+
 	public static final String DONG_JING = "東京著衣";
-	
+
 	public static final String DONG_JING_AUTHENTIC = "東京正宗";
 
 	public static final String APPAREL = "服飾";
-	
+
 	public static final String GIFT = "贈品";
 
 	public static final String POPULAR_WOMEN = "流行女裝";
@@ -47,19 +51,19 @@ public class ValidationText {
 	public static final String JACKET = "上衣";
 
 	public static final String T_SHIRT = "T恤";
-	
+
 	public static final String S = "s";
-	
+
 	public static final String ESCAPE_CHARACTER = "#39";
-	
+
 	public static final String NO_SLEEVE_SHIRT = "無袖T恤";
-	
+
 	public static final String COMMODITY = "商品";
 
 	public static final String SEARCH_TOP = "搜尋上衣";
 
 	public static final String SEARCH_APPAREL = "搜尋服飾";
-	
+
 	public static final String SEARCH = "搜尋";
 	
 	public static final String RECENT_BROWSE = "最近瀏覽";
@@ -219,6 +223,8 @@ public class ValidationText {
 	public static final String EDIT_FAVORITE_CATEGORY = "編輯喜愛的分類";
 	
 	public static final String HANSHEN_HOME_LIFE = "漢神百貨居家生活";
+	
+	public static final String HANSHEN_MALL = "漢神百貨";
 	
 	public static final String HANSHEN_BRAND = "漢神百貨品牌服飾";
 

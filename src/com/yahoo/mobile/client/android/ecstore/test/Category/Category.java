@@ -1673,4 +1673,30 @@ public class Category extends ActivityInstrumentationTestCase2<Activity> {
        assertTrue("Sort function incorrect.", Integer.valueOf(priceOneNumber
                .substring(1)) <= Integer.valueOf(priceTwoNumber.substring(1)));
     }
+
+    /**
+     * 1953648:Verify My account edit category function.
+     * @throws Exception if has error
+     */
+    public final void testEditFavoriteCategoryInMyAccount()
+            throws Exception {
+
+        Account.judgementAccountLogin(solo);
+        solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_FOUR));
+        solo.scrollToBottom();
+        solo.clickOnView(solo.getView("profile_bt_edit_favorite_categories"));
+
+        // solo.clickOnText(ValidationText.Edit_Favorite_Category);
+        // Get the grid view count.
+        GridView lv = (GridView) solo.getView("category_editor_grid");
+        Log.i("number", String.valueOf(lv.getCount()));
+
+        for (int i = 0; i < lv.getCount(); i++) {
+            View category = (View) solo.getView("category_editor_grid_button",
+                    i);
+            solo.clickOnView(category);
+            assertTrue("Category item is not selected.", category.isPressed());
+        }
+
+    }
 }

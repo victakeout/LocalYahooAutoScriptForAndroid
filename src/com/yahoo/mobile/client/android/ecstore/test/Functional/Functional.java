@@ -30,9 +30,11 @@ import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.view.View;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.robotium.solo.Solo;
 import com.yahoo.mobile.client.android.ecstore.Account.Account;
+import com.yahoo.mobile.client.android.ecstore.Action.Action;
 import com.yahoo.mobile.client.android.ecstore.Assert.Assert;
 import com.yahoo.mobile.client.android.ecstore.test.TestHelper;
 import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
@@ -122,6 +124,23 @@ public class Functional extends ActivityInstrumentationTestCase2<Activity> {
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
         assertFalse("Notification switch is on.",
                 notification.isChecked());
+
+    }
+
+    /**
+     * 1977449:[notification]list of notifications.
+     * @throws Exception if has error
+     */
+    public final void testShowNotificationInList() throws Exception {
+
+        Account.judgementAccountLogin(solo);
+        solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_FOUR));
+        solo.clickOnText(ValidationText.NOTIFICATION);
+        solo.sleep(ValidationText.WAIT_TIME_LONG);
+
+        TextView notificationBar = (TextView) solo.getView("tx_header");
+
+        assertTrue("Notification is null.", notificationBar.isShown());
 
     }
 

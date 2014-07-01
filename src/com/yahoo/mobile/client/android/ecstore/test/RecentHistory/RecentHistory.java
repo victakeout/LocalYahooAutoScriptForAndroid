@@ -29,6 +29,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
+import android.view.View;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -41,15 +42,14 @@ import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 
 /**
  * @author Administrator
- *
  */
 @SuppressLint("NewApi")
 public class RecentHistory extends ActivityInstrumentationTestCase2<Activity> {
     /**
      * Declare application main activity.
      */
-    private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME =
-            "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
+    private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME
+    = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
 
     /**
      * Declare a variable of type Class for start tested program.
@@ -72,7 +72,8 @@ public class RecentHistory extends ActivityInstrumentationTestCase2<Activity> {
     }
 
     /**
-     * @throws ClassNotFoundException if has error
+     * @throws ClassNotFoundException
+     *             if has error
      */
     @SuppressWarnings("unchecked")
     public RecentHistory() throws ClassNotFoundException {
@@ -95,24 +96,9 @@ public class RecentHistory extends ActivityInstrumentationTestCase2<Activity> {
     }
 
     /**
-     * @throws Exception if has error
-     */
-    public final void loopBrowse() throws Exception {
-        
-        for (int x = 1;x<7;x++) {
-            
-            solo.clickInList(x);
-            solo.sleep(ValidationText.WAIT_TIME_SHORT);
-            Action.clickText(solo, ValidationText.COMMODITY);
-            Action.loopEnterAndBack(solo, 3);
-            solo.goBack();
-            Log.i("number", "x"+String.valueOf(x));
-        }
-
-    }
-    /**
      * 1900011: Verify settings screen.
-     * @throws Exception if has error
+     * @throws Exception
+     *             if has error
      */
     public final void testVerifySettingsScreen() throws Exception {
 
@@ -153,24 +139,56 @@ public class RecentHistory extends ActivityInstrumentationTestCase2<Activity> {
                         && toggle.isChecked());
 
     }
+
     /**
      * 1900004: Verify can browse recent items in「Product」tab .
-     * @throws Exception if has error
+     * @throws Exception
+     *             if has error
      */
     public final void testVerifyCanBrowseRecentItems() throws Exception {
 
-       // Account.judgementAccountLogin(solo);
+        Account.judgementAccountLogin(solo);
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
         solo.clickOnView(solo.getView("tab_image", 2));
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
         Action.clickText(solo, ValidationText.APPAREL);
-        solo.sleep(ValidationText.WAIT_TIME_SHORT);
-        Action.clickText(solo, ValidationText.COMMODITY);
-        Action.loopEnterAndBack(solo, 3);
+        Action.loopBrowse(solo);
 
-        solo.clickOnText(ValidationText.CATEGORIES);
-        solo.sleep(ValidationText.WAIT_TIME_SHORT);
-        loopBrowse();
+        solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_FOUR));
+        solo.clickOnText(ValidationText.RECENT_BROWSE);
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+
+        TextView headerNumber = (TextView) solo.getView("tx_header",
+                Action.VIEW_ID_ZERO);
+        int count = Integer.valueOf(headerNumber.getText().toString().trim()
+                .substring(6, 8));
+        Log.i("number", headerNumber.getText().toString().trim());
+
+        // favorites icon.
+        View favoritesIcon = (View) solo.getView("star_button",
+                Action.VIEW_ID_ONE);
+
+        // Product image.
+        View productImage = (View) solo.getView("listitem_productlist_image",
+                Action.VIEW_ID_ZERO);
+
+        // Store name.
+        TextView storeName = (TextView) solo.getView(
+                "listitem_productlist_store_name", Action.VIEW_ID_ZERO);
+
+        // Store rating.
+        TextView storeRate = (TextView) solo.getView(
+                "listitem_productlist_store_rating", Action.VIEW_ID_ONE);
+
+        // Item name.'
+        TextView itemName = (TextView) solo.getView(
+                "listitem_productlist_title", Action.VIEW_ID_TWO);
+
+        assertTrue(
+                "Recent items number is less than 20.",
+                count >= 20 && favoritesIcon.isShown()
+                        && productImage.isShown() && storeName.isShown()
+                        && storeRate.isShown() && itemName.isShown());
 
     }
 }

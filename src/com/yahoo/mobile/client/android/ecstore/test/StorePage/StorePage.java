@@ -333,4 +333,36 @@ public class StorePage extends ActivityInstrumentationTestCase2<Activity> {
         assertTrue("Not enter store page.", banner.isShown());
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
     }
+
+    /**
+     * 1959925:Verify user can search function in store page.
+     * @throws Exception if has error
+     */
+    public final void testSearchFunctionInStorePage() throws Exception {
+
+        Account.judgementAccountLogin(solo);
+        solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_ONE));
+        solo.clickOnText(ValidationText.MAYBE_LIKE);
+        Action.clickSearchButtonOnScreen(solo);
+        Action.searchAfterPutData(solo, 0, ValidationText.HANSHEN_MALL);
+        solo.sleep(ValidationText.WAIT_TIME_LONG);
+
+         View shop = (View) solo.getView("category_tab_secondary_title",
+                 Action.VIEW_ID_ONE);
+        solo.clickOnView(shop);
+
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.clickOnView(solo.getView("listitem_storelist_image"));
+        solo.sleep(ValidationText.WAIT_TIME_LONG);
+        Action.clickSearchButtonOnScreen(solo);
+
+        Action.searchAfterPutData(solo, 0, ValidationText.DONG_J);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+
+        //Product image.
+        solo.clickOnView(solo.getView("listitem_productlist_image"));
+
+        View  image = (View) solo.getView("productitem_store_name");
+        assertTrue("Not enter item page.", image.isShown());
+    }
 }

@@ -19,6 +19,7 @@ import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 
 /**
  * Contains some common actions methods examples is enterToJacketAfterSearch().
+ * 
  * @author SYMBIO
  **/
 
@@ -31,32 +32,27 @@ public final class Action {
     private Action() {
 
     }
+
     /**
      * This is elements view ID.
      */
-    public static final int
-            VIEW_ID_ZERO = 0 ,
-            VIEW_ID_ONE = 1 ,
-            VIEW_ID_TWO = 2 ,
-            VIEW_ID_THREE = 3 ,
-            VIEW_ID_FOUR = 4 ,
-            VIEW_ID_FIVE = 5 ,
-            DEFAULT_LISTVIEW_COUNT = 21,
-            DEFAULT_LISTVIEW_COUNT_PLUS = 22;
-
+    public static final int VIEW_ID_ZERO = 0, VIEW_ID_ONE = 1, VIEW_ID_TWO = 2,
+            VIEW_ID_THREE = 3, VIEW_ID_FOUR = 4, VIEW_ID_FIVE = 5,
+            DEFAULT_LISTVIEW_COUNT = 21, DEFAULT_LISTVIEW_COUNT_PLUS = 22;
 
     /**
      * Clear history information then navigate to main screen.
-     * @param solo the Solo instance
-     * @throws Exception if has error
+     * 
+     * @param solo
+     *            the Solo instance
+     * @throws Exception
+     *             if has error
      */
-    public static void clearHistoryInfomation(final Solo solo)
-            throws Exception {
+    public static void clearHistoryInfomation(final Solo solo) throws Exception {
 
         // Go to main screen
         solo.waitForActivity("ECStoreActivity", ValidationText.WAIT_TIME_SHORT);
-        solo.waitForText(ValidationText.NEWS, 1,
-                ValidationText.WAIT_TIME_SHORT);
+        solo.waitForText(ValidationText.NEWS, 1, ValidationText.WAIT_TIME_SHORT);
         junit.framework.Assert.assertTrue("Navigate to main screen failed.",
                 solo.searchText(ValidationText.NEWS));
 
@@ -83,8 +79,11 @@ public final class Action {
 
     /**
      * Go to advanced screen.
-     * @param solo the Solo instance
-     * @throws Exception if has error
+     * 
+     * @param solo
+     *            the Solo instance
+     * @throws Exception
+     *             if has error
      */
     public static void enterAdvancedPage(final Solo solo) throws Exception {
 
@@ -97,14 +96,16 @@ public final class Action {
 
     /**
      * Go to Clothes screen.
-     * @param solo the Solo instance
-     * @throws Exception if has error
+     * 
+     * @param solo
+     *            the Solo instance
+     * @throws Exception
+     *             if has error
      */
     public static void enterCategoryClothesPage(final Solo solo)
             throws Exception {
 
-        solo.waitForActivity("ECSplashActivity",
-                ValidationText.WAIT_TIME_SHORT);
+        solo.waitForActivity("ECSplashActivity", ValidationText.WAIT_TIME_SHORT);
         Action.clickText(solo, ValidationText.ALL_CATEGORIES);
         Action.clickText(solo, ValidationText.APPAREL);
 
@@ -112,13 +113,16 @@ public final class Action {
 
     /**
      * Go to advanced sort screen.
-     * @param solo the Solo instance
-     * @throws Exception if has error
+     * 
+     * @param solo
+     *            the Solo instance
+     * @throws Exception
+     *             if has error
      */
-    public static void enterAdvancedSortPage(final Solo solo)throws Exception {
+    public static void enterAdvancedSortPage(final Solo solo) throws Exception {
 
         solo.waitForText(ValidationText.COMMODITY, 1,
-               ValidationText.WAIT_TIME_SHORT);
+                ValidationText.WAIT_TIME_SHORT);
         solo.clickOnText(ValidationText.COMMODITY);
         solo.clickOnView(solo.getView("menu_filter"));
         solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
@@ -126,11 +130,13 @@ public final class Action {
 
     }
 
-
     /**
      * Go to browser mode screen.
-     * @param solo the Solo instance
-     * @throws Exception if has error
+     * 
+     * @param solo
+     *            the Solo instance
+     * @throws Exception
+     *             if has error
      */
 
     public static void enterAdvancedBrowserModePage(final Solo solo)
@@ -147,11 +153,13 @@ public final class Action {
 
     }
 
-
     /**
      * Go to main screen then click search icon.
-     * @param solo the Solo instance
-     * @throws Exception if has error
+     * 
+     * @param solo
+     *            the Solo instance
+     * @throws Exception
+     *             if has error
      */
     public static void clickSearchButtonOnScreen(final Solo solo)
             throws Exception {
@@ -165,8 +173,11 @@ public final class Action {
 
     /**
      * Click home button on screen.
-     * @param solo the Solo instance
-     * @throws Exception if has error
+     * 
+     * @param solo
+     *            the Solo instance
+     * @throws Exception
+     *             if has error
      */
     public static void clickHomeButtonOnScreen(final Solo solo)
             throws Exception {
@@ -179,13 +190,18 @@ public final class Action {
 
     /**
      * Add data in text view.
-     * @param solo the Solo instance
-     * @param textviewId the text view id name
-     * @param data the data will input to text view
-     * @throws Exception if has error
+     * 
+     * @param solo
+     *            the Solo instance
+     * @param textviewId
+     *            the text view id name
+     * @param data
+     *            the data will input to text view
+     * @throws Exception
+     *             if has error
      */
-    public static void addInitializeData(final Solo solo,
-            final int textviewId, final String data)throws Exception {
+    public static void addInitializeData(final Solo solo, final int textviewId,
+            final String data) throws Exception {
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
         solo.enterText(textviewId, data);
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
@@ -193,25 +209,31 @@ public final class Action {
 
     /**
      * Put some data and search it.
-     * @param solo the Solo instance
-     * @param textviewId the text view id name
-     * @param data the data will input to text view
-     * @throws Exception if has error
+     * 
+     * @param solo
+     *            the Solo instance
+     * @param textviewId
+     *            the text view id name
+     * @param data
+     *            the data will input to text view
+     * @throws Exception
+     *             if has error
      */
-    public static void searchAfterPutData(final Solo solo
-            , final int textviewId,
-    final String data) throws Exception {
+    public static void searchAfterPutData(final Solo solo,
+            final int textviewId, final String data) throws Exception {
 
         addInitializeData(solo, textviewId, data);
         solo.pressSoftKeyboardSearchButton();
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
     }
 
-
     /**
      * Navigate to category screen.
-     * @param solo the Solo instance
-     * @throws Exception if has error
+     * 
+     * @param solo
+     *            the Solo instance
+     * @throws Exception
+     *             if has error
      */
     public static void navigateToCategoryScreen(final Solo solo)
             throws Exception {
@@ -225,8 +247,11 @@ public final class Action {
 
     /**
      * Navigate to favorite store screen.
-     * @param solo the Solo instance
-     * @throws Exception if has error
+     * 
+     * @param solo
+     *            the Solo instance
+     * @throws Exception
+     *             if has error
      */
     public static void navigateToFavoriteStoreScreen(final Solo solo)
             throws Exception {
@@ -242,8 +267,11 @@ public final class Action {
 
     /**
      * Remove favorite store.
-     * @param solo the Solo instance
-     * @throws Exception if has error
+     * 
+     * @param solo
+     *            the Solo instance
+     * @throws Exception
+     *             if has error
      */
     public static void removeFavoriteStore(final Solo solo) throws Exception {
 
@@ -252,16 +280,15 @@ public final class Action {
         try {
             View storeName = (View) solo
                     .getView("listitem_favoritestore_storename");
-            View url = (View)solo.getView (
-                    "listitem_favoritestore_image1");
-                for (int i = 0 ; i <= 10 ; i ++) {
-                    solo.clickLongOnView(storeName);
-                    solo.sleep(ValidationText.WAIT_TIME_SHORT);
-                    Button ok = (Button) solo.getView("button1");
-                    solo.clickOnView(ok);
-                    solo.sleep(ValidationText.WAIT_TIME_LONG);
+            View url = (View) solo.getView("listitem_favoritestore_image1");
+            for (int i = 0; i <= 10; i++) {
+                solo.clickLongOnView(storeName);
+                solo.sleep(ValidationText.WAIT_TIME_SHORT);
+                Button ok = (Button) solo.getView("button1");
+                solo.clickOnView(ok);
+                solo.sleep(ValidationText.WAIT_TIME_LONG);
 
-                }
+            }
         } catch (AssertionError e) {
             junit.framework.Assert.assertTrue("Not fully deleted.", true);
         }
@@ -271,12 +298,14 @@ public final class Action {
 
     }
 
-
     /**
      * Get the current screen contains list view.
-     * @param solo the Solo instance
+     * 
+     * @param solo
+     *            the Solo instance
      * @return return the list view default size
-     * @throws Exception if has error
+     * @throws Exception
+     *             if has error
      */
     public static int getListviewOnCurrentScreen(final Solo solo)
             throws Exception {
@@ -289,13 +318,18 @@ public final class Action {
 
     /**
      * Click plus in open window.
-     * @param solo the Solo instance
-     * @param viewId the search menu list view
-     * @param plusId the plusId is "+" icon in view
-     * @throws Exception if has error
+     * 
+     * @param solo
+     *            the Solo instance
+     * @param viewId
+     *            the search menu list view
+     * @param plusId
+     *            the plusId is "+" icon in view
+     * @throws Exception
+     *             if has error
      */
-    public static void clickPlusInOpenWindow(final Solo solo
-            , final String viewId, final int plusId) throws Exception {
+    public static void clickPlusInOpenWindow(final Solo solo,
+            final String viewId, final int plusId) throws Exception {
 
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
         View view = solo.getView(viewId, plusId);
@@ -306,14 +340,17 @@ public final class Action {
 
     /**
      * Return value in text view.
-     * @param solo the Solo instance
-     * @param textviewId get the view text
+     * 
+     * @param solo
+     *            the Solo instance
+     * @param textviewId
+     *            get the view text
      * @return the view result
-     * @throws Exception if has error
+     * @throws Exception
+     *             if has error
      */
-    public static String getValuesInTextview(final Solo solo
-            , final String textviewId)
-            throws Exception {
+    public static String getValuesInTextview(final Solo solo,
+            final String textviewId) throws Exception {
 
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
         View view = solo.getView(textviewId);
@@ -326,17 +363,20 @@ public final class Action {
     }
 
     /**
-     * value in text view,MULTI-same text view
-     * Return view status.
-     * @param solo the Solo instance
-     * @param textviewid the view text will be fetch
-     * @param vId the vId is view id
+     * value in text view,MULTI-same text view Return view status.
+     * 
+     * @param solo
+     *            the Solo instance
+     * @param textviewid
+     *            the view text will be fetch
+     * @param vId
+     *            the vId is view id
      * @return return the view status
-     * @throws Exception if has error
+     * @throws Exception
+     *             if has error
      */
     public static String getValuesInTextview(final Solo solo,
-            final String textviewid, final int vId)
-                    throws Exception {
+            final String textviewid, final int vId) throws Exception {
 
         View view = solo.getView(textviewid, vId);
         if (view == null) {
@@ -349,10 +389,14 @@ public final class Action {
 
     /**
      * Is view shown?
-     * @param solo the Solo instance
-     * @param viewid the searching view id name
+     * 
+     * @param solo
+     *            the Solo instance
+     * @param viewid
+     *            the searching view id name
      * @return return view status
-     * @throws Exception if has error
+     * @throws Exception
+     *             if has error
      */
     public static boolean getIsViewShown(final Solo solo, final String viewid)
             throws Exception {
@@ -368,14 +412,19 @@ public final class Action {
 
     /**
      * Is view shown?
-     * @param solo the Solo instance
-     * @param viewid  the searching view id name
-     * @param id the searching view id
-     * @return  return the view status
-     * @throws Exception if has error
+     * 
+     * @param solo
+     *            the Solo instance
+     * @param viewid
+     *            the searching view id name
+     * @param id
+     *            the searching view id
+     * @return return the view status
+     * @throws Exception
+     *             if has error
      */
     public static boolean getIsViewShown(final Solo solo, final String viewid,
-            final int id)throws Exception {
+            final int id) throws Exception {
 
         View view = solo.getView(viewid, id);
         if (view == null) {
@@ -387,9 +436,13 @@ public final class Action {
 
     /**
      * Click view.
-     * @param solo the Solo instance
-     * @param viewId By clicking on the view
-     * @throws Exception if has error
+     * 
+     * @param solo
+     *            the Solo instance
+     * @param viewId
+     *            By clicking on the view
+     * @throws Exception
+     *             if has error
      */
     public static void clickView(final Solo solo, final String viewId)
             throws Exception {
@@ -402,13 +455,18 @@ public final class Action {
 
     /**
      * Click view by id.
-     * @param solo the Solo instance
-     * @param viewId By clicking on the view
-     * @param id viewId By clicking on the view id
-     * @throws Exception if has error
+     * 
+     * @param solo
+     *            the Solo instance
+     * @param viewId
+     *            By clicking on the view
+     * @param id
+     *            viewId By clicking on the view id
+     * @throws Exception
+     *             if has error
      */
-    public static void clickView(final Solo solo
-            , final String viewId, final int id)throws Exception {
+    public static void clickView(final Solo solo, final String viewId,
+            final int id) throws Exception {
 
         View view = solo.getView(viewId, id);
         solo.clickOnView(view);
@@ -416,29 +474,34 @@ public final class Action {
 
     }
 
-
     /**
      * Click text.
-     * @param solo the Solo instance
-     * @param text the text is given to click
-     * @throws Exception if has error
+     * 
+     * @param solo
+     *            the Solo instance
+     * @param text
+     *            the text is given to click
+     * @throws Exception
+     *             if has error
      */
     public static void clickText(final Solo solo, final String text)
             throws Exception {
 
-        solo.waitForText(text, 1,
-                ValidationText.WAIT_TIME_MIDDLE);
+        solo.waitForText(text, 1, ValidationText.WAIT_TIME_MIDDLE);
         solo.clickOnText(text);
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
 
     }
 
-
     /**
      * Add history information in search bar.
-     * @param solo the Solo instance
-     * @param searchKeys the searchKeys array contains search elements
-     * @throws Exception if has error
+     * 
+     * @param solo
+     *            the Solo instance
+     * @param searchKeys
+     *            the searchKeys array contains search elements
+     * @throws Exception
+     *             if has error
      */
     public static void addHistoryInfomationInSearchBar(final Solo solo,
             final String[] searchKeys) throws Exception {
@@ -463,11 +526,13 @@ public final class Action {
 
     /**
      * Close some phone soft keyboard.
-     * @param solo the Solo instance
-     * @throws Exception if has error
+     * 
+     * @param solo
+     *            the Solo instance
+     * @throws Exception
+     *             if has error
      */
-    public static void closeSoftKeyBoard(final Solo solo)
-            throws Exception {
+    public static void closeSoftKeyBoard(final Solo solo) throws Exception {
 
         // close soft keyboard
         InputMethodManager imm = (InputMethodManager) solo.getCurrentActivity()
@@ -482,8 +547,11 @@ public final class Action {
 
     /**
      * Set the view to list view.
-     * @param solo the Solo instance
-     * @throws Exception if has error
+     * 
+     * @param solo
+     *            the Solo instance
+     * @throws Exception
+     *             if has error
      */
     public static void setListViewStyleAfterSearch(final Solo solo)
             throws Exception {
@@ -496,8 +564,11 @@ public final class Action {
 
     /**
      * Set the view to grid view.
-     * @param solo the Solo instance
-     * @throws Exception if has error
+     * 
+     * @param solo
+     *            the Solo instance
+     * @throws Exception
+     *             if has error
      */
     public static void setSmallPhotoViewStyleAfterSearch(final Solo solo)
             throws Exception {
@@ -509,8 +580,11 @@ public final class Action {
 
     /**
      * Set the view to large photo view.
-     * @param solo the Solo instance
-     * @throws Exception if has error
+     * 
+     * @param solo
+     *            the Solo instance
+     * @throws Exception
+     *             if has error
      */
     public static void setLargePhotoViewStyleAfterSearch(final Solo solo)
             throws Exception {
@@ -520,11 +594,13 @@ public final class Action {
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
     }
 
-
     /**
      * Remove favorite product item.
-     * @param solo the Solo instance
-     * @throws Exception if has error
+     * 
+     * @param solo
+     *            the Solo instance
+     * @throws Exception
+     *             if has error
      */
     public static void removeFavoriteItem(final Solo solo) throws Exception {
 
@@ -533,11 +609,11 @@ public final class Action {
         solo.clickOnText(ValidationText.PRODUCT_COLLECTION);
         solo.sleep(ValidationText.WAIT_TIME_LONG);
         if (solo.searchText(ValidationText.ALREAD_ADDED)) {
-            TextView  title = (TextView) solo.getView("tx_header", 0);
-            Log.i("number", title.getText().toString().trim().substring(5,6));
+            TextView title = (TextView) solo.getView("tx_header", 0);
+            Log.i("number", title.getText().toString().trim().substring(5, 6));
             if (title.isShown()) {
-                String number = title.getText().toString()
-                        .trim().substring(5,6);
+                String number = title.getText().toString().trim()
+                        .substring(5, 6);
                 int numbers = Integer.parseInt(number);
                 for (int f = 0; f < numbers; f++) {
                     solo.clickLongOnView(solo.getView(
@@ -546,17 +622,16 @@ public final class Action {
                     solo.clickOnButton(ValidationText.OK);
                     solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
                 }
-                junit.framework.Assert.assertFalse(
-                        "Did not remove all.", title.isShown());
+                junit.framework.Assert.assertFalse("Did not remove all.",
+                        title.isShown());
 
             } else {
                 junit.framework.Assert.assertTrue("Did not remove all", true);
             }
         } else {
-                junit.framework.Assert.assertTrue("Did not remove all", true);
+            junit.framework.Assert.assertTrue("Did not remove all", true);
         }
-        }
-
+    }
 
     /**
      * Define the counts default value.
@@ -571,8 +646,11 @@ public final class Action {
 
     /**
      * Click Star Icon.
-     * @param solo the Solo instance
-     * @throws Exception if has error
+     * 
+     * @param solo
+     *            the Solo instance
+     * @throws Exception
+     *             if has error
      */
     public static void clickStarIconNote(final Solo solo) throws Exception {
 
@@ -596,17 +674,19 @@ public final class Action {
 
     /**
      * Add product to shopping cart in item page.
-     * @param solo the Solo instance
-     * @throws Exception if has error
+     * 
+     * @param solo
+     *            the Solo instance
+     * @throws Exception
+     *             if has error
      */
-    public static void addToShoppingCart(final Solo solo)
-            throws Exception {
+    public static void addToShoppingCart(final Solo solo) throws Exception {
 
         Log.i("number", solo.getCurrentActivity().getClass().toString());
         // Swipe the screen until the buy button display.
-      //  TestHelper.swipeUp2(solo, 1);
+        // TestHelper.swipeUp2(solo, 1);
         TestHelper.swipeUp(solo, 1);
-       solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
         View shopCart;
         try {
             shopCart = solo.getView("productitem_btn_add_to_shopping_cart");
@@ -627,7 +707,7 @@ public final class Action {
                     "product_item_spec_item_selections", 0);
         } catch (AssertionError e) {
             TestHelper.swipeUp2(solo, 2);
-           // solo.sleep(ValidationText.WAIT_TIME_SHORT);
+            // solo.sleep(ValidationText.WAIT_TIME_SHORT);
             View shopCarts = solo
                     .getView("productitem_btn_add_to_shopping_cart");
             solo.clickOnView(shopCarts);
@@ -647,21 +727,21 @@ public final class Action {
             junit.framework.Assert.assertTrue("No items in shopping cart.",
                     buddle.isShown());
         } else {
-            junit.framework.Assert.assertTrue("Add failed.",
-                   true);
+            junit.framework.Assert.assertTrue("Add failed.", true);
         }
 
         solo.goBack();
     }
 
-
     /**
      * Remove shopping cart products.
-     * @param solo the Solo instance
-     * @throws Exception if has error
+     * 
+     * @param solo
+     *            the Solo instance
+     * @throws Exception
+     *             if has error
      */
-    public static void removeShoppingCart(final Solo solo)
-            throws Exception {
+    public static void removeShoppingCart(final Solo solo) throws Exception {
 
         View buddle;
         solo.clickOnView(solo.getView("tab_image", VIEW_ID_THREE));
@@ -706,15 +786,15 @@ public final class Action {
         }
     }
 
-
-
     /**
      * Enter product item detail page.
-     * @param solo the Solo instance
-     * @throws Exception if has error
+     * 
+     * @param solo
+     *            the Solo instance
+     * @throws Exception
+     *             if has error
      */
-    public static void enterToItemPage(final Solo solo)
-            throws Exception {
+    public static void enterToItemPage(final Solo solo) throws Exception {
 
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
         solo.clickOnView(solo.getView("tab_image", 2));
@@ -724,7 +804,7 @@ public final class Action {
         Action.clickText(solo, ValidationText.COMMODITY);
         solo.sleep(ValidationText.WAIT_TIME_LONG);
         solo.clickInList(1);
-        //solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        // solo.sleep(ValidationText.WAIT_TIME_SHORT);
 
     }
 
@@ -735,11 +815,12 @@ public final class Action {
 
     /**
      * Enter product item detail page.
-     * @param solo the Solo instance
-     * @throws Exception if has error
+     * @param solo
+     *            the Solo instance
+     * @throws Exception
+     *             if has error
      */
-    public static void enterToItemPages(final Solo solo)
-            throws Exception {
+    public static void enterToItemPages(final Solo solo) throws Exception {
 
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
         solo.clickOnView(solo.getView("tab_image", 2));
@@ -758,47 +839,77 @@ public final class Action {
         }
         Counts++;
         Log.i("number", String.valueOf(Counts));
-        //solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        // solo.sleep(ValidationText.WAIT_TIME_SHORT);
 
     }
 
     /**
      * define the count initial value.
      */
-    private static int number = 1;
+    private static int COUNT = 1;
 
     /**
      * Enter product item detail page.
-     * @param solo the Solo instance
-     * @throws Exception if has error
+     * @param solo
+     *            the Solo instance
+     * @throws Exception
+     *             if has error
      */
-    public static void loopEnterAndBack(final Solo solo, int numbers)
-            throws Exception {
+    public static void loopEnterAndBack(final Solo solo) throws Exception {
 
-        for (int i = 0; i<numbers; i++) {
+        for (int i = 0; i < Action.VIEW_ID_THREE; i++) {
 
             solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
-            solo.clickInList(number);
-            number++;
+            solo.clickInList(COUNT);
+            solo.sleep(ValidationText.WAIT_TIME_SHORT);
             solo.goBack();
-            Log.i("number", String.valueOf(number));
-            if(number %4 ==0){
-                number = 1;
-                
+            COUNT++;
+
+            if (COUNT % 4 == 0) {
+                COUNT = 1;
             }
         }
 
+    }
+
+    /**
+     * define the count initial value.
+     */
+    private static int LINE = 0;
+
+    /**
+     * @throws Exception
+     *             if has error
+     */
+    public static void loopBrowse(final Solo solo) throws Exception {
+        for (int z = 0; z < 6; z++) {
+            TextView subCategory = (TextView) solo.getView("sub_category_name",
+                    LINE);
+            Log.i("number", subCategory.getText().toString());
+
+            solo.clickOnView(subCategory);
+
+            solo.sleep(ValidationText.WAIT_TIME_SHORT);
+            Action.clickText(solo, ValidationText.COMMODITY);
+            Action.loopEnterAndBack(solo);
+            LINE++;
+            solo.goBack();
+        }
 
     }
+
     /**
      * Enter product item detail page2.
-     * @param solo the Solo instance
-     * @param countsBrowse the counts stand for how many browse record
-     * will be created
-     * @throws Exception if has error.
+     * 
+     * @param solo
+     *            the Solo instance
+     * @param countsBrowse
+     *            the counts stand for how many browse record will be created
+     * @throws Exception
+     *             if has error.
      */
-    public static void makeBrowseRecord(final Solo solo,
-            final int countsBrowse) throws Exception {
+    public static void makeBrowseRecord(final Solo solo, final int countsBrowse)
+            throws Exception {
 
         Action.clickText(solo, ValidationText.ALL_CATEGORIES);
         Action.clickText(solo, ValidationText.APPAREL);
@@ -820,15 +931,18 @@ public final class Action {
 
     }
 
-
     /**
      * Click elements from web view by ClassName.
-     * @param solo the Solo instance
-     * @param text the class name text will be clicked on the web view
-     * @throws Exception if has error
+     * 
+     * @param solo
+     *            the Solo instance
+     * @param text
+     *            the class name text will be clicked on the web view
+     * @throws Exception
+     *             if has error
      */
     public static void clickElementsInWebviewByClassname(final Solo solo,
-            final String text)throws Exception {
+            final String text) throws Exception {
 
         for (WebElement web : solo.getCurrentWebElements()) {
             Log.i("number", "ClassNme:" + web.getClassName().toString());
@@ -844,12 +958,15 @@ public final class Action {
 
     // Click elements from web view by text
     /**
-     * @param solo the Solo instance
-     * @param text the text will be clicked on the web view
-     * @throws Exception if has error.
+     * @param solo
+     *            the Solo instance
+     * @param text
+     *            the text will be clicked on the web view
+     * @throws Exception
+     *             if has error.
      */
     public static void clickElementsInWebviewByText(final Solo solo,
-            final String text)throws Exception {
+            final String text) throws Exception {
 
         for (WebElement web : solo.getCurrentWebElements()) {
             Log.i("number", web.getText().toString());
@@ -863,7 +980,6 @@ public final class Action {
         }
     }
 
-
     /**
      * Set the default value is false.
      */
@@ -871,9 +987,13 @@ public final class Action {
 
     /**
      * Search text on web view.
-     * @param solo the Solo instance
-     * @param text the text will be searched on the web view
-     * @throws Exception if has error
+     * 
+     * @param solo
+     *            the Solo instance
+     * @param text
+     *            the text will be searched on the web view
+     * @throws Exception
+     *             if has error
      */
     public static void searchTextOnWebview(final Solo solo, final String text)
             throws Exception {
@@ -892,8 +1012,11 @@ public final class Action {
 
     /**
      * Enter jacket page.
-     * @param solo the Solo instance
-     * @throws Exception if has error
+     * 
+     * @param solo
+     *            the Solo instance
+     * @throws Exception
+     *             if has error
      */
     public static void enterToJacket(final Solo solo) throws Exception {
 
@@ -905,11 +1028,13 @@ public final class Action {
 
     }
 
-
     /**
      * Enter jacket page after search.
-     * @param solo the Solo instance
-     * @throws Exception if has error
+     * 
+     * @param solo
+     *            the Solo instance
+     * @throws Exception
+     *             if has error
      */
     public static void enterToJacketAfterSearch(final Solo solo)
             throws Exception {
@@ -928,8 +1053,11 @@ public final class Action {
 
     /**
      * Delete collected store.
-     * @param solo the Solo instance
-     * @throws Exception if has error
+     * 
+     * @param solo
+     *            the Solo instance
+     * @throws Exception
+     *             if has error
      */
     public static void deleteProductCollected(final Solo solo)
             throws Exception {
