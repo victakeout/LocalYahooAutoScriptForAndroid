@@ -674,7 +674,6 @@ public final class Action {
 
     /**
      * Add product to shopping cart in item page.
-     * 
      * @param solo
      *            the Solo instance
      * @throws Exception

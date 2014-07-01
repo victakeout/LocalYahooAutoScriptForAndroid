@@ -37,6 +37,8 @@ public class ValidationText {
 	public static final String DONG = "東";
 
 	public static final String DONG_J = "東京";
+	
+	public static final String BIKINI = "金魚胸貼提胸貼可搭洋裝比基";
 
 	public static final String DONG_JING = "東京著衣";
 
@@ -193,6 +195,8 @@ public class ValidationText {
 	public static final String ECOUPON = "電子折價券";
 	
 	public static final String DISCOUNT = "折扣";
+	
+	public static final String SALES = "促銷";
 	
 	public static final String SALES_PROMOTION = "促銷活動";
 	
