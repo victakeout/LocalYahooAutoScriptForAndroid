@@ -26,6 +26,8 @@ package com.yahoo.mobile.client.android.ecstore.test.Checkout;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
+import android.util.Log;
+import android.view.View;
 
 import com.robotium.solo.Solo;
 
@@ -131,4 +133,148 @@ public class Checkout extends ActivityInstrumentationTestCase2<Activity> {
 
     }
 
+    /**
+     * 1959915:Verify check out component on step 3.
+     * @throws Exception if has error
+     */
+    public final void testVerifyCheckOutComponent() throws Exception {
+
+        Account.judgementAccountLogin(solo);
+        Action.enterToItemPage(solo);
+        TestHelper.swipeUp(solo, 1);
+        solo.clickOnText(ValidationText.BUY_NOW);
+
+        View radioButtons;
+
+        // Select product property if it exists.
+        try {
+            radioButtons = (View) solo.getView(
+                    "product_item_spec_item_selections", 0);
+        } catch (AssertionError e) {
+            TestHelper.swipeUp2(solo, 2);
+            // solo.sleep(ValidationText.WAIT_TIME_SHORT);
+            View shopCarts = solo
+                    .getView("productitem_btn_add_to_shopping_cart");
+            solo.clickOnView(shopCarts);
+        }
+        View buddle;
+        View radioButton = (View) solo.getView(
+                "product_item_spec_item_selections", 0);
+        if (radioButton.isShown()) {
+
+            solo.clickOnView(radioButton);
+            solo.searchText(ValidationText.OK);
+            solo.clickOnButton(ValidationText.OK);
+            solo.waitForText(ValidationText.ALREADY_ADD_SHOPPING_CART, 1,
+                    ValidationText.WAIT_TIME_MIDDLE);
+            solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+            buddle = solo.getView("tab_badge", Action.VIEW_ID_THREE);
+            junit.framework.Assert.assertTrue("No items in shopping cart.",
+                    buddle.isShown());
+        } else {
+            junit.framework.Assert.assertTrue("Add failed.", true);
+        }
+
+        //solo.goBack();
+        TestHelper.swipeUp(solo, 1);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+
+        // Click check out button on web view.
+        Action.clickElementsInWebviewByText(solo,
+                ValidationText.WANT_CHECKOUT);
+
+        solo.sleep(ValidationText.WAIT_TIME_LONGER);
+
+        //solo.goBack();
+        TestHelper.swipeUp(solo, 2);
+
+        TestHelper.swipeUp(solo, 1);
+        Log.i("number", "ME");
+        solo.sleep(ValidationText.WAIT_TIME_LONG);
+        Action.clickElementsInWebviewByText(solo, ValidationText.FAMILY_PICKUP);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+
+        // Click check out button on web view.
+        Action.clickElementsInWebviewByText(solo,
+                ValidationText.WANT_CHECKOUT);
+
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+
+        View webPage = (View) solo.getView("webpage");
+        assertTrue("Cannot found family pick up.", webPage.isShown());
+    }
+
+    /**
+     * 1959916:Verify order inquiry details page can show normally.
+     * @throws Exception if has error
+     */
+    public final void testVerifyorderInquiryShowNormally() throws Exception {
+
+        Account.judgementAccountLogin(solo);
+        Action.clickSearchButtonOnScreen(solo);
+        Action.searchAfterPutData(solo, 0, ValidationText.MIUSTAR);
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+        solo.clickInList(1);
+        TestHelper.swipeUp(solo, 1);
+        solo.clickOnText(ValidationText.BUY_NOW);
+
+        View radioButtons;
+
+        // Select product property if it exists.
+        try {
+            radioButtons = (View) solo.getView(
+                    "product_item_spec_item_selections", 0);
+        } catch (AssertionError e) {
+            TestHelper.swipeUp2(solo, 2);
+            // solo.sleep(ValidationText.WAIT_TIME_SHORT);
+            View shopCarts = solo
+                    .getView("productitem_btn_add_to_shopping_cart");
+            solo.clickOnView(shopCarts);
+        }
+        View buddle;
+        View radioButton = (View) solo.getView(
+                "product_item_spec_item_selections", 0);
+        if (radioButton.isShown()) {
+
+            solo.clickOnView(radioButton);
+            solo.searchText(ValidationText.OK);
+            solo.clickOnButton(ValidationText.OK);
+            solo.waitForText(ValidationText.ALREADY_ADD_SHOPPING_CART, 1,
+                    ValidationText.WAIT_TIME_MIDDLE);
+            solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+            buddle = solo.getView("tab_badge", Action.VIEW_ID_THREE);
+            junit.framework.Assert.assertTrue("No items in shopping cart.",
+                    buddle.isShown());
+        } else {
+            junit.framework.Assert.assertTrue("Add failed.", true);
+        }
+
+        //solo.goBack();
+        TestHelper.swipeUp(solo, 1);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+
+        // Click check out button on web view.
+        Action.clickElementsInWebviewByText(solo,
+                ValidationText.WANT_CHECKOUT);
+
+        solo.sleep(ValidationText.WAIT_TIME_LONGER);
+
+        //solo.goBack();
+        TestHelper.swipeUp(solo, 2);
+
+        TestHelper.swipeUp(solo, 1);
+        Log.i("number", "ME");
+        solo.sleep(ValidationText.WAIT_TIME_LONG);
+        Action.clickElementsInWebviewByText(solo, ValidationText.FAMILY_PICKUP);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+
+        // Click check out button on web view.
+        Action.clickElementsInWebviewByText(solo,
+                ValidationText.WANT_CHECKOUT);
+
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+
+        View webPage = (View) solo.getView("webpage");
+        assertTrue("Cannot found family pick up.", webPage.isShown());
+    }
 }

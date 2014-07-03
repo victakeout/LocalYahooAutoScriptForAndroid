@@ -13,6 +13,8 @@ public class ValidationText {
 	public static final String WAIT = "等等";
 
 	public static final String SKIP = "略過";
+	
+	public static final String MIUSTAR = "miustar";
 
 	public static final String NOTIFICATION = "通知";
 
@@ -55,6 +57,7 @@ public class ValidationText {
 	public static final String T_SHIRT = "T恤";
 
 	public static final String S = "s";
+	public static final String FAMILY_PICKUP = "全家繳費不取貨";
 
 	public static final String ESCAPE_CHARACTER = "#39";
 
@@ -67,6 +70,8 @@ public class ValidationText {
 	public static final String SEARCH_APPAREL = "搜尋服飾";
 
 	public static final String SEARCH = "搜尋";
+	
+	public static final String BUY_NOW = "立即購買";
 	
 	public static final String RECENT_BROWSE = "最近瀏覽";
 	

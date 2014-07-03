@@ -589,4 +589,58 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
 
         solo.goBack();
     }
+
+    /**
+     * 1953631:Verify share text and icon.
+     * @throws Exception if has error
+     */
+    public final void testVerifyShareTextAndIcon() throws Exception {
+
+        Account.judgementAccountLogin(solo);
+        Action.enterToItemPage(solo);
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+        TestHelper.swipeUp(solo, 1);
+
+        //Share button.
+        View shareIcon = (View) solo.getView(
+                "productitem_bt_share_product");
+        assertTrue("Share icon not display." , shareIcon.isShown());
+    }
+
+    /**
+     * 1977508:Verify It cann't show collection info when user
+     *  click 7﹣11 icon or Family  icon in item page.
+     * @throws Exception if has error
+     */
+    public final void testVerifyClickShopIcon() throws Exception {
+
+        Account.judgementAccountLogin(solo);
+        Action.enterToItemPage(solo);
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+
+        //7-11 shop icon.
+        View sevenEleven = (View) solo.getView("productitem_seven_store");
+        solo.clickOnView(sevenEleven);
+
+        try {
+            if (solo.waitForText(ValidationText.HAS_ADDED_COLLECTION)
+               || solo.waitForText(ValidationText.HAS_REMOVED_COLLECTION)) {
+                assertTrue("Collection info pop up.", false);
+            }
+        } catch (AssertionError e) {
+            assertTrue("Collection info pop up.", true);
+        }
+
+        //Family shop icon.
+        View allFamily = (View) solo.getView("productitem_family_mart");
+        solo.clickOnView(allFamily);
+        try {
+            if (solo.waitForText(ValidationText.HAS_ADDED_COLLECTION)
+               || solo.waitForText(ValidationText.HAS_REMOVED_COLLECTION)) {
+                assertTrue("Collection info pop up.", false);
+            }
+        } catch (AssertionError e) {
+            assertTrue("Collection info pop up.", true);
+        }
+    }
 }

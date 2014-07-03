@@ -29,6 +29,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -119,12 +120,17 @@ public class Functional extends ActivityInstrumentationTestCase2<Activity> {
 
         assertTrue("Notification switch is off",
                 notification.isChecked());
+
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
         solo.clickOnView(notification);
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
         assertFalse("Notification switch is on.",
                 notification.isChecked());
-
+        Switch notificationS = (Switch) solo.getView("switchWidget", 2);
+        solo.clickOnView(notificationS);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        assertTrue("Notification switch is off.",
+                notificationS.isChecked());
     }
 
     /**
@@ -144,4 +150,53 @@ public class Functional extends ActivityInstrumentationTestCase2<Activity> {
 
     }
 
+    /**
+     * 1977478:[Barcode]Discovery Stream root view.
+     * @throws Exception if has error
+     */
+
+    public final void testDiscoveryStreamFromDiscoveryStream()
+            throws Exception {
+        Account.judgementAccountLogin(solo);
+        Action.clickSearchButtonOnScreen(solo);
+        ImageView barcode = (ImageView) solo.getView("search_barcode_scan");
+        solo.clickOnView(barcode);
+
+        View finder = (View) solo.getView("viewfinder_view");
+        assertTrue("Viewfinder is not show.", finder.isShown());
+
+    }
+
+    /**
+     * 1977479:[Barcode]Discovery Stream root view.
+     * @throws Exception if has error
+     */
+    public final void testDiscoveryStreamFromFavoriteStore()
+            throws Exception {
+        Account.judgementAccountLogin(solo);
+        solo.clickOnView(solo.getView("tab_image", 1));
+        Action.clickSearchButtonOnScreen(solo);
+        ImageView barcode = (ImageView) solo.getView("search_barcode_scan");
+        solo.clickOnView(barcode);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        View finder = (View) solo.getView("viewfinder_view");
+        assertTrue("Viewfinder is not show.", finder.isShown());
+    }
+
+
+    /**
+     * 1977480:[Barcode]Discovery Stream root view.
+     * @throws Exception if has error
+     */
+    public final void testDiscoveryStreamFromCategory()
+            throws Exception {
+        Account.judgementAccountLogin(solo);
+        solo.clickOnView(solo.getView("tab_image", 2));
+        Action.clickSearchButtonOnScreen(solo);
+        ImageView barcode = (ImageView) solo.getView("search_barcode_scan");
+        solo.clickOnView(barcode);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        View finder = (View) solo.getView("viewfinder_view");
+        assertTrue("Viewfinder is not show.", finder.isShown());
+    }
 }

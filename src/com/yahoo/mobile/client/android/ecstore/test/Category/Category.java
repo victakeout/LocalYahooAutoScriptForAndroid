@@ -1699,4 +1699,29 @@ public class Category extends ActivityInstrumentationTestCase2<Activity> {
         }
 
     }
+
+    /**
+     * 1938062:Verify "Cancel" button function.
+     * @throws Exception if has error
+     */
+    public final void testVerifyCancelFunction()
+            throws Exception {
+
+        Account.judgementAccountLogin(solo);
+        Action.enterToItemPage(solo);
+        solo.goBack();
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.clickOnView(solo.getView("menu_filter"));
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.clickOnText(ValidationText.FILTER);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+
+        // solo.clickOnToggleButton("可刷卡");
+        ToggleButton tb = (ToggleButton) solo.getView("tb_cc");
+        solo.clickOnView(tb);
+        solo.clickOnText(ValidationText.CANCEL);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.clickOnView(solo.getView("menu_filter"));
+        assertFalse("credit card is selected.", tb.isSelected());
+    }
 }

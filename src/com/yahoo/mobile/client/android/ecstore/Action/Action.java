@@ -48,7 +48,8 @@ public final class Action {
      * @throws Exception
      *             if has error
      */
-    public static void clearHistoryInfomation(final Solo solo) throws Exception {
+    public static void clearHistoryInfomation(final Solo solo)
+            throws Exception {
 
         // Go to main screen
         solo.waitForActivity("ECStoreActivity", ValidationText.WAIT_TIME_SHORT);
@@ -734,7 +735,6 @@ public final class Action {
 
     /**
      * Remove shopping cart products.
-     * 
      * @param solo
      *            the Solo instance
      * @throws Exception
