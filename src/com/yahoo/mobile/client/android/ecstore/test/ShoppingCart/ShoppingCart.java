@@ -289,4 +289,42 @@ public class ShoppingCart extends ActivityInstrumentationTestCase2<Activity> {
         Action.removeShoppingCart(solo);
 
     }
+
+    /**
+     * 1959876:Verify the number of bottom bubble on shopping cart.
+     * @throws Exception if has error
+     */
+    public final void testVerifyButtomBubbleOnShoppingCart() throws Exception {
+
+        Account.judgementAccountLogin(solo);
+        Action.removeShoppingCart(solo);
+        Action.enterToItemPage(solo);
+
+        Action.buyNow(solo);
+        solo.sleep(ValidationText.WAIT_TIME_LONGER);
+        TestHelper.swipeDown(solo, 1);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_THREE));
+        TextView number = (TextView)
+                solo.getView("ecshopping_cart_header_count");
+        int now = Integer.valueOf(number.getText()
+                .toString().trim().substring(0, 1));
+
+        View buddle = solo.getView("tab_badge", Action.VIEW_ID_THREE);
+        assertTrue("Number is not increasing. ", now >= 1 && buddle.isShown());
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_TWO));
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        TestHelper.swipeUp(solo, 2);
+       // TestHelper.swipeDown2(solo, 10);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        Action.clickElementsInWebviewByText(solo, ValidationText.WANT_CHECKOUT);
+        solo.sleep(ValidationText.WAIT_TIME_LONG);
+        TestHelper.swipeUp(solo, 2);
+        Action.clickElementsInWebviewByText(solo, ValidationText.WANT_CHECKOUT);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+
+        View webPage = (View) solo.getView("webpage", 0);
+        assertTrue("Current page is not check out page.", webPage.isShown());
+    }
 }

@@ -42,7 +42,8 @@ public class StoreList extends ActivityInstrumentationTestCase2<Activity> {
     /**
      * Declare application main activity.
      */
-    private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
+    private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME
+    = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
 
     /**
      * Declare a variable of type Class for start tested program.
@@ -101,7 +102,7 @@ public class StoreList extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1977503:Verify escape character shouldn’t show in store list.
-     * 
+     *
      * @throws Exception
      *             if has error
      */

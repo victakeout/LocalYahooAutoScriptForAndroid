@@ -144,6 +144,7 @@ public class Checkout extends ActivityInstrumentationTestCase2<Activity> {
         TestHelper.swipeUp(solo, 1);
         solo.clickOnText(ValidationText.BUY_NOW);
 
+        @SuppressWarnings("unused")
         View radioButtons;
 
         // Select product property if it exists.
@@ -218,6 +219,7 @@ public class Checkout extends ActivityInstrumentationTestCase2<Activity> {
         TestHelper.swipeUp(solo, 1);
         solo.clickOnText(ValidationText.BUY_NOW);
 
+        @SuppressWarnings("unused")
         View radioButtons;
 
         // Select product property if it exists.

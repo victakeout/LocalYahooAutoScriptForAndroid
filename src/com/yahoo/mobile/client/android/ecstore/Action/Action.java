@@ -19,7 +19,7 @@ import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 
 /**
  * Contains some common actions methods examples is enterToJacketAfterSearch().
- * 
+ *
  * @author SYMBIO
  **/
 
@@ -42,7 +42,7 @@ public final class Action {
 
     /**
      * Clear history information then navigate to main screen.
-     * 
+     *
      * @param solo
      *            the Solo instance
      * @throws Exception
@@ -53,7 +53,8 @@ public final class Action {
 
         // Go to main screen
         solo.waitForActivity("ECStoreActivity", ValidationText.WAIT_TIME_SHORT);
-        solo.waitForText(ValidationText.NEWS, 1, ValidationText.WAIT_TIME_SHORT);
+        solo.waitForText(ValidationText.NEWS, 1,
+                ValidationText.WAIT_TIME_SHORT);
         junit.framework.Assert.assertTrue("Navigate to main screen failed.",
                 solo.searchText(ValidationText.NEWS));
 
@@ -80,7 +81,7 @@ public final class Action {
 
     /**
      * Go to advanced screen.
-     * 
+     *
      * @param solo
      *            the Solo instance
      * @throws Exception
@@ -97,7 +98,7 @@ public final class Action {
 
     /**
      * Go to Clothes screen.
-     * 
+     *
      * @param solo
      *            the Solo instance
      * @throws Exception
@@ -106,7 +107,8 @@ public final class Action {
     public static void enterCategoryClothesPage(final Solo solo)
             throws Exception {
 
-        solo.waitForActivity("ECSplashActivity", ValidationText.WAIT_TIME_SHORT);
+        solo.waitForActivity("ECSplashActivity",
+                ValidationText.WAIT_TIME_SHORT);
         Action.clickText(solo, ValidationText.ALL_CATEGORIES);
         Action.clickText(solo, ValidationText.APPAREL);
 
@@ -114,7 +116,7 @@ public final class Action {
 
     /**
      * Go to advanced sort screen.
-     * 
+     *
      * @param solo
      *            the Solo instance
      * @throws Exception
@@ -133,7 +135,7 @@ public final class Action {
 
     /**
      * Go to browser mode screen.
-     * 
+     *
      * @param solo
      *            the Solo instance
      * @throws Exception
@@ -156,7 +158,7 @@ public final class Action {
 
     /**
      * Go to main screen then click search icon.
-     * 
+     *
      * @param solo
      *            the Solo instance
      * @throws Exception
@@ -174,7 +176,7 @@ public final class Action {
 
     /**
      * Click home button on screen.
-     * 
+     *
      * @param solo
      *            the Solo instance
      * @throws Exception
@@ -191,7 +193,7 @@ public final class Action {
 
     /**
      * Add data in text view.
-     * 
+     *
      * @param solo
      *            the Solo instance
      * @param textviewId
@@ -210,7 +212,7 @@ public final class Action {
 
     /**
      * Put some data and search it.
-     * 
+     *
      * @param solo
      *            the Solo instance
      * @param textviewId
@@ -230,7 +232,7 @@ public final class Action {
 
     /**
      * Navigate to category screen.
-     * 
+     *
      * @param solo
      *            the Solo instance
      * @throws Exception
@@ -248,7 +250,7 @@ public final class Action {
 
     /**
      * Navigate to favorite store screen.
-     * 
+     *
      * @param solo
      *            the Solo instance
      * @throws Exception
@@ -268,7 +270,7 @@ public final class Action {
 
     /**
      * Remove favorite store.
-     * 
+     *
      * @param solo
      *            the Solo instance
      * @throws Exception
@@ -301,7 +303,7 @@ public final class Action {
 
     /**
      * Get the current screen contains list view.
-     * 
+     *
      * @param solo
      *            the Solo instance
      * @return return the list view default size
@@ -319,7 +321,7 @@ public final class Action {
 
     /**
      * Click plus in open window.
-     * 
+     *
      * @param solo
      *            the Solo instance
      * @param viewId
@@ -341,7 +343,7 @@ public final class Action {
 
     /**
      * Return value in text view.
-     * 
+     *
      * @param solo
      *            the Solo instance
      * @param textviewId
@@ -365,7 +367,7 @@ public final class Action {
 
     /**
      * value in text view,MULTI-same text view Return view status.
-     * 
+     *
      * @param solo
      *            the Solo instance
      * @param textviewid
@@ -390,7 +392,7 @@ public final class Action {
 
     /**
      * Is view shown?
-     * 
+     *
      * @param solo
      *            the Solo instance
      * @param viewid
@@ -413,7 +415,7 @@ public final class Action {
 
     /**
      * Is view shown?
-     * 
+     *
      * @param solo
      *            the Solo instance
      * @param viewid
@@ -437,7 +439,7 @@ public final class Action {
 
     /**
      * Click view.
-     * 
+     *
      * @param solo
      *            the Solo instance
      * @param viewId
@@ -456,7 +458,7 @@ public final class Action {
 
     /**
      * Click view by id.
-     * 
+     *
      * @param solo
      *            the Solo instance
      * @param viewId
@@ -477,7 +479,7 @@ public final class Action {
 
     /**
      * Click text.
-     * 
+     *
      * @param solo
      *            the Solo instance
      * @param text
@@ -496,7 +498,7 @@ public final class Action {
 
     /**
      * Add history information in search bar.
-     * 
+     *
      * @param solo
      *            the Solo instance
      * @param searchKeys
@@ -527,7 +529,7 @@ public final class Action {
 
     /**
      * Close some phone soft keyboard.
-     * 
+     *
      * @param solo
      *            the Solo instance
      * @throws Exception
@@ -548,7 +550,7 @@ public final class Action {
 
     /**
      * Set the view to list view.
-     * 
+     *
      * @param solo
      *            the Solo instance
      * @throws Exception
@@ -565,7 +567,7 @@ public final class Action {
 
     /**
      * Set the view to grid view.
-     * 
+     *
      * @param solo
      *            the Solo instance
      * @throws Exception
@@ -581,7 +583,7 @@ public final class Action {
 
     /**
      * Set the view to large photo view.
-     * 
+     *
      * @param solo
      *            the Solo instance
      * @throws Exception
@@ -597,7 +599,7 @@ public final class Action {
 
     /**
      * Remove favorite product item.
-     * 
+     *
      * @param solo
      *            the Solo instance
      * @throws Exception
@@ -647,7 +649,7 @@ public final class Action {
 
     /**
      * Click Star Icon.
-     * 
+     *
      * @param solo
      *            the Solo instance
      * @throws Exception
@@ -784,10 +786,68 @@ public final class Action {
                     true);
         }
     }
+    /**
+     * Buy now.
+     * @param solo
+     *            the Solo instance
+     * @throws Exception
+     *             if has error
+     */
+    public static void buyNow(final Solo solo) throws Exception {
 
+        Log.i("number", solo.getCurrentActivity().getClass().toString());
+        // Swipe the screen until the buy button display.
+        // TestHelper.swipeUp2(solo, 1);
+        TestHelper.swipeUp(solo, 1);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        View shopCart;
+        try {
+            shopCart = solo.getView("productitem_btn_purchase_now");
+            solo.clickOnView(shopCart);
+
+        } catch (AssertionError e) {
+
+            TestHelper.swipeUp2(solo, 2);
+
+            shopCart = solo.getView("productitem_btn_purchase_now");
+            solo.clickOnView(shopCart);
+
+        }
+
+        // Select product property if it exists.
+        try {
+            radioButtons = (View) solo.getView(
+                    "product_item_spec_item_selections", 0);
+        } catch (AssertionError e) {
+            TestHelper.swipeUp2(solo, 2);
+            // solo.sleep(ValidationText.WAIT_TIME_SHORT);
+            View shopCarts = solo
+                    .getView("productitem_btn_purchase_now");
+            solo.clickOnView(shopCarts);
+        }
+        View buddle;
+        View radioButton = (View) solo.getView(
+                "product_item_spec_item_selections", 0);
+        if (radioButton.isShown()) {
+
+            solo.clickOnView(radioButton);
+            solo.searchText(ValidationText.OK);
+            solo.clickOnButton(ValidationText.OK);
+            solo.waitForText(ValidationText.ALREADY_ADD_SHOPPING_CART, 1,
+                    ValidationText.WAIT_TIME_MIDDLE);
+            solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+            buddle = solo.getView("tab_badge", VIEW_ID_THREE);
+            junit.framework.Assert.assertTrue("No items in shopping cart.",
+                    buddle.isShown());
+        } else {
+            junit.framework.Assert.assertTrue("Add failed.", true);
+        }
+
+        
+    }
     /**
      * Enter product item detail page.
-     * 
+     *
      * @param solo
      *            the Solo instance
      * @throws Exception
@@ -877,6 +937,8 @@ public final class Action {
     private static int LINE = 0;
 
     /**
+     * @param solo
+     *            the Solo instance
      * @throws Exception
      *             if has error
      */
@@ -899,7 +961,7 @@ public final class Action {
 
     /**
      * Enter product item detail page2.
-     * 
+     *
      * @param solo
      *            the Solo instance
      * @param countsBrowse
@@ -932,7 +994,7 @@ public final class Action {
 
     /**
      * Click elements from web view by ClassName.
-     * 
+     *
      * @param solo
      *            the Solo instance
      * @param text
@@ -986,7 +1048,7 @@ public final class Action {
 
     /**
      * Search text on web view.
-     * 
+     *
      * @param solo
      *            the Solo instance
      * @param text
@@ -1011,7 +1073,7 @@ public final class Action {
 
     /**
      * Enter jacket page.
-     * 
+     *
      * @param solo
      *            the Solo instance
      * @throws Exception
@@ -1029,7 +1091,7 @@ public final class Action {
 
     /**
      * Enter jacket page after search.
-     * 
+     *
      * @param solo
      *            the Solo instance
      * @throws Exception
@@ -1052,7 +1114,7 @@ public final class Action {
 
     /**
      * Delete collected store.
-     * 
+     *
      * @param solo
      *            the Solo instance
      * @throws Exception
