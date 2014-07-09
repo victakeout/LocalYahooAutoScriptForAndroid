@@ -143,9 +143,13 @@ public class Functional extends ActivityInstrumentationTestCase2<Activity> {
         solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_FOUR));
         solo.clickOnText(ValidationText.NOTIFICATION);
         solo.sleep(ValidationText.WAIT_TIME_LONG);
-
-        TextView notificationBar = (TextView) solo.getView("tx_header");
-
+        TextView notificationBar;
+        try {
+            notificationBar = (TextView) solo.getView("action_bar_title");
+        } catch (AssertionError e) {
+            solo.sleep(ValidationText.WAIT_TIME_LONG);
+            notificationBar = (TextView) solo.getView("action_bar_title");
+        }
         assertTrue("Notification is null.", notificationBar.isShown());
 
     }

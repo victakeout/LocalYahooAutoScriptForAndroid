@@ -56,7 +56,8 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
     /**
      * Declare application main activity.
      */
-    private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
+    private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME 
+    = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
 
     /**
      * Declare a variable of type Class for start tested program.
@@ -630,10 +631,10 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
         // close soft keyboard
         Action.closeSoftKeyBoard(solo);
 
-        /*
-         * get the value of suggestion list and verify whether the suggestion
-         * list is correct
-         */
+        
+       /*  * get the value of suggestion list and verify whether the suggestion
+         * list is correct*/
+         
 
         for (int j = 0; j < 10; j++) {
             String suggestionRecord = Action.getValuesInTextview(solo,
@@ -986,9 +987,8 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1937892:Back to appeal list.
-     * 
-     * @throws Exception
-     *             if has error
+     *
+     * @throws Exception if has error
      */
     public final void testBackToCoatList() throws Exception {
 
@@ -1023,9 +1023,8 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1937896:Navigate to no result page.
-     * 
-     * @throws Exception
-     *             if has error
+     *
+     * @throws Exception  if has error
      */
     public final void testNavigateToNoResultItemListPage() throws Exception {
 
@@ -1054,9 +1053,8 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1937905:Categories item list search with no result display.
-     * 
-     * @throws Exception
-     *             if has error
+     *
+     * @throws Exception if has error
      */
     public final void testNavigateToCategoriesNoResultPage() throws Exception {
 
@@ -1085,9 +1083,8 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1937909:Search in L4 classification.
-     * 
-     * @throws Exception
-     *             if has error
+     *
+     * @throws Exception if has error
      */
     public final void testSearchInLfour() throws Exception {
 
@@ -1119,9 +1116,8 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1937912:Check search result.
-     * 
-     * @throws Exception
-     *             if has error
+     *
+     * @throws Exception if has error
      */
     public final void testSearchResult() throws Exception {
 
@@ -1146,9 +1142,8 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1937893:The L5 layer classification click returns Icon.
-     * 
-     * @throws Exception
-     *             if has error
+     *
+     * @throws Exception  if has error
      */
     public final void testClickReturnIconInL5Layer() throws Exception {
 
@@ -1165,9 +1160,8 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1937894:The L6 layer classification click returns Icon.
-     * 
-     * @throws Exception
-     *             if has error
+     *
+     * @throws Exception if has error
      */
     public final void testClickReturnIconInL6Layer() throws Exception {
 
@@ -1186,9 +1180,8 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1937898:Click search icon.
-     * 
-     * @throws Exception
-     *             if has error
+     *
+     * @throws Exception if has error
      */
     public final void testClickSearchIcon() throws Exception {
 
@@ -1204,9 +1197,8 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1937899:Click return icon in L2 item list.
-     * 
-     * @throws Exception
-     *             if has error
+     *
+     * @throws Exception if has error
      */
     public final void testClickReturnIconInL2() throws Exception {
 
@@ -1220,9 +1212,8 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1937900:Click return icon in L3 item list.
-     * 
-     * @throws Exception
-     *             if has error
+     *
+     * @throws Exception  if has error
      */
     public final void testClickReturnIconInL3() throws Exception {
 
@@ -1241,9 +1232,8 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1937901:Click return icon in L4 item list.
-     * 
-     * @throws Exception
-     *             if has error
+     *
+     * @throws Exception if has error
      */
     public final void testClickReturnIconInL4() throws Exception {
 
@@ -1259,9 +1249,8 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1937902:Click return icon in L5 item list.
-     * 
-     * @throws Exception
-     *             if has error
+     *
+     * @throws Exception if has error
      */
     public final void testClickReturnIconInL5() throws Exception {
 
@@ -1278,9 +1267,8 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1937903:Click return icon in L6 item list.
-     * 
-     * @throws Exception
-     *             if has error
+     *
+     * @throws Exception if has error
      */
     public final void testClickReturnIconInL6() throws Exception {
 
@@ -1298,9 +1286,8 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1937904:Input keywords and search.
-     * 
-     * @throws Exception
-     *             if has error
+     *
+     * @throws Exception if has error
      */
     public final void testInputkeywordsAndSearch() throws Exception {
 
@@ -1325,9 +1312,8 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1937906:Search in L1 category.
-     * 
-     * @throws Exception
-     *             if has error
+     *
+     * @throws Exception if has error
      */
     public final void testSearchInL1Category() throws Exception {
 
@@ -1350,9 +1336,8 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1937907:Search in L2 category.
-     * 
-     * @throws Exception
-     *             if has error
+     *
+     * @throws Exception if has error
      */
     public final void testSearchInL2Category() throws Exception {
 
@@ -1378,9 +1363,8 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1937908:Search in L3 category.
-     * 
-     * @throws Exception
-     *             if has error
+     *
+     * @throws Exception if has error
      */
     public final void testSearchInL3Category() throws Exception {
 
@@ -1412,9 +1396,8 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1937910:Search in L5 category.
-     * 
-     * @throws Exception
-     *             if has error
+     *
+     * @throws Exception if has error
      */
     public final void testSearchInL5Category() throws Exception {
 
@@ -1448,9 +1431,8 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1937911:Search in L6 category.
-     * 
-     * @throws Exception
-     *             if has error
+     *
+     * @throws Exception if has error
      */
     public final void testSearchInL6Category() throws Exception {
 
@@ -1484,9 +1466,8 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1959905:Verify "Search all the shops" function.
-     * 
-     * @throws Exception
-     *             if has error
+     *
+     * @throws Exception if has error
      */
     public final void testSearchAllStore() throws Exception {
 
@@ -1515,9 +1496,8 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1977507:Verify search result when enter special characters in search box.
-     * 
-     * @throws Exception
-     *             if has error
+     *
+     * @throws Exception  if has error
      */
     public final void testEnterSpecialCharactersToSearch() throws Exception {
 
@@ -1532,9 +1512,8 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1959914:Verify user can access store page by tapping store LOGO.
-     * 
-     * @throws Exception
-     *             if has error
+     *
+     * @throws Exception  if has error
      */
     public final void testEnterStorePageByTapLog() throws Exception {
 
@@ -1579,12 +1558,12 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1937868:Verify user can search directly without input any data.
-     * 
-     * @throws Exception
-     *             if has error
+     *
+     * @throws Exception  if has error
      */
     public final void testSearchDirectlyWithoutData() throws Exception {
 
+        Account.judgementAccountLogin(solo);
         // click on search button on home screen
         Action.clickSearchButtonOnScreen(solo);
 
@@ -1599,9 +1578,8 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1937880:Verify voice icon displays.
-     * 
-     * @throws Exception
-     *             if has error
+     *
+     * @throws Exception if has error
      */
     public final void testVerifyVoiceIcon() throws Exception {
 
@@ -1616,9 +1594,8 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
     /**
      * 1977509:Verify Search all category button can work in category of product
      * tab.
-     * 
-     * @throws Exception
-     *             if has error
+     *
+     * @throws Exception if has error
      */
     public final void testVerifyAllCategoryButtonWorkWell() throws Exception {
 
@@ -1667,9 +1644,8 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1959884:Verify Shopping Tips,when the store has no promotion.
-     * 
-     * @throws Exception
-     *             if has error
+     *
+     * @throws Exception if has error
      */
     public final void testShoppingTips() throws Exception {
 
@@ -1711,8 +1687,7 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
     /**
      * 1977510:Verify search all category button can work in category of product
      * tab.
-     * @throws Exception
-     *             if has error
+     * @throws Exception  if has error
      */
     public final void testVerifySearchCategoryButtonWorkInCategory()
             throws Exception {

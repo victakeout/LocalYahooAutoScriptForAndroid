@@ -148,7 +148,7 @@ public final class Action {
         solo.waitForText(ValidationText.COMMODITY, 1,
                 ValidationText.WAIT_TIME_SHORT);
         solo.clickOnText(ValidationText.COMMODITY);
-        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
         solo.clickOnView(solo.getView("menu_filter"));
         solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
         solo.clickOnView(solo.getView("btn_browse_mode"));
@@ -657,6 +657,7 @@ public final class Action {
      */
     public static void clickStarIconNote(final Solo solo) throws Exception {
 
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
         View star = (View) solo.getView("star_button", counts);
         solo.clickOnView(star);
         boolean alreadyAdd;
@@ -835,7 +836,7 @@ public final class Action {
             solo.clickOnButton(ValidationText.OK);
             solo.waitForText(ValidationText.ALREADY_ADD_SHOPPING_CART, 1,
                     ValidationText.WAIT_TIME_MIDDLE);
-            solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+            solo.sleep(ValidationText.WAIT_TIME_LONG);
             buddle = solo.getView("tab_badge", VIEW_ID_THREE);
             junit.framework.Assert.assertTrue("No items in shopping cart.",
                     buddle.isShown());
@@ -843,7 +844,7 @@ public final class Action {
             junit.framework.Assert.assertTrue("Add failed.", true);
         }
 
-        
+
     }
     /**
      * Enter product item detail page.
@@ -881,7 +882,7 @@ public final class Action {
      */
     public static void enterToItemPages(final Solo solo) throws Exception {
 
-        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
         solo.clickOnView(solo.getView("tab_image", 2));
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
         Action.clickText(solo, ValidationText.APPAREL);

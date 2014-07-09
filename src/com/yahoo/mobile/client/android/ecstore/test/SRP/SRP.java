@@ -339,10 +339,10 @@ public class SRP extends ActivityInstrumentationTestCase2 <Activity> {
 
     }
 
-  /*  *//**
+    /**
      * 1937944:Check the function of "OK" button.
      * @throws Exception if has error
-     *//*
+     */
     public final void testCheckConfirmButtonFunction() throws Exception {
 
         Action.enterToJacketAfterSearch(solo);
@@ -362,7 +362,7 @@ public class SRP extends ActivityInstrumentationTestCase2 <Activity> {
         assertEquals("Go back to search result screen failed", gvList.size(),
                 1);
 
-    }*/
+    }
 
     /**
      * 1937949:Unselected "Credit cards".

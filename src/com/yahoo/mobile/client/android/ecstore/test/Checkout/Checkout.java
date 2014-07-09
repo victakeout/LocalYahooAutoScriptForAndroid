@@ -120,16 +120,29 @@ public class Checkout extends ActivityInstrumentationTestCase2<Activity> {
         Action.clickElementsInWebviewByText(solo,
                 ValidationText.WANT_CHECKOUT);
 
-        solo.sleep(ValidationText.WAIT_TIME_LONG);
+        solo.sleep(ValidationText.WAIT_TIME_LONGER);
         TestHelper.swipeUp(solo, 2);
-        solo.sleep(ValidationText.WAIT_TIME_LONG);
-
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+        TestHelper.swipeUp(solo, 2);
         // Click "Select other store" text to re_selection.
-
+        try {
         Action.clickElementsInWebviewByText(solo,
                 ValidationText.RESELECT_OTHER_STORE);
         solo.sleep(ValidationText.WAIT_TIME_LONGER);
-        Action.searchTextOnWebview(solo, ValidationText.TAI_BEI);
+
+        } catch (AssertionError e) {
+            solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+            Action.clickElementsInWebviewByText(solo,
+                    ValidationText.RESELECT_OTHER_STORE);
+            solo.sleep(ValidationText.WAIT_TIME_LONGER);
+        }
+        try {
+            Action.searchTextOnWebview(solo, ValidationText.TAI_BEI);
+        } catch (AssertionError e) {
+            solo.sleep(ValidationText.WAIT_TIME_LONGER);
+            Action.searchTextOnWebview(solo, ValidationText.TAI_BEI);
+        }
+
 
     }
 

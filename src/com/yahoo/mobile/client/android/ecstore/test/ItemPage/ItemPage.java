@@ -422,7 +422,7 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
         solo.clickOnView(addon);
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
         solo.goBack();
-
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
         Action.addToShoppingCart(solo);
         solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_THREE));
         solo.clickOnView(solo.getView("ecshopping_cart_store_name", 0));

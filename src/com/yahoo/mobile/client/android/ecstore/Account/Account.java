@@ -209,7 +209,7 @@ public final class Account {
     public static void judgementAccountLogin(final Solo solo) throws Exception {
 
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
-        solo.clickOnView(solo.getView("tab_image", VIEW_ID));
+        solo.clickOnView(solo.getView("tab_image", 4));
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
 
         // Search "Set up account" aims to verify that not any account log in.
