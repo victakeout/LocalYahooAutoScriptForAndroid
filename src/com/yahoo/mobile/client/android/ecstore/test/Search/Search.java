@@ -1119,7 +1119,7 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
      *
      * @throws Exception if has error
      */
-    public final void testSearchResult() throws Exception {
+    public final void testIphoneSearchResult() throws Exception {
 
         // navigate to category screen
         Action.navigateToCategoryScreen(solo);

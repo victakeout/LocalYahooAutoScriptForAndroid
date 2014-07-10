@@ -1062,6 +1062,7 @@ public final class Action {
 
         for (WebElement web : solo.getCurrentWebElements()) {
             Log.i("number", web.getClassName().toString());
+
             if (web.getText().toString().equals(text)) {
                 actual = true;
                 solo.sleep(ValidationText.WAIT_TIME_MIDDLE);

@@ -282,10 +282,18 @@ public class MyAccount extends ActivityInstrumentationTestCase2<Activity> {
      */
     public final void testRemoveStoreFromRecently() throws Exception {
 
-    Account.judgementAccountLogin(solo);
+       Account.judgementAccountLogin(solo);
+       View shopTitle;
         for (int i = 0; i < Action.VIEW_ID_THREE; i++) {
             Action.enterToItemPages(solo);
-            View shopTitle = (View) solo.getView("productitem_store_name");
+            try {
+                  shopTitle = (View) solo.getView("productitem_store_name");
+            } catch (AssertionError e) {
+                TestHelper.swipeDown(solo, 1);
+                solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+                shopTitle = (View) solo.getView("productitem_store_name");
+            }
+
             solo.clickOnView(shopTitle);
             solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
             solo.goBack();
@@ -296,14 +304,21 @@ public class MyAccount extends ActivityInstrumentationTestCase2<Activity> {
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
         Action.clickText(solo, ValidationText.RECENT_BROWSE);
 
-        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+        solo.sleep(ValidationText.WAIT_TIME_LONG);
 
         View shop = (View) solo.getView("category_tab_primary_title", 1);
 
         solo.clickOnView(shop);
+        solo.sleep(ValidationText.WAIT_TIME_LONG);
+        TextView result;
+        try {
+             result = (TextView) solo.getView("tx_header", 1);
+        } catch (AssertionError e) {
+            TestHelper.swipeDown(solo, 1);
+            result = (TextView) solo.getView("tx_header", 1);
+        }
 
-        TextView result = (TextView) solo.getView("tx_header", 1);
-        String count = result.getText().toString().trim().substring(6, 7);
+        String count = result.getText().toString().trim().substring(6,7);
         Log.i("number", "count:" + count);
 
         View img = (View) solo.getView("listitem_storelist_image");
@@ -329,7 +344,7 @@ public class MyAccount extends ActivityInstrumentationTestCase2<Activity> {
     }
 
     /**
-     * 1977524:verify user can access to items.
+     * 1977524:verify user can access items.
      * @throws Exception if has error
      */
     public final void testAccessItems() throws Exception {
@@ -346,6 +361,7 @@ public class MyAccount extends ActivityInstrumentationTestCase2<Activity> {
 
         solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_FOUR));
         Action.clickText(solo, ValidationText.RECENT_BROWSE);
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
         TextView actionBar = (TextView) solo.getView("action_bar_title", 0);
         assertTrue("Cannot enter to recent history page. "
                 , actionBar.isShown());

@@ -94,9 +94,11 @@ public class Category extends ActivityInstrumentationTestCase2<Activity> {
     @Override
     public final void tearDown() throws Exception {
 
+
         solo.finishOpenedActivities();
         System.gc();
         super.tearDown();
+
     }
 
 
