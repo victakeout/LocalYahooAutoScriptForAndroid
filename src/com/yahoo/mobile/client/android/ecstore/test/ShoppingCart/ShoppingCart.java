@@ -215,6 +215,7 @@ public class ShoppingCart extends ActivityInstrumentationTestCase2<Activity> {
             View webpage = (View) solo.getView("webpage", 0);
             assertTrue("This page incorrect.", webpage.isShown());
         } catch (AssertionError e) {
+            solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
             View webpage = (View) solo.getView("webpage", 0);
             assertTrue("This page incorrect.", webpage.isShown());
         }
@@ -287,7 +288,7 @@ public class ShoppingCart extends ActivityInstrumentationTestCase2<Activity> {
         // Search "Confirm"button on alert window.
         Action.clickElementsInWebviewByText(solo, ValidationText.OK);
         solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
-        solo.clickOnView(solo.getView( "tab_image",3 ) );
+        solo.clickOnView(solo.getView("tab_image", 3));
         assertTrue("No next buy item.", solo.searchText(
                 ValidationText.NEXT_BUY));
 

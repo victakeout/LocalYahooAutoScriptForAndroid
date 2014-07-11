@@ -29,6 +29,8 @@ public class ValidationText {
 	public static final String SEARCH_ALL_CATEGORIES = "搜尋全部分類";
 
 	public static final String NEWS = "最新動態";
+	
+	public static final String ORDER_INQUIRY  = "訂單查詢";
 
 	public static final String PLUS_PURCHASE = "加購商品";
 
@@ -57,6 +59,9 @@ public class ValidationText {
 	public static final String T_SHIRT = "T恤";
 
 	public static final String S = "s";
+	
+	public static final String C = "c";
+	
 	public static final String FAMILY_PICKUP = "全家繳費不取貨";
 
 	public static final String ESCAPE_CHARACTER = "#39";

@@ -252,7 +252,7 @@ public class StorePage extends ActivityInstrumentationTestCase2<Activity> {
         solo.clickOnText(ValidationText.SALES_PROMOTION);
 
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
-        assertTrue("Account has login.", solo.searchText(
+        assertTrue("Not enter sales page.", solo.searchText(
                 ValidationText.SALES_PROMOTION));
     }
 
