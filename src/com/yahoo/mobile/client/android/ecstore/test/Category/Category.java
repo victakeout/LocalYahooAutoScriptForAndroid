@@ -1388,7 +1388,9 @@ public class Category extends ActivityInstrumentationTestCase2<Activity> {
         Account.judgementAccountLogin(solo);
         // click on up icon
         Action.clickHomeButtonOnScreen(solo);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
         solo.clickOnText(ValidationText.EDIT_FAVORITE_CATEGORY);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
         // Get the grid view count.
         GridView lv = (GridView) solo.getView("category_editor_grid");
         Log.i("number", String.valueOf(lv.getCount()));
@@ -1409,7 +1411,9 @@ public class Category extends ActivityInstrumentationTestCase2<Activity> {
     public final void test18LimitNote() throws Exception {
 
         Account.judgementAccountLogin(solo);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
         solo.clickOnView(solo.getView("tab_image", 2));
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
         solo.scrollToBottom();
         Action.clickText(solo, ValidationText.SPORTS_OUTDOOR_RECREATION);
         Action.clickText(solo, ValidationText.EIGHTEEN_AREA);

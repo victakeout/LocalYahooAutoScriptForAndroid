@@ -137,11 +137,16 @@ public class Checkout extends ActivityInstrumentationTestCase2<Activity> {
                     ValidationText.RESELECT_OTHER_STORE);
             solo.sleep(ValidationText.WAIT_TIME_LONGER);
         }
+        View storePage;
         try {
-            Action.searchTextOnWebview(solo, ValidationText.TAI_BEI);
+
+            storePage = (View) solo.getView("webpage");
+            assertTrue("Store page not show.", storePage.isShown());
+
         } catch (AssertionError e) {
             solo.sleep(ValidationText.WAIT_TIME_LONGER);
-            Action.searchTextOnWebview(solo, ValidationText.TAI_BEI);
+            storePage = (View) solo.getView("webpage");
+            assertTrue("Store page not show.", storePage.isShown());
         }
 
 
@@ -156,7 +161,13 @@ public class Checkout extends ActivityInstrumentationTestCase2<Activity> {
         Account.judgementAccountLogin(solo);
         Action.enterToItemPage(solo);
         TestHelper.swipeUp(solo, 1);
-        solo.clickOnText(ValidationText.BUY_NOW);
+        try {
+            solo.clickOnText(ValidationText.BUY_NOW);
+        } catch (AssertionError e) {
+            solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+            solo.clickOnText(ValidationText.BUY_NOW);
+        }
+
 
         @SuppressWarnings("unused")
         View radioButtons;

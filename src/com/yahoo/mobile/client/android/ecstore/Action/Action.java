@@ -260,6 +260,7 @@ public final class Action {
             throws Exception {
 
         solo.clickOnView(solo.getView("tab_text", 1));
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
         solo.clickOnText(ValidationText.FAVORITE_STORES);
         TextView favorite = (TextView) solo.getView("tab_text", 1);
         junit.framework.Assert.assertTrue(
@@ -279,12 +280,13 @@ public final class Action {
     public static void removeFavoriteStore(final Solo solo) throws Exception {
 
         solo.clickOnView(solo.getView("tab_text", 1));
-        solo.sleep(ValidationText.WAIT_TIME_LONG);
+        solo.sleep(ValidationText.WAIT_TIME_LONGER);
+        View storeName;
         try {
-            View storeName = (View) solo
+             storeName = (View) solo
                     .getView("listitem_favoritestore_storename");
             View url = (View) solo.getView("listitem_favoritestore_image1");
-            for (int i = 0; i <= 10; i++) {
+            for (int i = 0; i <= 10; i++){
                 solo.clickLongOnView(storeName);
                 solo.sleep(ValidationText.WAIT_TIME_SHORT);
                 Button ok = (Button) solo.getView("button1");
@@ -961,6 +963,30 @@ public final class Action {
     }
 
     /**
+     * define the count initial value.
+     */
+    private static int LINES = 1;
+
+    /**
+     * @param solo
+     *            the Solo instance
+     * @throws Exception
+     *             if has error
+     */
+    public static void loopBrowsebeauty(final Solo solo) throws Exception {
+        for (int z = 0; z < 1; z++) {
+
+            solo.clickInList(2);
+            solo.sleep(ValidationText.WAIT_TIME_SHORT);
+            Action.clickText(solo, ValidationText.COMMODITY);
+            Action.loopEnterAndBack(solo);
+            LINES++;
+            solo.goBack();
+        }
+
+    }
+
+    /**
      * Enter product item detail page2.
      *
      * @param solo
@@ -1061,9 +1087,10 @@ public final class Action {
             throws Exception {
 
         for (WebElement web : solo.getCurrentWebElements()) {
+            Log.i("number", web.getText().toString());
             Log.i("number", web.getClassName().toString());
-
             if (web.getText().toString().equals(text)) {
+
                 actual = true;
                 solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 

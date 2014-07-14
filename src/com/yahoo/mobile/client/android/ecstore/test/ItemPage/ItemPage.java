@@ -147,21 +147,24 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
 
         Account.judgementAccountLogin(solo);
         Action.enterToItemPage(solo);
-        solo.sleep(ValidationText.WAIT_TIME_SHORT);
-        TestHelper.swipeUp(solo, 1);
         solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+        TestHelper.swipeUp(solo, 1);
         solo.clickOnText(ValidationText.SALES_PROMOTION);
         solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+        View webpage;
         try {
             solo.clickOnText(ValidationText.FULL);
+            solo.sleep(ValidationText.WAIT_TIME_LONGER);
+             webpage = (View) solo.getView("webpage", 0);
+            assertTrue("No promotion link displayed. ", webpage.isShown());
         } catch (AssertionError e) {
-            solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
-            solo.clickOnText(ValidationText.FULL);
+
+            solo.sleep(ValidationText.WAIT_TIME_LONG);
+             webpage = (View) solo.getView("webpage", 0);
+            assertTrue("No promotion link displayed. ", webpage.isShown());
         }
 
-        solo.sleep(ValidationText.WAIT_TIME_LONGER);
-        View webpage = (View) solo.getView("webpage", 0);
-        assertTrue("No promotion link displayed. ", webpage.isShown());
+
 
     }
 

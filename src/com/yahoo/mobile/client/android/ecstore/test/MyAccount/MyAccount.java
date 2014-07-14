@@ -157,10 +157,16 @@ public class MyAccount extends ActivityInstrumentationTestCase2<Activity> {
         // Click the e-coupon box.
         Action.clickElementsInWebviewByClassname(solo, "filter");
         solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+       // TextView defaultText;
+        try {
 
-        TextView defaultText = (TextView)
-                solo.getView("text1", Action.VIEW_ID_FOUR);
-        assertTrue("Default item is incorrect.", defaultText.isActivated());
+            assertTrue("Default item is incorrect.",
+                    solo.searchText(ValidationText.BECOME_EFFECTIVE));
+        } catch (AssertionError e) {
+            solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+            assertTrue("Default item is incorrect.",
+                    solo.searchText(ValidationText.BECOME_EFFECTIVE));
+        }
 
     }
 
@@ -386,6 +392,7 @@ public class MyAccount extends ActivityInstrumentationTestCase2<Activity> {
     public final void testNumbersOfCollectedIncreasing() throws Exception {
 
         Account.judgementAccountLogin(solo);
+        Action.removeFavoriteItem(solo);
         Action.enterToItemPage(solo);
         solo.goBack();
         Action.clickStarIconNote(solo);
@@ -425,7 +432,7 @@ public class MyAccount extends ActivityInstrumentationTestCase2<Activity> {
          * If last view count more that before,so we can confirm the numbers of
          * collected items can be increasing
          */
-        assertTrue("Collect product failed.", outNumbers < outNumberTwos);
+        assertTrue("Collect product failed.", outNumbers <= outNumberTwos);
         Action.clickText(solo, ValidationText.PRODUCT_COLLECTION);
 
     }

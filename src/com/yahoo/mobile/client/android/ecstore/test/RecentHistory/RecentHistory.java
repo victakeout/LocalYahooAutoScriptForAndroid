@@ -153,10 +153,11 @@ public class RecentHistory extends ActivityInstrumentationTestCase2<Activity> {
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
         Action.clickText(solo, ValidationText.APPAREL);
         Action.loopBrowse(solo);
-
+        solo.goBack();
+        Action.loopBrowsebeauty(solo);
         solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_FOUR));
         solo.clickOnText(ValidationText.RECENT_BROWSE);
-        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+        solo.sleep(ValidationText.WAIT_TIME_LONG);
 
         TextView headerNumber = (TextView) solo.getView("tx_header",
                 Action.VIEW_ID_ZERO);
