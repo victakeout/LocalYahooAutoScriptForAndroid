@@ -23,7 +23,6 @@
 
 package com.yahoo.mobile.client.android.ecstore.test.Category;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
@@ -46,7 +45,7 @@ import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
  * @author Administrator
  *
  */
-@SuppressLint("NewApi")
+
 public class Category extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
@@ -1237,12 +1236,9 @@ public class Category extends ActivityInstrumentationTestCase2<Activity> {
         Action.clickText(solo, ValidationText.COMMODITY);
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
         try {
-            TestHelper.swipeUp(solo, 1);
-            solo.sleep(ValidationText.WAIT_TIME_SHORT);
             Action.clickStarIconNote(solo);
 
         } catch (AssertionError e) {
-            TestHelper.swipeUp(solo, 1);
             solo.sleep(ValidationText.WAIT_TIME_SHORT);
             Action.clickStarIconNote(solo);
         }

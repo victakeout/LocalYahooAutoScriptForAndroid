@@ -111,15 +111,17 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
         Action.clickText(solo, ValidationText.COMMODITY);
         solo.sleep(ValidationText.WAIT_TIME_LONG);
         solo.clickInList(1);
-        solo.sleep(ValidationText.WAIT_TIME_SHORT);
-        TestHelper.swipeUp(solo, 1);
-        try {
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 
+        try {
+            TestHelper.swipeUp(solo, 1);
+            solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
             solo.clickOnText(ValidationText.SALES_PROMOTION);
 
         } catch (AssertionError e) {
 
             TestHelper.swipeUp(solo, 1);
+            solo.sleep(ValidationText.WAIT_TIME_SHORT);
             solo.clickOnText(ValidationText.SALES_PROMOTION);
 
         }

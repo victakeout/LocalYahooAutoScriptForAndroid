@@ -260,7 +260,7 @@ public final class Action {
             throws Exception {
 
         solo.clickOnView(solo.getView("tab_text", 1));
-        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
         solo.clickOnText(ValidationText.FAVORITE_STORES);
         TextView favorite = (TextView) solo.getView("tab_text", 1);
         junit.framework.Assert.assertTrue(

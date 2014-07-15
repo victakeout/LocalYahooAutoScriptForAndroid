@@ -27,7 +27,6 @@ package com.yahoo.mobile.client.android.ecstore.test.SRP;
 
 import java.util.ArrayList;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
@@ -50,7 +49,7 @@ import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
  * @author Administrator
  *
  */
-@SuppressLint("NewApi")
+
 public class SRP extends ActivityInstrumentationTestCase2 <Activity> {
 
     /**
@@ -1249,14 +1248,15 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
         // Get toast text.
         if (solo.waitForText(ValidationText.HAS_ADDED_COMMODITY)) {
             alreadyAdd = solo.waitForText(ValidationText.HAS_ADDED_COMMODITY);
-            junit.framework.Assert.assertTrue("Add failed.", alreadyAdd);
+            assertTrue("Add failed.", alreadyAdd);
         } else {
             solo.sleep(ValidationText.WAIT_TIME_SHORT);
             solo.clickOnView(solo.getView("heart_button", 0));
             alreadyAdd = solo.waitForText(ValidationText.HAS_ADDED_COMMODITY);
-            junit.framework.Assert.assertTrue("Add failed.", alreadyAdd);
+            assertTrue("Add failed.", alreadyAdd);
 
         }
+        Action.setListViewStyleAfterSearch(solo);
     }
 
     /**
@@ -1366,7 +1366,7 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
     public final void testCheckTheDefaultBrowseMode() throws Exception {
 
         Action.enterToJacketAfterSearch(solo);
-
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
         GridView lv = (GridView) solo.getView("gridview", 0);
         int defaultItems = lv.getCount();
         assertEquals("The default browse mode is listview."
@@ -1505,8 +1505,9 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
         View iv = solo.getView("menu_search");
         solo.clickOnView(iv);
-        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
-        View keywords = (View) solo.getView("search_autocompletetext");
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.clickOnView(iv);
+        View keywords = (View) solo.getView("search_suggestion_text");
         assertTrue("Search component not displayed.", keywords.isShown());
 
     }

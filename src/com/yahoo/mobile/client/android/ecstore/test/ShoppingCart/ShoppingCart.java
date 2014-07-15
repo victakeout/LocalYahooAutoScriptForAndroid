@@ -25,12 +25,11 @@
 
 package com.yahoo.mobile.client.android.ecstore.test.ShoppingCart;
 
-import android.annotation.SuppressLint;
+
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 import android.view.View;
-import android.widget.CheckedTextView;
 import android.widget.TextView;
 
 import com.robotium.solo.Solo;
@@ -44,7 +43,7 @@ import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
  * @author Administrator
  *
  */
-@SuppressLint("NewApi")
+
 public class ShoppingCart extends ActivityInstrumentationTestCase2<Activity> {
 
     /**

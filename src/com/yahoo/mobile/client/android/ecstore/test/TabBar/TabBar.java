@@ -30,6 +30,7 @@ import android.test.ActivityInstrumentationTestCase2;
 import com.robotium.solo.Solo;
 import com.yahoo.mobile.client.android.ecstore.Account.Account;
 import com.yahoo.mobile.client.android.ecstore.Action.Action;
+import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 
 /**
  * @author Administrator
@@ -102,9 +103,12 @@ public class TabBar extends ActivityInstrumentationTestCase2<Activity> {
 
         Account.judgementAccountLogin(solo);
 
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+
         // navigate to category screen
         Action.navigateToCategoryScreen(solo);
 
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
         // navigate to favorite store screen
         Action.navigateToFavoriteStoreScreen(solo);
 

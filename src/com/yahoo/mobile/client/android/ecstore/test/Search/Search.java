@@ -996,14 +996,23 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
         Action.clearHistoryInfomation(solo);
 
         // navigate to category screen
-        Action.navigateToCategoryScreen(solo);
+        solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_TWO));
 
         solo.scrollToTop();
+
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+
         Action.clickText(solo, ValidationText.APPAREL);
 
         solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+        try {
+            Action.clickText(solo, ValidationText.POPULAR_WOMEN);
+        } catch (AssertionError e) {
+            solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+            Action.clickText(solo, ValidationText.POPULAR_WOMEN);
+        }
 
-        Action.clickText(solo, ValidationText.POPULAR_WOMEN);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
 
         Action.clickText(solo, ValidationText.JACKET);
 

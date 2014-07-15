@@ -1,5 +1,5 @@
 /*
- * This is automated script about "Sidebar".
+ * This is automated script about "Side bar".
  *
  * You can run these test cases either on the emulator or on device.
  *
