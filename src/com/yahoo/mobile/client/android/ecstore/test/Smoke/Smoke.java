@@ -1,3 +1,28 @@
+/*
+ * This is automated script about "Smoke".
+ *
+ * You can run these test cases either on the emulator or on device.
+ *
+ * By Eclipse:
+ * Right click the test project and select Run As --> Run As Android JUnit Test
+ *
+ * By Ant:
+ * 1.Run "android update test-project -m [path to target application]
+ * -p [path to the test folder]"  in command line .
+ * 2."ant test"
+ *
+ * By using instrument command:
+ * Run all test project:adb shell am instrument -w com.yahoo.mobile.client
+ * .android.ecstore.test/android.test.InstrumentationTestRunner
+ * Just run Sidebar:adb shell am instrument -e class com.yahoo.mobile.client
+ * .android.ecstore.test.Smoke.Smoke -w com.yahoo.mobile.client.android
+ * .ecstore.test/android.test.InstrumentationTestRunner
+ *
+ * @author SYMBIO.
+ * @version YAHOO APP:1.2.4
+ *
+ */
+
 package com.yahoo.mobile.client.android.ecstore.test.Smoke;
 
 import android.app.Activity;
@@ -18,7 +43,8 @@ public class Smoke extends ActivityInstrumentationTestCase2<Activity> {
     /**
      * Declare application main activity.
      */
-    private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
+    private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME =
+            "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
 
     /**
      * Declare a variable of type Class for start tested program.
@@ -207,10 +233,10 @@ public class Smoke extends ActivityInstrumentationTestCase2<Activity> {
     }
 
     /**
-     * 1959541:[Item page]Verify user can click "立即購買"button twice.
+     * 1959541:[Item page]Verify user can click "Buy now"button twice.
      *
      * @throws Exception
-     *             if has error ----------------------not finish
+     *             if has error
      */
     public final void testClickBuyButtonTwice() throws Exception {
 
@@ -286,7 +312,15 @@ public class Smoke extends ActivityInstrumentationTestCase2<Activity> {
         solo.goBack();
         solo.sleep(ValidationText.WAIT_TIME_LONGER);
 
-        Action.clickElementsInWebviewByClassname(solo, "products");
+        Action.clickElementsInWebviewByClassname(solo,
+                "goNextBuy updateItemClick");
+
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        // Search "Confirm"button on alert window.
+        Action.clickElementsInWebviewByText(solo, ValidationText.OK);
+        solo.sleep(ValidationText.WAIT_TIME_LONG);
+
+        Action.clickElementsInWebviewByClassname(solo, "title");
         solo.sleep(ValidationText.WAIT_TIME_LONG);
 
         View productName = (View) solo.getView("productitem_store_name");
