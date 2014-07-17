@@ -30,6 +30,7 @@ import android.widget.TextView;
 
 import com.robotium.solo.Solo;
 import com.yahoo.mobile.client.android.ecstore.Action.Action;
+import com.yahoo.mobile.client.android.ecstore.Assert.Assert;
 import com.yahoo.mobile.client.android.ecstore.test.TestHelper;
 import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 
@@ -84,7 +85,7 @@ public class StoreList extends ActivityInstrumentationTestCase2<Activity> {
 
         super.setUp();
         solo = new Solo(getInstrumentation(), getActivity());
-
+        Assert.testFirstLaunch(solo);
     }
 
     @Override

@@ -90,7 +90,7 @@ public class SRP extends ActivityInstrumentationTestCase2 <Activity> {
     protected final void setUp() throws Exception {
         super.setUp();
         solo = new Solo(getInstrumentation(), getActivity());
-
+        Assert.testFirstLaunch(solo);
     }
 
     @Override
@@ -1502,10 +1502,8 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
         ImageView storeListImage = (ImageView) solo.getView(
                 "listitem_storelist_image", 0);
         solo.clickOnView(storeListImage);
-        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
         View iv = solo.getView("menu_search");
-        solo.clickOnView(iv);
-        solo.sleep(ValidationText.WAIT_TIME_SHORT);
         solo.clickOnView(iv);
         View keywords = (View) solo.getView("search_suggestion_text");
         assertTrue("Search component not displayed.", keywords.isShown());

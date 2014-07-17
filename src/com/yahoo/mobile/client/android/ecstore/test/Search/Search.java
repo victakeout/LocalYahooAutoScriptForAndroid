@@ -239,7 +239,7 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1937859:Add suggestion into search bar by clicking "+" icon.
-     * 
+     *
      * @throws Exception
      *             if has error
      */
@@ -257,7 +257,7 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
         // value where in front of "+".
         String tvValue = Action.getValuesInTextview(solo,
-                "id/search_suggestion_text", 0);
+                "search_suggestion_text", 0);
 
         // click "+" in list suggestion window.
         Action.clickPlusInOpenWindow(solo, "search_fill_up", 0);
@@ -271,7 +271,7 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1937860:Change suggestion info if clicking "+" icon again.
-     * 
+     *
      * @throws Exception
      *             if has error
      */
@@ -923,7 +923,7 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1937890:Back to layer 2 category list.
-     * 
+     *
      * @throws Exception
      *             if has error
      */
@@ -938,8 +938,12 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
         solo.scrollToTop();
         Action.clickText(solo, ValidationText.APPAREL);
 
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+
         // click search button
         Action.clickSearchButtonOnScreen(solo);
+
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
 
         // click back(home) screen
         Action.clickHomeButtonOnScreen(solo);
@@ -950,7 +954,7 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1937891:Back to fashion list.
-     * 
+     *
      * @throws Exception
      *             if has error
      */
@@ -1004,7 +1008,7 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
         Action.clickText(solo, ValidationText.APPAREL);
 
-        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+        solo.sleep(ValidationText.WAIT_TIME_LONG);
         try {
             Action.clickText(solo, ValidationText.POPULAR_WOMEN);
         } catch (AssertionError e) {
@@ -1511,8 +1515,9 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
     public final void testEnterSpecialCharactersToSearch() throws Exception {
 
         Account.judgementAccountLogin(solo);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
         Action.clickSearchButtonOnScreen(solo);
-
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
         // Input test data.
         Action.searchAfterPutData(solo, 0, ValidationText.SPECIAL);
         assertTrue("No result note pop up.",

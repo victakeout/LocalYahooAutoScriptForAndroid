@@ -166,9 +166,16 @@ public final class Action {
      */
     public static void clickSearchButtonOnScreen(final Solo solo)
             throws Exception {
-
+        View iv;
         solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
-        View iv = solo.getView("menu_search", 0);
+
+        try {
+             iv = solo.getView("menu_search", 0);
+        } catch (AssertionError e){
+            solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+             iv = solo.getView("menu_search", 0);
+        }
+
         solo.clickOnView(iv);
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
 
@@ -696,7 +703,7 @@ public final class Action {
         try {
             shopCart = solo.getView("productitem_btn_add_to_shopping_cart");
             solo.clickOnView(shopCart);
-
+            solo.sleep(ValidationText.WAIT_TIME_SHORT);
         } catch (AssertionError e) {
 
             TestHelper.swipeUp2(solo, 2);

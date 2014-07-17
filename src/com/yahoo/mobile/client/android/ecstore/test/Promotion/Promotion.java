@@ -31,6 +31,7 @@ import android.widget.TextView;
 import com.robotium.solo.Solo;
 import com.yahoo.mobile.client.android.ecstore.Account.Account;
 import com.yahoo.mobile.client.android.ecstore.Action.Action;
+import com.yahoo.mobile.client.android.ecstore.Assert.Assert;
 import com.yahoo.mobile.client.android.ecstore.test.TestHelper;
 import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 
@@ -42,8 +43,7 @@ public class Promotion extends ActivityInstrumentationTestCase2<Activity> {
     /**
      * Declare application main activity.
      */
-    private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME
-    = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
+    private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
 
     /**
      * Declare a variable of type Class for start tested program.
@@ -84,7 +84,7 @@ public class Promotion extends ActivityInstrumentationTestCase2<Activity> {
 
         super.setUp();
         solo = new Solo(getInstrumentation(), getActivity());
-
+        Assert.testFirstLaunch(solo);
     }
 
     @Override
@@ -101,8 +101,9 @@ public class Promotion extends ActivityInstrumentationTestCase2<Activity> {
     }
 
     /**
-     * 1977505:Verify  user can add goods to
-     *  shopping cart in「Promotion」page after user logout then login..
+     * 1977505:Verify user can add goods to shopping cart in「Promotion」page
+     * after user logout then login..
+     *
      * @throws Exception
      *             if has error
      */
@@ -110,12 +111,12 @@ public class Promotion extends ActivityInstrumentationTestCase2<Activity> {
             throws Exception {
 
         Account.judgementAccountLogin(solo);
+        Action.removeShoppingCart(solo);
         solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_ONE));
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
         solo.clickOnText(ValidationText.MAYBE_LIKE);
         solo.sleep(ValidationText.WAIT_TIME_LONGER);
-        View recommend = (View) solo.getView(
-                "listitem_recommended_image1", 0);
+        View recommend = (View) solo.getView("listitem_recommended_image1", 0);
         solo.clickOnView(recommend);
 
         // Checks if the banner is show.
@@ -130,21 +131,26 @@ public class Promotion extends ActivityInstrumentationTestCase2<Activity> {
         solo.clickOnText(ValidationText.SALES_PROMOTION);
 
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
-        assertTrue("Account has login.", solo.searchText(
-                ValidationText.SALES_PROMOTION));
+        assertTrue("Account has login.",
+                solo.searchText(ValidationText.SALES_PROMOTION));
 
         Account.judgementAccountWithoutLogin(solo);
         Account.judgementAccountLogin(solo);
         solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_ONE));
+        solo.clickOnView(solo.getView("productitem_promotion_name",
+                Action.VIEW_ID_ONE));
 
-        TextView promotion = (TextView) solo.getView(
-                "product_item_promotion_header");
-
-        solo.clickOnView(promotion);
-
-        solo.sleep(ValidationText.WAIT_TIME_LONG);
-        TestHelper.swipeUp(solo, 1);
-        Action.clickElementsInWebviewByClassname(solo, "sss");
-        solo.sleep(ValidationText.WAIT_TIME_LONG);
+        solo.sleep(ValidationText.WAIT_TIME_LONGEST);
+        TestHelper.swipeUp2(solo, 1);
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+        Action.clickElementsInWebviewByClassname(solo, "shoppingCart");
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.clickOnView(solo.getView("tab_image", 3));
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.clickOnView(solo.getView("tab_image", 3));
+        TextView shoppingCart = (TextView) solo.getView(
+                "ecshopping_cart_store_count", 0);
+        assertTrue("Not add to shopping cart.",
+                Integer.valueOf(shoppingCart.getText().toString()) >= 1);
     }
 }
