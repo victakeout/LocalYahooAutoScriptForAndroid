@@ -672,7 +672,7 @@ public final class Action {
         boolean alreadyAdd;
 
         // Get toast text.
-        if (solo.waitForText(ValidationText.HAS_ADDED_COLLECTION)) {
+        if (solo.waitForText(ValidationText.HAS_ADDED_COLLECTION)){
             alreadyAdd = solo.waitForText(ValidationText.HAS_ADDED_COLLECTION);
             junit.framework.Assert.assertTrue("Add failed.", alreadyAdd);
         } else {
@@ -1105,6 +1105,38 @@ public final class Action {
 
         }
         junit.framework.Assert.assertTrue("Text not found", actual);
+    }
+
+    /**
+     * Set the default value is false.
+     */
+    private static boolean actuals = false;
+
+    /**
+     * Search text on web view.
+     *
+     * @param solo
+     *            the Solo instance
+     * @param text
+     *            the text will be searched on the web view
+     * @throws Exception
+     *             if has error
+     */
+    public static void searchClassNameOnWebview(final Solo solo, final String text)
+            throws Exception {
+
+        for (WebElement web : solo.getCurrentWebElements()) {
+            Log.i("number", web.getText().toString());
+            Log.i("number", web.getClassName().toString());
+            if (web.getClassName().toString().trim().equals(text)) {
+
+                actual = true;
+                solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+
+            }
+
+        }
+        junit.framework.Assert.assertTrue("Class name not found", actuals);
     }
 
     /**

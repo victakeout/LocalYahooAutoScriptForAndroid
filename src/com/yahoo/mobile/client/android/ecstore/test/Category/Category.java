@@ -143,14 +143,20 @@ public class Category extends ActivityInstrumentationTestCase2<Activity> {
         // Get "back" button view.
         ImageView back = (ImageView) solo.getView("home");
 
+        //Get "Apparel" text.
+        TextView dressText = (TextView) solo.getView("action_bar_title", 0);
+        boolean text = dressText.getText().toString().trim()
+                .equals(ValidationText.APPAREL);
+
         // Get "Search" button view.
         View search = solo.getView("menu_search");
 
         // Get "Filter" button view.
         View advance = solo.getView("menu_filter");
 
+
         boolean views = back.isShown() && search.isShown() && advance.isShown();
-        assertTrue("views not found", views);
+        assertTrue("views not found", views && text);
 
     }
 
@@ -1347,15 +1353,6 @@ public class Category extends ActivityInstrumentationTestCase2<Activity> {
             boolean textFound = solo.searchText(ValidationText.COSTUMELIST[i]);
             assertTrue(ValidationText.COSTUMELIST[i] + " not found", textFound);
         }
-        
-      /*  // Select two item to compare the position.
-        boolean flag = TestHelper.positionCompare(solo,
-                ValidationText.COSTUMELIST[0], 1,
-                ValidationText.COSTUMELIST[1], 2, 1);
-        assertTrue(
-                "Item position is not right,need confirm the"
-        + " default browse mode.",
-                flag);*/
 
     }
 
@@ -1371,7 +1368,7 @@ public class Category extends ActivityInstrumentationTestCase2<Activity> {
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
         TextView btnSort = (TextView) solo.getView("indicator_sort");
 
-        assertTrue("The default tab is incorrect.", btnSort.isShown());
+        assertTrue("The default tab is incorrect.", btnSort.isEnabled());
 
     }
 
@@ -1420,10 +1417,10 @@ public class Category extends ActivityInstrumentationTestCase2<Activity> {
     }
 
     /**
-     * 1938159:Verify Leisure / traffic tab correctly displayed on the page.
+     * 1938159:Verify Sports/Outdoor/Leisure tab correctly displayed on the page.
      * @throws Exception if has error
      */
-    public final void testLeisureTrafficTabDisplayed() throws Exception {
+    public final void testSportsOutdoorAndLeisureTabDisplayed() throws Exception {
 
         solo.clickOnView(solo.getView("tab_image", 2));
         assertTrue("Sports/Outdoor/Leisure is not displayed.",
@@ -1469,12 +1466,10 @@ public class Category extends ActivityInstrumentationTestCase2<Activity> {
         Action.enterAdvancedPage(solo);
         solo.clickOnView(solo.getView("btn_filter"));
 
-        // Get "0 Interest" button.
-        ToggleButton tb = (ToggleButton) solo.getView("tb_cczeroint");
-
-        solo.clickOnView(tb);
         Action.clickText(solo, ValidationText.OK);
-        assertFalse("Back to search result page failed.", tb.isShown());
+
+        View star = (View) solo.getView("star_button");
+        assertTrue("Back to search result page failed.", star.isShown());
 
     }
 

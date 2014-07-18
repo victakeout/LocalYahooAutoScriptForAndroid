@@ -1,21 +1,25 @@
 package com.yahoo.mobile.client.android.ecstore.test;
 
+/**
+ * @author Administrator
+ *
+ */
 public class ValidationText {
-    
+
     public static final int WAIT_TIME_SHORT = 2000;
     
     public static final int WAIT_TIME_MIDDLE = 5000;
-    
+
     public static final int WAIT_TIME_LONG = 10000;
 
     public static final int WAIT_TIME_LONGER = 20000;
-    
+
     public static final int WAIT_TIME_LONGEST = 30000;
 
     public static final String WAIT = "等等";
 
     public static final String SKIP = "略過";
-    
+
     public static final String MIUSTAR = "miustar";
 
     public static final String NOTIFICATION = "通知";
@@ -32,8 +36,10 @@ public class ValidationText {
 
     public static final String NEWS = "最新動態";
     
+    public static final String PRE_ORDER = "預購";
+
     public static final String BECOME_EFFECTIVE = "待生效";
-    
+
     public static final String ORDER_INQUIRY  = "訂單查詢";
 
     public static final String PLUS_PURCHASE = "加購商品";
@@ -41,13 +47,13 @@ public class ValidationText {
     public static final String ADDITIONAL_GIFT = "附送贈品";
 
     public static final String YOUR_FAVORITE = "你的最愛";
-    
+
     public static final String EMPTY = "你的最愛商店是空的";
 
     public static final String DONG = "東";
 
     public static final String DONG_J = "東京";
-    
+
     public static final String BIKINI = "金魚胸貼提胸貼可搭洋裝比基";
 
     public static final String DONG_JING = "東京著衣";
@@ -65,9 +71,9 @@ public class ValidationText {
     public static final String T_SHIRT = "T恤";
 
     public static final String S = "s";
-    
+
     public static final String C = "c";
-    
+
     public static final String FAMILY_PICKUP = "全家繳費不取貨";
 
     public static final String ESCAPE_CHARACTER = "#39";
@@ -81,48 +87,52 @@ public class ValidationText {
     public static final String SEARCH_APPAREL = "搜尋服飾";
 
     public static final String SEARCH = "搜尋";
-    
+
     public static final String BUY_NOW = "立即購買";
-    
+
     public static final String RECENT_BROWSE = "最近瀏覽";
-    
+
     public static final String BROWSE_RECORD = "瀏覽記錄";
-    
+
     public static final String CLEAN_BROWSE_RECORD = "清除瀏覽記錄";
-    
+
     public static final String SEARCH_RECORDER = "搜尋記錄";
-    
+
     public static final String SEARCH_CLEAN = "清除搜尋記錄";
 
     public static final String ALL_CATEGORIES = "全部分類";
 
     public static final String CATEGORIES = "分類";
+    
+    public static final String SUB_TOTAL = "小計";
 
     public static final String OK = "確定";
-    
+
     public static final String CANCEL = "取消";
-    
+
     public static final String CONTENT = "內容";
-    
+
     public static final String SPECIAL = "‘";
 
     public static final String SETTING = "設定";
-    
+
     public static final String CHECKOUT = "結賬";
 
     public static final String CLEAR_SEARCH_HISTORY = "清除搜尋記錄";
 
     public static final String RESULTS_VALUE = "筆結果";
-    
+
     public static final String SHOP = "商店";
 
     public static final String PLEASE_LOGIN_ACCOUNT = "請先登入帳號";
-    
+
     public static final String PRODUCT_COLLECTION = "商品收藏";
 
     public static final String HAS_ADDED_COLLECTION = "已加入商品收藏";
 
     public static final String HAS_REMOVED_COLLECTION = "此商品收藏已移除";
+    
+    public static final String CANNOT_ADD_NOW = "目前無法移除商品收藏";
 
     public static final String HAS_ADDED_COMMODITY = "已加入最愛商店";
 

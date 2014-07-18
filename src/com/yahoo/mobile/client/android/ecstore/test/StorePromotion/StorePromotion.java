@@ -25,11 +25,12 @@ package com.yahoo.mobile.client.android.ecstore.test.StorePromotion;
 
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
-
+import android.widget.TextView;
 
 import com.robotium.solo.Solo;
 import com.yahoo.mobile.client.android.ecstore.Action.Action;
 import com.yahoo.mobile.client.android.ecstore.Assert.Assert;
+import com.yahoo.mobile.client.android.ecstore.test.TestHelper;
 import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 
 /**
@@ -106,11 +107,17 @@ public class StorePromotion extends ActivityInstrumentationTestCase2<Activity> {
     public final void testViewPromotionItemLink() throws Exception {
 
         Action.clickSearchButtonOnScreen(solo);
-        Action.searchAfterPutData(solo, 0, ValidationText.SALES);
+        Action.searchAfterPutData(solo, 0, ValidationText.SALES_PROMOTION);
         solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
-        solo.clickInList(Action.VIEW_ID_ONE);
-        assertTrue("Not found promotion item link.",
-                solo.searchText(ValidationText.SALES));
+        solo.clickInList(Action.VIEW_ID_ZERO);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        TestHelper.swipeUp(solo, 1);
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+        solo.clickOnText(ValidationText.SALES_PROMOTION);
+        TextView header = (TextView)
+                solo.getView("product_item_promotion_header");
+        assertTrue("This product contains more than one promotion link.",
+                header.getText().toString().contains("1"));
 
     }
 

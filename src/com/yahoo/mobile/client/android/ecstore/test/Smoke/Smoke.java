@@ -44,8 +44,7 @@ public class Smoke extends ActivityInstrumentationTestCase2<Activity> {
     /**
      * Declare application main activity.
      */
-    private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME =
-            "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
+    private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
 
     /**
      * Declare a variable of type Class for start tested program.
@@ -92,7 +91,7 @@ public class Smoke extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1952835:[Personalization] Verify user can use personalization.
-     *
+     * 
      * @throws Exception
      *             if has error
      */
@@ -150,7 +149,7 @@ public class Smoke extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1959535:[Items listings]Verify Cancel button function in options layers..
-     *
+     * 
      * @throws Exception
      *             if has error
      */
@@ -182,7 +181,7 @@ public class Smoke extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1952836:[Web Views]verify user can use web views.
-     *
+     * 
      * @throws Exception
      *             if has error
      */
@@ -235,7 +234,7 @@ public class Smoke extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1959541:[Item page]Verify user can click "Buy now"button twice.
-     *
+     * 
      * @throws Exception
      *             if has error
      */
@@ -268,13 +267,12 @@ public class Smoke extends ActivityInstrumentationTestCase2<Activity> {
             assertTrue("This page incorrect.", webpage.isShown());
         }
 
-
     }
 
     /**
      * 1959553:[Shopping cart]Verify Item link function in shopping cart details
      * page.
-     *
+     * 
      * @throws Exception
      *             if has error
      */
@@ -331,7 +329,7 @@ public class Smoke extends ActivityInstrumentationTestCase2<Activity> {
     /**
      * 1959554:[Shopping cart]Verify user can access shopping cart details page
      * quickly.
-     *
+     * 
      * @throws Exception
      *             if has error
      */
@@ -362,7 +360,7 @@ public class Smoke extends ActivityInstrumentationTestCase2<Activity> {
     /**
      * 1959555:[Shopping cart]Verify user can access shopping cart details page
      * repeatedly.
-     *
+     * 
      * @throws Exception
      *             if has error
      */
@@ -398,7 +396,7 @@ public class Smoke extends ActivityInstrumentationTestCase2<Activity> {
     /**
      * 1977445:[Store Listings]Verify user can see some basic information about
      * the Store in its store listings page.
-     *
+     * 
      * @throws Exception
      *             if has error
      */
@@ -454,7 +452,7 @@ public class Smoke extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1952828:[Store Listings] Verify user can access the listings page.
-     *
+     * 
      * @throws Exception
      *             if has error
      */
@@ -540,4 +538,46 @@ public class Smoke extends ActivityInstrumentationTestCase2<Activity> {
                         && favor.isShown());
     }
 
+    /**
+     * 1961795:[My account]Verify click "commodity Favorites" any goods are able
+     * to enter Item page.
+     *
+     * @throws Exception
+     *             if has error
+     */
+    public final void testAccessItemPageAfterClickAnyGoods() throws Exception {
+
+        Account.judgementAccountLogin(solo);
+        Action.removeFavoriteItem(solo);
+        solo.goBack();
+        Action.enterToItemPage(solo);
+        solo.goBack();
+        for (int i = 0; i < 3 ; i++) {
+            Action.clickStarIconNote(solo);
+            solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        }
+
+        solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_FOUR));
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.clickOnText(ValidationText.PRODUCT_COLLECTION);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+
+        View img = (View) solo.getView("listitem_productlist_image");
+        solo.clickLongOnView(img);
+
+        // Confirm remove it.
+        solo.clickOnView(solo.getView("button1"));
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+
+        solo.goBack();
+        solo.clickOnText(ValidationText.PRODUCT_COLLECTION);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+
+        View imgs = (View) solo.getView("listitem_productlist_image");
+        solo.clickOnView(imgs);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        View star = (View) solo.getView("productitem_star_button",
+                Action.VIEW_ID_ZERO);
+        assertTrue("Cannot back to item page!", star.isShown());
+    }
 }

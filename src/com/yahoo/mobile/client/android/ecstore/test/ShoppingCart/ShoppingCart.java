@@ -262,7 +262,12 @@ public class ShoppingCart extends ActivityInstrumentationTestCase2<Activity> {
         solo.goBack();
         solo.clickOnView(solo.getView("ecshopping_cart_store_name", 0));
         solo.sleep(ValidationText.WAIT_TIME_LONG);
-
+        Action.clickElementsInWebviewByClassname(solo, "pimg");
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        View star = (View) solo.getView("productitem_star_button", 0);
+        assertTrue(" Cannot find the star icon ", star.isShown());
+        solo.goBack();
+        solo.sleep(ValidationText.WAIT_TIME_LONG);
        try {
             Action.clickElementsInWebviewByClassname(solo, "updateItemChange");
             solo.sleep(ValidationText.WAIT_TIME_SHORT);
@@ -271,6 +276,7 @@ public class ShoppingCart extends ActivityInstrumentationTestCase2<Activity> {
             Action.clickElementsInWebviewByClassname(solo, "updateItemChange");
             solo.sleep(ValidationText.WAIT_TIME_SHORT);
         }
+
        boolean actual = solo.searchText("1");
        assertTrue("number is not displayed!", actual);
 
@@ -285,11 +291,11 @@ public class ShoppingCart extends ActivityInstrumentationTestCase2<Activity> {
 
         Account.judgementAccountLogin(solo);
         Action.removeShoppingCart(solo);
-        for (int i = 0; i < Action.VIEW_ID_THREE; i++) {
-            solo.scrollToTop();
-            Action.enterToItemPage(solo);
-            Action.addToShoppingCart(solo);
-        }
+     
+        solo.scrollToTop();
+        Action.enterToItemPage(solo);
+        Action.addToShoppingCart(solo);
+      
         solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_THREE));
         solo.clickOnView(solo.getView("ecshopping_cart_store_name", 0));
         solo.sleep(ValidationText.WAIT_TIME_LONGER);
@@ -300,11 +306,18 @@ public class ShoppingCart extends ActivityInstrumentationTestCase2<Activity> {
         // Search "Confirm"button on alert window.
         Action.clickElementsInWebviewByText(solo, ValidationText.OK);
         solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
-        solo.clickOnView(solo.getView("tab_image", 3));
+        solo.clickOnView(solo.getView("tab_image",
+                Action.VIEW_ID_THREE));
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
         assertTrue("No next buy item.", solo.searchText(
                 ValidationText.NEXT_BUY));
-
+        solo.clickOnView(solo.getView("ecshopping_cart_store_name", 0));
+        solo.sleep(ValidationText.WAIT_TIME_LONGER);
+        Action.searchTextOnWebview(solo, ValidationText.NEXT_BUY);
+        solo.goBack();
+        solo.clickOnView(solo.getView("ecshopping_cart_store_name", 0));
+        solo.sleep(ValidationText.WAIT_TIME_LONGER);
+        Action.searchTextOnWebview(solo, ValidationText.SUB_TOTAL);
     }
 
     /**

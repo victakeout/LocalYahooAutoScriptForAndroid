@@ -103,7 +103,7 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1937852:Check search icon.
-     * 
+     *
      * @throws Exception
      *             if has error
      */
@@ -126,7 +126,7 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1937854:Check tips text indicated in search bar.
-     * 
+     *
      * @throws Exception
      *             if has error
      */
@@ -144,7 +144,7 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1937855:Picture "Super" is shown.
-     * 
+     *
      * @throws Exception
      *             if has error
      */
@@ -163,7 +163,7 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1937856：Back to the previous screen.
-     * 
+     *
      * @throws Exception
      *             if has error
      */
@@ -184,7 +184,7 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1937857:10 auto-complete suggestions under search bar.
-     * 
+     *
      * @throws Exception
      *             if has error
      */
@@ -216,7 +216,7 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1937858:"+" icon is shown.
-     * 
+     *
      * @throws Exception
      *             if has error
      */
@@ -631,10 +631,10 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
         // close soft keyboard
         Action.closeSoftKeyBoard(solo);
 
-        
-       /*  * get the value of suggestion list and verify whether the suggestion
-         * list is correct*/
-         
+        /**
+         * get the value of suggestion list and verify whether the suggestion
+         * list is correct
+          */
 
         for (int j = 0; j < 10; j++) {
             String suggestionRecord = Action.getValuesInTextview(solo,
@@ -648,7 +648,7 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1937873:By click on the keyword into the search box.
-     * 
+     *
      * @throws Exception
      *             if has error
      */
@@ -674,7 +674,7 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1937874:Recent Search by keyword.
-     * 
+     *
      * @throws Exception
      *             if has error
      */
@@ -700,7 +700,7 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1937875:No search suggestions displayed View.
-     * 
+     *
      * @throws Exception
      *             if has error
      */
@@ -726,7 +726,7 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1937876:No recent Search Show View.
-     * 
+     *
      * @throws Exception
      *             if has error
      */
@@ -782,7 +782,7 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1937878:Clear into the recent search keyword.
-     * 
+     *
      * @throws Exception
      *             if has error
      */
@@ -877,7 +877,7 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1937888:Verify search icon click.
-     * 
+     *
      * @throws Exception
      *             if has error
      */
@@ -898,7 +898,7 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1937889:Back to L1 layer category list.
-     * 
+     *
      * @throws Exception
      *             if has error
      */
@@ -1134,6 +1134,9 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
      */
     public final void testIphoneSearchResult() throws Exception {
 
+        // clear history information then back to home screen
+        Action.clearHistoryInfomation(solo);
+
         // navigate to category screen
         Action.navigateToCategoryScreen(solo);
 
@@ -1160,6 +1163,9 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
      */
     public final void testClickReturnIconInL5Layer() throws Exception {
 
+        // clear history information then back to home screen
+        Action.clearHistoryInfomation(solo);
+
         Action.enterToJacket(solo);
         Action.clickText(solo, ValidationText.T_SHIRT);
         Action.clickSearchButtonOnScreen(solo);
@@ -1177,6 +1183,9 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
      * @throws Exception if has error
      */
     public final void testClickReturnIconInL6Layer() throws Exception {
+
+        // clear history information then back to home screen
+        Action.clearHistoryInfomation(solo);
 
         Action.enterToJacket(solo);
         Action.clickText(solo, ValidationText.T_SHIRT);
@@ -1198,6 +1207,9 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
      */
     public final void testClickSearchIcon() throws Exception {
 
+        // clear history information then back to home screen
+        Action.clearHistoryInfomation(solo);
+
         solo.clickOnView(solo.getView("tab_text", 2));
         Action.clickSearchButtonOnScreen(solo);
 
@@ -1215,6 +1227,9 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
      */
     public final void testClickReturnIconInL2() throws Exception {
 
+     // clear history information then back to home screen
+        Action.clearHistoryInfomation(solo);
+
         Action.clickText(solo, ValidationText.ALL_CATEGORIES);
         Action.clickText(solo, ValidationText.APPAREL);
         Action.clickText(solo, ValidationText.COMMODITY);
@@ -1229,6 +1244,9 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
      * @throws Exception  if has error
      */
     public final void testClickReturnIconInL3() throws Exception {
+
+     // clear history information then back to home screen
+        Action.clearHistoryInfomation(solo);
 
         solo.clickOnView(solo.getView("tab_text", 2));
         Action.clickText(solo, ValidationText.APPAREL);
@@ -1250,6 +1268,9 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
      */
     public final void testClickReturnIconInL4() throws Exception {
 
+     // clear history information then back to home screen
+        Action.clearHistoryInfomation(solo);
+
         Action.enterToJacket(solo);
         Action.clickText(solo, ValidationText.COMMODITY);
         solo.goBack();
@@ -1266,6 +1287,9 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
      * @throws Exception if has error
      */
     public final void testClickReturnIconInL5() throws Exception {
+
+     // clear history information then back to home screen
+        Action.clearHistoryInfomation(solo);
 
         Action.enterToJacket(solo);
         Action.clickText(solo, ValidationText.T_SHIRT);
@@ -1285,6 +1309,9 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
      */
     public final void testClickReturnIconInL6() throws Exception {
 
+     // clear history information then back to home screen
+        Action.clearHistoryInfomation(solo);
+
         Action.enterToJacket(solo);
         Action.clickText(solo, ValidationText.T_SHIRT);
         Action.clickText(solo, ValidationText.CATEGORIES);
@@ -1303,6 +1330,9 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
      * @throws Exception if has error
      */
     public final void testInputkeywordsAndSearch() throws Exception {
+
+     // clear history information then back to home screen
+        Action.clearHistoryInfomation(solo);
 
         Action.clickText(solo, ValidationText.ALL_CATEGORIES);
         Action.clickText(solo, ValidationText.APPAREL);
@@ -1330,6 +1360,9 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
      */
     public final void testSearchInL1Category() throws Exception {
 
+     // clear history information then back to home screen
+        Action.clearHistoryInfomation(solo);
+
         Action.clickText(solo, ValidationText.ALL_CATEGORIES);
         Action.clickSearchButtonOnScreen(solo);
         // Input test data.
@@ -1353,6 +1386,9 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
      * @throws Exception if has error
      */
     public final void testSearchInL2Category() throws Exception {
+
+     // clear history information then back to home screen
+        Action.clearHistoryInfomation(solo);
 
         Action.clickText(solo, ValidationText.ALL_CATEGORIES);
         Action.clickText(solo, ValidationText.APPAREL);
@@ -1380,6 +1416,9 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
      * @throws Exception if has error
      */
     public final void testSearchInL3Category() throws Exception {
+
+     // clear history information then back to home screen
+        Action.clearHistoryInfomation(solo);
 
         Action.clickText(solo, ValidationText.ALL_CATEGORIES);
         Action.clickText(solo, ValidationText.APPAREL);
@@ -1413,6 +1452,9 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
      * @throws Exception if has error
      */
     public final void testSearchInL5Category() throws Exception {
+
+     // clear history information then back to home screen
+        Action.clearHistoryInfomation(solo);
 
         Action.enterToJacket(solo);
         Action.clickText(solo, ValidationText.T_SHIRT);
@@ -1449,6 +1491,9 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
      */
     public final void testSearchInL6Category() throws Exception {
 
+     // clear history information then back to home screen
+        Action.clearHistoryInfomation(solo);
+
         Action.enterToJacket(solo);
         Action.clickText(solo, ValidationText.T_SHIRT);
         Action.clickText(solo, ValidationText.CATEGORIES);
@@ -1484,6 +1529,9 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
      */
     public final void testSearchAllStore() throws Exception {
 
+     // clear history information then back to home screen
+        Action.clearHistoryInfomation(solo);
+
         Action.clickSearchButtonOnScreen(solo);
 
         // Input test data.
@@ -1514,6 +1562,9 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
      */
     public final void testEnterSpecialCharactersToSearch() throws Exception {
 
+     // clear history information then back to home screen
+        Action.clearHistoryInfomation(solo);
+
         Account.judgementAccountLogin(solo);
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
         Action.clickSearchButtonOnScreen(solo);
@@ -1530,7 +1581,10 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
      * @throws Exception  if has error
      */
     public final void testEnterStorePageByTapLog() throws Exception {
-
+        
+     // clear history information then back to home screen
+        Action.clearHistoryInfomation(solo);
+        
         // click on search button on home screen
         Action.clickSearchButtonOnScreen(solo);
 
@@ -1576,7 +1630,10 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
      * @throws Exception  if has error
      */
     public final void testSearchDirectlyWithoutData() throws Exception {
-
+        
+     // clear history information then back to home screen
+        Action.clearHistoryInfomation(solo);
+        
         Account.judgementAccountLogin(solo);
         // click on search button on home screen
         Action.clickSearchButtonOnScreen(solo);
@@ -1596,7 +1653,10 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
      * @throws Exception if has error
      */
     public final void testVerifyVoiceIcon() throws Exception {
-
+        
+     // clear history information then back to home screen
+        Action.clearHistoryInfomation(solo);
+        
         // click on search button on home screen
         Action.clickSearchButtonOnScreen(solo);
 
@@ -1613,6 +1673,9 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
      */
     public final void testVerifyAllCategoryButtonWorkWell() throws Exception {
 
+     // clear history information then back to home screen
+        Action.clearHistoryInfomation(solo);
+        
         Action.enterCategoryClothesPage(solo);
 
         // Go to advanced sort page.
@@ -1662,7 +1725,10 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
      * @throws Exception if has error
      */
     public final void testShoppingTips() throws Exception {
-
+        
+     // clear history information then back to home screen
+        Action.clearHistoryInfomation(solo);
+        
         solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_TWO));
 
         // click on search button on home screen
@@ -1705,7 +1771,10 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
      */
     public final void testVerifySearchCategoryButtonWorkInCategory()
             throws Exception {
-
+        
+     // clear history information then back to home screen
+        Action.clearHistoryInfomation(solo);
+        
         Account.judgementAccountLogin(solo);
         Action.enterToItemPage(solo);
         solo.goBack();

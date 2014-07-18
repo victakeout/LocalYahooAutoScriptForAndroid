@@ -113,9 +113,11 @@ public class StorePage extends ActivityInstrumentationTestCase2<Activity> {
         solo.sleep(ValidationText.WAIT_TIME_LONG);
         TestHelper.swipeUp(solo, 1);
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
-        try{
+        try
+        {
             solo.clickOnText(ValidationText.SHOPPING_TIPS);
-        } catch (AssertionError e ){
+        } catch (AssertionError e)
+        {
             TestHelper.swipeUp(solo, 1);
             solo.clickOnText(ValidationText.SHOPPING_TIPS);
         }
@@ -233,6 +235,7 @@ public class StorePage extends ActivityInstrumentationTestCase2<Activity> {
     public final void testViewStorePromotion() throws Exception {
 
         Account.judgementAccountLogin(solo);
+        Action.removeShoppingCart(solo);
         solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_ONE));
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
         solo.clickOnText(ValidationText.MAYBE_LIKE);
@@ -297,6 +300,7 @@ public class StorePage extends ActivityInstrumentationTestCase2<Activity> {
     public final void testStorePromotionItemDisplay() throws Exception {
 
         Account.judgementAccountLogin(solo);
+        Action.removeShoppingCart(solo);
         Action.enterToItemPage(solo);
         Action.addToShoppingCart(solo);
         solo.goBack();

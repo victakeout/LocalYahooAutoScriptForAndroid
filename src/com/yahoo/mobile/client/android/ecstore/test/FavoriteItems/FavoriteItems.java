@@ -112,6 +112,42 @@ public class FavoriteItems extends ActivityInstrumentationTestCase2<Activity> {
         //Checks if the star button is shown.
         View star = (View) solo.getView("star_button", 0);
         assertTrue("Star icon not checked.", star.isShown());
+        solo.clickOnView(star);
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+
+        //Check favorite store via familiar steps.
+        solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_ONE));
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.clickOnText(ValidationText.MAYBE_LIKE);
+
+        solo.sleep(ValidationText.WAIT_TIME_LONGER);
+        View recommend = (View) solo.getView(
+                "listitem_recommended_image1", 0);
+        solo.clickOnView(recommend);
+
+        // Checks if the banner is show.
+        View banner = (View) solo.getView("img_store_banner", 0);
+        assertTrue("Not enter recommended page.", banner.isShown());
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+        solo.clickOnView(solo.getView("listitem_productlist_content",1));
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+
+        // Favorite icon
+        View favor = (View) solo.getView("productitem_star_button");
+        solo.clickOnView(favor);
+        boolean alreadyAdd;
+
+        // Get toast text.
+        if (solo.waitForText(ValidationText.HAS_ADDED_COLLECTION)){
+            alreadyAdd = solo.waitForText(ValidationText.HAS_ADDED_COLLECTION);
+            junit.framework.Assert.assertTrue("Add failed.", alreadyAdd);
+        } else {
+            solo.sleep(ValidationText.WAIT_TIME_SHORT);
+            solo.clickOnView(favor);
+            alreadyAdd = solo.waitForText(ValidationText.HAS_ADDED_COLLECTION);
+            junit.framework.Assert.assertTrue("Add failed.", alreadyAdd);
+
+        }
 
     }
 
