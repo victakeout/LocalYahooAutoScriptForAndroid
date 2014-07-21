@@ -90,7 +90,7 @@ public class SRP extends ActivityInstrumentationTestCase2 <Activity> {
     protected final void setUp() throws Exception {
         super.setUp();
         solo = new Solo(getInstrumentation(), getActivity());
-        Assert.testFirstLaunch(solo);
+     //   Assert.testFirstLaunch(solo);
     }
 
     @Override
@@ -131,7 +131,7 @@ public class SRP extends ActivityInstrumentationTestCase2 <Activity> {
     }
 
     /**
-     * 1937921:Go back to goods tab.
+     * 1937921:Go back to product tab.
      * @throws Exception if has error
      */
     public final void testBackToGoodsTab() throws Exception {
@@ -141,7 +141,7 @@ public class SRP extends ActivityInstrumentationTestCase2 <Activity> {
         // click on store tab
         Action.clickView(solo, "category_tab_primary_title", 1);
 
-        // click on store tab
+        // click on product tab
         Action.clickView(solo, "category_tab_primary_title", 0);
 
         assertTrue("Store tab is not selected.",
@@ -356,7 +356,7 @@ public class SRP extends ActivityInstrumentationTestCase2 <Activity> {
 
         solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 
-        // get the number of gridview
+        // get the number of grid view
         ArrayList<GridView> gvList = solo.getCurrentViews(GridView.class);
         assertEquals("Go back to search result screen failed", gvList.size(),
                 1);
@@ -374,14 +374,14 @@ public class SRP extends ActivityInstrumentationTestCase2 <Activity> {
         // navigate to Filter screen
         Action.enterAdvancedSortPage(solo);
 
-        String view_id = "tb_cc";
-        Action.clickView(solo, view_id);
+        String viewId = "tb_cc";
+        Action.clickView(solo, viewId);
         assertTrue("Can_Swipe button is not selected.",
-                ((ToggleButton) solo.getView(view_id)).isChecked());
+                ((ToggleButton) solo.getView(viewId)).isChecked());
 
-        Action.clickView(solo, view_id);
+        Action.clickView(solo, viewId);
         assertFalse("Can_Swipe button is selected.",
-                ((ToggleButton) solo.getView(view_id)).isChecked());
+                ((ToggleButton) solo.getView(viewId)).isChecked());
     }
 
     /**
@@ -418,14 +418,14 @@ public class SRP extends ActivityInstrumentationTestCase2 <Activity> {
 
         // Action.closeSoftKeyBoard(solo);
 
-        String view_id = "tb_hasvideo";
-        Action.clickView(solo, view_id);
+        String viewId = "tb_hasvideo";
+        Action.clickView(solo, viewId);
         assertTrue("Has video button is not selected.",
-                ((ToggleButton) solo.getView(view_id)).isChecked());
+                ((ToggleButton) solo.getView(viewId)).isChecked());
 
-        Action.clickView(solo, view_id);
+        Action.clickView(solo, viewId);
         assertFalse("Has video button is selected.",
-                ((ToggleButton) solo.getView(view_id)).isChecked());
+                ((ToggleButton) solo.getView(viewId)).isChecked());
 
     }
 
@@ -440,14 +440,14 @@ public class SRP extends ActivityInstrumentationTestCase2 <Activity> {
         // navigate to Filter screen
         Action.enterAdvancedSortPage(solo);
 
-        String view_id = "tb_cczeroint";
-        Action.clickView(solo, view_id);
+        String viewId = "tb_cczeroint";
+        Action.clickView(solo, viewId);
         assertTrue("CC zero button is not selected.",
-                ((ToggleButton) solo.getView(view_id)).isChecked());
+                ((ToggleButton) solo.getView(viewId)).isChecked());
 
-        Action.clickView(solo, view_id);
+        Action.clickView(solo, viewId);
         assertFalse("CC zero button is selected.",
-                ((ToggleButton) solo.getView(view_id)).isChecked());
+                ((ToggleButton) solo.getView(viewId)).isChecked());
 
     }
 
@@ -462,14 +462,14 @@ public class SRP extends ActivityInstrumentationTestCase2 <Activity> {
         // navigate to Filter screen
         Action.enterAdvancedSortPage(solo);
 
-        String view_id = "tb_ccinstall";
-        Action.clickView(solo, view_id);
+        String viewId = "tb_ccinstall";
+        Action.clickView(solo, viewId);
         assertTrue("CC install button is not selected.",
-                ((ToggleButton) solo.getView(view_id)).isChecked());
+                ((ToggleButton) solo.getView(viewId)).isChecked());
 
-        Action.clickView(solo, view_id);
+        Action.clickView(solo, viewId);
         assertFalse("CC install button is selected.",
-                ((ToggleButton) solo.getView(view_id)).isChecked());
+                ((ToggleButton) solo.getView(viewId)).isChecked());
 
     }
 
@@ -486,14 +486,14 @@ public class SRP extends ActivityInstrumentationTestCase2 <Activity> {
 
         // Action.closeSoftKeyBoard(solo);
 
-        String view_id = "tb_cvs_pay";
-        Action.clickView(solo, view_id);
+        String viewId = "tb_cvs_pay";
+        Action.clickView(solo, viewId);
         assertTrue("Cvs pay button is not selected.",
-                ((ToggleButton) solo.getView(view_id)).isChecked());
+                ((ToggleButton) solo.getView(viewId)).isChecked());
 
-        Action.clickView(solo, view_id);
+        Action.clickView(solo, viewId);
         assertFalse("Cvs pay button is selected.",
-                ((ToggleButton) solo.getView(view_id)).isChecked());
+                ((ToggleButton) solo.getView(viewId)).isChecked());
 
     }
 
@@ -510,14 +510,14 @@ public class SRP extends ActivityInstrumentationTestCase2 <Activity> {
 
         // Action.closeSoftKeyBoard(solo);
 
-        String view_id = "tb_cvs_pick";
-        Action.clickView(solo, view_id);
+        String viewId = "tb_cvs_pick";
+        Action.clickView(solo, viewId);
         assertTrue("Cvs pay button is not selected.",
-                ((ToggleButton) solo.getView(view_id)).isChecked());
+                ((ToggleButton) solo.getView(viewId)).isChecked());
 
-        Action.clickView(solo, view_id);
+        Action.clickView(solo, viewId);
         assertFalse("Cvs pay button is selected.",
-                ((ToggleButton) solo.getView(view_id)).isChecked());
+                ((ToggleButton) solo.getView(viewId)).isChecked());
 
     }
 
@@ -535,14 +535,14 @@ public class SRP extends ActivityInstrumentationTestCase2 <Activity> {
 
         // Action.closeSoftKeyBoard(solo);
 
-        String view_id = "tb_hasstock";
-        Action.clickView(solo, view_id);
+        String viewId = "tb_hasstock";
+        Action.clickView(solo, viewId);
         assertTrue("Has stock button is not selected.",
-                ((ToggleButton) solo.getView(view_id)).isChecked());
+                ((ToggleButton) solo.getView(viewId)).isChecked());
 
-        Action.clickView(solo, view_id);
+        Action.clickView(solo, viewId);
         assertFalse("Has stock button is selected.",
-                ((ToggleButton) solo.getView(view_id)).isChecked());
+                ((ToggleButton) solo.getView(viewId)).isChecked());
 
     }
 
@@ -561,14 +561,14 @@ public class SRP extends ActivityInstrumentationTestCase2 <Activity> {
 
         solo.sleep(ValidationText.WAIT_TIME_LONGER);
 
-        String view_id = "tb_hasimage";
-        Action.clickView(solo, view_id);
+        String viewId = "tb_hasimage";
+        Action.clickView(solo, viewId);
         assertTrue("Has stock button is not selected.",
-                ((ToggleButton) solo.getView(view_id)).isChecked());
+                ((ToggleButton) solo.getView(viewId)).isChecked());
 
-        Action.clickView(solo, view_id);
+        Action.clickView(solo, viewId);
         assertFalse("Has stock button is selected.",
-                ((ToggleButton) solo.getView(view_id)).isChecked());
+                ((ToggleButton) solo.getView(viewId)).isChecked());
 
     }
 
@@ -583,22 +583,22 @@ public class SRP extends ActivityInstrumentationTestCase2 <Activity> {
         // navigate to Filter screen
         Action.enterAdvancedSortPage(solo);
 
-        String view_id = "tb_issuperior";
-        Action.clickView(solo, view_id);
+        String viewId = "tb_issuperior";
+        Action.clickView(solo, viewId);
 
         // Action.closeSoftKeyBoard(solo);
 
         assertTrue("Issuperior button is not selected.",
-                ((ToggleButton) solo.getView(view_id)).isChecked());
+                ((ToggleButton) solo.getView(viewId)).isChecked());
 
-        Action.clickView(solo, view_id);
+        Action.clickView(solo, viewId);
         assertFalse("Issuperior button is selected.",
-                ((ToggleButton) solo.getView(view_id)).isChecked());
+                ((ToggleButton) solo.getView(viewId)).isChecked());
 
     }
 
     /**
-     * 11937976:Navigate to item page.
+     * 1937976:Navigate to item page.
      * @throws Exception if has error
      */
     public final void testNavigateToItemPageByClickPicture() throws Exception {
@@ -656,7 +656,7 @@ public class SRP extends ActivityInstrumentationTestCase2 <Activity> {
     }
 
     /**
-     * 1937981:Store name on the right of store evaluation.
+     * 1937981:Store evaluation on the right side of store name.
      * @throws Exception if has error
      */
     public final void testGoodsEvaluationDisplay() throws Exception {
@@ -700,7 +700,7 @@ public class SRP extends ActivityInstrumentationTestCase2 <Activity> {
     }
 
     /**
-     * 1937983:Check to click the start icon without login.
+     * 1937983:Check to click the start icon without login in list view.
      * @throws Exception if has error
      */
     public final void testStarIconWithoutLogin() throws Exception {
@@ -724,7 +724,7 @@ public class SRP extends ActivityInstrumentationTestCase2 <Activity> {
     }
 
     /**
-     * 1937984:Commodity joined successfully collection list.
+     * 1937984:Commodity joined successfully collection list in list view.
      * @throws Exception if has error
      */
     public final void testAddGoodsIntoList() throws Exception {
@@ -755,7 +755,7 @@ public class SRP extends ActivityInstrumentationTestCase2 <Activity> {
     }
 
     /**
-     * 1937985:Check browser mode icon display.
+     * 1937985:Check browser mode icon display in list view.
      * @throws Exception if has error
      */
     public final void testBroserModelDisplay() throws Exception {
@@ -772,7 +772,7 @@ public class SRP extends ActivityInstrumentationTestCase2 <Activity> {
     }
 
     /**
-     * 1937986:Check small picture icon.
+     * 1937986:Check small picture icon in photo grid view.
      * @throws Exception if has error
      */
     public final void testSmallPictureDisplay() throws Exception {
@@ -829,7 +829,7 @@ public class SRP extends ActivityInstrumentationTestCase2 <Activity> {
     }
 
     /**
-     * 1937996:Check to click the start icon without login.
+     * 1937996:Check to click the start icon without login in photo grid view.
      * @throws Exception  if has error
      */
     public final void testStarIconWithoutLoginInSmallPictureStyle()
@@ -854,7 +854,7 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
     }
 
     /**
-     * 1937997:Commodity joined successfully collection list.
+     * 1937997:Commodity joined successfully collection list in photo grid view.
      * @throws Exception if has error
      */
     public final void testAddGoodsIntoListInSmallPictureStyle()
@@ -886,7 +886,7 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
     }
 
     /**
-     * 1937998:Check large picture icon.
+     * 1937998:Check large picture icon in large photo view.
      * @throws Exception  if has error
      */
     public final void testLargePictureDisplay() throws Exception {
@@ -950,7 +950,7 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
     }
 
     /**
-     * 1938006:Store name on the right of store evaluation.
+     * 1938006:Store evaluation on the right side of store name.
      * @throws Exception  if has error
      */
     public final void testGoodsEvaluationDisplayInLargeStyle()
@@ -1130,7 +1130,7 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
     }
 
     /**
-     * 1938027:Goods number on the right of evaluate.
+     * 1938027:Verify store ratings display.
      * @throws Exception  if has error
      */
     public final void testEvaluateDisplay() throws Exception {
@@ -1152,7 +1152,7 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
     }
 
     /**
-     * 1938029: Goods evaluate on the right of heart icon.
+     * 1938029: Verify Favorite List icon display.
      * @throws Exception  if has error
      */
     public final void testHeartIconDisplay() throws Exception {
@@ -1175,7 +1175,7 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
     }
 
     /**
-     * 1938030:Navigate to login screen.
+     * 1938030:Verify not logged in, click on the Favorites list icon.
      * @throws Exception if has error
      */
     public final void testNavigateToLoginScreen() throws Exception {
@@ -1198,7 +1198,7 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
     }
 
     /**
-     * 1938031:Shop to join the collection list.
+     * 1938031:Verify logged in, click on the Favorites list icon.
      * @throws Exception  if has error
      */
     public final void testAddStoreIntoCollectList() throws Exception {
@@ -1267,7 +1267,7 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
         Action.clickText(solo, ValidationText.ALL_CATEGORIES);
         // click search button
         Action.clickSearchButtonOnScreen(solo);
-
+        
         // input keyword and search
         Action.searchAfterPutData(solo, 0, ValidationText.JACKET);
         solo.goBack();
@@ -1342,11 +1342,21 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
     public final void testCheckTheDefaultBrowseMode() throws Exception {
 
         Action.enterToJacketAfterSearch(solo);
+
         solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
         GridView lv = (GridView) solo.getView("gridview", 0);
         int defaultItems = lv.getCount();
-        assertEquals("The default browse mode is listview."
+        assertEquals("view count not 20."
                 , Action.DEFAULT_LISTVIEW_COUNT, defaultItems);
+        solo.clickOnView(solo.getView("menu_filter"));
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+        solo.clickOnView(solo.getView("btn_browse_mode"));
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+
+        View listview = (View) solo.getView("btn_list_small");
+        assertTrue("The default browse mode is listview.",
+                listview.isInTouchMode());
+
     }
 
     /**
@@ -1481,6 +1491,7 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
         solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
         View iv = solo.getView("menu_search");
         solo.clickOnView(iv);
+        //Get the search component view
         View keywords = (View) solo.getView("search_suggestion_text");
         assertTrue("Search component not displayed.", keywords.isShown());
 
@@ -1615,6 +1626,10 @@ ValidationText.PLEASE_LOGIN_ACCOUNT, 1, ValidationText.WAIT_TIME_LONGER)){
         // input keyword and search
         Action.searchAfterPutData(solo, 0, ValidationText.APPLE);
         assertTrue("Not found iphone relevant info.",
+                solo.searchText(ValidationText.APPLE));
+        View keywords = (View) solo.getView("search_autocompletetext");
+        solo.clickOnView(keywords);
+        assertTrue("Header text is not iphone",
                 solo.searchText(ValidationText.APPLE));
     }
 

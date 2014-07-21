@@ -25,7 +25,6 @@
 
 package com.yahoo.mobile.client.android.ecstore.test.FavoriteStore;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.view.View;
@@ -44,7 +43,7 @@ import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
  * @author Administrator
  *
  */
-@SuppressLint("NewApi")
+
 public class FavoriteStore extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
@@ -153,7 +152,7 @@ public class FavoriteStore extends ActivityInstrumentationTestCase2<Activity> {
     }
 
     /**
-     * 1954571:Verify 18禁items displayed in favorite stores.
+     * 1954571:Verify 18 restricted items displayed in favorite stores.
      * @throws Exception if has error
      */
     public final void testRestricted() throws Exception {
@@ -363,7 +362,7 @@ public class FavoriteStore extends ActivityInstrumentationTestCase2<Activity> {
 
         solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_ONE));
         solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
-        TestHelper.swipeDown(solo, 20);
+        TestHelper.swipeDown(solo, Action.VIEW_ID_TWENTY);
         assertTrue("Refresh failed", solo.waitForText(ValidationText.WAIT));
 
     }
@@ -381,14 +380,14 @@ public class FavoriteStore extends ActivityInstrumentationTestCase2<Activity> {
         solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_ONE));
         solo.waitForText(ValidationText.YOUR_FAVORITE, 1,
                 ValidationText.WAIT_TIME_MIDDLE);
-        TestHelper.swipeDown(solo, 20);
+        TestHelper.swipeDown(solo, Action.VIEW_ID_TWENTY);
 
         //Checks if the pull refresh text is shown.
         assertTrue("Refresh failed", solo.waitForText(ValidationText.WAIT));
 
         solo.clickOnText(ValidationText.MAYBE_LIKE);
         solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
-        TestHelper.swipeDown(solo, 20);
+        TestHelper.swipeDown(solo, Action.VIEW_ID_TWENTY);
 
         assertTrue("Refresh failed", solo.waitForText(ValidationText.WAIT));
 

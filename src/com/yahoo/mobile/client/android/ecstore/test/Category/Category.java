@@ -86,16 +86,12 @@ public class Category extends ActivityInstrumentationTestCase2<Activity> {
     protected final void setUp() throws Exception {
         solo = new Solo(getInstrumentation(), getActivity());
         Assert.testFirstLaunch(solo);
-        System.gc();
-        solo.sleep(ValidationText.WAIT_TIME_SHORT);
     }
 
     @Override
     public final void tearDown() throws Exception {
 
-
         solo.finishOpenedActivities();
-        System.gc();
         super.tearDown();
 
     }
@@ -280,6 +276,7 @@ public class Category extends ActivityInstrumentationTestCase2<Activity> {
         Action.enterCategoryClothesPage(solo);
         Action.enterAdvancedPage(solo);
 
+        //Get list view.
         ListView lv = (ListView) solo.getView("list_sort", 0);
         lv.getItemAtPosition(0);
         int listviewCount = lv.getCount();
@@ -372,7 +369,7 @@ public class Category extends ActivityInstrumentationTestCase2<Activity> {
         // Go to advanced sort page.
         Action.enterAdvancedSortPage(solo);
 
-        // solo.clickOnToggleButton("可刷卡");
+        // solo.clickOnToggleButton("Can use credit card");
         ToggleButton tb = (ToggleButton) solo.getView("tb_cc");
 
         solo.clickOnView(tb);
@@ -1417,10 +1414,12 @@ public class Category extends ActivityInstrumentationTestCase2<Activity> {
     }
 
     /**
-     * 1938159:Verify Sports/Outdoor/Leisure tab correctly displayed on the page.
+     * 1938159:Verify Sports/Outdoor/Leisure tab correctly
+     *  displayed on the page.
      * @throws Exception if has error
      */
-    public final void testSportsOutdoorAndLeisureTabDisplayed() throws Exception {
+    public final void testSportsOutdoorAndLeisureTabDisplayed()
+            throws Exception {
 
         solo.clickOnView(solo.getView("tab_image", 2));
         assertTrue("Sports/Outdoor/Leisure is not displayed.",

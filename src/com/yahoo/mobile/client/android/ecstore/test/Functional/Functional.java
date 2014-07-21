@@ -25,7 +25,6 @@
 
 package com.yahoo.mobile.client.android.ecstore.test.Functional;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.view.View;
@@ -44,7 +43,7 @@ import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
  * @author Administrator
  *
  */
-@SuppressLint("NewApi")
+
 public class Functional extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
@@ -83,7 +82,6 @@ public class Functional extends ActivityInstrumentationTestCase2<Activity> {
 
     @Override
     protected final void setUp() throws Exception {
-        super.setUp();
         solo = new Solo(getInstrumentation(), getActivity());
         Assert.testFirstLaunch(solo);
 

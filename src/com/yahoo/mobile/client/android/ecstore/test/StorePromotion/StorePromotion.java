@@ -114,6 +114,7 @@ public class StorePromotion extends ActivityInstrumentationTestCase2<Activity> {
         TestHelper.swipeUp(solo, 1);
         solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
         solo.clickOnText(ValidationText.SALES_PROMOTION);
+        //Get the promotion header view.
         TextView header = (TextView)
                 solo.getView("product_item_promotion_header");
         assertTrue("This product contains more than one promotion link.",

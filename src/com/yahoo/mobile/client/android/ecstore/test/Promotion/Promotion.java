@@ -43,7 +43,8 @@ public class Promotion extends ActivityInstrumentationTestCase2<Activity> {
     /**
      * Declare application main activity.
      */
-    private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
+    private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME
+    = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
 
     /**
      * Declare a variable of type Class for start tested program.
@@ -133,8 +134,10 @@ public class Promotion extends ActivityInstrumentationTestCase2<Activity> {
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
         assertTrue("Account has login.",
                 solo.searchText(ValidationText.SALES_PROMOTION));
-
+        //Log out account.
         Account.judgementAccountWithoutLogin(solo);
+
+        //Log in account.
         Account.judgementAccountLogin(solo);
         solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_ONE));
         solo.clickOnView(solo.getView("productitem_promotion_name",
@@ -143,11 +146,13 @@ public class Promotion extends ActivityInstrumentationTestCase2<Activity> {
         solo.sleep(ValidationText.WAIT_TIME_LONGEST);
         TestHelper.swipeUp2(solo, 1);
         solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+
+        //Click shopping cart icon from class name.
         Action.clickElementsInWebviewByClassname(solo, "shoppingCart");
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
-        solo.clickOnView(solo.getView("tab_image", 3));
+        solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_THREE));
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
-        solo.clickOnView(solo.getView("tab_image", 3));
+        solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_THREE));
         TextView shoppingCart = (TextView) solo.getView(
                 "ecshopping_cart_store_count", 0);
         assertTrue("Not add to shopping cart.",

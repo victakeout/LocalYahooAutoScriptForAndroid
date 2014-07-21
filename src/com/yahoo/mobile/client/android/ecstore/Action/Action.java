@@ -37,7 +37,7 @@ public final class Action {
      * This is elements view ID.
      */
     public static final int VIEW_ID_ZERO = 0, VIEW_ID_ONE = 1, VIEW_ID_TWO = 2,
-            VIEW_ID_THREE = 3, VIEW_ID_FOUR = 4, VIEW_ID_FIVE = 5,
+            VIEW_ID_THREE = 3, VIEW_ID_FOUR = 4, VIEW_ID_FIVE = 5,VIEW_ID_EIGHT = 8,VIEW_ID_TEN = 10,VIEW_ID_TWENTY = 20,
             DEFAULT_LISTVIEW_COUNT = 21, DEFAULT_LISTVIEW_COUNT_PLUS = 22;
 
     /**
@@ -171,7 +171,7 @@ public final class Action {
 
         try {
              iv = solo.getView("menu_search", 0);
-        } catch (AssertionError e){
+        } catch (AssertionError e) {
             solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
              iv = solo.getView("menu_search", 0);
         }
@@ -624,6 +624,7 @@ public final class Action {
             TextView title = (TextView) solo.getView("tx_header", 0);
             Log.i("number", title.getText().toString().trim().substring(5, 6));
             if (title.isShown()) {
+                //Extracting the number of favorite items from text header.
                 String number = title.getText().toString().trim()
                         .substring(5, 6);
                 int numbers = Integer.parseInt(number);

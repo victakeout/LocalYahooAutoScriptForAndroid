@@ -272,7 +272,7 @@ public class ValidationText {
     
     public static final String STORE_OFFERS = "實體商店優惠";
     
-    public static final String[] STORE_TITLE = { "分類", "商品" };
+    public static final String[] STORE_TITLE = { "分類", "商d品" };
 
     public static final String LOW_TO_HIGH = "價錢低到高" ;
     

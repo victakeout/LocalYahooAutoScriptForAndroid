@@ -48,7 +48,7 @@ import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
 
 /**
  * @author Administrator
- * 
+ *
  */
 @SuppressLint("NewApi")
 public class Search extends ActivityInstrumentationTestCase2<Activity> {
@@ -56,7 +56,7 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
     /**
      * Declare application main activity.
      */
-    private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME 
+    private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME
     = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
 
     /**
@@ -137,7 +137,7 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
         // click on search button on home screen
         Action.clickSearchButtonOnScreen(solo);
-        assertTrue("Can not get tips in search bar.",
+        assertTrue("Cannot get tips in search bar.",
                 solo.searchText(ValidationText.SEARCH_ALL_CATEGORIES));
 
     }
@@ -215,7 +215,7 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
     }
 
     /**
-     * 1937858:"+" icon is shown.
+     * 1937858:Check auto complete layout.
      *
      * @throws Exception
      *             if has error
@@ -332,8 +332,8 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
     }
 
     /**
-     * 1937862:Hide search clear icon.
-     * 
+     * 1937862:Check when no keyword, see clear input icon.
+     *
      * @throws Exception
      *             if has error
      */
@@ -351,8 +351,8 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
     }
 
     /**
-     * 1937863:Show search clear icon.
-     * 
+     * 1937863:Check when has keywords, see clear input icon display.
+     *
      * @throws Exception
      *             if has error
      */
@@ -953,7 +953,7 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
     }
 
     /**
-     * 1937891:Back to fashion list.
+     * 1937891:Check click return icon in L3 layer classification.
      *
      * @throws Exception
      *             if has error
@@ -990,7 +990,7 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
     }
 
     /**
-     * 1937892:Back to appeal list.
+     * 1937892:Check click return icon in L4 layer classification.
      *
      * @throws Exception if has error
      */
@@ -1675,7 +1675,7 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
 
      // clear history information then back to home screen
         Action.clearHistoryInfomation(solo);
-        
+
         Action.enterCategoryClothesPage(solo);
 
         // Go to advanced sort page.
@@ -1725,10 +1725,10 @@ public class Search extends ActivityInstrumentationTestCase2<Activity> {
      * @throws Exception if has error
      */
     public final void testShoppingTips() throws Exception {
-        
+
      // clear history information then back to home screen
         Action.clearHistoryInfomation(solo);
-        
+
         solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_TWO));
 
         // click on search button on home screen

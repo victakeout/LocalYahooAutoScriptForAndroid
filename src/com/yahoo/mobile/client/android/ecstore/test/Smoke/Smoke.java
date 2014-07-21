@@ -44,7 +44,8 @@ public class Smoke extends ActivityInstrumentationTestCase2<Activity> {
     /**
      * Declare application main activity.
      */
-    private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
+    private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME
+    = "com.yahoo.mobile.client.android.ecstore.ui.ECSplashActivity";
 
     /**
      * Declare a variable of type Class for start tested program.
@@ -91,7 +92,7 @@ public class Smoke extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1952835:[Personalization] Verify user can use personalization.
-     * 
+     *
      * @throws Exception
      *             if has error
      */
@@ -149,7 +150,7 @@ public class Smoke extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1959535:[Items listings]Verify Cancel button function in options layers..
-     * 
+     *
      * @throws Exception
      *             if has error
      */
@@ -181,7 +182,7 @@ public class Smoke extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1952836:[Web Views]verify user can use web views.
-     * 
+     *
      * @throws Exception
      *             if has error
      */
@@ -203,6 +204,8 @@ public class Smoke extends ActivityInstrumentationTestCase2<Activity> {
             assertTrue("This page incorrect.", webpage.isShown());
         }
         TestHelper.swipeUp(solo, 2);
+
+        //Click "Check out" button on web view.
         Action.clickElementsInWebviewByText(solo, ValidationText.WANT_CHECKOUT);
         Action.searchTextOnWebview(solo, ValidationText.BUY_INFO);
         solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_THREE));
@@ -234,7 +237,7 @@ public class Smoke extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1959541:[Item page]Verify user can click "Buy now"button twice.
-     * 
+     *
      * @throws Exception
      *             if has error
      */
@@ -272,7 +275,7 @@ public class Smoke extends ActivityInstrumentationTestCase2<Activity> {
     /**
      * 1959553:[Shopping cart]Verify Item link function in shopping cart details
      * page.
-     * 
+     *
      * @throws Exception
      *             if has error
      */
@@ -287,6 +290,7 @@ public class Smoke extends ActivityInstrumentationTestCase2<Activity> {
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
         solo.clickOnText(ValidationText.ADD_SHOPPING_CART);
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        //Get product selection view.
         View radioButton = (View) solo.getView(
                 "product_item_spec_item_selections", 1);
         if (radioButton.isShown()) {
@@ -311,6 +315,7 @@ public class Smoke extends ActivityInstrumentationTestCase2<Activity> {
         solo.goBack();
         solo.sleep(ValidationText.WAIT_TIME_LONGER);
 
+        //click "next buy" button on web view.
         Action.clickElementsInWebviewByClassname(solo,
                 "goNextBuy updateItemClick");
 
@@ -319,6 +324,7 @@ public class Smoke extends ActivityInstrumentationTestCase2<Activity> {
         Action.clickElementsInWebviewByText(solo, ValidationText.OK);
         solo.sleep(ValidationText.WAIT_TIME_LONG);
 
+        //click product title class name on web view.
         Action.clickElementsInWebviewByClassname(solo, "title");
         solo.sleep(ValidationText.WAIT_TIME_LONG);
 
@@ -329,7 +335,7 @@ public class Smoke extends ActivityInstrumentationTestCase2<Activity> {
     /**
      * 1959554:[Shopping cart]Verify user can access shopping cart details page
      * quickly.
-     * 
+     *
      * @throws Exception
      *             if has error
      */
@@ -341,6 +347,8 @@ public class Smoke extends ActivityInstrumentationTestCase2<Activity> {
         Action.addToShoppingCart(solo);
         solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_THREE));
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
+
+        //click store name on shopping cart.
         solo.clickOnView(solo.getView("ecshopping_cart_store_name", 0));
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
         solo.goBack();
@@ -360,7 +368,7 @@ public class Smoke extends ActivityInstrumentationTestCase2<Activity> {
     /**
      * 1959555:[Shopping cart]Verify user can access shopping cart details page
      * repeatedly.
-     * 
+     *
      * @throws Exception
      *             if has error
      */
@@ -396,7 +404,7 @@ public class Smoke extends ActivityInstrumentationTestCase2<Activity> {
     /**
      * 1977445:[Store Listings]Verify user can see some basic information about
      * the Store in its store listings page.
-     * 
+     *
      * @throws Exception
      *             if has error
      */
@@ -406,6 +414,7 @@ public class Smoke extends ActivityInstrumentationTestCase2<Activity> {
         solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_ONE));
 
         solo.clickOnText(ValidationText.MAYBE_LIKE);
+        //Click recommended page store.
         View recommend = (View) solo.getView("listitem_recommended_image1", 0);
         solo.clickOnView(recommend);
         solo.sleep(ValidationText.WAIT_TIME_LONG);
@@ -452,7 +461,7 @@ public class Smoke extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
      * 1952828:[Store Listings] Verify user can access the listings page.
-     * 
+     *
      * @throws Exception
      *             if has error
      */
@@ -474,7 +483,8 @@ public class Smoke extends ActivityInstrumentationTestCase2<Activity> {
         View image = (View) solo.getView("listitem_productlist_image");
 
         assertTrue("Some views not show.",
-                advanced.isShown() && searchResult.isShown() && image.isShown());
+                advanced.isShown() && searchResult.isShown()
+                && image.isShown());
 
         // Item name
         TextView itemName = (TextView) solo
@@ -552,7 +562,7 @@ public class Smoke extends ActivityInstrumentationTestCase2<Activity> {
         solo.goBack();
         Action.enterToItemPage(solo);
         solo.goBack();
-        for (int i = 0; i < 3 ; i++) {
+        for (int i = 0; i < 3 ; i++){
             Action.clickStarIconNote(solo);
             solo.sleep(ValidationText.WAIT_TIME_SHORT);
         }

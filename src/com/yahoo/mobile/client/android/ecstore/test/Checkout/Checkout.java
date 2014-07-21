@@ -23,7 +23,6 @@
 
 package com.yahoo.mobile.client.android.ecstore.test.Checkout;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
@@ -41,7 +40,6 @@ import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
  * @author Administrator
  *
  */
-@SuppressLint("NewApi")
 public class Checkout extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
@@ -168,21 +166,6 @@ public class Checkout extends ActivityInstrumentationTestCase2<Activity> {
             solo.clickOnText(ValidationText.BUY_NOW);
         }
 
-
-        @SuppressWarnings("unused")
-        View radioButtons;
-
-        // Select product property if it exists.
-        try {
-            radioButtons = (View) solo.getView(
-                    "product_item_spec_item_selections", 0);
-        } catch (AssertionError e) {
-            TestHelper.swipeUp2(solo, 2);
-            // solo.sleep(ValidationText.WAIT_TIME_SHORT);
-            View shopCarts = solo
-                    .getView("productitem_btn_add_to_shopping_cart");
-            solo.clickOnView(shopCarts);
-        }
         View buddle;
         View radioButton = (View) solo.getView(
                 "product_item_spec_item_selections", 0);
@@ -244,20 +227,6 @@ public class Checkout extends ActivityInstrumentationTestCase2<Activity> {
         TestHelper.swipeUp(solo, 1);
         solo.clickOnText(ValidationText.BUY_NOW);
 
-        @SuppressWarnings("unused")
-        View radioButtons;
-
-        // Select product property if it exists.
-        try {
-            radioButtons = (View) solo.getView(
-                    "product_item_spec_item_selections", 0);
-        } catch (AssertionError e) {
-            TestHelper.swipeUp2(solo, 2);
-            // solo.sleep(ValidationText.WAIT_TIME_SHORT);
-            View shopCarts = solo
-                    .getView("productitem_btn_add_to_shopping_cart");
-            solo.clickOnView(shopCarts);
-        }
         View buddle;
         View radioButton = (View) solo.getView(
                 "product_item_spec_item_selections", 0);

@@ -24,12 +24,13 @@
 
 package com.yahoo.mobile.client.android.ecstore.test.DiscoveryStream;
 
-import android.annotation.SuppressLint;
+
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.TextView;
 
 import com.robotium.solo.Solo;
+import com.yahoo.mobile.client.android.ecstore.Action.Action;
 import com.yahoo.mobile.client.android.ecstore.Assert.Assert;
 import com.yahoo.mobile.client.android.ecstore.test.TestHelper;
 import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
@@ -38,7 +39,7 @@ import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
  * @author Administrator
  *
  */
-@SuppressLint("NewApi")
+
 public class DiscoveryStream extends ActivityInstrumentationTestCase2<Activity>
 {
 
@@ -101,7 +102,7 @@ public class DiscoveryStream extends ActivityInstrumentationTestCase2<Activity>
                 ValidationText.WAIT_TIME_SHORT);
         solo.waitForText(ValidationText.NEWS, 1,
                 ValidationText.WAIT_TIME_SHORT);
-        TestHelper.swipeDown(solo, 10);
+        TestHelper.swipeDown(solo, Action.VIEW_ID_TEN);
 
         //Checks if the pull refresh text is shown.
         TextView pullRefresh = (TextView)

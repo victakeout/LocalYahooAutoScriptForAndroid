@@ -24,7 +24,7 @@
 
 package com.yahoo.mobile.client.android.ecstore.test.FavoriteItems;
 
-import android.annotation.SuppressLint;
+
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
@@ -41,7 +41,7 @@ import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
  * @author Administrator
  *
  */
-@SuppressLint("NewApi")
+
 public class FavoriteItems extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
@@ -80,7 +80,6 @@ public class FavoriteItems extends ActivityInstrumentationTestCase2<Activity> {
 
     @Override
     protected final void setUp() throws Exception {
-        super.setUp();
         solo = new Solo(getInstrumentation(), getActivity());
         Assert.testFirstLaunch(solo);
 
@@ -129,7 +128,8 @@ public class FavoriteItems extends ActivityInstrumentationTestCase2<Activity> {
         View banner = (View) solo.getView("img_store_banner", 0);
         assertTrue("Not enter recommended page.", banner.isShown());
         solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
-        solo.clickOnView(solo.getView("listitem_productlist_content",1));
+        solo.clickOnView(solo.getView("listitem_productlist_content",
+                Action.VIEW_ID_ONE));
         solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 
         // Favorite icon
@@ -138,7 +138,7 @@ public class FavoriteItems extends ActivityInstrumentationTestCase2<Activity> {
         boolean alreadyAdd;
 
         // Get toast text.
-        if (solo.waitForText(ValidationText.HAS_ADDED_COLLECTION)){
+        if (solo.waitForText(ValidationText.HAS_ADDED_COLLECTION)) {
             alreadyAdd = solo.waitForText(ValidationText.HAS_ADDED_COLLECTION);
             junit.framework.Assert.assertTrue("Add failed.", alreadyAdd);
         } else {

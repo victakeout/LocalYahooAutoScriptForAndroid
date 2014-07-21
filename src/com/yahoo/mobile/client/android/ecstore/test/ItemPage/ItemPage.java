@@ -26,7 +26,6 @@
 package com.yahoo.mobile.client.android.ecstore.test.ItemPage;
 
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
@@ -45,7 +44,7 @@ import com.yahoo.mobile.client.android.ecstore.test.ValidationText;
  * @author Administrator
  *
  */
-@SuppressLint("NewApi")
+
 public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
 
     /**
@@ -237,6 +236,8 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
         Action.clickStarIconNote(solo);
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
+
+        //Get store name.
         TextView storeName = (TextView) solo.getView(
                 "listitem_productlist_store_name", 0);
         Log.i("number", "1" + storeName.getText().toString().trim());
@@ -247,6 +248,7 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
         TextView collectStoreName = (TextView) solo.getView(
                 "listitem_productlist_store_name", 0);
         Log.i("number", "2" +   collectStoreName.getText().toString().trim());
+
         assertTrue(
                 "Product not added to favorite list. ",
                 storeName.getText().toString().trim()
@@ -560,29 +562,16 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
 
         }
 
-        // Select product property if it exists.
-        try {
-            View radioButtons = (View) solo.getView(
-                    "product_item_spec_item_selections", 0);
 
-        } catch (AssertionError e) {
-            TestHelper.swipeUp2(solo, 2);
-            // solo.sleep(ValidationText.WAIT_TIME_SHORT);
-            View shopCarts = solo
-                    .getView("productitem_btn_add_to_shopping_cart");
-            solo.clickOnView(shopCarts);
-        }
-        View buddle;
         View radioButton = (View) solo.getView(
-                "product_item_spec_item_selections", 4);
+                "product_item_spec_item_selections", Action.VIEW_ID_FOUR);
 
         RadioButton sizeButton = (RadioButton) solo.getView(
-                "product_item_spec_item_selections",8);
+                "product_item_spec_item_selections", Action.VIEW_ID_EIGHT);
         if (radioButton.isShown()) {
 
             solo.clickOnView(radioButton);
             assertFalse("Item is not dimmed.", sizeButton.isActivated());
-           // solo.clickOnView(sizeButton);
             solo.searchText(ValidationText.CANCEL);
             solo.clickOnButton(ValidationText.CANCEL);
 
@@ -624,24 +613,11 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
 
         }
 
-        // Select product property if it exists.
-        try {
-            View radioButtons = (View) solo.getView(
-                    "product_item_spec_item_selections", 0);
-
-        } catch (AssertionError e) {
-            TestHelper.swipeUp2(solo, 2);
-            // solo.sleep(ValidationText.WAIT_TIME_SHORT);
-            View shopCarts = solo
-                    .getView("productitem_btn_add_to_shopping_cart");
-            solo.clickOnView(shopCarts);
-        }
-        View buddle;
         View radioButton = (View) solo.getView(
-                "product_item_spec_item_selections", 4);
+                "product_item_spec_item_selections", Action.VIEW_ID_FOUR);
 
         RadioButton sizeButton = (RadioButton) solo.getView(
-                "product_item_spec_item_selections",8);
+                "product_item_spec_item_selections", Action.VIEW_ID_EIGHT);
         if (radioButton.isShown()) {
 
             solo.clickOnView(radioButton);
