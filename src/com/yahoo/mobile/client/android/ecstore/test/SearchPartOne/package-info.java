@@ -4,4 +4,4 @@
 * @version YAHOO APP:1.2.4
 */
 
-package com.yahoo.mobile.client.android.ecstore.test.Search;
+package com.yahoo.mobile.client.android.ecstore.test.SearchPartOne;

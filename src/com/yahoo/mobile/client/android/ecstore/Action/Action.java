@@ -726,10 +726,10 @@ public final class Action {
             solo.clickOnView(shopCarts);
         }
         View buddle;
-        View radioButton = (View) solo.getView(
-                "product_item_spec_item_selections", 0);
-        if (radioButton.isShown()) {
-
+        View radioButton = null;
+        try {
+            radioButton  = (View) solo.getView(
+                    "product_item_spec_item_selections", 0);
             solo.clickOnView(radioButton);
             solo.searchText(ValidationText.OK);
             solo.clickOnButton(ValidationText.OK);
@@ -739,7 +739,66 @@ public final class Action {
             buddle = solo.getView("tab_badge", VIEW_ID_THREE);
             junit.framework.Assert.assertTrue("No items in shopping cart.",
                     buddle.isShown());
-        } else {
+        } catch (AssertionError e) {
+            junit.framework.Assert.assertTrue("Add failed.", true);
+        }
+
+        solo.goBack();
+    }
+
+    /**
+     * Add product to shopping cart in item page.
+     * @param solo
+     *            the Solo instance
+     * @throws Exception
+     *             if has error
+     */
+    public static void addToShoppingCartForSmallScreen(final Solo solo)
+            throws Exception {
+
+
+        // Swipe the screen until the buy button display.
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        View shopCart;
+        try {
+            shopCart = solo.getView("productitem_btn_add_to_shopping_cart");
+            solo.clickOnView(shopCart);
+            solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        } catch (AssertionError e) {
+
+            TestHelper.swipeUp2(solo, 2);
+
+            shopCart = solo.getView("productitem_btn_add_to_shopping_cart");
+            solo.clickOnView(shopCart);
+
+        }
+
+        // Select product property if it exists.
+        try {
+            radioButtons = (View) solo.getView(
+                    "product_item_spec_item_selections", 0);
+        } catch (AssertionError e) {
+            TestHelper.swipeUp2(solo, 2);
+            // solo.sleep(ValidationText.WAIT_TIME_SHORT);
+            View shopCarts = solo
+                    .getView("productitem_btn_add_to_shopping_cart");
+            solo.clickOnView(shopCarts);
+        }
+        View buddle;
+        View radioButton = null;
+        try {
+            radioButton  = (View) solo.getView(
+                    "product_item_spec_item_selections", 0);
+            solo.clickOnView(radioButton);
+            solo.searchText(ValidationText.OK);
+            solo.clickOnButton(ValidationText.OK);
+            solo.waitForText(ValidationText.ALREADY_ADD_SHOPPING_CART, 1,
+                    ValidationText.WAIT_TIME_MIDDLE);
+            solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
+            buddle = solo.getView("tab_badge", VIEW_ID_THREE);
+            junit.framework.Assert.assertTrue("No items in shopping cart.",
+                    buddle.isShown());
+        } catch (AssertionError e) {
             junit.framework.Assert.assertTrue("Add failed.", true);
         }
 

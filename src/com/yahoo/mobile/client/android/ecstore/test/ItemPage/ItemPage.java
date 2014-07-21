@@ -439,14 +439,15 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
         solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_ZERO));
         Action.clickSearchButtonOnScreen(solo);
         Action.searchAfterPutData(solo, 0, ValidationText.GIFT);
-        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
         TextView storeName = (TextView) solo.getView(
                 "listitem_productlist_store_name", 0);
 
         solo.clickOnView(storeName);
-        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+
         TestHelper.swipeUp(solo, 1);
         Action.addToShoppingCart(solo);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
         solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_THREE));
         solo.clickOnView(solo.getView("ecshopping_cart_store_name", 0));
         solo.sleep(ValidationText.WAIT_TIME_LONGER);
@@ -468,15 +469,21 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
         solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_ZERO));
         Action.clickSearchButtonOnScreen(solo);
         Action.searchAfterPutData(solo, 0, ValidationText.GIFT);
-        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
         TextView storeName = (TextView) solo.getView(
                 "listitem_productlist_store_name", 0);
 
         solo.clickOnView(storeName);
-        solo.sleep(ValidationText.WAIT_TIME_SHORT);
-        TestHelper.swipeUp(solo, 1);
 
-        solo.clickOnText(ValidationText.PLUS_PURCHASE);
+        TestHelper.swipeUp(solo, 1);
+        try {
+            solo.sleep(ValidationText.WAIT_TIME_SHORT);
+            solo.clickOnText(ValidationText.PLUS_PURCHASE);
+        } catch (AssertionError e) {
+            TestHelper.swipeUp2(solo, Action.VIEW_ID_TEN);
+            solo.clickOnText(ValidationText.PLUS_PURCHASE);
+        }
+
         solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
         TextView addon;
         solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
@@ -491,7 +498,8 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
         solo.goBack();
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
-        Action.addToShoppingCart(solo);
+      //  TestHelper.swipeDown(solo, 1);
+        Action.addToShoppingCartForSmallScreen(solo);
         solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_THREE));
         solo.clickOnView(solo.getView("ecshopping_cart_store_name", 0));
         solo.sleep(ValidationText.WAIT_TIME_LONGER);
@@ -516,14 +524,14 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
                 "listitem_productlist_store_name", 0);
 
         solo.clickOnView(storeName);
-        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+       // solo.sleep(ValidationText.WAIT_TIME_SHORT);
         TestHelper.swipeUp(solo, 1);
 
         Action.addToShoppingCart(solo);
         TextView storeNamee = (TextView) solo.getView(
                 "listitem_productlist_store_name", 0);
         solo.clickOnView(storeNamee);
-        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+       // solo.sleep(ValidationText.WAIT_TIME_SHORT);
         TestHelper.swipeUp(solo, 1);
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
         solo.clickOnText(ValidationText.ADDITIONAL_GIFT);
