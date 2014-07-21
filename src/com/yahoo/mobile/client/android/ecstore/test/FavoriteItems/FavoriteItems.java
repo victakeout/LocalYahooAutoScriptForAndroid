@@ -128,8 +128,7 @@ public class FavoriteItems extends ActivityInstrumentationTestCase2<Activity> {
         View banner = (View) solo.getView("img_store_banner", 0);
         assertTrue("Not enter recommended page.", banner.isShown());
         solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
-        solo.clickOnView(solo.getView("listitem_productlist_content",
-                Action.VIEW_ID_ONE));
+        solo.clickOnView(solo.getView("listitem_productlist_title",1));
         solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 
         // Favorite icon

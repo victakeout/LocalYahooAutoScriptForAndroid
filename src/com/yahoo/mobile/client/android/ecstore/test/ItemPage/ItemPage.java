@@ -171,7 +171,7 @@ public class ItemPage extends ActivityInstrumentationTestCase2<Activity> {
             assertTrue("No promotion link displayed. ", webpage.isShown());
         } catch (AssertionError e) {
 
-            solo.sleep(ValidationText.WAIT_TIME_LONG);
+            solo.sleep(ValidationText.WAIT_TIME_LONGER);
              webpage = (View) solo.getView("webpage", 0);
             assertTrue("No promotion link displayed. ", webpage.isShown());
         }

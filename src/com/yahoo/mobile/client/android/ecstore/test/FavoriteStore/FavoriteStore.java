@@ -158,6 +158,10 @@ public class FavoriteStore extends ActivityInstrumentationTestCase2<Activity> {
     public final void testRestricted() throws Exception {
 
         Account.judgementAccountLogin(solo);
+        
+        Action.removeFavoriteItem(solo);
+        solo.goBack();
+        solo.clickOnView(solo.getView("tab_image", 0));
 
         // click on search button on home screen
         Action.clickSearchButtonOnScreen(solo);
@@ -293,7 +297,7 @@ public class FavoriteStore extends ActivityInstrumentationTestCase2<Activity> {
                 "productitem_promotion_name", Action.VIEW_ID_ZERO);
         solo.clickOnView(promotion);
 
-        solo.sleep(ValidationText.WAIT_TIME_LONGER);
+        solo.sleep(ValidationText.WAIT_TIME_LONGEST);
 
         assertTrue("Promotion page cannot be opened.",
                 solo.getView("webpage", Action.VIEW_ID_ZERO).isShown());

@@ -268,7 +268,7 @@ public class Checkout extends ActivityInstrumentationTestCase2<Activity> {
         Action.clickElementsInWebviewByText(solo,
                 ValidationText.WANT_CHECKOUT);
 
-        solo.sleep(ValidationText.WAIT_TIME_SHORT);
+        solo.sleep(ValidationText.WAIT_TIME_MIDDLE);
 
         View webPage = (View) solo.getView("webpage");
         assertTrue("Cannot found family pick up.", webPage.isShown());

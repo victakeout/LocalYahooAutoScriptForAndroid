@@ -791,7 +791,8 @@ public class CategoryPartTwo extends ActivityInstrumentationTestCase2<Activity> 
 
         Account.judgementAccountLogin(solo);
         solo.clickOnView(solo.getView("tab_image", Action.VIEW_ID_FOUR));
-        solo.scrollToBottom();
+        TestHelper.swipeUp(solo, 1);
+        solo.sleep(ValidationText.WAIT_TIME_SHORT);
         solo.clickOnView(solo.getView("profile_bt_edit_favorite_categories"));
 
         solo.sleep(ValidationText.WAIT_TIME_SHORT);
